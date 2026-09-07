@@ -28,9 +28,9 @@ var __toESM = (mod2, isNodeMode, target) => (target = mod2 != null ? __create(__
   mod2
 ));
 
-// ../../external/mindcraft-lang/packages/core/dist/node/platform/list.js
+// ../../external/wendoo-lang/packages/core/dist/node/platform/list.js
 var require_list = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/platform/list.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/platform/list.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.List = void 0;
@@ -52,6 +52,14 @@ var require_list = __commonJS({
         return this.xs.length === 0;
       }
       get(i) {
+        if (i < 0 || i >= this.xs.length) {
+          throw new Error(`List index out of range: ${i} (size ${this.xs.length})`);
+        }
+        return this.xs[i];
+      }
+      at(i) {
+        if (i < 0 || i >= this.xs.length)
+          return void 0;
         return this.xs[i];
       }
       set(i, v) {
@@ -162,8 +170,13 @@ var require_list = __commonJS({
       }
       get(i) {
         if (i < 0 || i >= this._count) {
-          throw new Error(`Sublist index out of range: ${i}`);
+          throw new Error(`Sublist index out of range: ${i} (size ${this._count})`);
         }
+        return this._list.get(this._start + i);
+      }
+      at(i) {
+        if (i < 0 || i >= this._count)
+          return void 0;
         return this._list.get(this._start + i);
       }
       forEach(fn) {
@@ -256,9 +269,9 @@ var require_list = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/platform/dict.js
+// ../../external/wendoo-lang/packages/core/dist/node/platform/dict.js
 var require_dict = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/platform/dict.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/platform/dict.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.Dict = void 0;
@@ -317,9 +330,9 @@ var require_dict = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/platform/event-emitter.js
+// ../../external/wendoo-lang/packages/core/dist/node/platform/event-emitter.js
 var require_event_emitter = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/platform/event-emitter.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/platform/event-emitter.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.EventEmitter = void 0;
@@ -470,9 +483,9 @@ var require_event_emitter = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/runtime/abi-ids.js
+// ../../external/wendoo-lang/packages/core/dist/node/runtime/abi-ids.js
 var require_abi_ids = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/runtime/abi-ids.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/runtime/abi-ids.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.CoreHostActions = exports.CoreFuncId = exports.CoreTypeAtomId = exports.SHARED_TYPE_ATOM_BASE = exports.TARGET_TYPE_ATOM_BASE = exports.TARGET_ACTION_ID_BASE = exports.TARGET_FUNC_ID_BASE = void 0;
@@ -605,6 +618,7 @@ var require_abi_ids = __commonJS({
       CoreFuncId2[CoreFuncId2["ConvEnumToString"] = 104] = "ConvEnumToString";
       CoreFuncId2[CoreFuncId2["ConvEnumToNumber"] = 105] = "ConvEnumToNumber";
       CoreFuncId2[CoreFuncId2["SensorOtherwise"] = 106] = "SensorOtherwise";
+      CoreFuncId2[CoreFuncId2["SensorRuleTrigger"] = 107] = "SensorRuleTrigger";
     })(CoreFuncId || (exports.CoreFuncId = CoreFuncId = {}));
     exports.CoreHostActions = {
       SwitchPage: { key: "switch-page", actionId: 0, fnId: CoreFuncId.ActuatorSwitchPage },
@@ -615,14 +629,15 @@ var require_abi_ids = __commonJS({
       Timeout: { key: "sensor.timeout", actionId: 5, fnId: CoreFuncId.SensorTimeout },
       CurrentPage: { key: "current-page", actionId: 6, fnId: CoreFuncId.SensorCurrentPage },
       PreviousPage: { key: "previous-page", actionId: 7, fnId: CoreFuncId.SensorPreviousPage },
-      Otherwise: { key: "otherwise", actionId: 8, fnId: CoreFuncId.SensorOtherwise }
+      Otherwise: { key: "otherwise", actionId: 8, fnId: CoreFuncId.SensorOtherwise },
+      RuleTrigger: { key: "rule-trigger", actionId: 9, fnId: CoreFuncId.SensorRuleTrigger }
     };
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/platform/error.js
+// ../../external/wendoo-lang/packages/core/dist/node/platform/error.js
 var require_error = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/platform/error.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/platform/error.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.Error = void 0;
@@ -630,9 +645,9 @@ var require_error = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/platform/math.js
+// ../../external/wendoo-lang/packages/core/dist/node/platform/math.js
 var require_math = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/platform/math.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/platform/math.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.INFINITY = exports.MathOps = void 0;
@@ -670,9 +685,9 @@ var require_math = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/runtime/action-registry.js
+// ../../external/wendoo-lang/packages/core/dist/node/runtime/action-registry.js
 var require_action_registry = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/runtime/action-registry.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/runtime/action-registry.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.BrainActionRegistry = void 0;
@@ -747,9 +762,9 @@ var require_action_registry = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/primitives/fourcc.js
+// ../../external/wendoo-lang/packages/core/dist/node/primitives/fourcc.js
 var require_fourcc = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/primitives/fourcc.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/primitives/fourcc.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.fourCC = fourCC;
@@ -766,9 +781,9 @@ var require_fourcc = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/primitives/index.js
+// ../../external/wendoo-lang/packages/core/dist/node/primitives/index.js
 var require_primitives = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/primitives/index.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/primitives/index.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.fromFourCC = exports.fourCC = void 0;
@@ -782,9 +797,9 @@ var require_primitives = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/platform/stream-types.js
+// ../../external/wendoo-lang/packages/core/dist/node/platform/stream-types.js
 var require_stream_types = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/platform/stream-types.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/platform/stream-types.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.DataType = void 0;
@@ -802,9 +817,9 @@ var require_stream_types = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/platform/stream.js
+// ../../external/wendoo-lang/packages/core/dist/node/platform/stream.js
 var require_stream = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/platform/stream.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/platform/stream.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.MemoryStream = exports.kMaxByteArrayLength = exports.kMaxLongStringLength = exports.kMaxStringLength = exports.DataType = void 0;
@@ -1428,9 +1443,9 @@ var require_stream = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/platform/string.js
+// ../../external/wendoo-lang/packages/core/dist/node/platform/string.js
 var require_string = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/platform/string.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/platform/string.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.StringUtils = void 0;
@@ -1524,9 +1539,9 @@ var require_string = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/platform/types.js
+// ../../external/wendoo-lang/packages/core/dist/node/platform/types.js
 var require_types = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/platform/types.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/platform/types.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.TypeUtils = void 0;
@@ -1560,9 +1575,9 @@ var require_types = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/platform/uniqueset.js
+// ../../external/wendoo-lang/packages/core/dist/node/platform/uniqueset.js
 var require_uniqueset = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/platform/uniqueset.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/platform/uniqueset.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.UniqueSet = void 0;
@@ -1605,187 +1620,60 @@ var require_uniqueset = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/runtime/function-defs.js
-var require_function_defs = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/runtime/function-defs.js"(exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    exports.mkCallDef = mkCallDef14;
-    exports.getSlotId = getSlotId9;
-    exports.callSpecToArgSlots = callSpecToArgSlots;
-    exports.mkActionDescriptor = mkActionDescriptor;
-    var error_1 = require_error();
-    var list_1 = require_list();
-    var types_1 = require_types();
-    function mkCallDef14(callSpec) {
-      const argSlots = callSpecToArgSlots(callSpec);
-      return {
-        callSpec,
-        argSlots
-      };
-    }
-    function getSlotId9(callDef12, tileIdOrSpec) {
-      const tileId = types_1.TypeUtils.isString(tileIdOrSpec) ? tileIdOrSpec : tileIdOrSpec.tileId;
-      const idx = callDef12.argSlots.findIndex((s) => s.argSpec.tileId === tileId);
-      if (idx === -1) {
-        throw new error_1.Error(`No arg slot found for tileId: ${tileId}`);
-      }
-      return idx;
-    }
-    var nextChoiceGroupId = 0;
-    function callSpecToArgSlots(callSpec) {
-      const argList = list_1.List.empty();
-      callSpecToArgSlotsImpl(callSpec, argList, void 0, void 0);
-      return argList.asReadonly();
-    }
-    function callSpecToArgSlotsImpl(callSpec, argList, choiceGroup, repeated2) {
-      switch (callSpec.type) {
-        case "arg":
-          argList.push({
-            slotId: argList.size(),
-            argSpec: callSpec,
-            choiceGroup,
-            repeated: repeated2
-          });
-          break;
-        case "seq":
-          for (const item of callSpec.items) {
-            callSpecToArgSlotsImpl(item, argList, choiceGroup, repeated2);
-          }
-          break;
-        case "choice": {
-          const groupId = nextChoiceGroupId++;
-          for (const option of callSpec.options) {
-            callSpecToArgSlotsImpl(option, argList, groupId, repeated2);
-          }
-          break;
-        }
-        case "optional":
-          callSpecToArgSlotsImpl(callSpec.item, argList, choiceGroup, repeated2);
-          break;
-        case "repeat":
-          callSpecToArgSlotsImpl(callSpec.item, argList, choiceGroup, true);
-          break;
-        case "bag":
-          for (const item of callSpec.items) {
-            callSpecToArgSlotsImpl(item, argList, choiceGroup, repeated2);
-          }
-          break;
-        case "conditional":
-          callSpecToArgSlotsImpl(callSpec.then, argList, choiceGroup, repeated2);
-          if (callSpec.else) {
-            callSpecToArgSlotsImpl(callSpec.else, argList, choiceGroup, repeated2);
-          }
-          break;
-        default: {
-          const _exhaustive = callSpec;
-          break;
-        }
-      }
-    }
-    function mkActionDescriptor(kind, fnEntry, outputType) {
-      return {
-        key: fnEntry.name,
-        kind,
-        callDef: fnEntry.callDef,
-        isAsync: fnEntry.isAsync,
-        outputType
-      };
-    }
-  }
-});
-
-// ../../external/mindcraft-lang/packages/core/dist/node/runtime/json-container-codec.js
-var require_json_container_codec = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/runtime/json-container-codec.js"(exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    exports.listFromJson = listFromJson;
-    exports.listToJson = listToJson;
-    exports.dictToJsonEntries = dictToJsonEntries;
-    exports.dictFromJsonEntries = dictFromJsonEntries;
-    var dict_1 = require_dict();
-    var list_1 = require_list();
-    function listFromJson(items, convert) {
-      const source = list_1.List.from(items);
-      const result = list_1.List.empty();
-      for (let i = 0; i < source.size(); i++) {
-        result.push(convert(source.get(i)));
-      }
-      return result;
-    }
-    function listToJson(list, convert) {
-      return list.map(convert).toArray();
-    }
-    function dictToJsonEntries(dict, convert) {
-      return dict.entries().map((entry) => convert(entry[0], entry[1])).toArray();
-    }
-    function dictFromJsonEntries(entries, convert) {
-      const source = list_1.List.from(entries);
-      const result = new dict_1.Dict();
-      for (let i = 0; i < source.size(); i++) {
-        const [key, value] = convert(source.get(i));
-        result.set(key, value);
-      }
-      return result;
-    }
-  }
-});
-
-// ../../external/mindcraft-lang/packages/core/dist/node/runtime/type-defs.js
+// ../../external/wendoo-lang/packages/core/dist/node/runtime/type-defs.js
 var require_type_defs = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/runtime/type-defs.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/runtime/type-defs.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.NativeType = void 0;
     exports.nativeTypeToString = nativeTypeToString;
     exports.nativeTypeFromString = nativeTypeFromString;
-    var NativeType7;
-    (function(NativeType8) {
-      NativeType8[NativeType8["Unknown"] = -1] = "Unknown";
-      NativeType8[NativeType8["Void"] = 0] = "Void";
-      NativeType8[NativeType8["Nil"] = 1] = "Nil";
-      NativeType8[NativeType8["Boolean"] = 2] = "Boolean";
-      NativeType8[NativeType8["Number"] = 3] = "Number";
-      NativeType8[NativeType8["String"] = 4] = "String";
-      NativeType8[NativeType8["Enum"] = 5] = "Enum";
-      NativeType8[NativeType8["List"] = 6] = "List";
-      NativeType8[NativeType8["Map"] = 7] = "Map";
-      NativeType8[NativeType8["Struct"] = 8] = "Struct";
-      NativeType8[NativeType8["Any"] = 9] = "Any";
-      NativeType8[NativeType8["Union"] = 10] = "Union";
-      NativeType8[NativeType8["Function"] = 11] = "Function";
-      NativeType8[NativeType8["Buffer"] = 12] = "Buffer";
-    })(NativeType7 || (exports.NativeType = NativeType7 = {}));
+    var NativeType6;
+    (function(NativeType7) {
+      NativeType7[NativeType7["Unknown"] = -1] = "Unknown";
+      NativeType7[NativeType7["Void"] = 0] = "Void";
+      NativeType7[NativeType7["Nil"] = 1] = "Nil";
+      NativeType7[NativeType7["Boolean"] = 2] = "Boolean";
+      NativeType7[NativeType7["Number"] = 3] = "Number";
+      NativeType7[NativeType7["String"] = 4] = "String";
+      NativeType7[NativeType7["Enum"] = 5] = "Enum";
+      NativeType7[NativeType7["List"] = 6] = "List";
+      NativeType7[NativeType7["Map"] = 7] = "Map";
+      NativeType7[NativeType7["Struct"] = 8] = "Struct";
+      NativeType7[NativeType7["Any"] = 9] = "Any";
+      NativeType7[NativeType7["Union"] = 10] = "Union";
+      NativeType7[NativeType7["Function"] = 11] = "Function";
+      NativeType7[NativeType7["Buffer"] = 12] = "Buffer";
+    })(NativeType6 || (exports.NativeType = NativeType6 = {}));
     function nativeTypeToString(coreType) {
       switch (coreType) {
-        case NativeType7.Unknown:
+        case NativeType6.Unknown:
           return "unknown";
-        case NativeType7.Void:
+        case NativeType6.Void:
           return "void";
-        case NativeType7.Nil:
+        case NativeType6.Nil:
           return "nil";
-        case NativeType7.Boolean:
+        case NativeType6.Boolean:
           return "boolean";
-        case NativeType7.Number:
+        case NativeType6.Number:
           return "number";
-        case NativeType7.String:
+        case NativeType6.String:
           return "string";
-        case NativeType7.Enum:
+        case NativeType6.Enum:
           return "enum";
-        case NativeType7.List:
+        case NativeType6.List:
           return "list";
-        case NativeType7.Map:
+        case NativeType6.Map:
           return "map";
-        case NativeType7.Struct:
+        case NativeType6.Struct:
           return "struct";
-        case NativeType7.Any:
+        case NativeType6.Any:
           return "any";
-        case NativeType7.Union:
+        case NativeType6.Union:
           return "union";
-        case NativeType7.Function:
+        case NativeType6.Function:
           return "function";
-        case NativeType7.Buffer:
+        case NativeType6.Buffer:
           return "buffer";
         default:
           return "invalid";
@@ -1794,33 +1682,33 @@ var require_type_defs = __commonJS({
     function nativeTypeFromString(name) {
       switch (name) {
         case "unknown":
-          return NativeType7.Unknown;
+          return NativeType6.Unknown;
         case "void":
-          return NativeType7.Void;
+          return NativeType6.Void;
         case "nil":
-          return NativeType7.Nil;
+          return NativeType6.Nil;
         case "boolean":
-          return NativeType7.Boolean;
+          return NativeType6.Boolean;
         case "number":
-          return NativeType7.Number;
+          return NativeType6.Number;
         case "string":
-          return NativeType7.String;
+          return NativeType6.String;
         case "enum":
-          return NativeType7.Enum;
+          return NativeType6.Enum;
         case "list":
-          return NativeType7.List;
+          return NativeType6.List;
         case "map":
-          return NativeType7.Map;
+          return NativeType6.Map;
         case "struct":
-          return NativeType7.Struct;
+          return NativeType6.Struct;
         case "any":
-          return NativeType7.Any;
+          return NativeType6.Any;
         case "union":
-          return NativeType7.Union;
+          return NativeType6.Union;
         case "function":
-          return NativeType7.Function;
+          return NativeType6.Function;
         case "buffer":
-          return NativeType7.Buffer;
+          return NativeType6.Buffer;
         default:
           return void 0;
       }
@@ -1828,15 +1716,15 @@ var require_type_defs = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/runtime/value.js
+// ../../external/wendoo-lang/packages/core/dist/node/runtime/value.js
 var require_value = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/runtime/value.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/runtime/value.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.FALSE_VALUE = exports.TRUE_VALUE = exports.NIL_VALUE = exports.VOID_VALUE = exports.UNKNOWN_VALUE = exports.ValueDict = exports.ErrorCode = void 0;
     exports.errorCodeName = errorCodeName;
     exports.mkBooleanValue = mkBooleanValue;
-    exports.mkNumberValue = mkNumberValue6;
+    exports.mkNumberValue = mkNumberValue10;
     exports.mkStringValue = mkStringValue4;
     exports.mkClosedStructValue = mkClosedStructValue4;
     exports.mkClosedStructValueByName = mkClosedStructValueByName;
@@ -1844,21 +1732,21 @@ var require_value = __commonJS({
     exports.mkNativeStructValue = mkNativeStructValue2;
     exports.mkListValue = mkListValue2;
     exports.mkFunctionValue = mkFunctionValue;
-    exports.mkBufferValue = mkBufferValue3;
+    exports.mkBufferValue = mkBufferValue4;
     exports.bufferLength = bufferLength4;
     exports.bufferByteAt = bufferByteAt4;
     exports.buffersEqual = buffersEqual;
     exports.bufferToHex = bufferToHex2;
-    exports.mkBufferValueFromHex = mkBufferValueFromHex2;
+    exports.mkBufferValueFromHex = mkBufferValueFromHex;
     exports.extractBooleanValue = extractBooleanValue;
-    exports.extractNumberValue = extractNumberValue6;
+    exports.extractNumberValue = extractNumberValue7;
     exports.extractStringValue = extractStringValue4;
     exports.extractListValue = extractListValue;
     exports.extractBufferValue = extractBufferValue;
     exports.isHandleValue = isHandleValue;
     exports.isUnknownValue = isUnknownValue;
     exports.isVoidValue = isVoidValue;
-    exports.isNilValue = isNilValue6;
+    exports.isNilValue = isNilValue7;
     exports.isBooleanValue = isBooleanValue3;
     exports.isNumberValue = isNumberValue2;
     exports.isStringValue = isStringValue2;
@@ -1963,7 +1851,7 @@ var require_value = __commonJS({
     function mkBooleanValue(b) {
       return b ? exports.TRUE_VALUE : exports.FALSE_VALUE;
     }
-    function mkNumberValue6(n) {
+    function mkNumberValue10(n) {
       return { t: type_defs_1.NativeType.Number, v: n };
     }
     function mkStringValue4(str) {
@@ -1988,7 +1876,7 @@ var require_value = __commonJS({
     }
     function getClosedStructFieldByName(typeDef, source, fieldName) {
       const fieldIndex = typeDef.fieldIndexByName.get(fieldName);
-      return fieldIndex === void 0 ? void 0 : source.v?.get(fieldIndex);
+      return fieldIndex === void 0 ? void 0 : source.v?.at(fieldIndex);
     }
     function mkNativeStructValue2(typeId, native) {
       return { t: type_defs_1.NativeType.Struct, typeId, v: list_1.List.empty(), native };
@@ -2002,7 +1890,7 @@ var require_value = __commonJS({
       }
       return { t: type_defs_1.NativeType.Function, funcId };
     }
-    function mkBufferValue3(bytes) {
+    function mkBufferValue4(bytes) {
       return { t: type_defs_1.NativeType.Buffer, v: bytes };
     }
     function bufferLength4(buffer) {
@@ -2040,7 +1928,7 @@ var require_value = __commonJS({
       }
       return out;
     }
-    function mkBufferValueFromHex2(hex3) {
+    function mkBufferValueFromHex(hex3) {
       const length = string_1.StringUtils.length(hex3);
       let latin1 = "";
       for (let i = 0; i < length; i += 2) {
@@ -2048,7 +1936,7 @@ var require_value = __commonJS({
         const lo = hexDigitValue(string_1.StringUtils.charCodeAt(hex3, i + 1));
         latin1 += string_1.StringUtils.fromCharCode((hi << 4 | lo) & 255);
       }
-      return mkBufferValue3((0, stream_1.byteArrayFromStringLatin1)(latin1));
+      return mkBufferValue4((0, stream_1.byteArrayFromStringLatin1)(latin1));
     }
     function extractBooleanValue(v) {
       if (v && v.t === type_defs_1.NativeType.Boolean) {
@@ -2056,7 +1944,7 @@ var require_value = __commonJS({
       }
       return void 0;
     }
-    function extractNumberValue6(v) {
+    function extractNumberValue7(v) {
       if (v && v.t === type_defs_1.NativeType.Number) {
         return v.v;
       }
@@ -2089,7 +1977,7 @@ var require_value = __commonJS({
     function isVoidValue(v) {
       return v?.t === type_defs_1.NativeType.Void;
     }
-    function isNilValue6(v) {
+    function isNilValue7(v) {
       return v?.t === type_defs_1.NativeType.Nil;
     }
     function isBooleanValue3(v) {
@@ -2152,9 +2040,194 @@ var require_value = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/runtime/value-codec.js
+// ../../external/wendoo-lang/packages/core/dist/node/runtime/function-defs.js
+var require_function_defs = __commonJS({
+  "../../external/wendoo-lang/packages/core/dist/node/runtime/function-defs.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.mkCallDef = mkCallDef15;
+    exports.getSlotId = getSlotId10;
+    exports.callSpecToArgSlots = callSpecToArgSlots;
+    exports.mkActionDescriptor = mkActionDescriptor;
+    var error_1 = require_error();
+    var list_1 = require_list();
+    var types_1 = require_types();
+    var value_1 = require_value();
+    function validateArgSpec(argSpec) {
+      const where = argSpec.name ?? argSpec.tileId;
+      if (argSpec.default !== void 0 && argSpec.derived !== void 0) {
+        throw new error_1.Error(`Arg ${where} declares both a default and derived; an empty slot means one or the other`);
+      }
+      if (argSpec.required === true && (argSpec.default !== void 0 || argSpec.derived !== void 0)) {
+        throw new error_1.Error(`Arg ${where} is required and declares what an empty slot means; a required slot is never empty`);
+      }
+      const range = argSpec.range;
+      if (range === void 0)
+        return;
+      if (range.min === void 0 && range.max === void 0) {
+        throw new error_1.Error(`Arg ${where} declares a range carrying neither bound`);
+      }
+      if (range.min !== void 0 && range.max !== void 0 && range.min > range.max) {
+        throw new error_1.Error(`Arg ${where} declares a range whose min ${range.min} is above its max ${range.max}`);
+      }
+      if (argSpec.default !== void 0 && !(0, value_1.isNumberValue)(argSpec.default)) {
+        throw new error_1.Error(`Arg ${where} declares a range on a non-numeric slot`);
+      }
+    }
+    function validateSpecNames(callSpec) {
+      const seen = list_1.List.empty();
+      const visit = (spec) => {
+        if (spec.name !== void 0) {
+          if (seen.indexOf(spec.name) !== -1) {
+            throw new error_1.Error(`Call spec names ${spec.name} twice; a name identifies one spec to the grammar`);
+          }
+          seen.push(spec.name);
+        }
+        switch (spec.type) {
+          case "arg":
+            return;
+          case "seq":
+          case "bag":
+            for (const item of spec.items)
+              visit(item);
+            return;
+          case "choice":
+            for (const option of spec.options)
+              visit(option);
+            return;
+          case "optional":
+          case "repeat":
+            visit(spec.item);
+            return;
+          case "conditional":
+            visit(spec.then);
+            if (spec.else)
+              visit(spec.else);
+            return;
+        }
+      };
+      visit(callSpec);
+    }
+    function mkCallDef15(callSpec) {
+      validateSpecNames(callSpec);
+      const argSlots = callSpecToArgSlots(callSpec);
+      return {
+        callSpec,
+        argSlots
+      };
+    }
+    function getSlotId10(callDef13, tileIdOrSpec) {
+      const tileId = types_1.TypeUtils.isString(tileIdOrSpec) ? tileIdOrSpec : tileIdOrSpec.tileId;
+      const idx = callDef13.argSlots.findIndex((s) => s.argSpec.tileId === tileId);
+      if (idx === -1) {
+        throw new error_1.Error(`No arg slot found for tileId: ${tileId}`);
+      }
+      return idx;
+    }
+    var nextChoiceGroupId = 0;
+    function callSpecToArgSlots(callSpec) {
+      const argList = list_1.List.empty();
+      callSpecToArgSlotsImpl(callSpec, argList, void 0, void 0);
+      return argList.asReadonly();
+    }
+    function callSpecToArgSlotsImpl(callSpec, argList, choiceGroup, repeated2) {
+      switch (callSpec.type) {
+        case "arg":
+          validateArgSpec(callSpec);
+          argList.push({
+            slotId: argList.size(),
+            argSpec: callSpec,
+            choiceGroup,
+            repeated: repeated2
+          });
+          break;
+        case "seq":
+          for (const item of callSpec.items) {
+            callSpecToArgSlotsImpl(item, argList, choiceGroup, repeated2);
+          }
+          break;
+        case "choice": {
+          const groupId = nextChoiceGroupId++;
+          for (const option of callSpec.options) {
+            callSpecToArgSlotsImpl(option, argList, groupId, repeated2);
+          }
+          break;
+        }
+        case "optional":
+          callSpecToArgSlotsImpl(callSpec.item, argList, choiceGroup, repeated2);
+          break;
+        case "repeat":
+          callSpecToArgSlotsImpl(callSpec.item, argList, choiceGroup, true);
+          break;
+        case "bag":
+          for (const item of callSpec.items) {
+            callSpecToArgSlotsImpl(item, argList, choiceGroup, repeated2);
+          }
+          break;
+        case "conditional":
+          callSpecToArgSlotsImpl(callSpec.then, argList, choiceGroup, repeated2);
+          if (callSpec.else) {
+            callSpecToArgSlotsImpl(callSpec.else, argList, choiceGroup, repeated2);
+          }
+          break;
+        default: {
+          const _exhaustive = callSpec;
+          break;
+        }
+      }
+    }
+    function mkActionDescriptor(kind, fnEntry, outputType) {
+      return {
+        key: fnEntry.name,
+        kind,
+        callDef: fnEntry.callDef,
+        isAsync: fnEntry.isAsync,
+        outputType
+      };
+    }
+  }
+});
+
+// ../../external/wendoo-lang/packages/core/dist/node/runtime/json-container-codec.js
+var require_json_container_codec = __commonJS({
+  "../../external/wendoo-lang/packages/core/dist/node/runtime/json-container-codec.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.listFromJson = listFromJson;
+    exports.listToJson = listToJson;
+    exports.dictToJsonEntries = dictToJsonEntries;
+    exports.dictFromJsonEntries = dictFromJsonEntries;
+    var dict_1 = require_dict();
+    var list_1 = require_list();
+    function listFromJson(items, convert) {
+      const source = list_1.List.from(items);
+      const result = list_1.List.empty();
+      for (let i = 0; i < source.size(); i++) {
+        result.push(convert(source.get(i)));
+      }
+      return result;
+    }
+    function listToJson(list, convert) {
+      return list.map(convert).toArray();
+    }
+    function dictToJsonEntries(dict, convert) {
+      return dict.entries().map((entry) => convert(entry[0], entry[1])).toArray();
+    }
+    function dictFromJsonEntries(entries, convert) {
+      const source = list_1.List.from(entries);
+      const result = new dict_1.Dict();
+      for (let i = 0; i < source.size(); i++) {
+        const [key, value] = convert(source.get(i));
+        result.set(key, value);
+      }
+      return result;
+    }
+  }
+});
+
+// ../../external/wendoo-lang/packages/core/dist/node/runtime/value-codec.js
 var require_value_codec = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/runtime/value-codec.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/runtime/value-codec.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.brainValueFromJson = brainValueFromJson;
@@ -2343,9 +2416,9 @@ var require_value_codec = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/runtime/brain-program-codec.js
+// ../../external/wendoo-lang/packages/core/dist/node/runtime/brain-program-codec.js
 var require_brain_program_codec = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/runtime/brain-program-codec.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/runtime/brain-program-codec.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.brainValueToJson = exports.brainValueFromJson = void 0;
@@ -2620,9 +2693,9 @@ var require_brain_program_codec = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/runtime/bytecode.js
+// ../../external/wendoo-lang/packages/core/dist/node/runtime/bytecode.js
 var require_bytecode = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/runtime/bytecode.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/runtime/bytecode.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.OPERAND_SCHEMA = exports.BYTECODE_VERSION = exports.Op = void 0;
@@ -2696,6 +2769,8 @@ var require_bytecode = __commonJS({
       Op2[Op2["CALL_INDIRECT_ARGS"] = 161] = "CALL_INDIRECT_ARGS";
       Op2[Op2["MAKE_CLOSURE"] = 170] = "MAKE_CLOSURE";
       Op2[Op2["LOAD_CAPTURE"] = 171] = "LOAD_CAPTURE";
+      Op2[Op2["WHEN_END_CHAIN"] = 172] = "WHEN_END_CHAIN";
+      Op2[Op2["WHEN_END_PRESENT_CHAIN"] = 173] = "WHEN_END_PRESENT_CHAIN";
     })(Op || (exports.Op = Op = {}));
     exports.BYTECODE_VERSION = 1;
     var UVAR = { encoding: "uvar" };
@@ -2735,6 +2810,8 @@ var require_bytecode = __commonJS({
       [Op.DO_START]: [],
       [Op.DO_END]: [],
       [Op.WHEN_END_PRESENT]: [SVAR],
+      [Op.WHEN_END_CHAIN]: [SVAR],
+      [Op.WHEN_END_PRESENT_CHAIN]: [SVAR],
       [Op.LIST_NEW]: [UVAR, UVAR_OPT],
       [Op.LIST_PUSH]: [],
       [Op.LIST_GET]: [],
@@ -2806,13 +2883,13 @@ var require_bytecode = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/runtime/core-types.js
+// ../../external/wendoo-lang/packages/core/dist/node/runtime/core-types.js
 var require_core_types = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/runtime/core-types.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/runtime/core-types.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.CoreTypeIds = exports.CoreTypeNames = void 0;
-    exports.mkTypeId = mkTypeId6;
+    exports.mkTypeId = mkTypeId5;
     exports.mkNullableTypeName = mkNullableTypeName;
     exports.mkConstructedTypeName = mkConstructedTypeName;
     exports.mkUnionTypeName = mkUnionTypeName;
@@ -2821,7 +2898,7 @@ var require_core_types = __commonJS({
     exports.splitNamespacedTypeName = splitNamespacedTypeName;
     var string_1 = require_string();
     var type_defs_1 = require_type_defs();
-    function mkTypeId6(coreType, typeName) {
+    function mkTypeId5(coreType, typeName) {
       return `${(0, type_defs_1.nativeTypeToString)(coreType)}:<${typeName}>`;
     }
     function mkNullableTypeName(baseName) {
@@ -2877,22 +2954,22 @@ var require_core_types = __commonJS({
       Buffer: "buffer"
     };
     exports.CoreTypeIds = {
-      Unknown: mkTypeId6(type_defs_1.NativeType.Unknown, exports.CoreTypeNames.Unknown),
-      Void: mkTypeId6(type_defs_1.NativeType.Void, exports.CoreTypeNames.Void),
-      Nil: mkTypeId6(type_defs_1.NativeType.Nil, exports.CoreTypeNames.Nil),
-      Boolean: mkTypeId6(type_defs_1.NativeType.Boolean, exports.CoreTypeNames.Boolean),
-      Number: mkTypeId6(type_defs_1.NativeType.Number, exports.CoreTypeNames.Number),
-      String: mkTypeId6(type_defs_1.NativeType.String, exports.CoreTypeNames.String),
-      Any: mkTypeId6(type_defs_1.NativeType.Any, exports.CoreTypeNames.Any),
-      Function: mkTypeId6(type_defs_1.NativeType.Function, exports.CoreTypeNames.Function),
-      Buffer: mkTypeId6(type_defs_1.NativeType.Buffer, exports.CoreTypeNames.Buffer)
+      Unknown: mkTypeId5(type_defs_1.NativeType.Unknown, exports.CoreTypeNames.Unknown),
+      Void: mkTypeId5(type_defs_1.NativeType.Void, exports.CoreTypeNames.Void),
+      Nil: mkTypeId5(type_defs_1.NativeType.Nil, exports.CoreTypeNames.Nil),
+      Boolean: mkTypeId5(type_defs_1.NativeType.Boolean, exports.CoreTypeNames.Boolean),
+      Number: mkTypeId5(type_defs_1.NativeType.Number, exports.CoreTypeNames.Number),
+      String: mkTypeId5(type_defs_1.NativeType.String, exports.CoreTypeNames.String),
+      Any: mkTypeId5(type_defs_1.NativeType.Any, exports.CoreTypeNames.Any),
+      Function: mkTypeId5(type_defs_1.NativeType.Function, exports.CoreTypeNames.Function),
+      Buffer: mkTypeId5(type_defs_1.NativeType.Buffer, exports.CoreTypeNames.Buffer)
     };
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/runtime/program.js
+// ../../external/wendoo-lang/packages/core/dist/node/runtime/program.js
 var require_program = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/runtime/program.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/runtime/program.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.NO_VARIABLE_INIT = void 0;
@@ -2902,7 +2979,7 @@ var require_program = __commonJS({
     exports.anyVariableInit = anyVariableInit;
     var error_1 = require_error();
     function resolveProgramTypeId(types, idx) {
-      const entry = types?.get(idx);
+      const entry = types?.at(idx);
       if (!entry) {
         throw new error_1.Error(`Type-table index ${idx} out of range (table size ${types ? types.size() : 0})`);
       }
@@ -2967,25 +3044,25 @@ var require_program = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/runtime/program-image.js
+// ../../external/wendoo-lang/packages/core/dist/node/runtime/program-image.js
 var require_program_image = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/runtime/program-image.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/runtime/program-image.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.MindcraftProgramImageEncoding = exports.MINDCRAFT_BINARY_PROGRAM_IMAGE_MAGIC = exports.MINDCRAFT_PROGRAM_IMAGE_VERSION = exports.MINDCRAFT_PROGRAM_IMAGE_FORMAT = void 0;
-    exports.MINDCRAFT_PROGRAM_IMAGE_FORMAT = "mindcraft.program";
-    exports.MINDCRAFT_PROGRAM_IMAGE_VERSION = 1;
-    exports.MINDCRAFT_BINARY_PROGRAM_IMAGE_MAGIC = [137, 77, 66, 80];
-    exports.MindcraftProgramImageEncoding = {
+    exports.WendooProgramImageEncoding = exports.WENDOO_BINARY_PROGRAM_IMAGE_MAGIC = exports.WENDOO_PROGRAM_IMAGE_VERSION = exports.WENDOO_PROGRAM_IMAGE_FORMAT = void 0;
+    exports.WENDOO_PROGRAM_IMAGE_FORMAT = "wendoo.program";
+    exports.WENDOO_PROGRAM_IMAGE_VERSION = 1;
+    exports.WENDOO_BINARY_PROGRAM_IMAGE_MAGIC = [137, 77, 66, 80];
+    exports.WendooProgramImageEncoding = {
       JSON: "json",
       BINARY: "binary"
     };
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/runtime/brain-program-binary-codec.js
+// ../../external/wendoo-lang/packages/core/dist/node/runtime/brain-program-binary-codec.js
 var require_brain_program_binary_codec = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/runtime/brain-program-binary-codec.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/runtime/brain-program-binary-codec.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.BINARY_PROGRAM_FORMAT_VERSION = exports.BrainProgramBinaryCodecErrorCode = void 0;
@@ -3008,38 +3085,38 @@ var require_brain_program_binary_codec = __commonJS({
     var type_defs_1 = require_type_defs();
     exports.BrainProgramBinaryCodecErrorCode = {
       /** The leading bytes are not the binary `.mcprogram` magic. */
-      INVALID_MAGIC: "MINDCRAFT_BINARY_CODEC_INVALID_MAGIC",
+      INVALID_MAGIC: "WENDOO_BINARY_CODEC_INVALID_MAGIC",
       /** The envelope format version exceeds the reader's maximum. */
-      UNSUPPORTED_FORMAT_VERSION: "MINDCRAFT_BINARY_CODEC_UNSUPPORTED_FORMAT_VERSION",
+      UNSUPPORTED_FORMAT_VERSION: "WENDOO_BINARY_CODEC_UNSUPPORTED_FORMAT_VERSION",
       /** An f64 numeric entry was found while decoding for an f32 target. */
-      F64_ON_F32_TARGET: "MINDCRAFT_BINARY_CODEC_F64_ON_F32_TARGET",
+      F64_ON_F32_TARGET: "WENDOO_BINARY_CODEC_F64_ON_F32_TARGET",
       /** A CNUM discriminant byte is not one of `0`/`1`/`2`. */
-      INVALID_NUMBER_DISCRIMINANT: "MINDCRAFT_BINARY_CODEC_INVALID_NUMBER_DISCRIMINANT",
+      INVALID_NUMBER_DISCRIMINANT: "WENDOO_BINARY_CODEC_INVALID_NUMBER_DISCRIMINANT",
       /** A value tag byte is not a serializable {@link NativeType}. */
-      INVALID_VALUE_TAG: "MINDCRAFT_BINARY_CODEC_INVALID_VALUE_TAG",
+      INVALID_VALUE_TAG: "WENDOO_BINARY_CODEC_INVALID_VALUE_TAG",
       /** A runtime-only or native-backed value was passed to the encoder. */
-      UNENCODABLE_VALUE: "MINDCRAFT_BINARY_CODEC_UNENCODABLE_VALUE",
+      UNENCODABLE_VALUE: "WENDOO_BINARY_CODEC_UNENCODABLE_VALUE",
       /** An opcode byte has no operand-schema entry. */
-      UNKNOWN_OPCODE: "MINDCRAFT_BINARY_CODEC_UNKNOWN_OPCODE",
+      UNKNOWN_OPCODE: "WENDOO_BINARY_CODEC_UNKNOWN_OPCODE",
       /** An instruction's operands do not match its opcode's operand schema. */
-      INSTRUCTION_SCHEMA_MISMATCH: "MINDCRAFT_BINARY_CODEC_INSTRUCTION_SCHEMA_MISMATCH",
+      INSTRUCTION_SCHEMA_MISMATCH: "WENDOO_BINARY_CODEC_INSTRUCTION_SCHEMA_MISMATCH",
       /** A profile id outside the unsigned 32-bit range was supplied to the encoder. */
-      INVALID_PROFILE_ID: "MINDCRAFT_BINARY_CODEC_INVALID_PROFILE_ID",
+      INVALID_PROFILE_ID: "WENDOO_BINARY_CODEC_INVALID_PROFILE_ID",
       /** A TYPS entry tag byte is not a known type-entry tag. */
-      INVALID_TYPE_ENTRY_TAG: "MINDCRAFT_BINARY_CODEC_INVALID_TYPE_ENTRY_TAG",
+      INVALID_TYPE_ENTRY_TAG: "WENDOO_BINARY_CODEC_INVALID_TYPE_ENTRY_TAG",
       /** A TYPS entry references a child at or beyond its own index. */
-      TYPE_FORWARD_REFERENCE: "MINDCRAFT_BINARY_CODEC_TYPE_FORWARD_REFERENCE",
+      TYPE_FORWARD_REFERENCE: "WENDOO_BINARY_CODEC_TYPE_FORWARD_REFERENCE",
       /** A type-table index is outside the decoded table. */
-      TYPE_INDEX_OUT_OF_RANGE: "MINDCRAFT_BINARY_CODEC_TYPE_INDEX_OUT_OF_RANGE",
+      TYPE_INDEX_OUT_OF_RANGE: "WENDOO_BINARY_CODEC_TYPE_INDEX_OUT_OF_RANGE",
       /** An enum constant's symbol ordinal is outside its type's symbol list. */
-      ENUM_ORDINAL_OUT_OF_RANGE: "MINDCRAFT_BINARY_CODEC_ENUM_ORDINAL_OUT_OF_RANGE",
+      ENUM_ORDINAL_OUT_OF_RANGE: "WENDOO_BINARY_CODEC_ENUM_ORDINAL_OUT_OF_RANGE",
       /** A TYPS atom entry's atomId is not registered in the decoding runtime. */
-      UNKNOWN_TYPE_ATOM: "MINDCRAFT_BINARY_CODEC_UNKNOWN_TYPE_ATOM",
+      UNKNOWN_TYPE_ATOM: "WENDOO_BINARY_CODEC_UNKNOWN_TYPE_ATOM",
       /** A TYPS enum entry's value-kind byte is not `0` (number) or `1` (string). */
-      INVALID_ENUM_VALUE_KIND: "MINDCRAFT_BINARY_CODEC_INVALID_ENUM_VALUE_KIND"
+      INVALID_ENUM_VALUE_KIND: "WENDOO_BINARY_CODEC_INVALID_ENUM_VALUE_KIND"
     };
     exports.BINARY_PROGRAM_FORMAT_VERSION = 4;
-    var MAGIC = list_1.List.from(program_image_1.MINDCRAFT_BINARY_PROGRAM_IMAGE_MAGIC);
+    var MAGIC = list_1.List.from(program_image_1.WENDOO_BINARY_PROGRAM_IMAGE_MAGIC);
     var I32_MIN = -2147483648;
     var I32_MAX = 2147483647;
     var NUMBER_DISCRIMINANT_SMALL_INT = 0;
@@ -3068,8 +3145,8 @@ var require_brain_program_binary_codec = __commonJS({
     var PRESENCE_RULF = 2;
     var PRESENCE_RANC = 4;
     var PRESENCE_SYST = 8;
-    function codecError(code, message) {
-      return new error_1.Error(`[${code}] ${message}`);
+    function codecError(code, message2) {
+      return new error_1.Error(`[${code}] ${message2}`);
     }
     var StringInterner = class {
       strings = list_1.List.empty();
@@ -4224,9 +4301,9 @@ var require_brain_program_binary_codec = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/runtime/brain-program-dump.js
+// ../../external/wendoo-lang/packages/core/dist/node/runtime/brain-program-dump.js
 var require_brain_program_dump = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/runtime/brain-program-dump.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/runtime/brain-program-dump.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.CANONICAL_PROGRAM_DUMP_FORMAT_VERSION = void 0;
@@ -4557,9 +4634,9 @@ var require_brain_program_dump = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/runtime/callsite-store.js
+// ../../external/wendoo-lang/packages/core/dist/node/runtime/callsite-store.js
 var require_callsite_store = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/runtime/callsite-store.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/runtime/callsite-store.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.createCallsiteStore = createCallsiteStore;
@@ -4601,7 +4678,7 @@ var require_callsite_store = __commonJS({
           if (!record2) {
             return value_1.NIL_VALUE;
           }
-          return record2.slots.get(slotIdx) ?? value_1.NIL_VALUE;
+          return record2.slots.at(slotIdx) ?? value_1.NIL_VALUE;
         },
         setSlot(callSiteId, slotIdx, value) {
           const record2 = ensureRecord(callSiteId);
@@ -4628,13 +4705,14 @@ var require_callsite_store = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/runtime/rule-services.js
+// ../../external/wendoo-lang/packages/core/dist/node/runtime/rule-services.js
 var require_rule_services = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/runtime/rule-services.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/runtime/rule-services.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.RuleFiringState = void 0;
     exports.createRuleFiringServices = createRuleFiringServices;
+    exports.createRuleCompletionServices = createRuleCompletionServices;
     exports.createProgramServices = createProgramServices;
     exports.createRuleVariableServices = createRuleVariableServices;
     var dict_1 = require_dict();
@@ -4654,6 +4732,31 @@ var require_rule_services = __commonJS({
           if (ruleFuncId === void 0)
             return;
           states.set(ruleFuncId, state);
+        }
+      };
+    }
+    function createRuleCompletionServices(slots, abandoned, hasLiveSubtree) {
+      return {
+        hasLiveSubtree(ruleFuncId) {
+          return hasLiveSubtree(ruleFuncId);
+        },
+        getWatcher(ruleFuncId) {
+          return slots.get(ruleFuncId);
+        },
+        setWatcher(ruleFuncId, handleId) {
+          slots.set(ruleFuncId, handleId);
+        },
+        clearWatcher(ruleFuncId) {
+          slots.delete(ruleFuncId);
+        },
+        isAbandoned(ruleFuncId) {
+          return abandoned.has(ruleFuncId);
+        },
+        markAbandoned(ruleFuncId) {
+          abandoned.add(ruleFuncId);
+        },
+        clearAbandoned(ruleFuncId) {
+          abandoned.delete(ruleFuncId);
         }
       };
     }
@@ -4759,9 +4862,9 @@ var require_rule_services = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/runtime/runtime-services.js
+// ../../external/wendoo-lang/packages/core/dist/node/runtime/runtime-services.js
 var require_runtime_services = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/runtime/runtime-services.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/runtime/runtime-services.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.createRuntimeServices = createRuntimeServices;
@@ -4802,9 +4905,9 @@ var require_runtime_services = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/platform/logger.js
+// ../../external/wendoo-lang/packages/core/dist/node/platform/logger.js
 var require_logger = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/platform/logger.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/platform/logger.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.logger = exports.LogLevel = void 0;
@@ -4861,26 +4964,26 @@ var require_logger = __commonJS({
       isErrorEnabled() {
         return this.level <= LogLevel.ERROR;
       }
-      debug(message, data) {
-        this.log(LogLevel.DEBUG, message, data);
+      debug(message2, data) {
+        this.log(LogLevel.DEBUG, message2, data);
       }
-      info(message, data) {
-        this.log(LogLevel.INFO, message, data);
+      info(message2, data) {
+        this.log(LogLevel.INFO, message2, data);
       }
-      warn(message, data) {
-        this.log(LogLevel.WARN, message, data);
+      warn(message2, data) {
+        this.log(LogLevel.WARN, message2, data);
       }
-      error(message, data) {
-        this.log(LogLevel.ERROR, message, data);
+      error(message2, data) {
+        this.log(LogLevel.ERROR, message2, data);
       }
-      log(level, message, data) {
+      log(level, message2, data) {
         if (level < this.level) {
           return;
         }
         const timestamp = Date.now();
         const entry = {
           level,
-          message,
+          message: message2,
           timestamp,
           category: this.category,
           data
@@ -4943,9 +5046,9 @@ var require_logger = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/platform/time.js
+// ../../external/wendoo-lang/packages/core/dist/node/platform/time.js
 var require_time = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/platform/time.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/platform/time.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.Time = void 0;
@@ -4959,9 +5062,9 @@ var require_time = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/runtime/events.js
+// ../../external/wendoo-lang/packages/core/dist/node/runtime/events.js
 var require_events = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/runtime/events.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/runtime/events.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.HandleOutcome = void 0;
@@ -4974,12 +5077,12 @@ var require_events = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/runtime/vm-types.js
+// ../../external/wendoo-lang/packages/core/dist/node/runtime/vm-types.js
 var require_vm_types = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/runtime/vm-types.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/runtime/vm-types.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.HandleTable = exports.HandleState = exports.FiberState = exports.VmStatus = exports.UnderflowError = exports.OverflowError = void 0;
+    exports.HandleTable = exports.HandleState = exports.HANDLE_BACKPRESSURE_FAULT_ROUNDS = exports.FiberState = exports.VmStatus = exports.UnderflowError = exports.OverflowError = void 0;
     exports.throwOverflow = throwOverflow;
     exports.throwUnderflow = throwUnderflow;
     exports.isOverflowError = isOverflowError;
@@ -4991,24 +5094,24 @@ var require_vm_types = __commonJS({
     var uniqueset_1 = require_uniqueset();
     var value_1 = require_value();
     var OverflowError = class extends error_1.Error {
-      constructor(message) {
-        super(message);
+      constructor(message2) {
+        super(message2);
         this.name = "OverflowError";
       }
     };
     exports.OverflowError = OverflowError;
     var UnderflowError = class extends error_1.Error {
-      constructor(message) {
-        super(message);
+      constructor(message2) {
+        super(message2);
         this.name = "UnderflowError";
       }
     };
     exports.UnderflowError = UnderflowError;
-    function throwOverflow(message) {
-      throw new OverflowError(message);
+    function throwOverflow(message2) {
+      throw new OverflowError(message2);
     }
-    function throwUnderflow(message) {
-      throw new UnderflowError(message);
+    function throwUnderflow(message2) {
+      throw new UnderflowError(message2);
     }
     function isOverflowError(e) {
       return e instanceof OverflowError;
@@ -5031,6 +5134,7 @@ var require_vm_types = __commonJS({
       FiberState2["FAULT"] = "FAULT";
       FiberState2["CANCELLED"] = "CANCELLED";
     })(FiberState || (exports.FiberState = FiberState = {}));
+    exports.HANDLE_BACKPRESSURE_FAULT_ROUNDS = 8192;
     var HandleState;
     (function(HandleState2) {
       HandleState2["PENDING"] = "PENDING";
@@ -5042,25 +5146,34 @@ var require_vm_types = __commonJS({
       maxHandles;
       nextId = 1;
       handles = new dict_1.Dict();
+      cappedCount = 0;
       eventEmitter = new event_emitter_1.EventEmitter();
       events = this.eventEmitter.consumer();
       constructor(maxHandles) {
         this.maxHandles = maxHandles;
       }
       /**
-       * True when a {@link createPending} would succeed right now: the live-handle
-       * count is below {@link maxHandles}. Non-mutating; an async dispatch checks it
-       * to decide whether to allocate or to park and retry next round.
+       * True when a {@link createPending} of a capped handle would succeed right
+       * now: the live capped-handle count is below {@link maxHandles}. Uncapped
+       * handles are excluded from the count and always allocate. Non-mutating; an
+       * async dispatch checks it to decide whether to allocate or to park and retry
+       * next round.
        */
       hasCapacity() {
-        return this.handles.size() < this.maxHandles;
+        return this.cappedCount < this.maxHandles;
+      }
+      /** Count of live handles that count against {@link maxHandles}. */
+      cappedSize() {
+        return this.cappedCount;
       }
       /**
        * Allocate a pending handle. Pass `actionKey` when the handle backs an
-       * asynchronous host-action call, so its settle can name the action.
+       * asynchronous host-action call, so its settle can name the action. Pass
+       * `capped` false to keep the handle out of the {@link maxHandles} accounting;
+       * a capped allocation past the cap throws an overflow.
        */
-      createPending(actionKey) {
-        if (this.handles.size() >= this.maxHandles) {
+      createPending(actionKey, capped = true) {
+        if (capped && this.cappedCount >= this.maxHandles) {
           throwOverflow(`Handle limit exceeded: ${this.maxHandles}`);
         }
         const id = this.nextId++;
@@ -5069,8 +5182,12 @@ var require_vm_types = __commonJS({
           state: HandleState.PENDING,
           waiters: new uniqueset_1.UniqueSet(),
           createdAt: time_1.Time.nowMs(),
-          actionKey
+          actionKey,
+          capped
         });
+        if (capped) {
+          this.cappedCount++;
+        }
         return id;
       }
       get(id) {
@@ -5103,25 +5220,35 @@ var require_vm_types = __commonJS({
         h.error = err;
         this.eventEmitter.emit("completed", id);
       }
-      cancel(id, message = "Cancelled") {
+      cancel(id, message2 = "Cancelled") {
         const h = this.getOrThrow(id);
         if (h.state !== HandleState.PENDING) {
           throw new error_1.Error(`Cannot cancel handle ${id} in state ${h.state}`);
         }
         h.state = HandleState.CANCELLED;
-        h.error = { code: value_1.ErrorCode.Cancelled, message };
+        h.error = { code: value_1.ErrorCode.Cancelled, message: message2 };
         this.eventEmitter.emit("completed", id);
       }
       delete(id) {
+        const h = this.handles.get(id);
+        if (!h)
+          return;
+        if (h.capped) {
+          this.cappedCount--;
+        }
         this.handles.delete(id);
       }
       clear() {
         this.handles.clear();
+        this.cappedCount = 0;
       }
       gc() {
         let removed = 0;
         for (const [id, h] of this.handles.entries().toArray()) {
           if (h.state !== HandleState.PENDING && h.waiters.size() === 0) {
+            if (h.capped) {
+              this.cappedCount--;
+            }
             this.handles.delete(id);
             removed++;
           }
@@ -5136,9 +5263,9 @@ var require_vm_types = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/runtime/vm.js
+// ../../external/wendoo-lang/packages/core/dist/node/runtime/vm.js
 var require_vm = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/runtime/vm.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/runtime/vm.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.FiberScheduler = exports.DEFAULT_SCHEDULER_CONFIG = exports.VM = exports.DEFAULT_VM_CONFIG = void 0;
@@ -5348,6 +5475,9 @@ var require_vm = __commonJS({
         }
         const locals = this.allocLocals(fn, effectiveArgs);
         const ruleFuncId = this.resolveDirectRuleFuncId(executionContext, funcId);
+        if (ruleFuncId !== void 0) {
+          executionContext.services.brain.ruleCompletion.clearAbandoned(ruleFuncId);
+        }
         const now = time_1.Time.nowMs();
         const fiber = {
           id: fiberId,
@@ -5366,7 +5496,8 @@ var require_vm = __commonJS({
           instrBudget: 0,
           createdAt: now,
           lastRunAt: now,
-          executionContext
+          executionContext,
+          ruleFuncId
         };
         return fiber;
       }
@@ -5484,6 +5615,10 @@ var require_vm = __commonJS({
               return this.execWhenEnd(fiber, ins, frame);
             case bytecode_1.Op.WHEN_END_PRESENT:
               return this.execWhenEndPresent(fiber, ins, frame);
+            case bytecode_1.Op.WHEN_END_CHAIN:
+              return this.execWhenEndChain(fiber, ins, frame);
+            case bytecode_1.Op.WHEN_END_PRESENT_CHAIN:
+              return this.execWhenEndPresentChain(fiber, ins, frame);
             case bytecode_1.Op.DO_START:
               return this.execDoStart(fiber, ins, frame);
             case bytecode_1.Op.DO_END:
@@ -5924,13 +6059,13 @@ var require_vm = __commonJS({
             if (pending())
               handles.resolve(id, value);
           },
-          reject(code, message = "") {
+          reject(code, message2 = "") {
             if (pending())
-              handles.reject(id, { code, message });
+              handles.reject(id, { code, message: message2 });
           },
-          cancel(message) {
+          cancel(message2) {
             if (pending())
-              handles.cancel(id, message);
+              handles.cancel(id, message2);
           }
         };
       }
@@ -5948,8 +6083,9 @@ var require_vm = __commonJS({
           (0, vm_types_1.throwUnderflow)(`HOST_CALL_ASYNC: argc ${argc} exceeds stack size ${stackSize}`);
         }
         if (!this.handles.hasCapacity()) {
-          return { status: vm_types_1.VmStatus.YIELDED };
+          return this.backpressureOnHandles(fiber, frame);
         }
+        this.clearHandleBackpressure(fiber);
         const args = list_1.List.empty();
         for (let i = 0; i < argc; i++) {
           args.push(fiber.vstack.get(stackSize - argc + i));
@@ -6019,8 +6155,9 @@ var require_vm = __commonJS({
         const action = this.getExecutableAction(actionSlot, "ACTION_CALL_ASYNC");
         const actionKey = action.descriptor.key;
         if (!this.handles.hasCapacity()) {
-          return { status: vm_types_1.VmStatus.YIELDED };
+          return this.backpressureOnHandles(fiber, frame);
         }
+        this.clearHandleBackpressure(fiber);
         const args = this.snapshotStackArgs(fiber, argc, "ACTION_CALL_ASYNC");
         for (let i = 0; i < argc; i++) {
           fiber.vstack.pop();
@@ -6062,6 +6199,26 @@ var require_vm = __commonJS({
        * the resolved action is not host-backed, or its sync/async-ness does not
        * match the opcode that issued the call.
        */
+      /**
+       * Records that the dispatch at `frame.pc` found no free async handle and
+       * returns the fiber's yield result. Faults `ErrorCode.StackOverflow` once the
+       * same dispatch has backpressured {@link HANDLE_BACKPRESSURE_FAULT_ROUNDS}
+       * consecutive rounds.
+       */
+      backpressureOnHandles(fiber, frame) {
+        const rounds = fiber.handleBackpressurePc === frame.pc ? (fiber.handleBackpressureRounds ?? 0) + 1 : 1;
+        fiber.handleBackpressurePc = frame.pc;
+        fiber.handleBackpressureRounds = rounds;
+        if (rounds >= vm_types_1.HANDLE_BACKPRESSURE_FAULT_ROUNDS) {
+          (0, vm_types_1.throwOverflow)(`Async handle starvation: no free handle for ${vm_types_1.HANDLE_BACKPRESSURE_FAULT_ROUNDS} rounds`);
+        }
+        return { status: vm_types_1.VmStatus.YIELDED };
+      }
+      /** Clears the backpressure run recorded by {@link backpressureOnHandles}. */
+      clearHandleBackpressure(fiber) {
+        fiber.handleBackpressurePc = void 0;
+        fiber.handleBackpressureRounds = 0;
+      }
       resolveHostAction(actionId, wantAsync, opName) {
         const action = this.runtime.actions.getById(actionId);
         if (!action) {
@@ -6118,9 +6275,11 @@ var require_vm = __commonJS({
         if (!action.execAsync) {
           throw new error_1.Error(`HOST_ACTION_CALL_ASYNC: host action ${action.descriptor.key} is missing execAsync`);
         }
-        if (!this.handles.hasCapacity()) {
-          return { status: vm_types_1.VmStatus.YIELDED };
+        const capped = action.uncappedHandles !== true;
+        if (capped && !this.handles.hasCapacity()) {
+          return this.backpressureOnHandles(fiber, frame);
         }
+        this.clearHandleBackpressure(fiber);
         const args = list_1.List.empty();
         for (let i = 0; i < argc; i++) {
           args.push(fiber.vstack.get(stackSize - argc + i));
@@ -6128,7 +6287,7 @@ var require_vm = __commonJS({
         for (let i = 0; i < argc; i++) {
           fiber.vstack.pop();
         }
-        const hid = this.handles.createPending(action.descriptor.key);
+        const hid = this.handles.createPending(action.descriptor.key, capped);
         this.push(fiber, V.handle(hid));
         this.bindExecutionContext(fiber, frame, callSiteId);
         this.events?.onHostActionDispatch?.({
@@ -6230,35 +6389,54 @@ var require_vm = __commonJS({
         frame.pc++;
         return void 0;
       }
-      execWhenEnd(fiber, ins, frame) {
+      /**
+       * Body shared by the four WHEN gates. Pops the WHEN result, captures it into
+       * the rule's reserved `__whenResult` variable (every rule captures, whatever
+       * the gate decides), computes the fired outcome, writes the firing record, and
+       * advances the PC by one on a fire or by the signed `a` offset on a skip,
+       * which lands past the DO section and any nested boundaries.
+       *
+       * @param presenceGated - Gate on the WHEN result being present (non-nil), so a
+       *   present falsy value fires. Otherwise the gate is on truthiness.
+       * @param chained - Write the chain-aware firing record of an `otherwise` rule.
+       *   Otherwise the record is the rule's own outcome.
+       */
+      execWhenGate(fiber, ins, frame, presenceGated, chained) {
         const whenResult = this.pop(fiber);
+        const brain = fiber.executionContext.services.brain;
         const ruleFuncId = this.resolveFrameRuleFuncId(fiber.executionContext, frame);
-        fiber.executionContext.services.brain.ruleVars.setByName(ruleFuncId, "__whenResult", whenResult);
-        const fired = isTruthy(whenResult);
-        fiber.executionContext.services.brain.ruleFiring.set(ruleFuncId, fired ? rule_services_1.RuleFiringState.DID_FIRE : rule_services_1.RuleFiringState.DID_NOT_FIRE);
+        brain.ruleVars.setByName(ruleFuncId, "__whenResult", whenResult);
+        const fired = presenceGated ? whenResult.t !== type_defs_1.NativeType.Nil : isTruthy(whenResult);
+        brain.ruleFiring.set(ruleFuncId, chained ? this.chainedFiringState(brain, ruleFuncId, fired) : fired ? rule_services_1.RuleFiringState.DID_FIRE : rule_services_1.RuleFiringState.DID_NOT_FIRE);
         this.events?.onRuleWhenGate?.({ ruleFuncId, result: whenResult, fired });
-        if (!fired) {
-          const offset = ins.a ?? 0;
-          frame.pc += offset;
-        } else {
-          frame.pc++;
-        }
+        frame.pc += fired ? 1 : ins.a ?? 0;
         return void 0;
       }
+      /**
+       * The firing record a chain gate writes: `DidFire` when the rule fired, and on
+       * a rule that did not fire the record of its subject -- the rule directly
+       * above it at its own nesting level. A rule with no subject records its own
+       * outcome.
+       */
+      chainedFiringState(brain, ruleFuncId, fired) {
+        if (fired)
+          return rule_services_1.RuleFiringState.DID_FIRE;
+        const subjectFuncId = ruleFuncId === void 0 ? void 0 : brain.program.getPrecedingSiblingRuleFuncId(ruleFuncId);
+        if (subjectFuncId === void 0)
+          return rule_services_1.RuleFiringState.DID_NOT_FIRE;
+        return brain.ruleFiring.get(subjectFuncId);
+      }
+      execWhenEnd(fiber, ins, frame) {
+        return this.execWhenGate(fiber, ins, frame, false, false);
+      }
       execWhenEndPresent(fiber, ins, frame) {
-        const whenResult = this.pop(fiber);
-        const ruleFuncId = this.resolveFrameRuleFuncId(fiber.executionContext, frame);
-        fiber.executionContext.services.brain.ruleVars.setByName(ruleFuncId, "__whenResult", whenResult);
-        const fired = whenResult.t !== type_defs_1.NativeType.Nil;
-        fiber.executionContext.services.brain.ruleFiring.set(ruleFuncId, fired ? rule_services_1.RuleFiringState.DID_FIRE : rule_services_1.RuleFiringState.DID_NOT_FIRE);
-        this.events?.onRuleWhenGate?.({ ruleFuncId, result: whenResult, fired });
-        if (!fired) {
-          const offset = ins.a ?? 0;
-          frame.pc += offset;
-        } else {
-          frame.pc++;
-        }
-        return void 0;
+        return this.execWhenGate(fiber, ins, frame, true, false);
+      }
+      execWhenEndChain(fiber, ins, frame) {
+        return this.execWhenGate(fiber, ins, frame, false, true);
+      }
+      execWhenEndPresentChain(fiber, ins, frame) {
+        return this.execWhenGate(fiber, ins, frame, true, true);
       }
       execDoStart(fiber, ins, frame) {
         frame.pc++;
@@ -6299,7 +6477,7 @@ var require_vm = __commonJS({
           throw new error_1.Error("LIST_GET: index must be number");
         }
         const idx = math_1.MathOps.floor(index.v);
-        const item = list.v.get(idx);
+        const item = list.v.at(idx);
         this.push(fiber, item ?? V.nil());
         frame.pc++;
         return void 0;
@@ -6549,7 +6727,7 @@ var require_vm = __commonJS({
         if (typeDef?.fieldGetter) {
           return typeDef.fieldGetter(source, fieldId, fiber.executionContext) ?? V.nil();
         }
-        return source.v?.get(fieldId) ?? V.nil();
+        return source.v?.at(fieldId) ?? V.nil();
       }
       /**
        * Write a struct field by its numeric id (a pure store -- no value copy): dispatch to
@@ -6803,6 +6981,7 @@ var require_vm = __commonJS({
         childContext.currentCallSiteId = callSiteId;
         childContext.currentRuleFuncId = ruleFuncId;
         childFrame.ruleFuncId = ruleFuncId;
+        childFiber.ruleFuncId = ruleFuncId;
         childFrame.actionBinding = {
           actionSlot,
           actionKey: action.descriptor.key,
@@ -6830,7 +7009,7 @@ var require_vm = __commonJS({
         if (!listener) {
           return;
         }
-        const fn = this.prog.functions.get(frame.funcId);
+        const fn = this.prog.functions.at(frame.funcId);
         if (!fn) {
           return;
         }
@@ -7030,7 +7209,7 @@ var require_vm = __commonJS({
           const actualStackSize = fiber.vstack.size();
           if (actualStackSize > frame.base) {
             const leaked = actualStackSize - frame.base;
-            const fn = this.prog.functions.get(frame.funcId);
+            const fn = this.prog.functions.at(frame.funcId);
             const fnName = fn?.name ?? `func[${frame.funcId}]`;
             logger_1.logger.warn(`[VM] Stack leak detected in ${fnName}: expected stack at ${frame.base}, found ${actualStackSize} (${leaked} extra values). Cleaning up.`);
           }
@@ -7074,6 +7253,48 @@ var require_vm = __commonJS({
           throw new error_1.Error(`Invalid state transition: ${fiber.state} -> ${newState}`);
         }
         fiber.state = newState;
+        if (newState === vm_types_1.FiberState.DONE || newState === vm_types_1.FiberState.FAULT || newState === vm_types_1.FiberState.CANCELLED) {
+          this.settleRuleWatchers(fiber, newState);
+        }
+      }
+      /**
+       * The settle walk, run at every fiber terminal transition. Takes the
+       * finishing fiber's rule and walks it and its ancestors. A fiber that faulted
+       * or was cancelled marks every rule on that walk -- the whole set of clusters
+       * it belonged to -- as an abandoned firing. Then, for each rule whose cluster
+       * has emptied, resolves the pending trigger handle in that rule's watcher slot
+       * and clears the slot: `true` on a `DidFire` record with no abandonment mark,
+       * `false` otherwise.
+       *
+       * Call only once `fiber.state` is terminal.
+       */
+      settleRuleWatchers(fiber, cause) {
+        const brain = fiber.executionContext.services.brain;
+        const abandoning = cause !== vm_types_1.FiberState.DONE;
+        let ruleFuncId = fiber.ruleFuncId;
+        while (ruleFuncId !== void 0) {
+          if (abandoning) {
+            brain.ruleCompletion.markAbandoned(ruleFuncId);
+          }
+          const handleId = brain.ruleCompletion.getWatcher(ruleFuncId);
+          if (handleId !== void 0 && !brain.ruleCompletion.hasLiveSubtree(ruleFuncId)) {
+            const fired = !brain.ruleCompletion.isAbandoned(ruleFuncId) && brain.ruleFiring.get(ruleFuncId) === rule_services_1.RuleFiringState.DID_FIRE;
+            brain.ruleCompletion.clearWatcher(ruleFuncId);
+            if (this.handles.get(handleId)?.state === vm_types_1.HandleState.PENDING) {
+              this.handles.resolve(handleId, fired ? value_1.TRUE_VALUE : value_1.FALSE_VALUE);
+            }
+          }
+          ruleFuncId = this.ruleParentFuncId(ruleFuncId);
+        }
+      }
+      /**
+       * The parent rule of `ruleFuncId` in the loaded program's rule-ancestor table.
+       * Returns `undefined` for a root rule and for a funcId the table does not
+       * declare.
+       */
+      ruleParentFuncId(ruleFuncId) {
+        const ancestors = this.prog.ruleAncestors;
+        return ancestors !== void 0 ? ancestors.get(ruleFuncId) : void 0;
       }
       faultFiber(fiber, err, scheduler) {
         fiber.lastError = err;
@@ -7085,8 +7306,8 @@ var require_vm = __commonJS({
        * Construct an {@link ErrorValue} for an in-VM fault. Allocates a fresh
        * object carrying `message`, `detail`, and `site`.
        */
-      makeError(code, message, opts) {
-        const err = { code, message };
+      makeError(code, message2, opts) {
+        const err = { code, message: message2 };
         if (opts?.detail !== void 0)
           err.detail = opts.detail;
         if (opts?.site !== void 0)
@@ -7198,6 +7419,26 @@ var require_vm = __commonJS({
         for (const [, fiber] of this.fibers.entries().toArray()) {
           if (fiber.rootRuleFuncId === rootRuleFuncId && (fiber.state === vm_types_1.FiberState.RUNNABLE || fiber.state === vm_types_1.FiberState.WAITING)) {
             return true;
+          }
+        }
+        return false;
+      }
+      /**
+       * True when any live (runnable or waiting) fiber belongs to `ruleFuncId`'s
+       * cluster: its own fiber, or a fiber whose rule reaches `ruleFuncId` by
+       * walking the program's rule-ancestor chain. Child-rule fibers held in the
+       * current tick's spawn drain are runnable and count.
+       */
+      hasLiveRuleSubtree(ruleFuncId) {
+        for (const [, fiber] of this.fibers.entries().toArray()) {
+          if (fiber.state !== vm_types_1.FiberState.RUNNABLE && fiber.state !== vm_types_1.FiberState.WAITING) {
+            continue;
+          }
+          let cur = fiber.ruleFuncId;
+          while (cur !== void 0) {
+            if (cur === ruleFuncId)
+              return true;
+            cur = this.vm.ruleParentFuncId(cur);
           }
         }
         return false;
@@ -7346,9 +7587,9 @@ var require_vm = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/runtime/brain-runtime.js
+// ../../external/wendoo-lang/packages/core/dist/node/runtime/brain-runtime.js
 var require_brain_runtime = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/runtime/brain-runtime.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/runtime/brain-runtime.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.BrainRuntime = void 0;
@@ -7356,6 +7597,7 @@ var require_brain_runtime = __commonJS({
     var error_1 = require_error();
     var event_emitter_1 = require_event_emitter();
     var list_1 = require_list();
+    var uniqueset_1 = require_uniqueset();
     var callsite_store_1 = require_callsite_store();
     var program_1 = require_program();
     var rule_services_1 = require_rule_services();
@@ -7477,6 +7719,8 @@ var require_brain_runtime = __commonJS({
         const callsiteStore = (0, callsite_store_1.createCallsiteStore)();
         const ruleVariableStores = new dict_1.Dict();
         const ruleFiringStates = new dict_1.Dict();
+        const ruleWatcherSlots = new dict_1.Dict();
+        const abandonedRuleFirings = new uniqueset_1.UniqueSet();
         this.callsiteStore = callsiteStore;
         this.ruleVariableStores = ruleVariableStores;
         this.installVariableTable(program, previousVariables);
@@ -7495,6 +7739,7 @@ var require_brain_runtime = __commonJS({
             brainVars: runtimeServices.brainVars,
             ruleVars: (0, rule_services_1.createRuleVariableServices)(program, ruleVariableStores),
             ruleFiring: (0, rule_services_1.createRuleFiringServices)(ruleFiringStates),
+            ruleCompletion: (0, rule_services_1.createRuleCompletionServices)(ruleWatcherSlots, abandonedRuleFirings, (ruleFuncId) => this.scheduler.hasLiveRuleSubtree(ruleFuncId)),
             pages: runtimeServices.brainPages,
             callsite: callsiteStore
           }
@@ -7977,7 +8222,7 @@ var require_brain_runtime = __commonJS({
        * calls `BrainPage.activate()` synchronously inside the emit.
        */
       activatePage(pageIndex) {
-        const meta3 = this.pageMetadata.get(pageIndex);
+        const meta3 = this.pageMetadata.at(pageIndex);
         if (!meta3)
           return;
         this.activeRuleFiberIds = list_1.List.empty();
@@ -8055,7 +8300,7 @@ var require_brain_runtime = __commonJS({
       runDeactivationHooksForCurrentPage() {
         if (!this.isValidPageIndex(this.currentPageIndex))
           return;
-        const meta3 = this.pageMetadata.get(this.currentPageIndex);
+        const meta3 = this.pageMetadata.at(this.currentPageIndex);
         if (!meta3)
           return;
         for (let i = 0; i < meta3.actionCallSites.size(); i++) {
@@ -8168,9 +8413,9 @@ var require_brain_runtime = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/runtime/buffer-builtins.js
+// ../../external/wendoo-lang/packages/core/dist/node/runtime/buffer-builtins.js
 var require_buffer_builtins = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/runtime/buffer-builtins.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/runtime/buffer-builtins.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.registerBufferBuiltins = registerBufferBuiltins;
@@ -8224,9 +8469,9 @@ var require_buffer_builtins = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/platform/assert.js
+// ../../external/wendoo-lang/packages/core/dist/node/platform/assert.js
 var require_assert = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/platform/assert.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/platform/assert.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.assertUnreachable = assertUnreachable;
@@ -8237,9 +8482,9 @@ var require_assert = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/runtime/tile-ids.js
+// ../../external/wendoo-lang/packages/core/dist/node/runtime/tile-ids.js
 var require_tile_ids = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/runtime/tile-ids.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/runtime/tile-ids.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.CoreParameterId = void 0;
@@ -8315,51 +8560,48 @@ var require_tile_ids = __commonJS({
     function mkOutputVarKey(typeId, name) {
       return `__out.${typeId}.${name}`;
     }
-    var CoreParameterId3;
-    (function(CoreParameterId4) {
-      CoreParameterId4["AnonymousBoolean"] = "anon.boolean";
-      CoreParameterId4["AnonymousNumber"] = "anon.number";
-      CoreParameterId4["AnonymousString"] = "anon.string";
-    })(CoreParameterId3 || (exports.CoreParameterId = CoreParameterId3 = {}));
+    var CoreParameterId4;
+    (function(CoreParameterId5) {
+      CoreParameterId5["AnonymousBoolean"] = "anon.boolean";
+      CoreParameterId5["AnonymousNumber"] = "anon.number";
+      CoreParameterId5["AnonymousString"] = "anon.string";
+    })(CoreParameterId4 || (exports.CoreParameterId = CoreParameterId4 = {}));
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/runtime/call-spec.js
+// ../../external/wendoo-lang/packages/core/dist/node/runtime/call-spec.js
 var require_call_spec = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/runtime/call-spec.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/runtime/call-spec.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.mod = mod2;
-    exports.param = param4;
-    exports.bag = bag10;
-    exports.choice = choice4;
+    exports.param = param5;
+    exports.bag = bag11;
+    exports.choice = choice5;
     exports.seq = seq;
-    exports.optional = optional10;
+    exports.optional = optional11;
     exports.repeated = repeated2;
     exports.conditional = conditional;
     var tile_ids_1 = require_tile_ids();
+    function arg(tileId, opts) {
+      return { type: "arg", tileId, ...opts };
+    }
     function mod2(tileId) {
-      return { type: "arg", tileId: (0, tile_ids_1.mkModifierTileId)(tileId) };
+      return arg((0, tile_ids_1.mkModifierTileId)(tileId));
     }
-    function param4(tileId, opts) {
-      return {
-        type: "arg",
-        tileId: (0, tile_ids_1.mkParameterTileId)(tileId),
-        name: opts?.name,
-        required: opts?.required,
-        anonymous: opts?.anonymous
-      };
+    function param5(tileId, opts) {
+      return arg((0, tile_ids_1.mkParameterTileId)(tileId), opts);
     }
-    function bag10(...items) {
+    function bag11(...items) {
       return { type: "bag", items };
     }
-    function choice4(...options) {
+    function choice5(...options) {
       return { type: "choice", options };
     }
     function seq(...items) {
       return { type: "seq", items };
     }
-    function optional10(item) {
+    function optional11(item) {
       return { type: "optional", item };
     }
     function repeated2(item, opts) {
@@ -8371,9 +8613,9 @@ var require_call_spec = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/runtime/context.js
+// ../../external/wendoo-lang/packages/core/dist/node/runtime/context.js
 var require_context = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/runtime/context.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/runtime/context.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getRuleVariable = getRuleVariable;
@@ -8408,9 +8650,9 @@ var require_context = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/runtime/context-types.js
+// ../../external/wendoo-lang/packages/core/dist/node/runtime/context-types.js
 var require_context_types = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/runtime/context-types.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/runtime/context-types.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.ContextTypeIds = exports.ContextTypeNames = void 0;
@@ -8563,9 +8805,9 @@ var require_context_types = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/runtime/conversion-defs.js
+// ../../external/wendoo-lang/packages/core/dist/node/runtime/conversion-defs.js
 var require_conversion_defs = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/runtime/conversion-defs.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/runtime/conversion-defs.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.MAX_COERCION_PATH_LENGTH = void 0;
@@ -8581,9 +8823,9 @@ var require_conversion_defs = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/runtime/conversions.js
+// ../../external/wendoo-lang/packages/core/dist/node/runtime/conversions.js
 var require_conversions = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/runtime/conversions.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/runtime/conversions.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.ConversionRegistry = void 0;
@@ -8625,8 +8867,8 @@ var require_conversions = __commonJS({
           }
         } else if (!(0, conversion_defs_1.isBytecodeConversion)(conv)) {
           const name = conversionFnName(conv.fromType, conv.toType);
-          const callDef12 = conv.callDef ?? anonConversionCallDef;
-          this.functions.register(conv.id, name, false, conv.fn, callDef12);
+          const callDef13 = conv.callDef ?? anonConversionCallDef;
+          this.functions.register(conv.id, name, false, conv.fn, callDef13);
         }
         const conversion = { ...conv };
         if (!this.conversions.has(conversion.fromType)) {
@@ -8730,7 +8972,7 @@ var require_conversions = __commonJS({
         throw new error_1.Error(`registerEnumConversions: type ${typeId} is not an enum`);
       }
       const enumDef = enumType;
-      const firstSymbol = enumDef.symbols.get(0);
+      const firstSymbol = enumDef.symbols.at(0);
       if (!firstSymbol) {
         return;
       }
@@ -8886,9 +9128,9 @@ var require_conversions = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/runtime/element-access-builtins.js
+// ../../external/wendoo-lang/packages/core/dist/node/runtime/element-access-builtins.js
 var require_element_access_builtins = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/runtime/element-access-builtins.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/runtime/element-access-builtins.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.registerElementAccessBuiltins = registerElementAccessBuiltins;
@@ -8920,7 +9162,7 @@ var require_element_access_builtins = __commonJS({
       return value;
     }
     function readListIndex(list, index) {
-      return list.v.get(index) ?? value_1.NIL_VALUE;
+      return list.v.at(index) ?? value_1.NIL_VALUE;
     }
     function readStringIndex(source, index) {
       return index < string_1.StringUtils.length(source) ? (0, value_1.mkStringValue)(string_1.StringUtils.charAt(source, index)) : value_1.NIL_VALUE;
@@ -8959,29 +9201,29 @@ var require_element_access_builtins = __commonJS({
       const { functions } = services.runtime;
       functions.register(abi_ids_1.CoreFuncId.ListGet, "$$list_get_js", false, {
         exec: (_ctx, args) => {
-          const list = args.get(0);
+          const list = args.at(0);
           if (!list || list.t !== type_defs_1.NativeType.List) {
             return value_1.NIL_VALUE;
           }
-          return listGetJs(list, args.get(1));
+          return listGetJs(list, args.at(1));
         }
       }, elementAccessCallDef);
       functions.register(abi_ids_1.CoreFuncId.StringGet, "$$str_get_js", false, {
         exec: (_ctx, args) => {
-          const source = args.get(0);
+          const source = args.at(0);
           if (!source || source.t !== type_defs_1.NativeType.String) {
             return value_1.NIL_VALUE;
           }
-          return stringGetJs(source.v, args.get(1));
+          return stringGetJs(source.v, args.at(1));
         }
       }, elementAccessCallDef);
     }
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/runtime/functions.js
+// ../../external/wendoo-lang/packages/core/dist/node/runtime/functions.js
 var require_functions = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/runtime/functions.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/runtime/functions.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.FunctionRegistry = void 0;
@@ -9003,7 +9245,7 @@ var require_functions = __commonJS({
           this.owner = previous;
         }
       }
-      register(id, name, isAsync, fn, callDef12) {
+      register(id, name, isAsync, fn, callDef13) {
         if (!name || !string_1.StringUtils.length(name)) {
           throw new error_1.Error("FunctionRegistry.register: name must be a non-empty string");
         }
@@ -9017,7 +9259,7 @@ var require_functions = __commonJS({
             name,
             isAsync: true,
             fn,
-            callDef: callDef12
+            callDef: callDef13
           };
           this.fnDict.set(name, entry);
           this.fnById.set(id, entry);
@@ -9028,7 +9270,7 @@ var require_functions = __commonJS({
             name,
             isAsync: false,
             fn,
-            callDef: callDef12
+            callDef: callDef13
           };
           this.fnDict.set(name, entry);
           this.fnById.set(id, entry);
@@ -9084,17 +9326,17 @@ var require_functions = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/runtime/host-bindings.js
+// ../../external/wendoo-lang/packages/core/dist/node/runtime/host-bindings.js
 var require_host_bindings = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/runtime/host-bindings.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/runtime/host-bindings.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/runtime/map-builtins.js
+// ../../external/wendoo-lang/packages/core/dist/node/runtime/map-builtins.js
 var require_map_builtins = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/runtime/map-builtins.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/runtime/map-builtins.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.registerMapBuiltins = registerMapBuiltins;
@@ -9155,9 +9397,9 @@ var require_map_builtins = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/runtime/math-builtins.js
+// ../../external/wendoo-lang/packages/core/dist/node/runtime/math-builtins.js
 var require_math_builtins = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/runtime/math-builtins.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/runtime/math-builtins.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.registerMathBuiltins = registerMathBuiltins;
@@ -9231,9 +9473,9 @@ var require_math_builtins = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/runtime/operator-defs.js
+// ../../external/wendoo-lang/packages/core/dist/node/runtime/operator-defs.js
 var require_operator_defs = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/runtime/operator-defs.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/runtime/operator-defs.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.CoreOpId = void 0;
@@ -9265,9 +9507,9 @@ var require_operator_defs = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/runtime/operators.js
+// ../../external/wendoo-lang/packages/core/dist/node/runtime/operators.js
 var require_operators = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/runtime/operators.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/runtime/operators.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.OperatorOverloads = exports.OperatorTable = exports.RegisteredOperator = void 0;
@@ -9763,9 +10005,9 @@ var require_operators = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/runtime/binary32-format.js
+// ../../external/wendoo-lang/packages/core/dist/node/runtime/binary32-format.js
 var require_binary32_format = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/runtime/binary32-format.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/runtime/binary32-format.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.formatF32 = formatF322;
@@ -10175,9 +10417,9 @@ var require_binary32_format = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/runtime/binary32-transcendental.js
+// ../../external/wendoo-lang/packages/core/dist/node/runtime/binary32-transcendental.js
 var require_binary32_transcendental = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/runtime/binary32-transcendental.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/runtime/binary32-transcendental.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.sin = sin;
@@ -10645,9 +10887,9 @@ var require_binary32_transcendental = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/runtime/profile-numerics.js
+// ../../external/wendoo-lang/packages/core/dist/node/runtime/profile-numerics.js
 var require_profile_numerics = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/runtime/profile-numerics.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/runtime/profile-numerics.js"(exports) {
     "use strict";
     var __createBinding = exports && exports.__createBinding || (Object.create ? (function(o, m, k, k2) {
       if (k2 === void 0) k2 = k;
@@ -10743,9 +10985,9 @@ var require_profile_numerics = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/runtime/rng.js
+// ../../external/wendoo-lang/packages/core/dist/node/runtime/rng.js
 var require_rng = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/runtime/rng.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/runtime/rng.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.Rng = void 0;
@@ -10770,17 +11012,17 @@ var require_rng = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/runtime/services.js
+// ../../external/wendoo-lang/packages/core/dist/node/runtime/services.js
 var require_services = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/runtime/services.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/runtime/services.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/runtime/string-builtins.js
+// ../../external/wendoo-lang/packages/core/dist/node/runtime/string-builtins.js
 var require_string_builtins = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/runtime/string-builtins.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/runtime/string-builtins.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.registerStringBuiltins = registerStringBuiltins;
@@ -10799,7 +11041,7 @@ var require_string_builtins = __commonJS({
       return args.get(index).v;
     }
     function optNum(args, index) {
-      const val = args.get(index);
+      const val = args.at(index);
       if (val === void 0 || val.t === type_defs_1.NativeType.Nil)
         return void 0;
       return val.v;
@@ -10863,9 +11105,9 @@ var require_string_builtins = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/runtime/type-system.js
+// ../../external/wendoo-lang/packages/core/dist/node/runtime/type-system.js
 var require_type_system = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/runtime/type-system.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/runtime/type-system.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.TypeRegistry = void 0;
@@ -11600,7 +11842,7 @@ var require_type_system = __commonJS({
             compatible = false;
             return;
           }
-          const sourceField = sourceStruct.fields.get(sourceFieldIndex);
+          const sourceField = sourceStruct.fields.at(sourceFieldIndex);
           if (!sourceField) {
             compatible = false;
             return;
@@ -11918,9 +12160,9 @@ var require_type_system = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/runtime/actuators/restart-page.js
+// ../../external/wendoo-lang/packages/core/dist/node/runtime/actuators/restart-page.js
 var require_restart_page = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/runtime/actuators/restart-page.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/runtime/actuators/restart-page.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var abi_ids_1 = require_abi_ids();
@@ -11932,14 +12174,14 @@ var require_restart_page = __commonJS({
       items: []
     };
     var argSlots = (0, function_defs_1.callSpecToArgSlots)(callSpec);
-    var callDef12 = {
+    var callDef13 = {
       callSpec,
       argSlots
     };
     var descriptor = {
       key: abi_ids_1.CoreHostActions.RestartPage.key,
       kind: "actuator",
-      callDef: callDef12,
+      callDef: callDef13,
       isAsync: false
     };
     function fnRestartPage(ctx) {
@@ -11961,14 +12203,14 @@ var require_restart_page = __commonJS({
       fn: {
         exec: fnRestartPage
       },
-      callDef: callDef12
+      callDef: callDef13
     };
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/runtime/actuators/switch-page.js
+// ../../external/wendoo-lang/packages/core/dist/node/runtime/actuators/switch-page.js
 var require_switch_page = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/runtime/actuators/switch-page.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/runtime/actuators/switch-page.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var abi_ids_1 = require_abi_ids();
@@ -11978,15 +12220,15 @@ var require_switch_page = __commonJS({
     var value_1 = require_value();
     var AnonNumber3 = (0, call_spec_1.param)(tile_ids_1.CoreParameterId.AnonymousNumber, { anonymous: true });
     var AnonString2 = (0, call_spec_1.param)(tile_ids_1.CoreParameterId.AnonymousString, { anonymous: true });
-    var callDef12 = (0, function_defs_1.mkCallDef)((0, call_spec_1.choice)(AnonNumber3, AnonString2));
+    var callDef13 = (0, function_defs_1.mkCallDef)((0, call_spec_1.choice)(AnonNumber3, AnonString2));
     var descriptor = {
       key: abi_ids_1.CoreHostActions.SwitchPage.key,
       kind: "actuator",
-      callDef: callDef12,
+      callDef: callDef13,
       isAsync: false
     };
-    var kAnonymousNumberSlotId = (0, function_defs_1.getSlotId)(callDef12, AnonNumber3);
-    var kAnonymousStringSlotId = (0, function_defs_1.getSlotId)(callDef12, AnonString2);
+    var kAnonymousNumberSlotId = (0, function_defs_1.getSlotId)(callDef13, AnonNumber3);
+    var kAnonymousStringSlotId = (0, function_defs_1.getSlotId)(callDef13, AnonString2);
     function fnSwitchPage(ctx, args) {
       const numberArg2 = args.get(kAnonymousNumberSlotId);
       const stringArg = args.get(kAnonymousStringSlotId);
@@ -12015,14 +12257,14 @@ var require_switch_page = __commonJS({
       fn: {
         exec: fnSwitchPage
       },
-      callDef: callDef12
+      callDef: callDef13
     };
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/runtime/actuators/yield.js
+// ../../external/wendoo-lang/packages/core/dist/node/runtime/actuators/yield.js
 var require_yield = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/runtime/actuators/yield.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/runtime/actuators/yield.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var abi_ids_1 = require_abi_ids();
@@ -12034,14 +12276,14 @@ var require_yield = __commonJS({
       items: []
     };
     var argSlots = (0, function_defs_1.callSpecToArgSlots)(callSpec);
-    var callDef12 = {
+    var callDef13 = {
       callSpec,
       argSlots
     };
     var descriptor = {
       key: abi_ids_1.CoreHostActions.Yield.key,
       kind: "actuator",
-      callDef: callDef12,
+      callDef: callDef13,
       isAsync: false
     };
     function fnYield(_ctx) {
@@ -12062,14 +12304,14 @@ var require_yield = __commonJS({
       fn: {
         exec: fnYield
       },
-      callDef: callDef12
+      callDef: callDef13
     };
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/runtime/actuators/index.js
+// ../../external/wendoo-lang/packages/core/dist/node/runtime/actuators/index.js
 var require_actuators = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/runtime/actuators/index.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/runtime/actuators/index.js"(exports) {
     "use strict";
     var __importDefault = exports && exports.__importDefault || function(mod2) {
       return mod2 && mod2.__esModule ? mod2 : { "default": mod2 };
@@ -12091,9 +12333,9 @@ var require_actuators = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/runtime/sensors/current-page.js
+// ../../external/wendoo-lang/packages/core/dist/node/runtime/sensors/current-page.js
 var require_current_page = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/runtime/sensors/current-page.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/runtime/sensors/current-page.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var abi_ids_1 = require_abi_ids();
@@ -12105,11 +12347,11 @@ var require_current_page = __commonJS({
       type: "bag",
       items: []
     };
-    var callDef12 = (0, function_defs_1.mkCallDef)(callSpec);
+    var callDef13 = (0, function_defs_1.mkCallDef)(callSpec);
     var descriptor = {
       key: abi_ids_1.CoreHostActions.CurrentPage.key,
       kind: "sensor",
-      callDef: callDef12,
+      callDef: callDef13,
       isAsync: false,
       outputType: core_types_1.CoreTypeIds.String
     };
@@ -12131,14 +12373,14 @@ var require_current_page = __commonJS({
       fn: {
         exec: fnCurrentPage
       },
-      callDef: callDef12
+      callDef: callDef13
     };
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/runtime/sensors/on-page-entered.js
+// ../../external/wendoo-lang/packages/core/dist/node/runtime/sensors/on-page-entered.js
 var require_on_page_entered = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/runtime/sensors/on-page-entered.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/runtime/sensors/on-page-entered.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var abi_ids_1 = require_abi_ids();
@@ -12151,11 +12393,11 @@ var require_on_page_entered = __commonJS({
       type: "bag",
       items: []
     };
-    var callDef12 = (0, function_defs_1.mkCallDef)(callSpec);
+    var callDef13 = (0, function_defs_1.mkCallDef)(callSpec);
     var descriptor = {
       key: abi_ids_1.CoreHostActions.OnPageEntered.key,
       kind: "sensor",
-      callDef: callDef12,
+      callDef: callDef13,
       isAsync: false,
       outputType: core_types_1.CoreTypeIds.Boolean
     };
@@ -12190,14 +12432,14 @@ var require_on_page_entered = __commonJS({
         onPageEntered,
         exec: fnOnPageEntered
       },
-      callDef: callDef12
+      callDef: callDef13
     };
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/runtime/sensors/otherwise.js
+// ../../external/wendoo-lang/packages/core/dist/node/runtime/sensors/otherwise.js
 var require_otherwise = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/runtime/sensors/otherwise.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/runtime/sensors/otherwise.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var abi_ids_1 = require_abi_ids();
@@ -12210,11 +12452,11 @@ var require_otherwise = __commonJS({
       type: "bag",
       items: []
     };
-    var callDef12 = (0, function_defs_1.mkCallDef)(callSpec);
+    var callDef13 = (0, function_defs_1.mkCallDef)(callSpec);
     var descriptor = {
       key: abi_ids_1.CoreHostActions.Otherwise.key,
       kind: "sensor",
-      callDef: callDef12,
+      callDef: callDef13,
       isAsync: false,
       outputType: core_types_1.CoreTypeIds.Boolean
     };
@@ -12243,14 +12485,14 @@ var require_otherwise = __commonJS({
       fn: {
         exec: fnOtherwise
       },
-      callDef: callDef12
+      callDef: callDef13
     };
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/runtime/sensors/previous-page.js
+// ../../external/wendoo-lang/packages/core/dist/node/runtime/sensors/previous-page.js
 var require_previous_page = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/runtime/sensors/previous-page.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/runtime/sensors/previous-page.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var abi_ids_1 = require_abi_ids();
@@ -12262,11 +12504,11 @@ var require_previous_page = __commonJS({
       type: "bag",
       items: []
     };
-    var callDef12 = (0, function_defs_1.mkCallDef)(callSpec);
+    var callDef13 = (0, function_defs_1.mkCallDef)(callSpec);
     var descriptor = {
       key: abi_ids_1.CoreHostActions.PreviousPage.key,
       kind: "sensor",
-      callDef: callDef12,
+      callDef: callDef13,
       isAsync: false,
       outputType: core_types_1.CoreTypeIds.String
     };
@@ -12288,14 +12530,14 @@ var require_previous_page = __commonJS({
       fn: {
         exec: fnPreviousPage
       },
-      callDef: callDef12
+      callDef: callDef13
     };
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/runtime/sensors/random.js
+// ../../external/wendoo-lang/packages/core/dist/node/runtime/sensors/random.js
 var require_random = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/runtime/sensors/random.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/runtime/sensors/random.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var abi_ids_1 = require_abi_ids();
@@ -12307,11 +12549,11 @@ var require_random = __commonJS({
       type: "bag",
       items: []
     };
-    var callDef12 = (0, function_defs_1.mkCallDef)(callSpec);
+    var callDef13 = (0, function_defs_1.mkCallDef)(callSpec);
     var descriptor = {
       key: abi_ids_1.CoreHostActions.Random.key,
       kind: "sensor",
-      callDef: callDef12,
+      callDef: callDef13,
       isAsync: false,
       outputType: core_types_1.CoreTypeIds.Number
     };
@@ -12334,14 +12576,74 @@ var require_random = __commonJS({
       fn: {
         exec: fnRandom
       },
-      callDef: callDef12
+      callDef: callDef13
     };
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/runtime/sensors/timeout.js
+// ../../external/wendoo-lang/packages/core/dist/node/runtime/sensors/rule-trigger.js
+var require_rule_trigger = __commonJS({
+  "../../external/wendoo-lang/packages/core/dist/node/runtime/sensors/rule-trigger.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    var abi_ids_1 = require_abi_ids();
+    var core_types_1 = require_core_types();
+    var function_defs_1 = require_function_defs();
+    var rule_services_1 = require_rule_services();
+    var value_1 = require_value();
+    var callSpec = {
+      type: "bag",
+      items: []
+    };
+    var callDef13 = (0, function_defs_1.mkCallDef)(callSpec);
+    var descriptor = {
+      key: abi_ids_1.CoreHostActions.RuleTrigger.key,
+      kind: "sensor",
+      callDef: callDef13,
+      isAsync: true,
+      outputType: core_types_1.CoreTypeIds.Boolean
+    };
+    function fnRuleTrigger(ctx, _args, handle) {
+      const brain = ctx.services.brain;
+      const ruleFuncId = ctx.currentRuleFuncId;
+      const subjectFuncId = ruleFuncId === void 0 ? void 0 : brain.program.getPrecedingSiblingRuleFuncId(ruleFuncId);
+      if (subjectFuncId === void 0) {
+        handle.resolve(value_1.FALSE_VALUE);
+        return;
+      }
+      if (brain.ruleCompletion.hasLiveSubtree(subjectFuncId)) {
+        brain.ruleFiring.set(ruleFuncId, rule_services_1.RuleFiringState.DID_NOT_FIRE);
+        brain.ruleCompletion.setWatcher(subjectFuncId, handle.id);
+        return;
+      }
+      const completed = brain.ruleFiring.get(subjectFuncId) === rule_services_1.RuleFiringState.DID_FIRE && !brain.ruleCompletion.isAbandoned(subjectFuncId);
+      handle.resolve(completed ? value_1.TRUE_VALUE : value_1.FALSE_VALUE);
+    }
+    var binding = {
+      binding: "host",
+      descriptor,
+      id: abi_ids_1.CoreHostActions.RuleTrigger.actionId,
+      execAsync: fnRuleTrigger,
+      // A rule holds at most one watcher, and a trigger handle lives only in a
+      // watcher slot, so the live count is bounded by the program's rule count.
+      uncappedHandles: true
+    };
+    exports.default = {
+      key: abi_ids_1.CoreHostActions.RuleTrigger.key,
+      isAsync: true,
+      descriptor,
+      binding,
+      fn: {
+        exec: fnRuleTrigger
+      },
+      callDef: callDef13
+    };
+  }
+});
+
+// ../../external/wendoo-lang/packages/core/dist/node/runtime/sensors/timeout.js
 var require_timeout = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/runtime/sensors/timeout.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/runtime/sensors/timeout.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var math_1 = require_math();
@@ -12352,20 +12654,22 @@ var require_timeout = __commonJS({
     var function_defs_1 = require_function_defs();
     var tile_ids_1 = require_tile_ids();
     var value_1 = require_value();
+    var DEFAULT_DELAY_SECONDS = 1;
     var AnonNumber3 = (0, call_spec_1.param)(tile_ids_1.CoreParameterId.AnonymousNumber, {
-      name: "anonNumber",
-      required: true,
-      anonymous: true
+      name: "seconds",
+      anonymous: true,
+      unit: "seconds",
+      default: (0, value_1.mkNumberValue)(DEFAULT_DELAY_SECONDS)
     });
-    var callDef12 = (0, function_defs_1.mkCallDef)((0, call_spec_1.bag)((0, call_spec_1.optional)(AnonNumber3)));
+    var callDef13 = (0, function_defs_1.mkCallDef)((0, call_spec_1.bag)((0, call_spec_1.optional)(AnonNumber3)));
     var descriptor = {
       key: abi_ids_1.CoreHostActions.Timeout.key,
       kind: "sensor",
-      callDef: callDef12,
+      callDef: callDef13,
       isAsync: false,
       outputType: core_types_1.CoreTypeIds.Boolean
     };
-    var kAnonymousNumberSlotId = (0, function_defs_1.getSlotId)(callDef12, AnonNumber3);
+    var kAnonymousNumberSlotId = (0, function_defs_1.getSlotId)(callDef13, AnonNumber3);
     function onPageEntered(ctx) {
       const state = {
         fireTime: 0,
@@ -12377,7 +12681,7 @@ var require_timeout = __commonJS({
       (0, context_1.setCallSiteState)(ctx, state);
     }
     function execTimeout(ctx, args) {
-      let delay = 1;
+      let delay = DEFAULT_DELAY_SECONDS;
       const anonNumberValue = args.get(kAnonymousNumberSlotId);
       if (anonNumberValue !== void 0 && !(0, value_1.isNilValue)(anonNumberValue)) {
         if (!(0, value_1.isNumberValue)(anonNumberValue) || math_1.MathOps.isNaN(anonNumberValue.v)) {
@@ -12424,14 +12728,14 @@ var require_timeout = __commonJS({
         onPageEntered,
         exec: execTimeout
       },
-      callDef: callDef12
+      callDef: callDef13
     };
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/runtime/sensors/index.js
+// ../../external/wendoo-lang/packages/core/dist/node/runtime/sensors/index.js
 var require_sensors = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/runtime/sensors/index.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/runtime/sensors/index.js"(exports) {
     "use strict";
     var __importDefault = exports && exports.__importDefault || function(mod2) {
       return mod2 && mod2.__esModule ? mod2 : { "default": mod2 };
@@ -12444,6 +12748,7 @@ var require_sensors = __commonJS({
     var otherwise_1 = __importDefault(require_otherwise());
     var previous_page_1 = __importDefault(require_previous_page());
     var random_1 = __importDefault(require_random());
+    var rule_trigger_1 = __importDefault(require_rule_trigger());
     var timeout_1 = __importDefault(require_timeout());
     function registerCoreSensors(services) {
       services.runtime.actions.register(random_1.default.binding);
@@ -12452,19 +12757,21 @@ var require_sensors = __commonJS({
       services.runtime.actions.register(current_page_1.default.binding);
       services.runtime.actions.register(previous_page_1.default.binding);
       services.runtime.actions.register(otherwise_1.default.binding);
+      services.runtime.actions.register(rule_trigger_1.default.binding);
       services.runtime.functions.register(abi_ids_1.CoreHostActions.Random.fnId, abi_ids_1.CoreHostActions.Random.key, false, random_1.default.fn, random_1.default.callDef);
       services.runtime.functions.register(abi_ids_1.CoreHostActions.OnPageEntered.fnId, abi_ids_1.CoreHostActions.OnPageEntered.key, false, on_page_entered_1.default.fn, on_page_entered_1.default.callDef);
       services.runtime.functions.register(abi_ids_1.CoreHostActions.Timeout.fnId, abi_ids_1.CoreHostActions.Timeout.key, false, timeout_1.default.fn, timeout_1.default.callDef);
       services.runtime.functions.register(abi_ids_1.CoreHostActions.CurrentPage.fnId, abi_ids_1.CoreHostActions.CurrentPage.key, false, current_page_1.default.fn, current_page_1.default.callDef);
       services.runtime.functions.register(abi_ids_1.CoreHostActions.PreviousPage.fnId, abi_ids_1.CoreHostActions.PreviousPage.key, false, previous_page_1.default.fn, previous_page_1.default.callDef);
       services.runtime.functions.register(abi_ids_1.CoreHostActions.Otherwise.fnId, abi_ids_1.CoreHostActions.Otherwise.key, false, otherwise_1.default.fn, otherwise_1.default.callDef);
+      services.runtime.functions.register(abi_ids_1.CoreHostActions.RuleTrigger.fnId, abi_ids_1.CoreHostActions.RuleTrigger.key, true, rule_trigger_1.default.fn, rule_trigger_1.default.callDef);
     }
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/runtime/index.js
+// ../../external/wendoo-lang/packages/core/dist/node/runtime/index.js
 var require_runtime = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/runtime/index.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/runtime/index.js"(exports) {
     "use strict";
     var __createBinding = exports && exports.__createBinding || (Object.create ? (function(o, m, k, k2) {
       if (k2 === void 0) k2 = k;
@@ -12555,33 +12862,39 @@ var require_runtime = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/interfaces/catalog.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/interfaces/catalog.js
 var require_catalog = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/interfaces/catalog.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/interfaces/catalog.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/interfaces/emitter.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/interfaces/emitter.js
 var require_emitter = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/interfaces/emitter.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/interfaces/emitter.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/interfaces/model.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/interfaces/model.js
 var require_model = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/interfaces/model.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/interfaces/model.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    exports.RuleTriggerMode = void 0;
+    exports.RuleTriggerMode = {
+      When: "when",
+      Otherwise: "otherwise",
+      Then: "then"
+    };
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/interfaces/tiles.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/interfaces/tiles.js
 var require_tiles = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/interfaces/tiles.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/interfaces/tiles.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.CoreLiteralFactoryTileIds = exports.CoreVariableFactoryTileIds = exports.CoreLiteralFactoryId = exports.CoreVariableFactoryId = exports.CoreControlFlowId = exports.CoreCapabilityBits = exports.APP_CAPABILITY_BIT_OFFSET = exports.LiteralDisplayFormats = exports.TilePlacement = exports.RuleSide = exports.parseTileId = exports.mkTileId = exports.mkSensorTileId = exports.mkParameterTileId = exports.mkOutputVarKey = exports.mkOutputTileId = exports.mkModifierTileId = exports.mkActuatorTileId = exports.mkActionTileId = exports.CoreParameterId = void 0;
@@ -12596,8 +12909,9 @@ var require_tiles = __commonJS({
     exports.mkControlFlowTileId = mkControlFlowTileId;
     exports.mkVariableTileId = mkVariableTileId;
     exports.mkVariableFactoryTileId = mkVariableFactoryTileId;
-    exports.mkLiteralTileId = mkLiteralTileId3;
-    exports.mkLiteralFactoryTileId = mkLiteralFactoryTileId;
+    exports.mkLiteralTileId = mkLiteralTileId2;
+    exports.mkUniqueLiteralTileId = mkUniqueLiteralTileId;
+    exports.mkLiteralFactoryTileId = mkLiteralFactoryTileId2;
     exports.mkAccessorTileId = mkAccessorTileId;
     exports.mkPageTileId = mkPageTileId;
     exports.isPageTileId = isPageTileId;
@@ -12606,6 +12920,7 @@ var require_tiles = __commonJS({
     exports.isCoreVariableFactoryTileId = isCoreVariableFactoryTileId;
     exports.isVariableFactoryTileId = isVariableFactoryTileId;
     exports.isCoreLiteralFactoryTileId = isCoreLiteralFactoryTileId;
+    exports.isLiteralFactoryTileId = isLiteralFactoryTileId;
     var math_1 = require_math();
     var string_1 = require_string();
     var tile_ids_1 = require_tile_ids();
@@ -12719,14 +13034,17 @@ var require_tiles = __commonJS({
     function mkVariableFactoryTileId(factoryId) {
       return (0, tile_ids_1.mkTileId)("var.factory", factoryId);
     }
-    function mkLiteralTileId3(valueType, valueStr, displayFormat) {
+    function mkLiteralTileId2(valueType, valueStr, displayFormat) {
       const base = `${valueType}->${valueStr}`;
       if (displayFormat && displayFormat !== exports.LiteralDisplayFormats.Default) {
         return (0, tile_ids_1.mkTileId)("literal", `${base}[${displayFormat}]`);
       }
       return (0, tile_ids_1.mkTileId)("literal", base);
     }
-    function mkLiteralFactoryTileId(factoryId) {
+    function mkUniqueLiteralTileId(uniqueId) {
+      return (0, tile_ids_1.mkTileId)("literal", uniqueId);
+    }
+    function mkLiteralFactoryTileId2(factoryId) {
       return (0, tile_ids_1.mkTileId)("lit.factory", factoryId);
     }
     function mkAccessorTileId(structTypeId, fieldName) {
@@ -12799,19 +13117,22 @@ var require_tiles = __commonJS({
       return string_1.StringUtils.startsWith(tileId, "tile.var.factory->");
     }
     exports.CoreLiteralFactoryTileIds = [
-      mkLiteralFactoryTileId(CoreLiteralFactoryId.Boolean),
-      mkLiteralFactoryTileId(CoreLiteralFactoryId.Number),
-      mkLiteralFactoryTileId(CoreLiteralFactoryId.String)
+      mkLiteralFactoryTileId2(CoreLiteralFactoryId.Boolean),
+      mkLiteralFactoryTileId2(CoreLiteralFactoryId.Number),
+      mkLiteralFactoryTileId2(CoreLiteralFactoryId.String)
     ];
     function isCoreLiteralFactoryTileId(tileId) {
       return exports.CoreLiteralFactoryTileIds.includes(tileId);
     }
+    function isLiteralFactoryTileId(tileId) {
+      return string_1.StringUtils.startsWith(tileId, "tile.lit.factory->");
+    }
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/interfaces/index.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/interfaces/index.js
 var require_interfaces = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/interfaces/index.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/interfaces/index.js"(exports) {
     "use strict";
     var __createBinding = exports && exports.__createBinding || (Object.create ? (function(o, m, k, k2) {
       if (k2 === void 0) k2 = k;
@@ -12837,9 +13158,9 @@ var require_interfaces = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/localization/catalog.js
+// ../../external/wendoo-lang/packages/core/dist/node/localization/catalog.js
 var require_catalog2 = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/localization/catalog.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/localization/catalog.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.kTileLabelContext = exports.kListContext = exports.kDefaultLocale = void 0;
@@ -12849,9 +13170,9 @@ var require_catalog2 = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/localization/folding.js
+// ../../external/wendoo-lang/packages/core/dist/node/localization/folding.js
 var require_folding = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/localization/folding.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/localization/folding.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.foldForSearch = foldForSearch;
@@ -13018,9 +13339,9 @@ var require_folding = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/localization/plural.js
+// ../../external/wendoo-lang/packages/core/dist/node/localization/plural.js
 var require_plural = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/localization/plural.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/localization/plural.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.defaultPluralRule = void 0;
@@ -13092,9 +13413,9 @@ var require_plural = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/localization/sentence-case.js
+// ../../external/wendoo-lang/packages/core/dist/node/localization/sentence-case.js
 var require_sentence_case = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/localization/sentence-case.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/localization/sentence-case.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.defaultSentenceCaseSpec = void 0;
@@ -13121,9 +13442,9 @@ var require_sentence_case = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/localization/template.js
+// ../../external/wendoo-lang/packages/core/dist/node/localization/template.js
 var require_template = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/localization/template.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/localization/template.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.TemplateDiagCode = void 0;
@@ -13387,9 +13708,9 @@ var require_template = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/localization/localizer.js
+// ../../external/wendoo-lang/packages/core/dist/node/localization/localizer.js
 var require_localizer = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/localization/localizer.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/localization/localizer.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.createLocalizer = createLocalizer;
@@ -13484,9 +13805,9 @@ var require_localizer = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/util/bitset.js
+// ../../external/wendoo-lang/packages/core/dist/node/util/bitset.js
 var require_bitset = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/util/bitset.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/util/bitset.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.BitSet = void 0;
@@ -13504,9 +13825,9 @@ var require_bitset = __commonJS({
       // The "infinity fill" bit: when the set represents an infinite bit string,
       // this value (0 or ~0) fills all words beyond the stored data length.
       _ = 0;
-      constructor(param4) {
+      constructor(param5) {
         this.data = new list_1.List();
-        _BitSet.parse(this, param4);
+        _BitSet.parse(this, param5);
         this.data = list_1.List.from(this.data.toArray());
       }
       // Hamming weight / population count: counts the number of set bits in a 32-bit word.
@@ -13810,9 +14131,9 @@ var require_bitset = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/compiler/lvalue.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/compiler/lvalue.js
 var require_lvalue = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/compiler/lvalue.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/compiler/lvalue.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.isLValue = isLValue;
@@ -13842,9 +14163,9 @@ var require_lvalue = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/model/tiledef.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/model/tiledef.js
 var require_tiledef = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/model/tiledef.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/model/tiledef.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.BrainActionTileBase = exports.BrainTileDefBase = void 0;
@@ -13904,15 +14225,15 @@ var require_tiledef = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/tiles/factories.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/tiles/factories.js
 var require_factories = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/tiles/factories.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/tiles/factories.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.BrainTileFactoryDef = void 0;
     var interfaces_1 = require_interfaces();
     var tiledef_1 = require_tiledef();
-    var BrainTileFactoryDef = class extends tiledef_1.BrainTileDefBase {
+    var BrainTileFactoryDef2 = class extends tiledef_1.BrainTileDefBase {
       kind = "factory";
       factoryId;
       producedDataType;
@@ -13926,13 +14247,13 @@ var require_factories = __commonJS({
         this.producedDataType = producedDataType;
       }
     };
-    exports.BrainTileFactoryDef = BrainTileFactoryDef;
+    exports.BrainTileFactoryDef = BrainTileFactoryDef2;
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/tiles/literals.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/tiles/literals.js
 var require_literals = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/tiles/literals.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/tiles/literals.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.BrainTileLiteralDef = void 0;
@@ -13944,12 +14265,24 @@ var require_literals = __commonJS({
     var tiledef_1 = require_tiledef();
     var factories_1 = require_factories();
     var kVersion = 2;
-    var BrainTileLiteralDef2 = class _BrainTileLiteralDef extends tiledef_1.BrainTileDefBase {
+    function namedLiteralMetadata(base, displayName) {
+      const metadata = base ? { ...base, label: displayName } : { label: displayName };
+      metadata.language = base?.language ? { ...base.language, form: displayName } : { form: displayName };
+      return metadata;
+    }
+    var BrainTileLiteralDef3 = class _BrainTileLiteralDef extends tiledef_1.BrainTileDefBase {
       kind = "literal";
       valueLabel;
       valueType;
       value;
       displayFormat;
+      /** The word this literal reads by, and undefined for one carrying no name. Set it with {@link BrainTileLiteralDef.setDisplayName}. */
+      displayName;
+      /**
+       * This literal's own identity, and undefined for one whose tile id follows
+       * its content. Where it is set, the tile id derives from it alone.
+       */
+      uniqueId;
       services_;
       constructor(valueType, value, opts = {}, services) {
         if (opts.placement === void 0)
@@ -13958,17 +14291,50 @@ var require_literals = __commonJS({
           opts.persist = true;
         const typeDef = services.runtime.types.get(valueType);
         if (!typeDef) {
-          throw new error_1.Error(`BrainTileLiteralDef.deserialize: unknown value type ${valueType}`);
+          throw new error_1.Error(`BrainTileLiteralDef: unknown value type ${valueType}`);
         }
-        const valueStr = opts.valueLabel || typeDef.codec.stringify(value);
+        const valueStr = opts.valueLabel || opts.uniqueId || typeDef.codec.stringify(value);
         const fmt = opts.displayFormat || interfaces_1.LiteralDisplayFormats.Default;
-        const tileId = (0, interfaces_1.mkLiteralTileId)(valueType, valueStr, fmt);
+        const tileId = opts.uniqueId === void 0 ? (0, interfaces_1.mkLiteralTileId)(valueType, valueStr, fmt) : (0, interfaces_1.mkUniqueLiteralTileId)(opts.uniqueId);
+        if (opts.displayName !== void 0) {
+          opts.metadata = namedLiteralMetadata(opts.metadata, opts.displayName);
+        }
         super(tileId, opts);
         this.valueType = valueType;
         this.value = value;
         this.valueLabel = valueStr;
         this.displayFormat = fmt;
+        this.displayName = opts.displayName;
+        this.uniqueId = opts.uniqueId;
         this.services_ = services;
+      }
+      /**
+       * A literal holding `edit`'s value and name under this literal's tile id,
+       * value type, value label, and display format. A field `edit` leaves
+       * undefined is carried over from this literal.
+       *
+       * Throws when this literal carries no unique identity.
+       */
+      edited(edit) {
+        const uniqueId = this.uniqueId;
+        if (uniqueId === void 0) {
+          throw new error_1.Error(`BrainTileLiteralDef.edited: literal ${this.tileId} carries no unique identity`);
+        }
+        return new _BrainTileLiteralDef(this.valueType, edit.value === void 0 ? this.value : edit.value, {
+          uniqueId,
+          valueLabel: this.valueLabel,
+          displayFormat: this.displayFormat,
+          displayName: edit.displayName === void 0 ? this.displayName : edit.displayName
+        }, this.services_);
+      }
+      /**
+       * Names this literal `displayName`, which becomes the word it reads by on
+       * every surface: its `metadata.label` and its `metadata.language.form`. The
+       * tile id is unchanged.
+       */
+      setDisplayName(displayName) {
+        this.displayName = displayName;
+        this.metadata = namedLiteralMetadata(this.metadata, displayName);
       }
       // -- JSON serialization ----------------------------------------------------
       toJson() {
@@ -13976,7 +14342,7 @@ var require_literals = __commonJS({
         if (!typeDef) {
           throw new error_1.Error(`BrainTileLiteralDef.toJson: unknown value type ${this.valueType}`);
         }
-        return {
+        const json2 = {
           version: kVersion,
           kind: "literal",
           tileId: this.tileId,
@@ -13985,6 +14351,11 @@ var require_literals = __commonJS({
           valueLabel: this.valueLabel,
           displayFormat: this.displayFormat
         };
+        if (this.displayName !== void 0)
+          json2.displayName = this.displayName;
+        if (this.uniqueId !== void 0)
+          json2.uniqueId = this.uniqueId;
+        return json2;
       }
       static fromJson(json2, catalog, services) {
         if (json2.version !== kVersion) {
@@ -13999,13 +14370,15 @@ var require_literals = __commonJS({
         const value = literalValueFromJson(typeDef, json2.value);
         const tileDef = new _BrainTileLiteralDef(json2.valueType, value, {
           valueLabel: json2.valueLabel,
-          displayFormat: json2.displayFormat
+          displayFormat: json2.displayFormat,
+          displayName: json2.displayName,
+          uniqueId: json2.uniqueId
         }, services);
         catalog.registerTileDef(tileDef);
         return tileDef;
       }
     };
-    exports.BrainTileLiteralDef = BrainTileLiteralDef2;
+    exports.BrainTileLiteralDef = BrainTileLiteralDef3;
     function literalValueToJson(typeDef, value) {
       switch (typeDef.coreType) {
         case runtime_1.NativeType.Void:
@@ -14016,6 +14389,9 @@ var require_literals = __commonJS({
         case runtime_1.NativeType.String:
         case runtime_1.NativeType.Enum:
           return value;
+        case runtime_1.NativeType.Struct:
+        case runtime_1.NativeType.Buffer:
+          return (0, runtime_1.brainValueToJson)(value);
         default:
           throw new error_1.Error(`literalValueToJson: unsupported coreType ${typeDef.coreType} (typeId: ${typeDef.typeId})`);
       }
@@ -14030,6 +14406,9 @@ var require_literals = __commonJS({
         case runtime_1.NativeType.String:
         case runtime_1.NativeType.Enum:
           return json2;
+        case runtime_1.NativeType.Struct:
+        case runtime_1.NativeType.Buffer:
+          return (0, runtime_1.brainValueFromJson)(json2);
         default:
           throw new error_1.Error(`literalValueFromJson: unsupported coreType ${typeDef.coreType} (typeId: ${typeDef.typeId})`);
       }
@@ -14045,16 +14424,17 @@ var require_literals = __commonJS({
       }
       const varType = factoryTileDef.producedDataType || runtime_1.CoreTypeIds.Void;
       const displayFormat = opts.displayFormat;
-      const tileDef = new BrainTileLiteralDef2(varType, varValue, { displayFormat }, services);
+      const displayName = opts.displayName;
+      const tileDef = new BrainTileLiteralDef3(varType, varValue, { displayFormat, displayName }, services);
       return tileDef;
     }
     function registerCoreLiteralFactoryTileDefs(services) {
       const tiles = services.edit.tiles;
       registerLiteralFactoryTileDef(interfaces_1.CoreLiteralFactoryId.Number, runtime_1.CoreTypeIds.Number, { metadata: { label: "create a number tile" } }, services);
       registerLiteralFactoryTileDef(interfaces_1.CoreLiteralFactoryId.String, runtime_1.CoreTypeIds.String, { metadata: { label: "create a text tile" } }, services);
-      const trueTileDef = new BrainTileLiteralDef2(runtime_1.CoreTypeIds.Boolean, true, { persist: false }, services);
-      const falseTileDef = new BrainTileLiteralDef2(runtime_1.CoreTypeIds.Boolean, false, { persist: false }, services);
-      const nilTileDef = new BrainTileLiteralDef2(runtime_1.CoreTypeIds.Nil, void 0, { persist: false }, services);
+      const trueTileDef = new BrainTileLiteralDef3(runtime_1.CoreTypeIds.Boolean, true, { persist: false }, services);
+      const falseTileDef = new BrainTileLiteralDef3(runtime_1.CoreTypeIds.Boolean, false, { persist: false }, services);
+      const nilTileDef = new BrainTileLiteralDef3(runtime_1.CoreTypeIds.Nil, void 0, { persist: false }, services);
       tiles.registerTileDef(trueTileDef);
       tiles.registerTileDef(falseTileDef);
       tiles.registerTileDef(nilTileDef);
@@ -14062,9 +14442,9 @@ var require_literals = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/tiles/missing.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/tiles/missing.js
 var require_missing = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/tiles/missing.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/tiles/missing.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.BrainTileMissingDef = void 0;
@@ -14108,9 +14488,9 @@ var require_missing = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/tiles/pagetiles.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/tiles/pagetiles.js
 var require_pagetiles = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/tiles/pagetiles.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/tiles/pagetiles.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.BrainTilePageDef = void 0;
@@ -14167,23 +14547,23 @@ var require_pagetiles = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/model/document-id.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/model/document-id.js
 var require_document_id = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/model/document-id.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/model/document-id.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.mintDocumentId = mintDocumentId;
+    exports.mintDocumentId = mintDocumentId2;
     var string_1 = require_string();
     var kDocumentIdLength = 16;
-    function mintDocumentId(rng) {
+    function mintDocumentId2(rng) {
       return string_1.StringUtils.mkid(kDocumentIdLength, () => rng.next());
     }
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/tiles/variables.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/tiles/variables.js
 var require_variables = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/tiles/variables.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/tiles/variables.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.BrainTileVariableDef = void 0;
@@ -14256,9 +14636,9 @@ var require_variables = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/tiles/catalog.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/tiles/catalog.js
 var require_catalog3 = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/tiles/catalog.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/tiles/catalog.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.TileCatalog = void 0;
@@ -14359,9 +14739,9 @@ var require_catalog3 = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/tiles/display-format.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/tiles/display-format.js
 var require_display_format = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/tiles/display-format.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/tiles/display-format.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.applyDisplayFormat = applyDisplayFormat;
@@ -14462,9 +14842,9 @@ var require_display_format = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/language-service/sentence-projection.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/language-service/sentence-projection.js
 var require_sentence_projection = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/language-service/sentence-projection.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/language-service/sentence-projection.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.flattenRuleTiles = flattenRuleTiles;
@@ -14472,7 +14852,7 @@ var require_sentence_projection = __commonJS({
     exports.sentenceText = sentenceText;
     exports.paragraphText = paragraphText;
     exports.tileSentenceWord = tileSentenceWord2;
-    exports.whenTriggerWord = whenTriggerWord;
+    exports.triggerModeWord = triggerModeWord;
     exports.projectRuleSentence = projectRuleSentence;
     exports.projectPageParagraph = projectPageParagraph;
     var catalog_1 = require_catalog2();
@@ -14525,12 +14905,15 @@ var require_sentence_projection = __commonJS({
     var kVerbTemplate = "When I {form} {object}";
     var kStateTemplate = "When I am {form} {object}";
     var kEventTemplate = "When {form} {object}";
-    var kAdverbTemplate = "{form} {object}";
     var kSubjectlessTemplate = "When {condition}";
     var kNegatedVerbTemplate = "When I do {negation} {form} {object}";
     var kNegatedStateTemplate = "When I am {negation} {form} {object}";
     var kNegatedEventTemplate = "When {negation} {form} {object}";
     var kAlwaysWord = "Always";
+    var kOtherwiseWord = "Otherwise";
+    var kThenWord = "Then";
+    var kOtherwiseConditionTemplate = "Otherwise, when {condition}";
+    var kThenConditionTemplate = "Then, when {condition}";
     var kBareDefaultTemplate = "{frame, select, verb {anything} other {}}";
     var kTextValueTemplate = '"{value}"';
     var kWordGlueTemplate = "{a} {b}";
@@ -14541,12 +14924,15 @@ var require_sentence_projection = __commonJS({
     var kChildConsequenceTemplate = "{parent}, and {consequence}";
     var kIncompleteConditionTemplate = "{parent}, when {condition}";
     var kIncompleteConsequenceTemplate = "{parent}, {consequence}";
+    var kChildOtherwiseConditionTemplate = "{parent}, otherwise when {condition}";
+    var kChildOtherwiseConsequenceTemplate = "{parent}, otherwise {consequence}";
+    var kChildThenConditionTemplate = "{parent}, then when {condition}";
+    var kChildThenConsequenceTemplate = "{parent}, then {consequence}";
     var kChildClauseTemplate = "{condition}, {action}";
     var kSentenceGlueTemplate = "{sentence} {rest}";
     var kChildVerbTemplate = "I {form} {object}";
     var kChildStateTemplate = "I am {form} {object}";
     var kChildEventTemplate = "{form} {object}";
-    var kChildAdverbTemplate = "{form} {object}";
     var kChildSubjectlessTemplate = "{condition}";
     var kChildNegatedVerbTemplate = "I do {negation} {form} {object}";
     var kChildNegatedStateTemplate = "I am {negation} {form} {object}";
@@ -14792,9 +15178,6 @@ var require_sentence_projection = __commonJS({
       if (frame === "event") {
         return kEventTemplate;
       }
-      if (frame === "adverb") {
-        return kAdverbTemplate;
-      }
       return kVerbTemplate;
     }
     function negatedFrameTemplate(frame) {
@@ -14808,9 +15191,6 @@ var require_sentence_projection = __commonJS({
     }
     function isSubjectlessWhenSide(tiles) {
       const head = tiles.get(0);
-      if (head.kind === "sensor" && tileFrame(head) === "adverb") {
-        return tiles.size() > 1;
-      }
       return head.kind !== "sensor" || (0, interfaces_1.isInlineTileDef)(head);
     }
     function startsOwnExpression(tileDef) {
@@ -14821,7 +15201,7 @@ var require_sentence_projection = __commonJS({
         return void 0;
       }
       const operand = tiles.get(1);
-      if (operand.kind !== "sensor" || tileFrame(operand) === "adverb") {
+      if (operand.kind !== "sensor") {
         return void 0;
       }
       for (let i = 2; i < tiles.size(); i++) {
@@ -14853,8 +15233,50 @@ var require_sentence_projection = __commonJS({
       slots.push(slot("object", tiles.size() > 1 ? joinWords(localizer, tiles, 1, 0) : barePhrase(localizer, head, 0)));
       return renderPhrase(localizer, frameTemplate(tileFrame(head)), kWhenContext, slots);
     }
-    function whenTriggerWord(localizer) {
+    function childFrameTemplate(frame) {
+      if (frame === "state") {
+        return kChildStateTemplate;
+      }
+      if (frame === "event") {
+        return kChildEventTemplate;
+      }
+      return kChildVerbTemplate;
+    }
+    function childNegatedFrameTemplate(frame) {
+      if (frame === "state") {
+        return kChildNegatedStateTemplate;
+      }
+      if (frame === "event") {
+        return kChildNegatedEventTemplate;
+      }
+      return kChildNegatedVerbTemplate;
+    }
+    function projectChildWhenClause(localizer, tiles) {
+      const head = tiles.get(0);
+      const slots = new list_1.List();
+      const sensed = negatedSensor(tiles);
+      if (sensed !== void 0) {
+        return renderPhrase(localizer, childNegatedFrameTemplate(tileFrame(sensed)), kConnectiveContext, negatedFrameSlots(localizer, tiles, sensed));
+      }
+      if (isSubjectlessWhenSide(tiles)) {
+        slots.push(slot("condition", joinWords(localizer, tiles, 0, 0)));
+        return renderPhrase(localizer, kChildSubjectlessTemplate, kConnectiveContext, slots);
+      }
+      slots.push(slot("form", wordPhrase(localizer, head, 0)));
+      slots.push(slot("object", tiles.size() > 1 ? joinWords(localizer, tiles, 1, 0) : barePhrase(localizer, head, 0)));
+      return renderPhrase(localizer, childFrameTemplate(tileFrame(head)), kConnectiveContext, slots);
+    }
+    function triggerModeWord(trigger, localizer) {
+      if (trigger === interfaces_1.RuleTriggerMode.Otherwise) {
+        return localizer.tr(kOtherwiseWord, void 0, kWhenContext);
+      }
+      if (trigger === interfaces_1.RuleTriggerMode.Then) {
+        return localizer.tr(kThenWord, void 0, kWhenContext);
+      }
       return localizer.tr(kAlwaysWord, void 0, kWhenContext);
+    }
+    function modeConditionTemplate(trigger) {
+      return trigger === interfaces_1.RuleTriggerMode.Otherwise ? kOtherwiseConditionTemplate : kThenConditionTemplate;
     }
     function isUnfinishedClause(rule) {
       return rule.do().tiles().isEmpty();
@@ -14865,12 +15287,17 @@ var require_sentence_projection = __commonJS({
     function projectRuleClause(localizer, rule) {
       const whenTiles = rule.when().tiles();
       const doTiles = rule.do().tiles();
+      const mode = rule.trigger();
       let trigger;
       if (whenTiles.isEmpty()) {
         trigger = new list_1.List();
-        trigger.push(glueSegment(whenTriggerWord(localizer)));
-      } else {
+        trigger.push(glueSegment(triggerModeWord(mode, localizer)));
+      } else if (mode === interfaces_1.RuleTriggerMode.When) {
         trigger = projectWhenClause(localizer, whenTiles);
+      } else {
+        const modeSlots = new list_1.List();
+        modeSlots.push(slot("condition", projectChildWhenClause(localizer, whenTiles)));
+        trigger = renderPhrase(localizer, modeConditionTemplate(mode), kWhenContext, modeSlots);
       }
       if (doTiles.isEmpty()) {
         return trigger;
@@ -14969,42 +15396,6 @@ var require_sentence_projection = __commonJS({
       });
       return mergeGlueEntries(out.asReadonly());
     }
-    function childFrameTemplate(frame) {
-      if (frame === "state") {
-        return kChildStateTemplate;
-      }
-      if (frame === "event") {
-        return kChildEventTemplate;
-      }
-      if (frame === "adverb") {
-        return kChildAdverbTemplate;
-      }
-      return kChildVerbTemplate;
-    }
-    function childNegatedFrameTemplate(frame) {
-      if (frame === "state") {
-        return kChildNegatedStateTemplate;
-      }
-      if (frame === "event") {
-        return kChildNegatedEventTemplate;
-      }
-      return kChildNegatedVerbTemplate;
-    }
-    function projectChildWhenClause(localizer, tiles) {
-      const head = tiles.get(0);
-      const slots = new list_1.List();
-      const sensed = negatedSensor(tiles);
-      if (sensed !== void 0) {
-        return renderPhrase(localizer, childNegatedFrameTemplate(tileFrame(sensed)), kConnectiveContext, negatedFrameSlots(localizer, tiles, sensed));
-      }
-      if (isSubjectlessWhenSide(tiles)) {
-        slots.push(slot("condition", joinWords(localizer, tiles, 0, 0)));
-        return renderPhrase(localizer, kChildSubjectlessTemplate, kConnectiveContext, slots);
-      }
-      slots.push(slot("form", wordPhrase(localizer, head, 0)));
-      slots.push(slot("object", tiles.size() > 1 ? joinWords(localizer, tiles, 1, 0) : barePhrase(localizer, head, 0)));
-      return renderPhrase(localizer, childFrameTemplate(tileFrame(head)), kConnectiveContext, slots);
-    }
     function projectChildClause(localizer, rule) {
       const whenTiles = rule.when().tiles();
       const doTiles = rule.do().tiles();
@@ -15023,7 +15414,13 @@ var require_sentence_projection = __commonJS({
     function isTilelessRule(rule) {
       return rule.when().tiles().isEmpty() && rule.do().tiles().isEmpty();
     }
-    function childConnectiveTemplate(unfinished, childHasCondition) {
+    function childConnectiveTemplate(trigger, unfinished, childHasCondition) {
+      if (trigger === interfaces_1.RuleTriggerMode.Otherwise) {
+        return childHasCondition ? kChildOtherwiseConditionTemplate : kChildOtherwiseConsequenceTemplate;
+      }
+      if (trigger === interfaces_1.RuleTriggerMode.Then) {
+        return childHasCondition ? kChildThenConditionTemplate : kChildThenConsequenceTemplate;
+      }
       if (childHasCondition) {
         return unfinished ? kIncompleteConditionTemplate : kChildConditionTemplate;
       }
@@ -15043,7 +15440,7 @@ var require_sentence_projection = __commonJS({
         const slots = new list_1.List();
         slots.push(paragraphSlot("parent", out.entries.asReadonly()));
         slots.push(paragraphSlot(childHasCondition ? "condition" : "consequence", childEntries.asReadonly()));
-        const source = childConnectiveTemplate(out.unfinished, childHasCondition);
+        const source = childConnectiveTemplate(child.trigger(), out.unfinished, childHasCondition);
         const entries = composeEntries(localizer, source, kConnectiveContext, slots.asReadonly());
         out = attachChildRules(localizer, { entries, unfinished: isUnfinishedClause(child) }, child.children());
       }
@@ -15082,9 +15479,9 @@ var require_sentence_projection = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/compiler/diagnostics.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/compiler/diagnostics.js
 var require_diagnostics = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/compiler/diagnostics.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/compiler/diagnostics.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.BrainBuildError = exports.LinkDiagCode = exports.CompilationDiagCode = exports.TypeDiagCode = exports.ParseDiagCode = void 0;
@@ -15115,6 +15512,9 @@ var require_diagnostics = __commonJS({
       ParseDiagCode3[ParseDiagCode3["TileRequirementsNotProvided"] = 1018] = "TileRequirementsNotProvided";
       ParseDiagCode3[ParseDiagCode3["TileWhenResultUnavailable"] = 1019] = "TileWhenResultUnavailable";
       ParseDiagCode3[ParseDiagCode3["NoPrecedingSiblingRule"] = 1020] = "NoPrecedingSiblingRule";
+      ParseDiagCode3[ParseDiagCode3["OtherwiseTriggerNoPrecedingSiblingRule"] = 1021] = "OtherwiseTriggerNoPrecedingSiblingRule";
+      ParseDiagCode3[ParseDiagCode3["ThenTriggerNoPrecedingSiblingRule"] = 1022] = "ThenTriggerNoPrecedingSiblingRule";
+      ParseDiagCode3[ParseDiagCode3["Unused1023"] = 1023] = "Unused1023";
     })(ParseDiagCode2 || (exports.ParseDiagCode = ParseDiagCode2 = {}));
     var TypeDiagCode2;
     (function(TypeDiagCode3) {
@@ -15175,8 +15575,8 @@ var require_diagnostics = __commonJS({
     }
     var BrainBuildError = class extends error_1.Error {
       diagnostics;
-      constructor(message, diagnostics) {
-        super(message);
+      constructor(message2, diagnostics) {
+        super(message2);
         this.diagnostics = diagnostics;
         this.name = "BrainBuildError";
       }
@@ -15208,14 +15608,15 @@ var require_diagnostics = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/compiler/parser.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/compiler/parser.js
 var require_parser = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/compiler/parser.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/compiler/parser.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.parseBrainTiles = parseBrainTiles;
     exports.validateTilePlacement = validateTilePlacement;
     exports.validatePrecedingSiblingConsumers = validatePrecedingSiblingConsumers;
+    exports.validateTriggerMode = validateTriggerMode;
     exports.collectProvidedOutputKeys = collectProvidedOutputKeys;
     exports.validateOutputProviders = validateOutputProviders;
     exports.whenResultConsumerEligible = whenResultConsumerEligible;
@@ -15845,17 +16246,17 @@ var require_parser = __commonJS({
             }
             if (left.kind === "fieldAccess" && !(0, lvalue_1.isLValue)(left)) {
               const described = describeReadOnlyResultAssignment(left, this.localizer);
-              const message = described.message;
+              const message2 = described.message;
               this.diags.push({
                 code: diagnostics_1.ParseDiagCode.ReadOnlyResultFieldAssignment,
-                message,
+                message: message2,
                 span: { from: startPos, to: this.i },
                 params: described.params
               });
               return {
                 nodeId: this.nextNodeId(),
                 kind: "errorExpr",
-                message,
+                message: message2,
                 span: { from: startPos, to: this.i },
                 expr: left
               };
@@ -16196,6 +16597,19 @@ var require_parser = __commonJS({
       }
       return diags;
     }
+    function validateTriggerMode(trigger, hasPrecedingSibling) {
+      const diags = list_1.List.empty();
+      if (hasPrecedingSibling || trigger === interfaces_1.RuleTriggerMode.When) {
+        return diags;
+      }
+      const otherwiseMode = trigger === interfaces_1.RuleTriggerMode.Otherwise;
+      diags.push({
+        code: otherwiseMode ? diagnostics_1.ParseDiagCode.OtherwiseTriggerNoPrecedingSiblingRule : diagnostics_1.ParseDiagCode.ThenTriggerNoPrecedingSiblingRule,
+        message: otherwiseMode ? "An 'otherwise' rule needs a rule above it at the same level to complement" : "A 'then' rule needs a rule above it at the same level to follow",
+        span: { from: 0, to: 0 }
+      });
+      return diags;
+    }
     function collectProvidedOutputKeys(tiles, keys) {
       for (let i = 0; i < tiles.size(); i++) {
         const provided = tiles.get(i).providedOutputs();
@@ -16323,10 +16737,10 @@ var require_parser = __commonJS({
             providerText += " or ";
           providerText += `"${providers.labels.get(j)}"`;
         }
-        const message = providers.labels.size() > 0 ? `Tile "${label}" requires a sensor like ${providerText} in this rule or an enclosing rule` : `Tile "${label}" requires a providing sensor in this rule or an enclosing rule`;
+        const message2 = providers.labels.size() > 0 ? `Tile "${label}" requires a sensor like ${providerText} in this rule or an enclosing rule` : `Tile "${label}" requires a providing sensor in this rule or an enclosing rule`;
         diags.push({
           code: diagnostics_1.ParseDiagCode.TileRequirementsNotProvided,
-          message,
+          message: message2,
           span: { from: i, to: i + 1 },
           params: {
             tileId: tile.tileId,
@@ -16340,9 +16754,9 @@ var require_parser = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/language-service/tile-suggestions.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/language-service/tile-suggestions.js
 var require_tile_suggestions = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/language-service/tile-suggestions.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/language-service/tile-suggestions.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.TileCompatibility = void 0;
@@ -16352,6 +16766,7 @@ var require_tile_suggestions = __commonJS({
     exports.availableWhenResultType = availableWhenResultType;
     exports.collectRuleHierarchyCapabilities = collectRuleHierarchyCapabilities;
     exports.collectRuleHierarchyOutputKeys = collectRuleHierarchyOutputKeys;
+    exports.availableTriggerModes = availableTriggerModes;
     exports.suggestTiles = suggestTiles2;
     exports.parseTilesForSuggestions = parseTilesForSuggestions;
     exports.countUnclosedParens = countUnclosedParens;
@@ -16800,9 +17215,9 @@ var require_tile_suggestions = __commonJS({
       return slotsHoldUnclosedParenGroup(actionExpr.anons, excludeSlotId) || slotsHoldUnclosedParenGroup(actionExpr.parameters, excludeSlotId);
     }
     function actionCallTakesArgs(actionExpr, unclosedParenDepth) {
-      const callDef12 = actionExpr.tileDef.action.callDef;
+      const callDef13 = actionExpr.tileDef.action.callDef;
       const availableArgSlots = list_1.List.empty();
-      collectAvailableArgSlots(callDef12.callSpec, callDef12.argSlots, collectFilledSlotIds(actionExpr), availableArgSlots, 1, callDef12.callSpec);
+      collectAvailableArgSlots(callDef13.callSpec, callDef13.argSlots, collectFilledSlotIds(actionExpr), availableArgSlots, 1, callDef13.callSpec);
       return availableArgSlots.size() > 0 || hasParametersNeedingValues(actionExpr) || hasIncompleteAnonValues(actionExpr) || (unclosedParenDepth ?? 0) > 0 && hasUnclosedParenGroupInArgs(actionExpr);
     }
     function hasStructValuePendingAccessor(actionExpr, catalogs, types, excludeSlotId) {
@@ -16821,7 +17236,7 @@ var require_tile_suggestions = __commonJS({
         if (typeDef && typeDef.coreType === runtime_1.NativeType.Struct)
           return true;
       }
-      const callDef12 = actionExpr.tileDef.action.callDef;
+      const callDef13 = actionExpr.tileDef.action.callDef;
       for (let i = 0; i < actionExpr.anons.size(); i++) {
         if (actionExpr.anons.get(i).slotId === excludeSlotId)
           continue;
@@ -16835,9 +17250,9 @@ var require_tile_suggestions = __commonJS({
         if (!typeDef || typeDef.coreType !== runtime_1.NativeType.Struct)
           continue;
         const slotId = actionExpr.anons.get(i).slotId;
-        for (let j = 0; j < callDef12.argSlots.size(); j++) {
-          if (callDef12.argSlots.get(j).slotId === slotId) {
-            const argTileDef = findTileInCatalogs(callDef12.argSlots.get(j).argSpec.tileId, catalogs);
+        for (let j = 0; j < callDef13.argSlots.size(); j++) {
+          if (callDef13.argSlots.get(j).slotId === slotId) {
+            const argTileDef = findTileInCatalogs(callDef13.argSlots.get(j).argSpec.tileId, catalogs);
             if (argTileDef && argTileDef.kind === "parameter") {
               const expectedType = argTileDef.dataType;
               if (outputType !== expectedType)
@@ -16850,10 +17265,10 @@ var require_tile_suggestions = __commonJS({
       return false;
     }
     function collectActionCallExpectedTypes(actionExpr, catalogs, types) {
-      const callDef12 = actionExpr.tileDef.action.callDef;
+      const callDef13 = actionExpr.tileDef.action.callDef;
       const filledSlotIds = collectFilledSlotIds(actionExpr);
       const availableSlots = list_1.List.empty();
-      collectAvailableArgSlots(callDef12.callSpec, callDef12.argSlots, filledSlotIds, availableSlots, 1, callDef12.callSpec);
+      collectAvailableArgSlots(callDef13.callSpec, callDef13.argSlots, filledSlotIds, availableSlots, 1, callDef13.callSpec);
       const expectedTypes = list_1.List.empty();
       for (let i = 0; i < availableSlots.size(); i++) {
         const slot = availableSlots.get(i);
@@ -16874,16 +17289,16 @@ var require_tile_suggestions = __commonJS({
         const anonExpr = actionExpr.anons.get(i).expr;
         const slotId = actionExpr.anons.get(i).slotId;
         const slotAcceptedTypes = list_1.List.empty();
-        for (let j = 0; j < callDef12.argSlots.size(); j++) {
-          if (callDef12.argSlots.get(j).slotId === slotId) {
-            const slotDef = callDef12.argSlots.get(j);
+        for (let j = 0; j < callDef13.argSlots.size(); j++) {
+          if (callDef13.argSlots.get(j).slotId === slotId) {
+            const slotDef = callDef13.argSlots.get(j);
             const argTileDef = findTileInCatalogs(slotDef.argSpec.tileId, catalogs);
             if (argTileDef && argTileDef.kind === "parameter") {
               slotAcceptedTypes.push(argTileDef.dataType);
             }
             if (slotDef.choiceGroup !== void 0) {
-              for (let k = 0; k < callDef12.argSlots.size(); k++) {
-                const sibling = callDef12.argSlots.get(k);
+              for (let k = 0; k < callDef13.argSlots.size(); k++) {
+                const sibling = callDef13.argSlots.get(k);
                 if (sibling.choiceGroup !== slotDef.choiceGroup || sibling.slotId === slotId)
                   continue;
                 if (!sibling.argSpec.anonymous)
@@ -17350,6 +17765,9 @@ var require_tile_suggestions = __commonJS({
           const expr = parseTilesForSuggestions(whenTiles);
           return whenExprResultType(expr, operatorOverloads, conversions);
         }
+        if (current.trigger() !== interfaces_1.RuleTriggerMode.When) {
+          return runtime_1.CoreTypeIds.Boolean;
+        }
         current = current.ancestor();
       }
       return void 0;
@@ -17392,6 +17810,12 @@ var require_tile_suggestions = __commonJS({
         return false;
       return siblings.indexOf(ruleDef) > 0;
     }
+    function availableTriggerModes(ruleDef) {
+      if (!hasPrecedingSiblingRule(ruleDef)) {
+        return list_1.List.from([interfaces_1.RuleTriggerMode.When]);
+      }
+      return list_1.List.from([interfaces_1.RuleTriggerMode.When, interfaces_1.RuleTriggerMode.Otherwise, interfaces_1.RuleTriggerMode.Then]);
+    }
     function suggestTiles2(context, catalogs, services) {
       const { conversions } = services.shared;
       const { operatorOverloads } = services.edit;
@@ -17433,13 +17857,13 @@ var require_tile_suggestions = __commonJS({
             suggestAccessorTiles(context, catalogs, types, conversions, result, groupType);
             break;
           }
-          const callDef12 = expr.tileDef.action.callDef;
+          const callDef13 = expr.tileDef.action.callDef;
           const filledSlotIds = collectFilledSlotIds(expr);
           const needsSlots = actionCallTakesArgs(expr, context.unclosedParenDepth);
           if (needsSlots) {
             suggestActionCallTiles(expr, expr.span.to, context.ruleSide, catalogs, conversions, types, operatorOverloads, availableWhenResult, hasPrecedingSiblingRule(context.ruleDef), result, void 0, context.availableCapabilities, context.availableOutputKeys, context.unclosedParenDepth);
           }
-          if (trailingValueExpr(expr) !== void 0 || expr.kind === "sensor" && !needsSlots && callDef12.argSlots.size() === 0 && (0, interfaces_1.isInlineTileDef)(expr.tileDef)) {
+          if (trailingValueExpr(expr) !== void 0 || expr.kind === "sensor" && !needsSlots && callDef13.argSlots.size() === 0 && (0, interfaces_1.isInlineTileDef)(expr.tileDef)) {
             const leftExpr = trailingValueExpr(expr) ?? expr;
             const leftType = operatorOverloads ? getExprOutputType(leftExpr, operatorOverloads, conversions) : void 0;
             suggestInfixOperators(context, catalogs, conversions, result, leftType, operatorOverloads, leftExpr);
@@ -17447,7 +17871,7 @@ var require_tile_suggestions = __commonJS({
             const trailingForAccessor = trailingPrimaryExpr(leftExpr);
             const acceptedTypes = leftExpr === expr ? void 0 : collectActionCallExpectedTypes(expr, catalogs, types);
             suggestAccessorTiles(context, catalogs, types, conversions, result, getExprOutputType(trailingForAccessor, operatorOverloads, conversions) ?? getExprOutputType(trailingForAccessor), acceptedTypes);
-          } else if (expr.parenGroup === "unclosed" && !hasParametersNeedingValues(expr) && !hasIncompleteAnonValues(expr) && !hasUnfilledRequiredArg(callDef12.callSpec, callDef12.argSlots, filledSlotIds, callDef12.callSpec)) {
+          } else if (expr.parenGroup === "unclosed" && !hasParametersNeedingValues(expr) && !hasIncompleteAnonValues(expr) && !hasUnfilledRequiredArg(callDef13.callSpec, callDef13.argSlots, filledSlotIds, callDef13.callSpec)) {
             suggestCloseParenIfNeeded(context, catalogs, result);
           }
           break;
@@ -17455,13 +17879,13 @@ var require_tile_suggestions = __commonJS({
         case "unaryOp": {
           if (!afterClosedGroup(context, expr) && (expr.operand.kind === "sensor" || expr.operand.kind === "actuator")) {
             const innerExpr = expr.operand;
-            const callDef12 = innerExpr.tileDef.action.callDef;
+            const callDef13 = innerExpr.tileDef.action.callDef;
             const filledSlotIds = collectFilledSlotIds(innerExpr);
             const needsSlots = actionCallTakesArgs(innerExpr, context.unclosedParenDepth);
             if (needsSlots) {
               suggestActionCallTiles(innerExpr, expr.span.to, context.ruleSide, catalogs, conversions, types, operatorOverloads, availableWhenResult, hasPrecedingSiblingRule(context.ruleDef), result, void 0, context.availableCapabilities, context.availableOutputKeys, context.unclosedParenDepth);
             }
-            const operandComplete = innerExpr.kind === "sensor" && !hasParametersNeedingValues(innerExpr) && !hasIncompleteAnonValues(innerExpr) && !hasUnfilledRequiredArg(callDef12.callSpec, callDef12.argSlots, filledSlotIds, callDef12.callSpec);
+            const operandComplete = innerExpr.kind === "sensor" && !hasParametersNeedingValues(innerExpr) && !hasIncompleteAnonValues(innerExpr) && !hasUnfilledRequiredArg(callDef13.callSpec, callDef13.argSlots, filledSlotIds, callDef13.callSpec);
             if (trailingValueExpr(innerExpr) !== void 0 || operandComplete) {
               const leftExpr = trailingValueExpr(innerExpr) ?? expr;
               const leftType = operatorOverloads ? getExprOutputType(leftExpr, operatorOverloads, conversions) : void 0;
@@ -17952,10 +18376,10 @@ var require_tile_suggestions = __commonJS({
       }
     }
     function suggestActionCallTiles(actionExpr, insertionTileIndex, ruleSide, catalogs, conversions, types, operatorOverloads, availableWhenResult, hasPrecedingSibling, result, excludeSlotId, availableCapabilities, availableOutputKeys, unclosedParenDepth) {
-      const callDef12 = actionExpr.tileDef.action.callDef;
+      const callDef13 = actionExpr.tileDef.action.callDef;
       const filledSlotIds = collectFilledSlotIds(actionExpr, excludeSlotId);
       const availableSlots = list_1.List.empty();
-      collectAvailableArgSlots(callDef12.callSpec, callDef12.argSlots, filledSlotIds, availableSlots, 1, callDef12.callSpec);
+      collectAvailableArgSlots(callDef13.callSpec, callDef13.argSlots, filledSlotIds, availableSlots, 1, callDef13.callSpec);
       const valuePending = (unclosedParenDepth ?? 0) > 0 && hasUnclosedParenGroupInArgs(actionExpr, excludeSlotId) || hasParametersNeedingValues(actionExpr, excludeSlotId) || hasIncompleteAnonValues(actionExpr, excludeSlotId) || hasStructValuePendingAccessor(actionExpr, catalogs, types, excludeSlotId);
       const valueExpectedTypes = list_1.List.empty();
       for (let i = 0; i < availableSlots.size(); i++) {
@@ -18002,9 +18426,9 @@ var require_tile_suggestions = __commonJS({
           }
           if (!usedOperandType) {
             const slotId = actionExpr.anons.get(i).slotId;
-            for (let j = 0; j < callDef12.argSlots.size(); j++) {
-              if (callDef12.argSlots.get(j).slotId === slotId) {
-                const argTileDef = findTileInCatalogs(callDef12.argSlots.get(j).argSpec.tileId, catalogs);
+            for (let j = 0; j < callDef13.argSlots.size(); j++) {
+              if (callDef13.argSlots.get(j).slotId === slotId) {
+                const argTileDef = findTileInCatalogs(callDef13.argSlots.get(j).argSpec.tileId, catalogs);
                 if (argTileDef && argTileDef.kind === "parameter") {
                   valueExpectedTypes.push(argTileDef.dataType);
                 }
@@ -18129,9 +18553,9 @@ var require_tile_suggestions = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/rule-path.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/rule-path.js
 var require_rule_path = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/rule-path.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/rule-path.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.rootRulePath = rootRulePath2;
@@ -18145,9 +18569,9 @@ var require_rule_path = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/compiler/type-table-builder.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/compiler/type-table-builder.js
 var require_type_table_builder = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/compiler/type-table-builder.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/compiler/type-table-builder.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.ProgramTypeTableBuilder = void 0;
@@ -18268,9 +18692,9 @@ var require_type_table_builder = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/compiler/constant-pool.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/compiler/constant-pool.js
 var require_constant_pool = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/compiler/constant-pool.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/compiler/constant-pool.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.ConstantPool = void 0;
@@ -18426,9 +18850,9 @@ var require_constant_pool = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/compiler/emitter.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/compiler/emitter.js
 var require_emitter2 = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/compiler/emitter.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/compiler/emitter.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.BytecodeEmitter = void 0;
@@ -18633,6 +19057,26 @@ var require_emitter2 = __commonJS({
         this.addFixup(skipLabel, "a");
       }
       /**
+       * Mark the end of a WHEN boundary that fires on a truthy WHEN result and
+       * records the chain-aware firing outcome.
+       *
+       * @param skipLabel - Label to jump to if WHEN evaluated to false (typically after DO section)
+       */
+      whenEndChain(skipLabel) {
+        this.emit({ op: bytecode_1.Op.WHEN_END_CHAIN, a: 0 });
+        this.addFixup(skipLabel, "a");
+      }
+      /**
+       * Mark the end of a WHEN boundary that fires on a present (non-nil) WHEN
+       * result and records the chain-aware firing outcome.
+       *
+       * @param skipLabel - Label to jump to when the WHEN result is nil (typically after the DO section)
+       */
+      whenEndPresentChain(skipLabel) {
+        this.emit({ op: bytecode_1.Op.WHEN_END_PRESENT_CHAIN, a: 0 });
+        this.addFixup(skipLabel, "a");
+      }
+      /**
        * Mark the start of a DO boundary.
        */
       doStart() {
@@ -18834,9 +19278,9 @@ var require_emitter2 = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/compiler/types.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/compiler/types.js
 var require_types2 = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/compiler/types.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/compiler/types.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.acceptExprVisitor = acceptExprVisitor;
@@ -18873,9 +19317,9 @@ var require_types2 = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/compiler/expected-types.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/compiler/expected-types.js
 var require_expected_types = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/compiler/expected-types.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/compiler/expected-types.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.computeExpectedTypes = computeExpectedTypes;
@@ -18977,9 +19421,9 @@ var require_expected_types = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/compiler/inferred-types.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/compiler/inferred-types.js
 var require_inferred_types = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/compiler/inferred-types.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/compiler/inferred-types.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.computeInferredTypes = computeInferredTypes;
@@ -19305,8 +19749,8 @@ var require_inferred_types = __commonJS({
       visitActuator(expr) {
         const typeInfo = this.ensureTypeInfo(expr.nodeId);
         typeInfo.inferred = runtime_1.CoreTypeNames.Void;
-        const callDef12 = expr.tileDef.action.callDef;
-        const argSlots = callDef12.argSlots;
+        const callDef13 = expr.tileDef.action.callDef;
+        const argSlots = callDef13.argSlots;
         expr.anons.forEach((e) => {
           (0, types_1.acceptExprVisitor)(e.expr, this);
         });
@@ -19326,8 +19770,8 @@ var require_inferred_types = __commonJS({
       visitSensor(expr) {
         const typeInfo = this.ensureTypeInfo(expr.nodeId);
         typeInfo.inferred = expr.tileDef.action.outputType ?? runtime_1.CoreTypeNames.Unknown;
-        const callDef12 = expr.tileDef.action.callDef;
-        const argSlots = callDef12.argSlots;
+        const callDef13 = expr.tileDef.action.callDef;
+        const argSlots = callDef13.argSlots;
         expr.anons.forEach((e) => {
           (0, types_1.acceptExprVisitor)(e.expr, this);
         });
@@ -19399,9 +19843,9 @@ var require_inferred_types = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/compiler/rule-compiler.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/compiler/rule-compiler.js
 var require_rule_compiler = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/compiler/rule-compiler.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/compiler/rule-compiler.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.ExprCompiler = void 0;
@@ -19684,12 +20128,12 @@ var require_rule_compiler = __commonJS({
           return;
         }
         this.context.reportedVariableConflicts.set(reportKey, true);
-        const message = `Variable '${varName}' is used as both '${boundType}' and '${varType}'; both share one slot, which holds '${boundType}' values.`;
-        logger_1.logger.warn(message);
+        const message2 = `Variable '${varName}' is used as both '${boundType}' and '${varType}'; both share one slot, which holds '${boundType}' values.`;
+        logger_1.logger.warn(message2);
         this.context.diags.push({
           code: diagnostics_1.CompilationDiagCode.VariableTypeConflict,
           severity: (0, diagnostics_1.diagnosticSeverity)(diagnostics_1.CompilationDiagCode.VariableTypeConflict),
-          message,
+          message: message2,
           nodeId,
           params: {
             varName,
@@ -19836,7 +20280,7 @@ var require_rule_compiler = __commonJS({
         const gathered = new dict_1.Dict();
         for (let i = 0; i < slotExprs.size(); i++) {
           const slot = slotExprs.get(i);
-          const argSlot = argSlots.get(slot.slotId);
+          const argSlot = argSlots.at(slot.slotId);
           if (argSlot?.repeated) {
             if (gathered.get(slot.slotId)) {
               continue;
@@ -19931,12 +20375,12 @@ var require_rule_compiler = __commonJS({
         const sideName = this.context.ruleSide === interfaces_1.RuleSide.When ? "WHEN" : "DO";
         const where = `rule '${this.context.rulePath}' ${sideName}`;
         const at = tileId === void 0 ? where : `${where} at tile '${tileId}'`;
-        const message = `Dropped uncompilable expression in ${at}: ${reason}`;
-        logger_1.logger.warn(message);
+        const message2 = `Dropped uncompilable expression in ${at}: ${reason}`;
+        logger_1.logger.warn(message2);
         this.context.diags.push({
           code: diagnostics_1.CompilationDiagCode.UncompilableExpressionDropped,
           severity: (0, diagnostics_1.diagnosticSeverity)(diagnostics_1.CompilationDiagCode.UncompilableExpressionDropped),
-          message,
+          message: message2,
           nodeId,
           params: { rulePath: this.context.rulePath, side: this.context.ruleSide, tileId }
         });
@@ -19953,9 +20397,9 @@ var require_rule_compiler = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/compiler/brain-compiler.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/compiler/brain-compiler.js
 var require_brain_compiler = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/compiler/brain-compiler.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/compiler/brain-compiler.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.BrainCompiler = void 0;
@@ -20176,7 +20620,7 @@ var require_brain_compiler = __commonJS({
           if (visitedFuncs.has(funcId))
             continue;
           visitedFuncs.add(funcId);
-          const fn = this.functions.get(funcId);
+          const fn = this.functions.at(funcId);
           if (!fn)
             continue;
           const childFuncIds = list_1.List.empty();
@@ -20265,6 +20709,7 @@ var require_brain_compiler = __commonJS({
         this.pushParseDiags((0, parser_1.validateTilePlacement)(doTiles, interfaces_1.RuleSide.Do, this.localizer), rulePath);
         this.pushParseDiags((0, parser_1.validatePrecedingSiblingConsumers)(whenTiles, siblingIndex > 0, this.localizer), rulePath);
         this.pushParseDiags((0, parser_1.validatePrecedingSiblingConsumers)(doTiles, siblingIndex > 0, this.localizer), rulePath);
+        this.pushParseDiags((0, parser_1.validateTriggerMode)(ruleDef.trigger(), siblingIndex > 0), rulePath);
         const providedOutputKeys = (0, tile_suggestions_1.collectRuleHierarchyOutputKeys)(ruleDef);
         this.pushParseDiags((0, parser_1.validateOutputProviders)(whenTiles, providedOutputKeys, this.localizer), rulePath);
         this.pushParseDiags((0, parser_1.validateOutputProviders)(doTiles, providedOutputKeys, this.localizer), rulePath);
@@ -20295,14 +20740,32 @@ var require_brain_compiler = __commonJS({
         const emitter = new emitter_1.BytecodeEmitter();
         const endLabel = emitter.label();
         const whenIsEmpty = whenParseResult.exprs.get(0).kind === "empty";
-        if (!whenIsEmpty) {
-          emitter.whenStart();
-          this.emitExprs(whenParseResult.exprs, emitter, typeEnv, true, rulePath, interfaces_1.RuleSide.When, whenTiles);
-          if (isBarePresenceGatedSensor(whenParseResult.exprs.get(0))) {
-            emitter.whenEndPresent(endLabel);
-          } else {
-            emitter.whenEnd(endLabel);
+        const presenceGated = !whenIsEmpty && isBarePresenceGatedSensor(whenParseResult.exprs.get(0));
+        const trigger = ruleDef.trigger();
+        if (trigger === interfaces_1.RuleTriggerMode.When) {
+          if (!whenIsEmpty) {
+            emitter.whenStart();
+            this.emitExprs(whenParseResult.exprs, emitter, typeEnv, true, rulePath, interfaces_1.RuleSide.When, whenTiles);
+            if (presenceGated) {
+              emitter.whenEndPresent(endLabel);
+            } else {
+              emitter.whenEnd(endLabel);
+            }
           }
+        } else {
+          emitter.whenStart();
+          this.emitTriggerPrologue(emitter, trigger);
+          if (!whenIsEmpty) {
+            const unarmedLabel = emitter.label();
+            const gateLabel = emitter.label();
+            emitter.jmpIfFalse(unarmedLabel);
+            this.emitExprs(whenParseResult.exprs, emitter, typeEnv, true, rulePath, interfaces_1.RuleSide.When, whenTiles);
+            emitter.jmp(gateLabel);
+            emitter.mark(unarmedLabel);
+            emitter.pushConst(this.constantPool.addOther(value_1.NIL_VALUE));
+            emitter.mark(gateLabel);
+          }
+          this.emitTriggerGate(emitter, trigger, presenceGated, endLabel);
         }
         emitter.doStart();
         this.emitExprs(doParseResult.exprs, emitter, typeEnv, false, rulePath, interfaces_1.RuleSide.Do, doTiles);
@@ -20320,6 +20783,48 @@ var require_brain_compiler = __commonJS({
           variableNames: this.variableNames,
           childFuncIds
         };
+      }
+      /**
+       * Emit the arming read that opens the WHEN section of a rule whose trigger
+       * mode is not `when`, leaving its boolean answer on the operand stack.
+       *
+       * An `otherwise` rule reads the `otherwise` host sensor synchronously. A
+       * `then` rule dispatches the rule-trigger host action asynchronously and
+       * awaits it, so a rule whose subject is still in flight parks here.
+       */
+      emitTriggerPrologue(emitter, trigger) {
+        const callSiteId = this.nextCallSiteIdCounter.value++;
+        if (trigger === interfaces_1.RuleTriggerMode.Otherwise) {
+          emitter.hostActionCall(runtime_1.CoreHostActions.Otherwise.actionId, 0, callSiteId);
+          return;
+        }
+        emitter.hostActionCallAsync(runtime_1.CoreHostActions.RuleTrigger.actionId, 0, callSiteId);
+        emitter.await();
+      }
+      /**
+       * Emit the WHEN gate closing a rule whose trigger mode is not `when`. An
+       * `otherwise` rule takes the chain variant of the gate its expression selects,
+       * so its record carries the ladder outcome; a `then` rule takes the ordinary
+       * variant.
+       *
+       * @param presenceGated - Whether the rule's WHEN expression selected the
+       *   presence gate.
+       * @param endLabel - Label past the DO section, taken when the gate does not fire.
+       */
+      emitTriggerGate(emitter, trigger, presenceGated, endLabel) {
+        if (trigger === interfaces_1.RuleTriggerMode.Otherwise) {
+          if (presenceGated) {
+            emitter.whenEndPresentChain(endLabel);
+          } else {
+            emitter.whenEndChain(endLabel);
+          }
+          return;
+        }
+        if (presenceGated) {
+          emitter.whenEndPresent(endLabel);
+        } else {
+          emitter.whenEnd(endLabel);
+        }
       }
       /**
        * Emit bytecode for a list of expressions. Uses the global variable pool for
@@ -20391,9 +20896,9 @@ var require_brain_compiler = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/compiler/linker.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/compiler/linker.js
 var require_linker = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/compiler/linker.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/compiler/linker.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.linkBrainProgram = linkBrainProgram;
@@ -20406,11 +20911,11 @@ var require_linker = __commonJS({
     var value_1 = require_value();
     var interfaces_1 = require_interfaces();
     var diagnostics_1 = require_diagnostics();
-    function invalidArtifact(actionKey, message) {
+    function invalidArtifact(actionKey, message2) {
       return {
         code: diagnostics_1.LinkDiagCode.InvalidActionArtifact,
         severity: (0, diagnostics_1.diagnosticSeverity)(diagnostics_1.LinkDiagCode.InvalidActionArtifact),
-        message,
+        message: message2,
         params: { actionKey }
       };
     }
@@ -20763,9 +21268,9 @@ var require_linker = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/compiler/tree-shaker.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/compiler/tree-shaker.js
 var require_tree_shaker = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/compiler/tree-shaker.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/compiler/tree-shaker.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.treeshakeProgram = treeshakeProgram;
@@ -21519,9 +22024,9 @@ var require_tree_shaker = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/compiler/link-brain.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/compiler/link-brain.js
 var require_link_brain = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/compiler/link-brain.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/compiler/link-brain.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.runBrainLinkPipeline = runBrainLinkPipeline;
@@ -21559,9 +22064,9 @@ var require_link_brain = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/compiler/expr-mapper.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/compiler/expr-mapper.js
 var require_expr_mapper = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/compiler/expr-mapper.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/compiler/expr-mapper.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.mapExprs = mapExprs;
@@ -21647,12 +22152,12 @@ var require_expr_mapper = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/compiler/index.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/compiler/index.js
 var require_compiler = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/compiler/index.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/compiler/index.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.acceptExprVisitor = exports.treeshakeProgram = exports.whenResultConsumerEligible = exports.validateWhenResultConsumers = exports.validatePrecedingSiblingConsumers = exports.validateOutputProviders = exports.validateCapabilityRequirements = exports.parseBrainTiles = exports.collectProvidedOutputKeys = exports.collectProvidedCapabilities = exports.linkBrainProgram = exports.runBrainLinkPipeline = exports.BytecodeEmitter = exports.TypeDiagCode = exports.summarizeBrainBuildDiagnostics = exports.ParseDiagCode = exports.LinkDiagCode = exports.isBrainBuildError = exports.diagnosticSeverity = exports.CompilationDiagCode = exports.BrainBuildError = exports.ConstantPool = exports.compileBrain = exports.BrainCompiler = void 0;
+    exports.acceptExprVisitor = exports.treeshakeProgram = exports.whenResultConsumerEligible = exports.validateWhenResultConsumers = exports.validateTriggerMode = exports.validatePrecedingSiblingConsumers = exports.validateOutputProviders = exports.validateCapabilityRequirements = exports.parseBrainTiles = exports.collectProvidedOutputKeys = exports.collectProvidedCapabilities = exports.linkBrainProgram = exports.runBrainLinkPipeline = exports.BytecodeEmitter = exports.TypeDiagCode = exports.summarizeBrainBuildDiagnostics = exports.ParseDiagCode = exports.LinkDiagCode = exports.isBrainBuildError = exports.diagnosticSeverity = exports.CompilationDiagCode = exports.BrainBuildError = exports.ConstantPool = exports.compileBrain = exports.BrainCompiler = void 0;
     exports.parseRule = parseRule;
     var brain_compiler_1 = require_brain_compiler();
     Object.defineProperty(exports, "BrainCompiler", { enumerable: true, get: function() {
@@ -21721,6 +22226,9 @@ var require_compiler = __commonJS({
     Object.defineProperty(exports, "validatePrecedingSiblingConsumers", { enumerable: true, get: function() {
       return parser_1.validatePrecedingSiblingConsumers;
     } });
+    Object.defineProperty(exports, "validateTriggerMode", { enumerable: true, get: function() {
+      return parser_1.validateTriggerMode;
+    } });
     Object.defineProperty(exports, "validateWhenResultConsumers", { enumerable: true, get: function() {
       return parser_1.validateWhenResultConsumers;
     } });
@@ -21751,7 +22259,7 @@ var require_compiler = __commonJS({
       }
       return { ...result, diags: list_1.List.from(result.diags.toArray()).concat(list_1.List.from(extra.toArray())) };
     }
-    function parseRule(whenSrc, doSrc, catalogs, conversions, typeRegistry, localizer, inheritedOutputKeys, inheritedCapabilities, inheritedWhenResultType, operatorOverloads, hasPrecedingSiblingRule = true) {
+    function parseRule(whenSrc, doSrc, catalogs, conversions, typeRegistry, localizer, inheritedOutputKeys, inheritedCapabilities, inheritedWhenResultType, operatorOverloads, hasPrecedingSiblingRule = true, trigger = interfaces_1.RuleTriggerMode.When) {
       const providedOutputKeys = new uniqueset_1.UniqueSet();
       inheritedOutputKeys?.forEach((key) => {
         providedOutputKeys.add(key);
@@ -21765,7 +22273,7 @@ var require_compiler = __commonJS({
       const doParsed = (0, parser_2.parseBrainTiles)(doSrc, localizer, -1, 0, whenParsed.nextNodeId);
       const whenSideWhenResult = inheritedWhenResultType;
       const doSideWhenResult = whenSrc.size() > 0 ? (0, tile_suggestions_1.whenExprResultType)(whenParsed.exprs.get(0), operatorOverloads, conversions) : inheritedWhenResultType;
-      const whenParseResult = appendParseDiags(appendParseDiags(appendParseDiags(appendParseDiags(appendParseDiags(whenParsed, (0, parser_2.validateTilePlacement)(whenSrc, interfaces_1.RuleSide.When, localizer)), (0, parser_2.validateOutputProviders)(whenSrc, providedOutputKeys, localizer)), (0, parser_2.validateCapabilityRequirements)(whenSrc, availableCapabilities, catalogs, localizer)), (0, parser_2.validateWhenResultConsumers)(whenSrc, whenSideWhenResult, conversions, typeRegistry, localizer)), (0, parser_2.validatePrecedingSiblingConsumers)(whenSrc, hasPrecedingSiblingRule, localizer));
+      const whenParseResult = appendParseDiags(appendParseDiags(appendParseDiags(appendParseDiags(appendParseDiags(appendParseDiags(whenParsed, (0, parser_2.validateTilePlacement)(whenSrc, interfaces_1.RuleSide.When, localizer)), (0, parser_2.validateOutputProviders)(whenSrc, providedOutputKeys, localizer)), (0, parser_2.validateCapabilityRequirements)(whenSrc, availableCapabilities, catalogs, localizer)), (0, parser_2.validateWhenResultConsumers)(whenSrc, whenSideWhenResult, conversions, typeRegistry, localizer)), (0, parser_2.validatePrecedingSiblingConsumers)(whenSrc, hasPrecedingSiblingRule, localizer)), (0, parser_2.validateTriggerMode)(trigger, hasPrecedingSiblingRule));
       const doParseResult = appendParseDiags(appendParseDiags(appendParseDiags(appendParseDiags(appendParseDiags(doParsed, (0, parser_2.validateTilePlacement)(doSrc, interfaces_1.RuleSide.Do, localizer)), (0, parser_2.validateOutputProviders)(doSrc, providedOutputKeys, localizer)), (0, parser_2.validateCapabilityRequirements)(doSrc, availableCapabilities, catalogs, localizer)), (0, parser_2.validateWhenResultConsumers)(doSrc, doSideWhenResult, conversions, typeRegistry, localizer)), (0, parser_2.validatePrecedingSiblingConsumers)(doSrc, hasPrecedingSiblingRule, localizer));
       const allExprs = list_1.List.from(whenParseResult.exprs.toArray()).concat(list_1.List.from(doParseResult.exprs.toArray()));
       const allDiags = list_1.List.from(whenParseResult.diags.toArray()).concat(list_1.List.from(doParseResult.diags.toArray()));
@@ -21811,9 +22319,9 @@ var require_compiler = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/rule.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/rule.js
 var require_rule = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/rule.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/rule.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.BrainRule = void 0;
@@ -21941,9 +22449,9 @@ var require_rule = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/page.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/page.js
 var require_page = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/page.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/page.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.BrainPage = void 0;
@@ -22005,9 +22513,9 @@ var require_page = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/brain.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/brain.js
 var require_brain = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/brain.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/brain.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.Brain = void 0;
@@ -22068,10 +22576,10 @@ var require_brain = __commonJS({
         };
         this.runtime = new runtime_1.BrainRuntime(program, pageMetadata, hostServices, contextData, previousVariables, vmEvents);
         this.unsubs.push(this.runtime.events().on("page_activated", ({ pageIndex }) => {
-          this.pages.get(pageIndex)?.activate();
+          this.pages.at(pageIndex)?.activate();
         }));
         this.unsubs.push(this.runtime.events().on("page_deactivated", ({ pageIndex }) => {
-          this.pages.get(pageIndex)?.deactivate();
+          this.pages.at(pageIndex)?.deactivate();
         }));
       }
       /**
@@ -22196,9 +22704,9 @@ var require_brain = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/language-service/insertion-context.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/language-service/insertion-context.js
 var require_insertion_context = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/language-service/insertion-context.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/language-service/insertion-context.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.buildInsertionContext = buildInsertionContext;
@@ -22223,9 +22731,9 @@ var require_insertion_context = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/language-service/index.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/language-service/index.js
 var require_language_service = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/language-service/index.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/language-service/index.js"(exports) {
     "use strict";
     var __createBinding = exports && exports.__createBinding || (Object.create ? (function(o, m, k, k2) {
       if (k2 === void 0) k2 = k;
@@ -22250,9 +22758,9 @@ var require_language_service = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/util/event-emitter.js
+// ../../external/wendoo-lang/packages/core/dist/node/util/event-emitter.js
 var require_event_emitter2 = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/util/event-emitter.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/util/event-emitter.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.EventEmitter = void 0;
@@ -22263,9 +22771,9 @@ var require_event_emitter2 = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/util/op-result.js
+// ../../external/wendoo-lang/packages/core/dist/node/util/op-result.js
 var require_op_result = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/util/op-result.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/util/op-result.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.opSuccess = opSuccess;
@@ -22280,9 +22788,9 @@ var require_op_result = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/util/m-tree.js
+// ../../external/wendoo-lang/packages/core/dist/node/util/m-tree.js
 var require_m_tree = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/util/m-tree.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/util/m-tree.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.MTreeBuilder = exports.MTree = exports.MTreeNode = void 0;
@@ -22814,9 +23322,9 @@ var require_m_tree = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/util/index.js
+// ../../external/wendoo-lang/packages/core/dist/node/util/index.js
 var require_util = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/util/index.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/util/index.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.opSuccess = exports.opFailure = exports.MTreeNode = exports.MTreeBuilder = exports.MTree = exports.EventEmitter = exports.BitSet = void 0;
@@ -22848,9 +23356,9 @@ var require_util = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/platform/task.js
+// ../../external/wendoo-lang/packages/core/dist/node/platform/task.js
 var require_task = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/platform/task.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/platform/task.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.task = void 0;
@@ -22979,9 +23487,9 @@ var require_task = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/compiler/expr-printer.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/compiler/expr-printer.js
 var require_expr_printer = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/compiler/expr-printer.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/compiler/expr-printer.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.ExprPrinter = void 0;
@@ -23125,9 +23633,9 @@ ${(0, types_1.acceptExprVisitor)(expr.expr, this.child().child())}`;
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/model/tileset.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/model/tileset.js
 var require_tileset = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/model/tileset.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/model/tileset.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.BrainTileSet = exports.UnregisteredTileErrorCode = exports.kMaxTileSetSize = void 0;
@@ -23333,9 +23841,9 @@ ${(0, expr_printer_1.printExpr)(this.typecheckResult_.parseResult.exprs)}`);
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/model/ruledef.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/model/ruledef.js
 var require_ruledef = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/model/ruledef.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/model/ruledef.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.BrainRuleDef = exports.kMaxBrainRuleCommentLength = exports.kMaxBrainRuleDepth = void 0;
@@ -23366,6 +23874,7 @@ var require_ruledef = __commonJS({
       when_;
       do_;
       comment_;
+      trigger_ = interfaces_1.RuleTriggerMode.When;
       tileSetSubscriptions_ = new dict_1.Dict();
       childRuleSubscriptions_ = new dict_1.Dict();
       dirtyChangedDebounceThread_;
@@ -23375,6 +23884,12 @@ var require_ruledef = __commonJS({
        * without touching the rule's own tiles invalidates the stored result.
        */
       typecheckedWithPrecedingSibling_;
+      /**
+       * The trigger mode the rule carried when the stored typecheck result was
+       * produced. A mode change without an edit to the rule's own tiles
+       * invalidates the stored result.
+       */
+      typecheckedWithTrigger_;
       /**
        * @param rng - The environment's random stream (`services.app.rng`), which
        *   this rule and every rule it creates mint their ids from.
@@ -23458,6 +23973,25 @@ var require_ruledef = __commonJS({
         }
         this.comment_ = comment || void 0;
       }
+      /**
+       * The trigger mode this rule carries. A rule that has never been given one,
+       * and one loaded from a document saved before rules carried a mode, reads
+       * {@link RuleTriggerMode.When}.
+       */
+      trigger() {
+        return this.trigger_;
+      }
+      /**
+       * Give this rule `trigger` as the mode arming it, marking the rule dirty so
+       * it is recompiled and the document reads as changed.
+       */
+      setTrigger(trigger) {
+        if (this.trigger_ === trigger) {
+          return;
+        }
+        this.trigger_ = trigger;
+        this.markDirty();
+      }
       isDirty() {
         if (this.when_.isDirty() || this.do_.isDirty()) {
           return true;
@@ -23485,7 +24019,7 @@ var require_ruledef = __commonJS({
       }
       typecheck() {
         const hasPrecedingSibling = this.myIndex_() > 0;
-        if (this.when_.isDirty() || this.do_.isDirty() || !this.when_.typecheckResult() || !this.do_.typecheckResult() || this.typecheckedWithPrecedingSibling_ !== hasPrecedingSibling) {
+        if (this.when_.isDirty() || this.do_.isDirty() || !this.when_.typecheckResult() || !this.do_.typecheckResult() || this.typecheckedWithPrecedingSibling_ !== hasPrecedingSibling || this.typecheckedWithTrigger_ !== this.trigger_) {
           const catalogs = this.gatherCatalogs();
           const whenTiles = this.when_.tiles();
           const doTiles = this.do_.tiles();
@@ -23507,10 +24041,11 @@ var require_ruledef = __commonJS({
             const operatorOverloads = brain?.servicesOperatorOverloads();
             const enclosing = this.ancestor();
             const inheritedWhenResultType = enclosing ? (0, tile_suggestions_1.getRuleWhenResultType)(enclosing, operatorOverloads, conversions) : void 0;
-            const typecheckResult = (0, compiler_1.parseRule)(whenTiles, doTiles, catalogs, conversions, typeRegistry, localizer, inheritedOutputKeys, inheritedCapabilities, inheritedWhenResultType, operatorOverloads, hasPrecedingSibling);
+            const typecheckResult = (0, compiler_1.parseRule)(whenTiles, doTiles, catalogs, conversions, typeRegistry, localizer, inheritedOutputKeys, inheritedCapabilities, inheritedWhenResultType, operatorOverloads, hasPrecedingSibling, this.trigger_);
             this.when_.setTypecheckResult(typecheckResult);
             this.do_.setTypecheckResult(typecheckResult);
             this.typecheckedWithPrecedingSibling_ = hasPrecedingSibling;
+            this.typecheckedWithTrigger_ = this.trigger_;
           }
         }
         this.children_.forEach((child) => {
@@ -23897,6 +24432,9 @@ var require_ruledef = __commonJS({
         if (this.comment_ !== void 0) {
           json2.comment = this.comment_;
         }
+        if (this.trigger_ !== interfaces_1.RuleTriggerMode.When) {
+          json2.trigger = this.trigger_;
+        }
         return json2;
       }
       static fromJson(json2, page, brain) {
@@ -23906,17 +24444,18 @@ var require_ruledef = __commonJS({
         rule.deserializeJson(json2, catalogs);
         return rule;
       }
-      deserializeJson(json2, catalogs) {
-        if (json2.version !== kVersion) {
-          throw new error_1.Error(`BrainRuleDef.deserializeJson: unsupported version ${json2.version}`);
+      deserializeJson(serialized, catalogs) {
+        if (serialized.version !== kVersion) {
+          throw new error_1.Error(`BrainRuleDef.deserializeJson: unsupported version ${serialized.version}`);
         }
-        this.when_.deserializeJson(json2.when, catalogs);
-        this.do_.deserializeJson(json2.do, catalogs);
-        this.comment_ = json2.comment || void 0;
-        for (let i = 0; i < json2.children.size(); i++) {
-          const child = new _BrainRuleDef(this.rng_, json2.children.get(i).ruleId);
+        this.when_.deserializeJson(serialized.when, catalogs);
+        this.do_.deserializeJson(serialized.do, catalogs);
+        this.comment_ = serialized.comment || void 0;
+        this.trigger_ = serialized.trigger || interfaces_1.RuleTriggerMode.When;
+        for (let i = 0; i < serialized.children.size(); i++) {
+          const child = new _BrainRuleDef(this.rng_, serialized.children.get(i).ruleId);
           child.setPage(this.page());
-          child.deserializeJson(json2.children.get(i), catalogs);
+          child.deserializeJson(serialized.children.get(i), catalogs);
           this.children_.push(child);
           child.ancestor_ = this;
           this.subscribeToChildRule_(child);
@@ -23986,9 +24525,9 @@ var require_ruledef = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/model/pagedef.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/model/pagedef.js
 var require_pagedef = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/model/pagedef.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/model/pagedef.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.BrainPageDef = exports.kMaxPageNameLength = void 0;
@@ -24143,9 +24682,9 @@ var require_pagedef = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/model/braindef.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/model/braindef.js
 var require_braindef = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/model/braindef.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/model/braindef.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.BrainDef = exports.BrainDefWarningCode = exports.kMaxBrainPageCount = exports.kMaxBrainNameLength = void 0;
@@ -24193,6 +24732,9 @@ var require_braindef = __commonJS({
       }
       if (r.comment !== void 0) {
         json2.comment = r.comment;
+      }
+      if (r.trigger !== void 0) {
+        json2.trigger = r.trigger;
       }
       return json2;
     }
@@ -24554,9 +25096,9 @@ var require_braindef = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/model/brain-json-codec.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/model/brain-json-codec.js
 var require_brain_json_codec = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/model/brain-json-codec.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/model/brain-json-codec.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.BrainJsonCodecErrorCode = void 0;
@@ -24651,10 +25193,10 @@ var require_brain_json_codec = __commonJS({
           const params = [];
           let structured = false;
           fnDef.paramTypeIds.forEach((paramId) => {
-            const param4 = this.encodeTypeRefById(paramId, position);
-            if (!types_1.TypeUtils.isString(param4))
+            const param5 = this.encodeTypeRefById(paramId, position);
+            if (!types_1.TypeUtils.isString(param5))
               structured = true;
-            params.push(param4);
+            params.push(param5);
           });
           const ret = this.encodeTypeRefById(fnDef.returnTypeId, position);
           if (!types_1.TypeUtils.isString(ret))
@@ -24748,6 +25290,8 @@ var require_brain_json_codec = __commonJS({
           }
           case "literal": {
             const literalDef = tileDef;
+            if (literalDef.uniqueId !== void 0)
+              return this.plainId(tileDef.tileId, "literal tile id");
             const typeRef = this.encodeTypeRefById(literalDef.valueType, "literal value type");
             if (types_1.TypeUtils.isString(typeRef))
               return this.plainId(tileDef.tileId, "literal tile id");
@@ -24779,8 +25323,8 @@ var require_brain_json_codec = __commonJS({
       }
       encodeCatalogEntry(entry) {
         switch (entry.kind) {
-          case "literal":
-            return {
+          case "literal": {
+            const result = {
               version: entry.version,
               kind: "literal",
               valueType: this.encodeTypeRefById(entry.valueType, "literal value type"),
@@ -24788,6 +25332,12 @@ var require_brain_json_codec = __commonJS({
               valueLabel: entry.valueLabel,
               displayFormat: entry.displayFormat
             };
+            if (entry.displayName !== void 0)
+              result.displayName = entry.displayName;
+            if (entry.uniqueId !== void 0)
+              result.uniqueId = entry.uniqueId;
+            return result;
+          }
           case "variable":
             return {
               version: entry.version,
@@ -24841,6 +25391,8 @@ var require_brain_json_codec = __commonJS({
           result.ruleId = ruleJson.ruleId;
         if (ruleJson.comment !== void 0)
           result.comment = ruleJson.comment;
+        if (ruleJson.trigger !== void 0)
+          result.trigger = ruleJson.trigger;
         return result;
       }
     };
@@ -24918,8 +25470,8 @@ var require_brain_json_codec = __commonJS({
           }
           case "function": {
             const paramIds = new list_1.List();
-            for (const param4 of ref.params) {
-              paramIds.push(this.decodeTypeRef(param4).typeId);
+            for (const param5 of ref.params) {
+              paramIds.push(this.decodeTypeRef(param5).typeId);
             }
             const ret = this.decodeTypeRef(ref.ret);
             const name = (0, core_types_1.mkFunctionTypeName)(paramIds, ret.typeId);
@@ -24972,15 +25524,21 @@ var require_brain_json_codec = __commonJS({
         switch (entry.kind) {
           case "literal": {
             const typeId = this.decodeTypeRef(entry.valueType).typeId;
-            return {
+            const tileId = entry.uniqueId === void 0 ? (0, interfaces_1.mkLiteralTileId)(typeId, entry.valueLabel, entry.displayFormat === interfaces_1.LiteralDisplayFormats.Default ? void 0 : entry.displayFormat) : (0, interfaces_1.mkUniqueLiteralTileId)(entry.uniqueId);
+            const result = {
               version: entry.version,
               kind: "literal",
-              tileId: (0, interfaces_1.mkLiteralTileId)(typeId, entry.valueLabel, entry.displayFormat === interfaces_1.LiteralDisplayFormats.Default ? void 0 : entry.displayFormat),
+              tileId,
               valueType: typeId,
               value: entry.value,
               valueLabel: entry.valueLabel,
               displayFormat: entry.displayFormat
             };
+            if (entry.displayName !== void 0)
+              result.displayName = entry.displayName;
+            if (entry.uniqueId !== void 0)
+              result.uniqueId = entry.uniqueId;
+            return result;
           }
           case "variable":
             return {
@@ -25042,6 +25600,8 @@ var require_brain_json_codec = __commonJS({
           result.ruleId = rule.ruleId;
         if (rule.comment !== void 0)
           result.comment = rule.comment;
+        if (rule.trigger !== void 0)
+          result.trigger = rule.trigger;
         return result;
       }
     };
@@ -25077,9 +25637,9 @@ var require_brain_json_codec = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/model/brain-json-exclude.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/model/brain-json-exclude.js
 var require_brain_json_exclude = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/model/brain-json-exclude.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/model/brain-json-exclude.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.brainJsonWithRulesEmptied = brainJsonWithRulesEmptied2;
@@ -25151,17 +25711,17 @@ var require_brain_json_exclude = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/model/brain-json-persisted.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/model/brain-json-persisted.js
 var require_brain_json_persisted = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/model/brain-json-persisted.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/model/brain-json-persisted.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/model/brain-json-rename.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/model/brain-json-rename.js
 var require_brain_json_rename = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/model/brain-json-rename.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/model/brain-json-rename.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.renameBrainNamespaces = renameBrainNamespaces;
@@ -25345,9 +25905,173 @@ var require_brain_json_rename = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/model/commands/BrainCommand.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/model/commands/AttributeCommands.js
+var require_AttributeCommands = __commonJS({
+  "../../external/wendoo-lang/packages/core/dist/node/brain/model/commands/AttributeCommands.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.SetRuleTriggerCommand = exports.SetRuleCommentCommand = exports.EditLiteralCommand = exports.RenameVariableCommand = exports.RenamePageCommand = exports.RenameBrainCommand = void 0;
+    var variables_1 = require_variables();
+    function replaceTileInAllRules(brainDef, fromTile, toTile) {
+      const pages = brainDef.pages();
+      for (let pi = 0; pi < pages.size(); pi++) {
+        walkRules(pages.get(pi).children(), fromTile, toTile);
+      }
+    }
+    function walkRules(rules, fromTile, toTile) {
+      for (let ri = 0; ri < rules.size(); ri++) {
+        const rule = rules.get(ri);
+        replaceInTileSet(rule.when(), fromTile, toTile);
+        replaceInTileSet(rule.do(), fromTile, toTile);
+        walkRules(rule.children(), fromTile, toTile);
+      }
+    }
+    function replaceInTileSet(tileSet, fromTile, toTile) {
+      const tiles = tileSet.tiles();
+      for (let ti = 0; ti < tiles.size(); ti++) {
+        if (tiles.get(ti) === fromTile) {
+          tileSet.replaceTileAtIndex(ti, toTile);
+        }
+      }
+    }
+    var RenameBrainCommand = class {
+      brainDef;
+      newName;
+      oldName;
+      constructor(brainDef, newName) {
+        this.brainDef = brainDef;
+        this.newName = newName;
+        this.oldName = brainDef.name();
+      }
+      execute() {
+        this.brainDef.setName(this.newName);
+      }
+      undo() {
+        this.brainDef.setName(this.oldName);
+      }
+      getDescription() {
+        return `Rename brain from "${this.oldName}" to "${this.newName}"`;
+      }
+    };
+    exports.RenameBrainCommand = RenameBrainCommand;
+    var RenamePageCommand = class {
+      pageDef;
+      newName;
+      oldName;
+      constructor(pageDef, newName) {
+        this.pageDef = pageDef;
+        this.newName = newName;
+        this.oldName = pageDef.name();
+      }
+      execute() {
+        this.pageDef.setName(this.newName);
+      }
+      undo() {
+        this.pageDef.setName(this.oldName);
+      }
+      getDescription() {
+        return `Rename page from "${this.oldName}" to "${this.newName}"`;
+      }
+    };
+    exports.RenamePageCommand = RenamePageCommand;
+    var RenameVariableCommand = class {
+      brainDef;
+      oldTile;
+      newTile;
+      constructor(brainDef, oldTile, newName) {
+        this.brainDef = brainDef;
+        this.oldTile = oldTile;
+        this.newTile = new variables_1.BrainTileVariableDef(oldTile.tileId, newName, oldTile.varType, oldTile.uniqueId);
+      }
+      execute() {
+        const catalog = this.brainDef.catalog();
+        catalog.delete(this.oldTile.tileId);
+        catalog.registerTileDef(this.newTile);
+        replaceTileInAllRules(this.brainDef, this.oldTile, this.newTile);
+      }
+      undo() {
+        const catalog = this.brainDef.catalog();
+        catalog.delete(this.newTile.tileId);
+        catalog.registerTileDef(this.oldTile);
+        replaceTileInAllRules(this.brainDef, this.newTile, this.oldTile);
+      }
+      getDescription() {
+        return `Rename variable from "${this.oldTile.varName}" to "${this.newTile.varName}"`;
+      }
+    };
+    exports.RenameVariableCommand = RenameVariableCommand;
+    var EditLiteralCommand = class {
+      brainDef;
+      oldTile;
+      newTile;
+      constructor(brainDef, oldTile, edit) {
+        this.brainDef = brainDef;
+        this.oldTile = oldTile;
+        this.newTile = oldTile.edited(edit);
+      }
+      execute() {
+        this.swapTile_(this.oldTile, this.newTile);
+      }
+      undo() {
+        this.swapTile_(this.newTile, this.oldTile);
+      }
+      getDescription() {
+        return `Edit literal "${this.newTile.displayName ?? this.newTile.valueLabel}"`;
+      }
+      swapTile_(fromTile, toTile) {
+        const catalog = this.brainDef.catalog();
+        catalog.delete(fromTile.tileId);
+        catalog.registerTileDef(toTile);
+        replaceTileInAllRules(this.brainDef, fromTile, toTile);
+      }
+    };
+    exports.EditLiteralCommand = EditLiteralCommand;
+    var SetRuleCommentCommand = class {
+      ruleDef;
+      newComment;
+      oldComment;
+      constructor(ruleDef, newComment) {
+        this.ruleDef = ruleDef;
+        this.newComment = newComment;
+        this.oldComment = ruleDef.comment();
+      }
+      execute() {
+        this.ruleDef.setComment(this.newComment);
+      }
+      undo() {
+        this.ruleDef.setComment(this.oldComment);
+      }
+      getDescription() {
+        return this.newComment ? `Set rule comment to "${this.newComment}"` : "Remove rule comment";
+      }
+    };
+    exports.SetRuleCommentCommand = SetRuleCommentCommand;
+    var SetRuleTriggerCommand = class {
+      ruleDef;
+      newTrigger;
+      oldTrigger;
+      constructor(ruleDef, newTrigger) {
+        this.ruleDef = ruleDef;
+        this.newTrigger = newTrigger;
+        this.oldTrigger = ruleDef.trigger();
+      }
+      execute() {
+        this.ruleDef.setTrigger(this.newTrigger);
+      }
+      undo() {
+        this.ruleDef.setTrigger(this.oldTrigger);
+      }
+      getDescription() {
+        return `Set rule trigger to "${this.newTrigger}"`;
+      }
+    };
+    exports.SetRuleTriggerCommand = SetRuleTriggerCommand;
+  }
+});
+
+// ../../external/wendoo-lang/packages/core/dist/node/brain/model/commands/BrainCommand.js
 var require_BrainCommand = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/model/commands/BrainCommand.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/model/commands/BrainCommand.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.BrainCommandHistory = exports.BrainEditOrigin = void 0;
@@ -25612,9 +26336,9 @@ var require_BrainCommand = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/model/commands/BrainCommands.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/model/commands/BrainCommands.js
 var require_BrainCommands = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/model/commands/BrainCommands.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/model/commands/BrainCommands.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.ReplaceBrainCommand = void 0;
@@ -25643,9 +26367,9 @@ var require_BrainCommands = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/model/commands/PageCommands.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/model/commands/PageCommands.js
 var require_PageCommands = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/model/commands/PageCommands.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/model/commands/PageCommands.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.ReplaceLastPageCommand = exports.RemovePageCommand = exports.AddPageCommand = void 0;
@@ -25763,127 +26487,9 @@ var require_PageCommands = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/model/commands/RenameCommands.js
-var require_RenameCommands = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/model/commands/RenameCommands.js"(exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    exports.SetRuleCommentCommand = exports.RenameVariableCommand = exports.RenamePageCommand = exports.RenameBrainCommand = void 0;
-    var variables_1 = require_variables();
-    var RenameBrainCommand = class {
-      brainDef;
-      newName;
-      oldName;
-      constructor(brainDef, newName) {
-        this.brainDef = brainDef;
-        this.newName = newName;
-        this.oldName = brainDef.name();
-      }
-      execute() {
-        this.brainDef.setName(this.newName);
-      }
-      undo() {
-        this.brainDef.setName(this.oldName);
-      }
-      getDescription() {
-        return `Rename brain from "${this.oldName}" to "${this.newName}"`;
-      }
-    };
-    exports.RenameBrainCommand = RenameBrainCommand;
-    var RenamePageCommand = class {
-      pageDef;
-      newName;
-      oldName;
-      constructor(pageDef, newName) {
-        this.pageDef = pageDef;
-        this.newName = newName;
-        this.oldName = pageDef.name();
-      }
-      execute() {
-        this.pageDef.setName(this.newName);
-      }
-      undo() {
-        this.pageDef.setName(this.oldName);
-      }
-      getDescription() {
-        return `Rename page from "${this.oldName}" to "${this.newName}"`;
-      }
-    };
-    exports.RenamePageCommand = RenamePageCommand;
-    var RenameVariableCommand = class {
-      brainDef;
-      oldTile;
-      newTile;
-      constructor(brainDef, oldTile, newName) {
-        this.brainDef = brainDef;
-        this.oldTile = oldTile;
-        this.newTile = new variables_1.BrainTileVariableDef(oldTile.tileId, newName, oldTile.varType, oldTile.uniqueId);
-      }
-      execute() {
-        const catalog = this.brainDef.catalog();
-        catalog.delete(this.oldTile.tileId);
-        catalog.registerTileDef(this.newTile);
-        this.replaceTileInAllRules_(this.oldTile, this.newTile);
-      }
-      undo() {
-        const catalog = this.brainDef.catalog();
-        catalog.delete(this.newTile.tileId);
-        catalog.registerTileDef(this.oldTile);
-        this.replaceTileInAllRules_(this.newTile, this.oldTile);
-      }
-      getDescription() {
-        return `Rename variable from "${this.oldTile.varName}" to "${this.newTile.varName}"`;
-      }
-      replaceTileInAllRules_(fromTile, toTile) {
-        const pages = this.brainDef.pages();
-        for (let pi = 0; pi < pages.size(); pi++) {
-          this.walkRules_(pages.get(pi).children(), fromTile, toTile);
-        }
-      }
-      walkRules_(rules, fromTile, toTile) {
-        for (let ri = 0; ri < rules.size(); ri++) {
-          const rule = rules.get(ri);
-          this.replaceInTileSet_(rule.when(), fromTile, toTile);
-          this.replaceInTileSet_(rule.do(), fromTile, toTile);
-          this.walkRules_(rule.children(), fromTile, toTile);
-        }
-      }
-      replaceInTileSet_(tileSet, fromTile, toTile) {
-        const tiles = tileSet.tiles();
-        for (let ti = 0; ti < tiles.size(); ti++) {
-          if (tiles.get(ti) === fromTile) {
-            tileSet.replaceTileAtIndex(ti, toTile);
-          }
-        }
-      }
-    };
-    exports.RenameVariableCommand = RenameVariableCommand;
-    var SetRuleCommentCommand = class {
-      ruleDef;
-      newComment;
-      oldComment;
-      constructor(ruleDef, newComment) {
-        this.ruleDef = ruleDef;
-        this.newComment = newComment;
-        this.oldComment = ruleDef.comment();
-      }
-      execute() {
-        this.ruleDef.setComment(this.newComment);
-      }
-      undo() {
-        this.ruleDef.setComment(this.oldComment);
-      }
-      getDescription() {
-        return this.newComment ? `Set rule comment to "${this.newComment}"` : "Remove rule comment";
-      }
-    };
-    exports.SetRuleCommentCommand = SetRuleCommentCommand;
-  }
-});
-
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/model/commands/RuleCommands.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/model/commands/RuleCommands.js
 var require_RuleCommands = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/model/commands/RuleCommands.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/model/commands/RuleCommands.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.PasteRulesCommand = exports.OutdentRuleCommand = exports.IndentRuleCommand = exports.MoveRuleDownCommand = exports.MoveRuleUpCommand = exports.MoveRuleCommand = exports.DeleteRuleCommand = exports.InsertRuleCommand = exports.AddRuleCommand = void 0;
@@ -26169,9 +26775,9 @@ var require_RuleCommands = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/model/commands/TileCommands.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/model/commands/TileCommands.js
 var require_TileCommands = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/model/commands/TileCommands.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/model/commands/TileCommands.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.PasteTileBeforeCommand = exports.RemoveTileCommand = exports.ReplaceTileCommand = exports.InsertTileCommand = exports.AddTileCommand = void 0;
@@ -26314,12 +26920,31 @@ var require_TileCommands = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/model/commands/index.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/model/commands/index.js
 var require_commands = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/model/commands/index.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/model/commands/index.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.ReplaceTileCommand = exports.RemoveTileCommand = exports.PasteTileBeforeCommand = exports.InsertTileCommand = exports.AddTileCommand = exports.PasteRulesCommand = exports.OutdentRuleCommand = exports.MoveRuleUpCommand = exports.MoveRuleDownCommand = exports.MoveRuleCommand = exports.InsertRuleCommand = exports.IndentRuleCommand = exports.DeleteRuleCommand = exports.AddRuleCommand = exports.SetRuleCommentCommand = exports.RenameVariableCommand = exports.RenamePageCommand = exports.RenameBrainCommand = exports.ReplaceLastPageCommand = exports.RemovePageCommand = exports.AddPageCommand = exports.ReplaceBrainCommand = exports.BrainEditOrigin = exports.BrainCommandHistory = void 0;
+    exports.ReplaceTileCommand = exports.RemoveTileCommand = exports.PasteTileBeforeCommand = exports.InsertTileCommand = exports.AddTileCommand = exports.PasteRulesCommand = exports.OutdentRuleCommand = exports.MoveRuleUpCommand = exports.MoveRuleDownCommand = exports.MoveRuleCommand = exports.InsertRuleCommand = exports.IndentRuleCommand = exports.DeleteRuleCommand = exports.AddRuleCommand = exports.ReplaceLastPageCommand = exports.RemovePageCommand = exports.AddPageCommand = exports.ReplaceBrainCommand = exports.BrainEditOrigin = exports.BrainCommandHistory = exports.SetRuleTriggerCommand = exports.SetRuleCommentCommand = exports.RenameVariableCommand = exports.RenamePageCommand = exports.RenameBrainCommand = exports.EditLiteralCommand = void 0;
+    var AttributeCommands_1 = require_AttributeCommands();
+    Object.defineProperty(exports, "EditLiteralCommand", { enumerable: true, get: function() {
+      return AttributeCommands_1.EditLiteralCommand;
+    } });
+    Object.defineProperty(exports, "RenameBrainCommand", { enumerable: true, get: function() {
+      return AttributeCommands_1.RenameBrainCommand;
+    } });
+    Object.defineProperty(exports, "RenamePageCommand", { enumerable: true, get: function() {
+      return AttributeCommands_1.RenamePageCommand;
+    } });
+    Object.defineProperty(exports, "RenameVariableCommand", { enumerable: true, get: function() {
+      return AttributeCommands_1.RenameVariableCommand;
+    } });
+    Object.defineProperty(exports, "SetRuleCommentCommand", { enumerable: true, get: function() {
+      return AttributeCommands_1.SetRuleCommentCommand;
+    } });
+    Object.defineProperty(exports, "SetRuleTriggerCommand", { enumerable: true, get: function() {
+      return AttributeCommands_1.SetRuleTriggerCommand;
+    } });
     var BrainCommand_1 = require_BrainCommand();
     Object.defineProperty(exports, "BrainCommandHistory", { enumerable: true, get: function() {
       return BrainCommand_1.BrainCommandHistory;
@@ -26340,19 +26965,6 @@ var require_commands = __commonJS({
     } });
     Object.defineProperty(exports, "ReplaceLastPageCommand", { enumerable: true, get: function() {
       return PageCommands_1.ReplaceLastPageCommand;
-    } });
-    var RenameCommands_1 = require_RenameCommands();
-    Object.defineProperty(exports, "RenameBrainCommand", { enumerable: true, get: function() {
-      return RenameCommands_1.RenameBrainCommand;
-    } });
-    Object.defineProperty(exports, "RenamePageCommand", { enumerable: true, get: function() {
-      return RenameCommands_1.RenamePageCommand;
-    } });
-    Object.defineProperty(exports, "RenameVariableCommand", { enumerable: true, get: function() {
-      return RenameCommands_1.RenameVariableCommand;
-    } });
-    Object.defineProperty(exports, "SetRuleCommentCommand", { enumerable: true, get: function() {
-      return RenameCommands_1.SetRuleCommentCommand;
     } });
     var RuleCommands_1 = require_RuleCommands();
     Object.defineProperty(exports, "AddRuleCommand", { enumerable: true, get: function() {
@@ -26401,9 +27013,9 @@ var require_commands = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/model/index.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/model/index.js
 var require_model2 = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/model/index.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/model/index.js"(exports) {
     "use strict";
     var __createBinding = exports && exports.__createBinding || (Object.create ? (function(o, m, k, k2) {
       if (k2 === void 0) k2 = k;
@@ -26428,15 +27040,16 @@ var require_model2 = __commonJS({
     __exportStar(require_brain_json_rename(), exports);
     __exportStar(require_braindef(), exports);
     __exportStar(require_commands(), exports);
+    __exportStar(require_document_id(), exports);
     __exportStar(require_pagedef(), exports);
     __exportStar(require_ruledef(), exports);
     __exportStar(require_tileset(), exports);
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/services.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/services.js
 var require_services2 = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/services.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/services.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.BrainServices = void 0;
@@ -26449,7 +27062,7 @@ var require_services2 = __commonJS({
       shared;
       /**
        * Host-supplied capabilities shared across every brain in the process.
-       * The same reference is exposed by {@link MindcraftEnvironment.appServices}.
+       * The same reference is exposed by {@link WendooEnvironment.appServices}.
        */
       app;
       constructor(config2) {
@@ -26463,9 +27076,9 @@ var require_services2 = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/tiles/controlflow.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/tiles/controlflow.js
 var require_controlflow = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/tiles/controlflow.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/tiles/controlflow.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.BrainTileControlFlowDef = void 0;
@@ -26499,9 +27112,9 @@ var require_controlflow = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/tiles/operators.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/tiles/operators.js
 var require_operators2 = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/tiles/operators.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/tiles/operators.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.BrainTileOperatorDef = void 0;
@@ -26592,9 +27205,9 @@ var require_operators2 = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/tiles/builder.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/tiles/builder.js
 var require_builder = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/tiles/builder.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/tiles/builder.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.BrainTileDefBuilder = void 0;
@@ -26643,9 +27256,9 @@ var require_builder = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/services-factory.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/services-factory.js
 var require_services_factory = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/services-factory.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/services-factory.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.createTileCatalog = createTileCatalog;
@@ -26721,9 +27334,9 @@ var require_services_factory = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/tiles/accessors.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/tiles/accessors.js
 var require_accessors = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/tiles/accessors.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/tiles/accessors.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.BrainTileAccessorDef = void 0;
@@ -26762,9 +27375,9 @@ var require_accessors = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/tiles/actuators.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/tiles/actuators.js
 var require_actuators2 = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/tiles/actuators.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/tiles/actuators.js"(exports) {
     "use strict";
     var __importDefault = exports && exports.__importDefault || function(mod2) {
       return mod2 && mod2.__esModule ? mod2 : { "default": mod2 };
@@ -26812,30 +27425,27 @@ var require_actuators2 = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/tiles/manufacture.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/tiles/manufacture.js
 var require_manufacture = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/tiles/manufacture.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/tiles/manufacture.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.manufactureLiteralTile = manufactureLiteralTile;
     exports.manufactureVariableTile = manufactureVariableTile;
     var string_1 = require_string();
-    function manufactureLiteralTile(factoryTileDef, catalog, value, displayFormat) {
-      const newTileDef = factoryTileDef.manufacture(factoryTileDef, { value, displayFormat });
+    function manufactureLiteralTile(factoryTileDef, catalog, value, displayFormat, displayName) {
+      const trimmedName = displayName === void 0 ? "" : string_1.StringUtils.trim(displayName);
+      const name = trimmedName === "" ? void 0 : trimmedName;
+      const newTileDef = factoryTileDef.manufacture(factoryTileDef, { value, displayFormat, displayName: name });
       if (!newTileDef)
         return void 0;
-      if (!catalog)
-        return newTileDef;
-      const existingDef = catalog.find((td) => {
-        if (td.kind !== "literal")
-          return false;
-        const litTileDef = td;
-        return litTileDef.value === value && litTileDef.valueType === newTileDef.valueType && litTileDef.displayFormat === newTileDef.displayFormat;
-      });
-      if (existingDef)
-        return existingDef;
-      catalog.registerTileDef(newTileDef);
-      return newTileDef;
+      const existingDef = catalog ? catalog.get(newTileDef.tileId) : void 0;
+      const tileDef = existingDef ?? newTileDef;
+      if (name !== void 0 && tileDef.displayName !== name)
+        tileDef.setDisplayName(name);
+      if (catalog && !existingDef)
+        catalog.registerTileDef(tileDef);
+      return tileDef;
     }
     function manufactureVariableTile(factoryTileDef, catalog, varName) {
       const name = string_1.StringUtils.trim(varName);
@@ -26860,9 +27470,9 @@ var require_manufacture = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/tiles/modifiers.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/tiles/modifiers.js
 var require_modifiers = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/tiles/modifiers.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/tiles/modifiers.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.BrainTileModifierDef = void 0;
@@ -26885,9 +27495,9 @@ var require_modifiers = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/tiles/outputs.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/tiles/outputs.js
 var require_outputs = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/tiles/outputs.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/tiles/outputs.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.BrainTileOutputDef = void 0;
@@ -26942,9 +27552,9 @@ var require_outputs = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/tiles/parameters.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/tiles/parameters.js
 var require_parameters = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/tiles/parameters.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/tiles/parameters.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.BrainTileParameterDef = void 0;
@@ -26984,9 +27594,9 @@ var require_parameters = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/tiles/sensors.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/tiles/sensors.js
 var require_sensors2 = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/tiles/sensors.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/tiles/sensors.js"(exports) {
     "use strict";
     var __importDefault = exports && exports.__importDefault || function(mod2) {
       return mod2 && mod2.__esModule ? mod2 : { "default": mod2 };
@@ -26998,7 +27608,6 @@ var require_sensors2 = __commonJS({
     var runtime_1 = require_runtime();
     var current_page_1 = __importDefault(require_current_page());
     var on_page_entered_1 = __importDefault(require_on_page_entered());
-    var otherwise_1 = __importDefault(require_otherwise());
     var previous_page_1 = __importDefault(require_previous_page());
     var random_1 = __importDefault(require_random());
     var timeout_1 = __importDefault(require_timeout());
@@ -27070,18 +27679,13 @@ var require_sensors2 = __commonJS({
         capabilities: pageSensorCaps,
         metadata: { label: "previous page", language: { form: "the previous page" } }
       });
-      register(otherwise_1.default.key, otherwise_1.default.descriptor, {
-        placement: interfaces_1.TilePlacement.WhenSide | interfaces_1.TilePlacement.Inline,
-        capabilities: new bitset_1.BitSet().set(interfaces_1.CoreCapabilityBits.RequiresPrecedingSiblingRule),
-        metadata: { label: "otherwise", language: { form: "otherwise", frame: "adverb" } }
-      });
     }
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/tiles/index.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/tiles/index.js
 var require_tiles2 = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/tiles/index.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/tiles/index.js"(exports) {
     "use strict";
     var __createBinding = exports && exports.__createBinding || (Object.create ? (function(o, m, k, k2) {
       if (k2 === void 0) k2 = k;
@@ -27139,9 +27743,9 @@ var require_tiles2 = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/brain/index.js
+// ../../external/wendoo-lang/packages/core/dist/node/brain/index.js
 var require_brain2 = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/brain/index.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/brain/index.js"(exports) {
     "use strict";
     var __createBinding = exports && exports.__createBinding || (Object.create ? (function(o, m, k, k2) {
       if (k2 === void 0) k2 = k;
@@ -27221,17 +27825,17 @@ var require_brain2 = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/mindcraft.js
-var require_mindcraft = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/mindcraft.js"(exports) {
+// ../../external/wendoo-lang/packages/core/dist/node/wendoo.js
+var require_wendoo = __commonJS({
+  "../../external/wendoo-lang/packages/core/dist/node/wendoo.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.createHostSensor = createHostSensor2;
     exports.createHostActuator = createHostActuator2;
-    exports.createMindcraftEnvironment = createMindcraftEnvironment2;
+    exports.createWendooEnvironment = createWendooEnvironment2;
     exports.coreModule = coreModule2;
-    exports.getMindcraftEnvironmentServices = getMindcraftEnvironmentServices;
-    exports.withMindcraftEnvironmentServices = withMindcraftEnvironmentServices;
+    exports.getWendooEnvironmentServices = getWendooEnvironmentServices;
+    exports.withWendooEnvironmentServices = withWendooEnvironmentServices;
     var brain_1 = require_brain2();
     var compiler_1 = require_compiler();
     var interfaces_1 = require_interfaces();
@@ -27348,7 +27952,7 @@ var require_mindcraft = __commonJS({
         throw new error_1.Error(`Structural type '${definition.name}' must not declare an atomId (got ${definition.atomId})`);
       }
     }
-    function registerMindcraftTypeDefinition(services, definition) {
+    function registerWendooTypeDefinition(services, definition) {
       const nullableDef = definition;
       if (definition.nullable && nullableDef.baseTypeId !== void 0) {
         rejectStructuralAtomId(definition);
@@ -27436,7 +28040,7 @@ var require_mindcraft = __commonJS({
           return assertRegisteredTypeId(services.runtime.types.getOrCreateUnionType(unionDef.memberTypeIds), unionDef.typeId, unionDef.name);
         }
         default:
-          throw new error_1.Error(`Unsupported mindcraft type '${definition.name}' (coreType: ${definition.coreType})`);
+          throw new error_1.Error(`Unsupported wendoo type '${definition.name}' (coreType: ${definition.coreType})`);
       }
       return registeredTypeId;
     }
@@ -27509,7 +28113,7 @@ var require_mindcraft = __commonJS({
       }
       return set2;
     }
-    var MindcraftCatalogImpl = class {
+    var WendooCatalogImpl = class {
       catalog;
       constructor(catalog = new catalog_1.TileCatalog()) {
         this.catalog = catalog;
@@ -27535,7 +28139,7 @@ var require_mindcraft = __commonJS({
       }
     };
     function unwrapCatalog(catalog) {
-      if (catalog instanceof MindcraftCatalogImpl) {
+      if (catalog instanceof WendooCatalogImpl) {
         return catalog.rawCatalog();
       }
       const clone2 = new catalog_1.TileCatalog();
@@ -27551,7 +28155,7 @@ var require_mindcraft = __commonJS({
         this.brainServices = services;
       }
       defineType(def) {
-        return registerMindcraftTypeDefinition(this.brainServices, def);
+        return registerWendooTypeDefinition(this.brainServices, def);
       }
       registerHostSensor(def) {
         if (def.descriptor.kind !== "sensor" || def.tile.kind !== "sensor") {
@@ -27607,13 +28211,15 @@ var require_mindcraft = __commonJS({
         return this.environment.resolveAction(descriptor);
       }
     };
-    var MindcraftEnvironmentImpl = class {
+    var WendooEnvironmentImpl = class {
       brainServices;
       appServices;
       bundleCatalog = new catalog_1.TileCatalog();
       bundleResolver = new dict_1.Dict();
       /** Revision of the bundle last applied, or undefined while none has been. */
       bundleRevision;
+      /** Compilation roots of the bundle last applied; empty while none has been. */
+      bundleRoots = [];
       /** `(fromType, toType)` pairs this environment registered from the active bundle's conversion artifacts. */
       bundleConversionPairs = new list_1.List();
       trackedBrains = list_1.List.empty();
@@ -27628,13 +28234,13 @@ var require_mindcraft = __commonJS({
         this.installModules(modules);
       }
       withServices(callback) {
-        return withMindcraftEnvironmentServices(this, callback);
+        return withWendooEnvironmentServices(this, callback);
       }
       tileCatalogs() {
         return [this.brainServices.edit.tiles, this.bundleCatalog];
       }
       createCatalog() {
-        return new MindcraftCatalogImpl();
+        return new WendooCatalogImpl();
       }
       deserializeBrainJson(json2) {
         return model_1.BrainDef.fromJson(json2, this.brainServices, this.buildDeserializeCatalogs());
@@ -27650,7 +28256,7 @@ var require_mindcraft = __commonJS({
       }
       createBrain(definition, options) {
         const overlayCatalogs = this.resolveOverlayCatalogs(options?.catalogs);
-        const brain = new ManagedMindcraftBrain(this, definition, overlayCatalogs);
+        const brain = new ManagedWendooBrain(this, definition, overlayCatalogs);
         this.trackBrain(brain);
         try {
           brain.initialize(options?.context, options?.vmEvents);
@@ -27668,12 +28274,18 @@ var require_mindcraft = __commonJS({
         return { program: result.program, diagnostics: result.diagnostics };
       }
       replaceActionBundle(bundle) {
+        for (const tile of bundle.tiles) {
+          if (!tile.provenance) {
+            throw new error_1.Error(`replaceActionBundle: bundle tile "${tile.tileId}" carries no provenance`);
+          }
+        }
         const nextActions = copyActionArtifacts(bundle.actions);
         const changedActionKeys = collectChangedActionKeys(this.bundleResolver, nextActions);
         const changedActionKeySet = toActionKeySet(changedActionKeys);
         const hasChangedActions = !changedActionKeySet.isEmpty();
         this.replaceCatalogContents(this.bundleCatalog, list_1.List.from(bundle.tiles));
         this.bundleRevision = bundle.revision;
+        this.bundleRoots = bundle.roots;
         this.bundleResolver.clear();
         const nextKeys = nextActions.keys();
         for (let i = 0; i < nextKeys.size(); i++) {
@@ -27711,7 +28323,8 @@ var require_mindcraft = __commonJS({
         return {
           revision: this.bundleRevision,
           tiles: this.bundleCatalog.getAll().toArray(),
-          actions: copyActionArtifacts(this.bundleResolver)
+          actions: copyActionArtifacts(this.bundleResolver),
+          roots: this.bundleRoots
         };
       }
       onBrainsInvalidated(listener) {
@@ -27727,7 +28340,7 @@ var require_mindcraft = __commonJS({
         const targets = brains ? list_1.List.from(brains) : list_1.List.from(this.invalidatedBrains.toArray());
         for (let i = 0; i < targets.size(); i++) {
           const candidate = targets.get(i);
-          if (!(candidate instanceof ManagedMindcraftBrain)) {
+          if (!(candidate instanceof ManagedWendooBrain)) {
             continue;
           }
           if (candidate.owner() !== this || candidate.isDisposed()) {
@@ -27820,7 +28433,7 @@ var require_mindcraft = __commonJS({
         for (let i = 0; i < moduleList.size(); i++) {
           const module2 = moduleList.get(i);
           if (seen.has(module2.id)) {
-            throw new error_1.Error(`Mindcraft module '${module2.id}' is already installed`);
+            throw new error_1.Error(`Wendoo module '${module2.id}' is already installed`);
           }
           seen.set(module2.id, true);
           const api = new EnvironmentModuleApi(this.brainServices);
@@ -27891,7 +28504,7 @@ var require_mindcraft = __commonJS({
         this.trackedBrains.push(brain);
       }
     };
-    var ManagedMindcraftBrain = class extends brain_1.Brain {
+    var ManagedWendooBrain = class extends brain_1.Brain {
       environment;
       definition;
       status = "active";
@@ -28029,32 +28642,32 @@ var require_mindcraft = __commonJS({
         }
       }
     };
-    function createMindcraftEnvironment2(options = {}) {
-      return new MindcraftEnvironmentImpl(options.modules ?? [], options.rng, options.numerics, options.localizer);
+    function createWendooEnvironment2(options = {}) {
+      return new WendooEnvironmentImpl(options.modules ?? [], options.rng, options.numerics, options.localizer);
     }
     function coreModule2() {
       return {
-        id: "mindcraft.core",
+        id: "wendoo.core",
         install(api) {
           (0, brain_1.installCoreBrainComponents)(api.brainServices);
         }
       };
     }
-    function getMindcraftEnvironmentServices(environment) {
-      if (!(environment instanceof MindcraftEnvironmentImpl)) {
-        throw new error_1.Error("Unsupported MindcraftEnvironment implementation");
+    function getWendooEnvironmentServices(environment) {
+      if (!(environment instanceof WendooEnvironmentImpl)) {
+        throw new error_1.Error("Unsupported WendooEnvironment implementation");
       }
       return environment.brainServices;
     }
-    function withMindcraftEnvironmentServices(environment, callback) {
+    function withWendooEnvironmentServices(environment, callback) {
       return callback(environment.brainServices);
     }
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/platform/vector2.js
+// ../../external/wendoo-lang/packages/core/dist/node/platform/vector2.js
 var require_vector2 = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/platform/vector2.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/platform/vector2.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.Vector2 = void 0;
@@ -28165,26 +28778,26 @@ var require_vector2 = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/app/index.js
+// ../../external/wendoo-lang/packages/core/dist/node/app/index.js
 var require_app = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/app/index.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/app/index.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.CoreTypeIds = exports.CoreOpId = exports.CoreVariableFactoryId = exports.CoreParameterId = exports.CoreLiteralFactoryId = exports.CoreControlFlowId = exports.mkVariableFactoryTileId = exports.mkSensorTileId = exports.mkParameterTileId = exports.mkPageTileId = exports.mkOutputVarKey = exports.mkOutputTileId = exports.mkOperatorTileId = exports.mkModifierTileId = exports.mkLiteralTileId = exports.mkLiteralFactoryTileId = exports.mkControlFlowTileId = exports.mkActuatorTileId = exports.mkActionTileId = exports.mkAccessorTileId = exports.getCatalogFallbackLabel = exports.createVariableFactoryTileDef = exports.createAccessorTileDef = exports.buildDescriptorOutputTiles = exports.BrainTileVariableDef = exports.BrainTileSensorDef = exports.BrainTileParameterDef = exports.BrainTileOutputDef = exports.BrainTileModifierDef = exports.BrainTileLiteralDef = exports.BrainTileActuatorDef = exports.BrainTileAccessorDef = exports.repeated = exports.param = exports.optional = exports.mod = exports.mkCallDef = exports.conditional = exports.choice = exports.bag = exports.renameBrainNamespaces = exports.encodePersistedBrainJson = exports.deserializePersistedBrainJson = exports.decodePersistedBrainJson = exports.brainJsonFromPlain = exports.BrainDef = exports.createMindcraftEnvironment = exports.createHostSensor = exports.createHostActuator = exports.coreModule = void 0;
+    exports.CoreTypeIds = exports.CoreOpId = exports.CoreVariableFactoryId = exports.CoreParameterId = exports.CoreLiteralFactoryId = exports.CoreControlFlowId = exports.mkVariableFactoryTileId = exports.mkSensorTileId = exports.mkParameterTileId = exports.mkPageTileId = exports.mkOutputVarKey = exports.mkOutputTileId = exports.mkOperatorTileId = exports.mkModifierTileId = exports.mkLiteralTileId = exports.mkLiteralFactoryTileId = exports.mkControlFlowTileId = exports.mkActuatorTileId = exports.mkActionTileId = exports.mkAccessorTileId = exports.getCatalogFallbackLabel = exports.createVariableFactoryTileDef = exports.createAccessorTileDef = exports.buildDescriptorOutputTiles = exports.BrainTileVariableDef = exports.BrainTileSensorDef = exports.BrainTileParameterDef = exports.BrainTileOutputDef = exports.BrainTileModifierDef = exports.BrainTileLiteralDef = exports.BrainTileActuatorDef = exports.BrainTileAccessorDef = exports.repeated = exports.param = exports.optional = exports.mod = exports.mkCallDef = exports.conditional = exports.choice = exports.bag = exports.renameBrainNamespaces = exports.encodePersistedBrainJson = exports.deserializePersistedBrainJson = exports.decodePersistedBrainJson = exports.brainJsonFromPlain = exports.BrainDef = exports.createWendooEnvironment = exports.createHostSensor = exports.createHostActuator = exports.coreModule = void 0;
     exports.TRUE_VALUE = exports.NIL_VALUE = exports.mkStringValue = exports.mkNumberValue = exports.mkNativeStructValue = exports.mkListValue = exports.mkFunctionValue = exports.mkClosedStructValueByName = exports.mkClosedStructValue = exports.mkBooleanValue = exports.isVoidValue = exports.isUnknownValue = exports.isStructValue = exports.isStringValue = exports.isNumberValue = exports.isNilValue = exports.isMapValue = exports.isListValue = exports.isHandleValue = exports.isFunctionValue = exports.isEnumValue = exports.isBooleanValue = exports.getClosedStructFieldByName = exports.FALSE_VALUE = exports.extractStringValue = exports.extractNumberValue = exports.extractListValue = exports.setSensorOutput = exports.setRuleVariable = exports.setCallSiteState = exports.getWhenResult = exports.getRuleVariable = exports.getCallSiteState = exports.clearCallSiteState = exports.formatF32 = exports.getSlotId = exports.TilePlacement = exports.CoreCapabilityBits = exports.APP_CAPABILITY_BIT_OFFSET = exports.Rng = exports.createEntropySeededRng = exports.MathOps = exports.NativeType = exports.mkTypeId = exports.ContextTypeNames = exports.ContextTypeIds = exports.TARGET_FUNC_ID_BASE = exports.TARGET_ACTION_ID_BASE = exports.CoreHostActions = exports.CoreFuncId = void 0;
     exports.BitSet = exports.Vector2 = exports.TypeUtils = exports.logger = exports.LogLevel = exports.List = exports.Dict = exports.VOID_VALUE = void 0;
-    var mindcraft_1 = require_mindcraft();
+    var wendoo_1 = require_wendoo();
     Object.defineProperty(exports, "coreModule", { enumerable: true, get: function() {
-      return mindcraft_1.coreModule;
+      return wendoo_1.coreModule;
     } });
     Object.defineProperty(exports, "createHostActuator", { enumerable: true, get: function() {
-      return mindcraft_1.createHostActuator;
+      return wendoo_1.createHostActuator;
     } });
     Object.defineProperty(exports, "createHostSensor", { enumerable: true, get: function() {
-      return mindcraft_1.createHostSensor;
+      return wendoo_1.createHostSensor;
     } });
-    Object.defineProperty(exports, "createMindcraftEnvironment", { enumerable: true, get: function() {
-      return mindcraft_1.createMindcraftEnvironment;
+    Object.defineProperty(exports, "createWendooEnvironment", { enumerable: true, get: function() {
+      return wendoo_1.createWendooEnvironment;
     } });
     var model_1 = require_model2();
     Object.defineProperty(exports, "BrainDef", { enumerable: true, get: function() {
@@ -28523,9 +29136,9 @@ var require_app = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/platform/vector3.js
+// ../../external/wendoo-lang/packages/core/dist/node/platform/vector3.js
 var require_vector3 = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/platform/vector3.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/platform/vector3.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.Vector3 = exports.Axis = exports.NormalId = void 0;
@@ -28706,9 +29319,9 @@ var require_vector3 = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/systems/index.js
+// ../../external/wendoo-lang/packages/core/dist/node/systems/index.js
 var require_systems = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/systems/index.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/systems/index.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.services = services;
@@ -28726,9 +29339,9 @@ var require_systems = __commonJS({
   }
 });
 
-// ../../external/mindcraft-lang/packages/core/dist/node/index.js
+// ../../external/wendoo-lang/packages/core/dist/node/index.js
 var require_node = __commonJS({
-  "../../external/mindcraft-lang/packages/core/dist/node/index.js"(exports) {
+  "../../external/wendoo-lang/packages/core/dist/node/index.js"(exports) {
     "use strict";
     var __createBinding = exports && exports.__createBinding || (Object.create ? (function(o, m, k, k2) {
       if (k2 === void 0) k2 = k;
@@ -28768,24 +29381,8 @@ var require_node = __commonJS({
       };
     })();
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.opSuccess = exports.opFailure = exports.MTreeNode = exports.MTreeBuilder = exports.MTree = exports.EventEmitter = exports.BitSet = exports.util = exports.systems = exports.runtime = exports.fromFourCC = exports.fourCC = exports.primitives = exports.Vector3 = exports.Vector2 = exports.UniqueSet = exports.TypeUtils = exports.task = exports.StringUtils = exports.stream = exports.MathOps = exports.logger = exports.LogLevel = exports.createLogger = exports.List = exports.Error = exports.Dict = exports.assertUnreachable = exports.withMindcraftEnvironmentServices = exports.createMindcraftEnvironment = exports.createHostSensor = exports.createHostActuator = exports.coreModule = exports.brain = void 0;
+    exports.withWendooEnvironmentServices = exports.createWendooEnvironment = exports.createHostSensor = exports.createHostActuator = exports.coreModule = exports.opSuccess = exports.opFailure = exports.MTreeNode = exports.MTreeBuilder = exports.MTree = exports.EventEmitter = exports.BitSet = exports.util = exports.systems = exports.runtime = exports.fromFourCC = exports.fourCC = exports.primitives = exports.Vector3 = exports.Vector2 = exports.UniqueSet = exports.TypeUtils = exports.task = exports.StringUtils = exports.stream = exports.MathOps = exports.logger = exports.LogLevel = exports.createLogger = exports.List = exports.Error = exports.Dict = exports.assertUnreachable = exports.brain = void 0;
     exports.brain = __importStar(require_brain2());
-    var mindcraft_1 = require_mindcraft();
-    Object.defineProperty(exports, "coreModule", { enumerable: true, get: function() {
-      return mindcraft_1.coreModule;
-    } });
-    Object.defineProperty(exports, "createHostActuator", { enumerable: true, get: function() {
-      return mindcraft_1.createHostActuator;
-    } });
-    Object.defineProperty(exports, "createHostSensor", { enumerable: true, get: function() {
-      return mindcraft_1.createHostSensor;
-    } });
-    Object.defineProperty(exports, "createMindcraftEnvironment", { enumerable: true, get: function() {
-      return mindcraft_1.createMindcraftEnvironment;
-    } });
-    Object.defineProperty(exports, "withMindcraftEnvironmentServices", { enumerable: true, get: function() {
-      return mindcraft_1.withMindcraftEnvironmentServices;
-    } });
     var assert_1 = require_assert();
     Object.defineProperty(exports, "assertUnreachable", { enumerable: true, get: function() {
       return assert_1.assertUnreachable;
@@ -28877,10 +29474,26 @@ var require_node = __commonJS({
     Object.defineProperty(exports, "opSuccess", { enumerable: true, get: function() {
       return op_result_1.opSuccess;
     } });
+    var wendoo_1 = require_wendoo();
+    Object.defineProperty(exports, "coreModule", { enumerable: true, get: function() {
+      return wendoo_1.coreModule;
+    } });
+    Object.defineProperty(exports, "createHostActuator", { enumerable: true, get: function() {
+      return wendoo_1.createHostActuator;
+    } });
+    Object.defineProperty(exports, "createHostSensor", { enumerable: true, get: function() {
+      return wendoo_1.createHostSensor;
+    } });
+    Object.defineProperty(exports, "createWendooEnvironment", { enumerable: true, get: function() {
+      return wendoo_1.createWendooEnvironment;
+    } });
+    Object.defineProperty(exports, "withWendooEnvironmentServices", { enumerable: true, get: function() {
+      return wendoo_1.withWendooEnvironmentServices;
+    } });
   }
 });
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/dist/kit/environment.js
+// ../../external/wendoo-lang/packages/assistant-bridge/dist/kit/environment.js
 var import_app = __toESM(require_app(), 1);
 var import_runtime = __toESM(require_runtime(), 1);
 function createSeededRng(seed) {
@@ -28888,18 +29501,18 @@ function createSeededRng(seed) {
   return () => rng.next();
 }
 function createRehearsalEnvironment(options) {
-  return (0, import_app.createMindcraftEnvironment)({
+  return (0, import_app.createWendooEnvironment)({
     modules: [(0, import_app.coreModule)(), ...options.modules],
     rng: { next: options.rng },
     numerics: (0, import_runtime.createProfileNumerics)(options.precision ?? "f64")
   });
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/dist/kit/rehearsal-adapter.js
+// ../../external/wendoo-lang/packages/assistant-bridge/dist/kit/rehearsal-adapter.js
 var import_model = __toESM(require_model2(), 1);
 var import_runtime3 = __toESM(require_runtime(), 1);
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/dist/target/adapter.js
+// ../../external/wendoo-lang/packages/assistant-bridge/dist/target/adapter.js
 var ADAPTER_CONTRACT_VERSION = 10;
 var DispatchOutcome = {
   /** The call produced a value. */
@@ -28918,7 +29531,7 @@ var DispatchOutcome = {
   BackgroundEnd: "background-end"
 };
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/dist/tools/workspace.js
+// ../../external/wendoo-lang/packages/assistant-bridge/dist/tools/workspace.js
 var import_brain = __toESM(require_brain2(), 1);
 function walkRule(rule, rulePath, into) {
   into.push({ ruleId: rule.ruleId(), rulePath, rule });
@@ -28946,7 +29559,7 @@ function ruleIdsByPath(brainDef) {
   return byPath;
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/dist/kit/value-text.js
+// ../../external/wendoo-lang/packages/assistant-bridge/dist/kit/value-text.js
 var import_app2 = __toESM(require_app(), 1);
 var import_language_service = __toESM(require_language_service(), 1);
 var import_runtime2 = __toESM(require_runtime(), 1);
@@ -29031,7 +29644,7 @@ function bakedContainer(tile) {
   const value = baked;
   return value.t === import_app2.NativeType.Struct || value.t === import_app2.NativeType.List ? value : void 0;
 }
-function createValueLabeler(catalogsOf, numberText) {
+function createValueLabeler(catalogsOf, numberText, localizer) {
   let byContents;
   let byHostObject;
   return (value) => {
@@ -29050,13 +29663,13 @@ function createValueLabeler(catalogsOf, numberText) {
             continue;
           if (baked.t === import_app2.NativeType.Struct && baked.native !== void 0) {
             if (!byHostObject.has(baked.native))
-              byHostObject.set(baked.native, literal2.valueLabel);
+              byHostObject.set(baked.native, (0, import_language_service.tileSentenceWord)(literal2, localizer));
             continue;
           }
           const contents2 = render(baked, numberText, namesNothing);
           if (contents2.opaque || byContents.has(contents2.text))
             continue;
-          byContents.set(contents2.text, literal2.valueLabel);
+          byContents.set(contents2.text, (0, import_language_service.tileSentenceWord)(literal2, localizer));
         }
       }
     }
@@ -29087,7 +29700,7 @@ function isUnfilled(value) {
 function renderArgs(slots, args, nameOf, numberText, labelOf) {
   const rendered = [];
   for (let i = 0; i < slots.size(); i++) {
-    const value = args.get(i);
+    const value = args.at(i);
     if (value === void 0 || isUnfilled(value))
       continue;
     const argSpec = slots.get(i).argSpec;
@@ -29097,7 +29710,7 @@ function renderArgs(slots, args, nameOf, numberText, labelOf) {
   return rendered;
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/dist/kit/rehearsal-adapter.js
+// ../../external/wendoo-lang/packages/assistant-bridge/dist/kit/rehearsal-adapter.js
 var ScenarioRejectionCode = {
   /** The scenario named a subject the driver does not offer. */
   UnknownSubject: "scenario_unknown_subject",
@@ -29429,12 +30042,13 @@ async function rehearse(options, runId, request) {
     environment.replaceActionBundle(request.actionBundle);
   }
   const numberText = (value) => environment.appServices.numerics.formatNumber(value);
-  const recorder = new SubjectRecorder(createTileNamer(() => environment.tileCatalogs(), environment.appServices.localizer), numberText, createValueLabeler(() => environment.tileCatalogs(), numberText));
   const subjectBrain = environment.deserializeBrainJson((0, import_model.brainJsonWithRulesEmptied)(request.brainDef.toJson(), request.excludedRules ?? []));
   const unresolved = unresolvedTileIds(subjectBrain);
   if (unresolved.length > 0) {
     throw new RehearsalRejection(RehearsalRejectionCode.TilesUnresolved, [], unresolved);
   }
+  const localizer = environment.appServices.localizer;
+  const recorder = new SubjectRecorder(createTileNamer(() => environment.tileCatalogs(), localizer), numberText, createValueLabeler(() => [...environment.tileCatalogs(), subjectBrain.catalog()], numberText, localizer));
   recorder.bindRuleIds(ruleFuncIdRuleIds(environment, subjectBrain));
   const world = await driver2.stage({
     environment,
@@ -29496,7 +30110,7 @@ function createRehearsalAdapter(options) {
   };
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/dist/kit/tile-docs.js
+// ../../external/wendoo-lang/packages/assistant-bridge/dist/kit/tile-docs.js
 var kTileIdPlaceholder = "${tileId}";
 function pairTileDocs(content, entries) {
   const docs = /* @__PURE__ */ new Map();
@@ -29509,9 +30123,9 @@ function pairTileDocs(content, entries) {
   return docs;
 }
 
-// ../../packages/wodal/dist/targets/microbit-v2/mindcraft/module.js
-var import_core2 = __toESM(require_node(), 1);
-var import_app20 = __toESM(require_app(), 1);
+// ../../packages/wodal/dist/targets/microbit-v2/wendoo/module.js
+var import_core3 = __toESM(require_node(), 1);
+var import_app21 = __toESM(require_app(), 1);
 var import_runtime8 = __toESM(require_runtime(), 1);
 
 // ../../packages/wodal/dist/core/gesture-detector.js
@@ -30586,7 +31200,7 @@ var TouchButton = class extends Button {
   }
 };
 
-// ../../packages/wodal/dist/mindcraft/shared-type-ids.js
+// ../../packages/wodal/dist/wendoo/shared-type-ids.js
 var import_app3 = __toESM(require_app(), 1);
 var WodalSharedTypeAtomId;
 (function(WodalSharedTypeAtomId2) {
@@ -31776,7 +32390,7 @@ var MicroBitDisplay = class {
   }
 };
 
-// ../../packages/wodal/dist/targets/microbit-v2/mindcraft/built-in-sounds.js
+// ../../packages/wodal/dist/targets/microbit-v2/wendoo/built-in-sounds.js
 var import_app4 = __toESM(require_app(), 1);
 var SOUND_EMOJI_TYPE_ID = (0, import_app4.mkTypeId)(import_app4.NativeType.Struct, "SoundEmoji");
 var SoundEmojiField;
@@ -31856,6 +32470,24 @@ function builtInSoundStructValue(def) {
 }
 
 // ../../packages/wodal/dist/targets/microbit-v2/microbit-speaker.js
+var MIN_TONE_FREQUENCY_HZ = 0;
+var MAX_TONE_FREQUENCY_HZ = 9999;
+var MIN_TONE_VOLUME = 0;
+var MAX_TONE_VOLUME = 1;
+var TONE_WAVEFORMS = ["square", "sawtooth", "sine", "triangle"];
+function findToneWaveform(name) {
+  return TONE_WAVEFORMS.find((waveform) => waveform === name);
+}
+function mkSpeakerToneCommand(waveform, frequencyHz, durationMs, volume) {
+  const clampedFrequency = Math.min(Math.max(frequencyHz, MIN_TONE_FREQUENCY_HZ), MAX_TONE_FREQUENCY_HZ);
+  const clampedVolume = Math.min(Math.max(volume, MIN_TONE_VOLUME), MAX_TONE_VOLUME);
+  return {
+    waveform,
+    frequencyHz: clampedFrequency,
+    durationMs,
+    volume: clampedFrequency === MIN_TONE_FREQUENCY_HZ ? 0 : clampedVolume
+  };
+}
 var MicroBitSpeaker = class {
   /** The play holding the speaker lease, or undefined while idle. */
   activePlay;
@@ -31888,8 +32520,38 @@ var MicroBitSpeaker = class {
     this.nextPlayId += 1;
     this.activePlay = {
       name,
+      tone: void 0,
       startedAt: requestTime,
       durationMs: def.durationMs,
+      playId: this.nextPlayId,
+      onEnd
+    };
+  }
+  /**
+   * Starts an asynchronous tone play requested at logical tick time
+   * `requestTime`. An accepted tone takes the speaker lease for
+   * `command.durationMs`; the lease is settled by {@link advancePlay} and
+   * `onEnd` fires once the duration has elapsed. When the speaker is already
+   * busy the tone is dropped: nothing sounds and `onEnd` fires at once with
+   * {@link OperationEnd.Dropped}, so the dispatching fiber continues without
+   * blocking. A negative duration is dropped the same way. A zero duration is
+   * accepted and ends on the next lease settle.
+   *
+   * @param command - The clamped tone to sound (see {@link mkSpeakerToneCommand}).
+   * @param requestTime - Logical tick time the play was requested.
+   * @param onEnd - Invoked once with how the play ended, at the moment it ends.
+   */
+  playTone(command, requestTime, onEnd) {
+    if (this.activePlay !== void 0 || command.durationMs < 0) {
+      onEnd(OperationEnd.Dropped);
+      return;
+    }
+    this.nextPlayId += 1;
+    this.activePlay = {
+      name: "",
+      tone: command,
+      startedAt: requestTime,
+      durationMs: command.durationMs,
       playId: this.nextPlayId,
       onEnd
     };
@@ -31935,9 +32597,16 @@ var MicroBitSpeaker = class {
   /** Returns a serializable view of the speaker state. */
   snapshot() {
     const play = this.activePlay;
-    return {
-      playing: play === void 0 ? void 0 : { name: play.name, startedAt: play.startedAt, durationMs: play.durationMs, playId: play.playId }
+    if (play === void 0) {
+      return { playing: void 0 };
+    }
+    const playing = {
+      name: play.name,
+      startedAt: play.startedAt,
+      durationMs: play.durationMs,
+      playId: play.playId
     };
+    return { playing: play.tone === void 0 ? playing : { ...playing, tone: play.tone } };
   }
 };
 
@@ -32100,10 +32769,10 @@ var MicroBit = class {
   }
 };
 
-// ../../packages/wodal/dist/targets/microbit-v2/mindcraft/actions/button-sensor.js
+// ../../packages/wodal/dist/targets/microbit-v2/wendoo/actions/button-sensor.js
 var import_app6 = __toESM(require_app(), 1);
 
-// ../../packages/wodal/dist/targets/microbit-v2/mindcraft/context.js
+// ../../packages/wodal/dist/targets/microbit-v2/wendoo/context.js
 function isWodalMicroBitRuntimeContext(data) {
   return data !== null && typeof data === "object" && data.microbit instanceof MicroBit;
 }
@@ -32117,10 +32786,10 @@ function reportDeviceOperationEnding(ctx, ending) {
   ctx.data.operations?.(ending);
 }
 
-// ../../packages/wodal/dist/targets/microbit-v2/mindcraft/modifiers.js
+// ../../packages/wodal/dist/targets/microbit-v2/wendoo/modifiers.js
 var import_app5 = __toESM(require_app(), 1);
 
-// ../../packages/wodal/dist/targets/microbit-v2/mindcraft/tile-ids.js
+// ../../packages/wodal/dist/targets/microbit-v2/wendoo/tile-ids.js
 var MicroBitV2HostFuncId;
 (function(MicroBitV2HostFuncId2) {
   MicroBitV2HostFuncId2[MicroBitV2HostFuncId2["DisplaySetPixelValue"] = 1024] = "DisplaySetPixelValue";
@@ -32180,6 +32849,8 @@ var MicroBitV2HostFuncId;
   MicroBitV2HostFuncId2[MicroBitV2HostFuncId2["SensorLightLevel"] = 1078] = "SensorLightLevel";
   MicroBitV2HostFuncId2[MicroBitV2HostFuncId2["ThermometerGetTemperature"] = 1079] = "ThermometerGetTemperature";
   MicroBitV2HostFuncId2[MicroBitV2HostFuncId2["SensorTemperature"] = 1080] = "SensorTemperature";
+  MicroBitV2HostFuncId2[MicroBitV2HostFuncId2["ActuatorPlayTone"] = 1081] = "ActuatorPlayTone";
+  MicroBitV2HostFuncId2[MicroBitV2HostFuncId2["AudioPlayTone"] = 1082] = "AudioPlayTone";
 })(MicroBitV2HostFuncId || (MicroBitV2HostFuncId = {}));
 var MicroBitV2TypeAtomId;
 (function(MicroBitV2TypeAtomId2) {
@@ -32200,6 +32871,7 @@ var MicroBitV2TypeAtomId;
   MicroBitV2TypeAtomId2[MicroBitV2TypeAtomId2["PlaySoundOptions"] = 1038] = "PlaySoundOptions";
   MicroBitV2TypeAtomId2[MicroBitV2TypeAtomId2["DrawImageOptions"] = 1039] = "DrawImageOptions";
   MicroBitV2TypeAtomId2[MicroBitV2TypeAtomId2["ScrollTextOptions"] = 1040] = "ScrollTextOptions";
+  MicroBitV2TypeAtomId2[MicroBitV2TypeAtomId2["PlayToneOptions"] = 1041] = "PlayToneOptions";
 })(MicroBitV2TypeAtomId || (MicroBitV2TypeAtomId = {}));
 var MicroBitV2HostActions = {
   /** Sensor: button A, deriving one button event from the polled press level. */
@@ -32287,6 +32959,12 @@ var MicroBitV2HostActions = {
     key: "microbit-v2.temperature",
     actionId: 1040,
     fnId: MicroBitV2HostFuncId.SensorTemperature
+  },
+  /** Actuator: play a plain constant-pitch tone on the speaker, awaiting its duration. */
+  PlayTone: {
+    key: "microbit-v2.play-tone",
+    actionId: 1041,
+    fnId: MicroBitV2HostFuncId.ActuatorPlayTone
   }
 };
 var WodalMicroBitV2ModifierId = {
@@ -32321,7 +32999,15 @@ var WodalMicroBitV2ModifierId = {
   /** Preempt the current display or speaker lease so the operation runs at once. */
   Immediately: "microbit-v2.immediately",
   /** Run the operation under its display or speaker lease without the issuing rule awaiting it. */
-  InBackground: "microbit-v2.in-background"
+  InBackground: "microbit-v2.in-background",
+  /** Sound a tone as a square wave. */
+  Square: "microbit-v2.square",
+  /** Sound a tone as a sawtooth wave. */
+  Sawtooth: "microbit-v2.sawtooth",
+  /** Sound a tone as a sine wave. */
+  Sine: "microbit-v2.sine",
+  /** Sound a tone as a triangle wave. */
+  Triangle: "microbit-v2.triangle"
 };
 var WodalMicroBitV2ParameterId = {
   /** Display column index, 0 to 4. */
@@ -32339,12 +33025,14 @@ var WodalMicroBitV2ParameterId = {
   /** Byte buffer filling an anonymous Buffer value slot. */
   Buffer: "microbit-v2.buffer",
   /** Built-in sound to play on the speaker. */
-  SoundEmoji: "microbit-v2.sound-emoji"
+  SoundEmoji: "microbit-v2.sound-emoji",
+  /** Tone volume as a fraction of full, 0 to 1. */
+  Volume: "microbit-v2.volume"
 };
 
-// ../../packages/wodal/dist/targets/microbit-v2/mindcraft/modifiers.js
+// ../../packages/wodal/dist/targets/microbit-v2/wendoo/modifiers.js
 function hasModifier(args, slotId) {
-  const value = args.get(slotId);
+  const value = args.at(slotId);
   return value !== void 0 && !(0, import_app5.isNilValue)(value);
 }
 var Modifier = {
@@ -32363,7 +33051,11 @@ var Modifier = {
   faceDown: (0, import_app5.mod)(WodalMicroBitV2ModifierId.FaceDown),
   freefall: (0, import_app5.mod)(WodalMicroBitV2ModifierId.Freefall),
   immediately: (0, import_app5.mod)(WodalMicroBitV2ModifierId.Immediately),
-  inBackground: (0, import_app5.mod)(WodalMicroBitV2ModifierId.InBackground)
+  inBackground: (0, import_app5.mod)(WodalMicroBitV2ModifierId.InBackground),
+  square: (0, import_app5.mod)(WodalMicroBitV2ModifierId.Square),
+  sawtooth: (0, import_app5.mod)(WodalMicroBitV2ModifierId.Sawtooth),
+  sine: (0, import_app5.mod)(WodalMicroBitV2ModifierId.Sine),
+  triangle: (0, import_app5.mod)(WodalMicroBitV2ModifierId.Triangle)
 };
 var MICROBIT_V2_MODIFIERS = [
   { id: WodalMicroBitV2ModifierId.Pressed, label: "pressed" },
@@ -32381,10 +33073,14 @@ var MICROBIT_V2_MODIFIERS = [
   { id: WodalMicroBitV2ModifierId.FaceDown, label: "face down" },
   { id: WodalMicroBitV2ModifierId.Freefall, label: "freefall" },
   { id: WodalMicroBitV2ModifierId.Immediately, label: "immediately" },
-  { id: WodalMicroBitV2ModifierId.InBackground, label: "in background" }
+  { id: WodalMicroBitV2ModifierId.InBackground, label: "in background" },
+  { id: WodalMicroBitV2ModifierId.Square, label: "square" },
+  { id: WodalMicroBitV2ModifierId.Sawtooth, label: "sawtooth" },
+  { id: WodalMicroBitV2ModifierId.Sine, label: "sine" },
+  { id: WodalMicroBitV2ModifierId.Triangle, label: "triangle" }
 ];
 
-// ../../packages/wodal/dist/targets/microbit-v2/mindcraft/actions/button-sensor.js
+// ../../packages/wodal/dist/targets/microbit-v2/wendoo/actions/button-sensor.js
 var LONG_CLICK_THRESHOLD_MS = 1e3;
 var DOUBLE_CLICK_WINDOW_MS = 500;
 var callDef = (0, import_app6.mkCallDef)((0, import_app6.bag)((0, import_app6.optional)((0, import_app6.choice)(Modifier.pressed, Modifier.released, Modifier.click, Modifier.doubleClick, Modifier.longClick, Modifier.held))));
@@ -32395,7 +33091,7 @@ var kDoubleClickSlotId = (0, import_app6.getSlotId)(callDef, Modifier.doubleClic
 var kLongClickSlotId = (0, import_app6.getSlotId)(callDef, Modifier.longClick);
 var kHeldSlotId = (0, import_app6.getSlotId)(callDef, Modifier.held);
 function hasArg(args, slotId) {
-  const value = args.get(slotId);
+  const value = args.at(slotId);
   return value !== void 0 && !(0, import_app6.isNilValue)(value);
 }
 function selectEvent(args, events) {
@@ -32480,7 +33176,7 @@ var buttonBSensor = makeButtonSensor(MicroBitV2HostActions.ButtonB, "button B", 
 var buttonABSensor = makeButtonSensor(MicroBitV2HostActions.ButtonAB, "button A+B", (microbit) => microbit.buttonA.isPressed() !== 0 && microbit.buttonB.isPressed() !== 0);
 var buttonLogoSensor = makeButtonSensor(MicroBitV2HostActions.ButtonLogo, "logo", (microbit) => microbit.logo.isPressed() !== 0);
 
-// ../../packages/wodal/dist/targets/microbit-v2/mindcraft/actions/display-clear.js
+// ../../packages/wodal/dist/targets/microbit-v2/wendoo/actions/display-clear.js
 var import_app7 = __toESM(require_app(), 1);
 var callDef2 = (0, import_app7.mkCallDef)((0, import_app7.bag)());
 function execDisplayClear(ctx) {
@@ -32499,14 +33195,23 @@ var display_clear_default = {
   metadata: { label: "clear display" }
 };
 
-// ../../packages/wodal/dist/targets/microbit-v2/mindcraft/actions/display-draw.js
+// ../../packages/wodal/dist/targets/microbit-v2/wendoo/actions/display-draw.js
 var import_app10 = __toESM(require_app(), 1);
 var import_runtime5 = __toESM(require_runtime(), 1);
 
-// ../../packages/wodal/dist/targets/microbit-v2/mindcraft/built-in-images.js
+// ../../packages/wodal/dist/wendoo/image-value.js
+var import_core = __toESM(require_node(), 1);
 var import_app8 = __toESM(require_app(), 1);
 var import_runtime4 = __toESM(require_runtime(), 1);
-var IMAGE_TYPE_ID = (0, import_app8.mkTypeId)(import_app8.NativeType.Struct, "Image");
+function mkImageStructValue(width, height, pixels) {
+  const slots = [];
+  slots[ImageField.Width] = (0, import_app8.mkNumberValue)(width);
+  slots[ImageField.Height] = (0, import_app8.mkNumberValue)(height);
+  slots[ImageField.Pixels] = (0, import_runtime4.mkBufferValue)(import_core.stream.byteArrayFromUint8Array(new Uint8Array(pixels)));
+  return (0, import_app8.mkClosedStructValue)(WODAL_SHARED_TYPE_IDS.Image, import_app8.List.from(slots));
+}
+
+// ../../packages/wodal/dist/targets/microbit-v2/wendoo/built-in-images.js
 var LIT = 255;
 var BUILT_IN_IMAGES = [
   {
@@ -32639,58 +33344,63 @@ function builtInImageBytes(def) {
   }
   return bytes;
 }
-function builtInImageHex(def) {
-  return builtInImageBytes(def).map((byte) => byte.toString(16).padStart(2, "0")).join("");
-}
 function builtInImageFrame(def) {
   return { frame: builtInImageBytes(def), width: MICROBIT_LED_MATRIX_SIZE, height: MICROBIT_LED_MATRIX_SIZE };
 }
 function builtInImageStructValue(def) {
-  const slots = [];
-  slots[ImageField.Width] = (0, import_app8.mkNumberValue)(MICROBIT_LED_MATRIX_SIZE);
-  slots[ImageField.Height] = (0, import_app8.mkNumberValue)(MICROBIT_LED_MATRIX_SIZE);
-  slots[ImageField.Pixels] = (0, import_runtime4.mkBufferValueFromHex)(builtInImageHex(def));
-  return (0, import_app8.mkClosedStructValue)(IMAGE_TYPE_ID, import_app8.List.from(slots));
+  return mkImageStructValue(MICROBIT_LED_MATRIX_SIZE, MICROBIT_LED_MATRIX_SIZE, builtInImageBytes(def));
 }
 
-// ../../packages/wodal/dist/targets/microbit-v2/mindcraft/parameters.js
+// ../../packages/wodal/dist/targets/microbit-v2/wendoo/parameters.js
 var import_app9 = __toESM(require_app(), 1);
-var IMAGE_TYPE_ID2 = (0, import_app9.mkTypeId)(import_app9.NativeType.Struct, "Image");
+var IMAGE_TYPE_ID = (0, import_app9.mkTypeId)(import_app9.NativeType.Struct, "Image");
+var MAX_PIXEL_COORD = MICROBIT_LED_MATRIX_SIZE - 1;
+var MAX_BRIGHTNESS = 255;
 var Param = {
-  x: (0, import_app9.param)(WodalMicroBitV2ParameterId.X),
-  y: (0, import_app9.param)(WodalMicroBitV2ParameterId.Y),
-  brightness: (0, import_app9.param)(WodalMicroBitV2ParameterId.Brightness),
-  text: (0, import_app9.param)(WodalMicroBitV2ParameterId.Text, { anonymous: true }),
-  image: (0, import_app9.param)(WodalMicroBitV2ParameterId.Image, { anonymous: true }),
-  duration: (0, import_app9.param)(WodalMicroBitV2ParameterId.Duration),
-  soundEmoji: (0, import_app9.param)(WodalMicroBitV2ParameterId.SoundEmoji, { anonymous: true })
+  x: (0, import_app9.param)(WodalMicroBitV2ParameterId.X, { range: { min: 0, max: MAX_PIXEL_COORD, onExceed: "drop" } }),
+  y: (0, import_app9.param)(WodalMicroBitV2ParameterId.Y, { range: { min: 0, max: MAX_PIXEL_COORD, onExceed: "drop" } }),
+  brightness: (0, import_app9.param)(WodalMicroBitV2ParameterId.Brightness, {
+    range: { min: 0, max: MAX_BRIGHTNESS, onExceed: "wrap" }
+  }),
+  text: (0, import_app9.param)(WodalMicroBitV2ParameterId.Text, { anonymous: true, name: "text", derived: true }),
+  image: (0, import_app9.param)(WodalMicroBitV2ParameterId.Image, { anonymous: true, name: "image" }),
+  duration: (0, import_app9.param)(WodalMicroBitV2ParameterId.Duration, { unit: "seconds" }),
+  volume: (0, import_app9.param)(WodalMicroBitV2ParameterId.Volume, { unit: "fraction" }),
+  soundEmoji: (0, import_app9.param)(WodalMicroBitV2ParameterId.SoundEmoji, { anonymous: true, name: "sound" })
 };
 var MICROBIT_V2_PARAMETERS = [
   { id: WodalMicroBitV2ParameterId.X, dataType: import_app9.CoreTypeIds.Number, label: "x" },
   { id: WodalMicroBitV2ParameterId.Y, dataType: import_app9.CoreTypeIds.Number, label: "y" },
   { id: WodalMicroBitV2ParameterId.Brightness, dataType: import_app9.CoreTypeIds.Number, label: "brightness" },
   { id: WodalMicroBitV2ParameterId.Text, dataType: import_app9.CoreTypeIds.String, label: "text" },
-  { id: WodalMicroBitV2ParameterId.Image, dataType: IMAGE_TYPE_ID2, label: "image" },
+  { id: WodalMicroBitV2ParameterId.Image, dataType: IMAGE_TYPE_ID, label: "image" },
   { id: WodalMicroBitV2ParameterId.Duration, dataType: import_app9.CoreTypeIds.Number, label: "duration" },
   { id: WodalMicroBitV2ParameterId.Buffer, dataType: import_app9.CoreTypeIds.Buffer, hidden: true },
-  { id: WodalMicroBitV2ParameterId.SoundEmoji, dataType: SOUND_EMOJI_TYPE_ID, label: "sound" }
+  { id: WodalMicroBitV2ParameterId.SoundEmoji, dataType: SOUND_EMOJI_TYPE_ID, label: "sound" },
+  { id: WodalMicroBitV2ParameterId.Volume, dataType: import_app9.CoreTypeIds.Number, label: "volume" }
 ];
 
-// ../../packages/wodal/dist/targets/microbit-v2/mindcraft/actions/display-draw.js
+// ../../packages/wodal/dist/targets/microbit-v2/wendoo/actions/display-draw.js
+var MS_PER_SECOND = 1e3;
 var DEFAULT_DURATION_MS = 1e3;
 var DEFAULT_IMAGE = builtInImageFrame(getBuiltInImage(DEFAULT_BUILT_IN_IMAGE_NAME));
-var callDef3 = (0, import_app10.mkCallDef)((0, import_app10.bag)((0, import_app10.optional)((0, import_app10.repeated)(Param.image, { min: 0 })), (0, import_app10.optional)(Param.duration), (0, import_app10.optional)(Modifier.immediately), (0, import_app10.optional)(Modifier.inBackground)));
+var Duration = {
+  ...Param.duration,
+  default: (0, import_app10.mkNumberValue)(DEFAULT_DURATION_MS / MS_PER_SECOND),
+  range: { min: 0, onExceed: "clamp" }
+};
+var callDef3 = (0, import_app10.mkCallDef)((0, import_app10.bag)((0, import_app10.optional)((0, import_app10.repeated)(Param.image, { min: 0 })), (0, import_app10.optional)(Duration), (0, import_app10.optional)(Modifier.immediately), (0, import_app10.optional)(Modifier.inBackground)));
 var kImageSlotId = (0, import_app10.getSlotId)(callDef3, Param.image);
-var kDurationSlotId = (0, import_app10.getSlotId)(callDef3, Param.duration);
+var kDurationSlotId = (0, import_app10.getSlotId)(callDef3, Duration);
 var kImmediatelySlotId = (0, import_app10.getSlotId)(callDef3, Modifier.immediately);
 var kInBackgroundSlotId = (0, import_app10.getSlotId)(callDef3, Modifier.inBackground);
 function clipImage(value) {
   if (!(0, import_app10.isStructValue)(value) || value.v === void 0) {
     return void 0;
   }
-  const widthValue = (0, import_app10.extractNumberValue)(value.v.get(ImageField.Width));
-  const heightValue = (0, import_app10.extractNumberValue)(value.v.get(ImageField.Height));
-  const pixels = value.v.get(ImageField.Pixels);
+  const widthValue = (0, import_app10.extractNumberValue)(value.v.at(ImageField.Width));
+  const heightValue = (0, import_app10.extractNumberValue)(value.v.at(ImageField.Height));
+  const pixels = value.v.at(ImageField.Pixels);
   if (widthValue === void 0 || heightValue === void 0 || !(0, import_runtime5.isBufferValue)(pixels)) {
     return void 0;
   }
@@ -32737,9 +33447,9 @@ function execDrawImage(ctx, args, handle) {
   if (hasModifier(args, kImmediatelySlotId)) {
     microbit.display.preempt();
   }
-  const frames = clipImageSequence(args.get(kImageSlotId));
-  const durationSeconds = (0, import_app10.extractNumberValue)(args.get(kDurationSlotId));
-  const durationMs = durationSeconds === void 0 ? DEFAULT_DURATION_MS : toNonNegativeInteger(Math.fround(durationSeconds * 1e3));
+  const frames = clipImageSequence(args.at(kImageSlotId));
+  const durationSeconds = (0, import_app10.extractNumberValue)(args.at(kDurationSlotId));
+  const durationMs = durationSeconds === void 0 ? DEFAULT_DURATION_MS : toNonNegativeInteger(Math.fround(durationSeconds * MS_PER_SECOND));
   const inBackground = hasModifier(args, kInBackgroundSlotId);
   microbit.display.drawImage(frames, durationMs, ctx.time, (end) => {
     handle.resolve(import_app10.VOID_VALUE);
@@ -32754,10 +33464,12 @@ var display_draw_default = {
   callDef: callDef3,
   fn: { exec: execDrawImage },
   isAsync: true,
-  metadata: { label: "draw image" }
+  metadata: {
+    label: "draw image"
+  }
 };
 
-// ../../packages/wodal/dist/targets/microbit-v2/mindcraft/actions/display-pixel-conversion.js
+// ../../packages/wodal/dist/targets/microbit-v2/wendoo/actions/display-pixel-conversion.js
 function pixelCoordToPort(value) {
   if (!Number.isFinite(value)) {
     return 0;
@@ -32771,10 +33483,10 @@ function brightnessToPort(value) {
   return Math.trunc(value) & 255;
 }
 
-// ../../packages/wodal/dist/targets/microbit-v2/mindcraft/actions/display-scroll.js
+// ../../packages/wodal/dist/targets/microbit-v2/wendoo/actions/display-scroll.js
 var import_app11 = __toESM(require_app(), 1);
 
-// ../../packages/wodal/dist/targets/microbit-v2/mindcraft/display-scroll.js
+// ../../packages/wodal/dist/targets/microbit-v2/wendoo/display-scroll.js
 var SCROLL_DISPLAY_WIDTH = 5;
 var SCROLL_DISPLAY_SPACING2 = 1;
 var SCROLL_DEFAULT_DELAY_MS = 120;
@@ -32786,14 +33498,14 @@ function scrollDurationMs(characterCount, delayMs) {
   return scrollStepCount(characterCount) * delayMs;
 }
 
-// ../../packages/wodal/dist/targets/microbit-v2/mindcraft/actions/display-scroll.js
+// ../../packages/wodal/dist/targets/microbit-v2/wendoo/actions/display-scroll.js
 var DEFAULT_TEXT = "hello";
 var callDef4 = (0, import_app11.mkCallDef)((0, import_app11.bag)((0, import_app11.optional)(Param.text), (0, import_app11.optional)(Modifier.immediately), (0, import_app11.optional)(Modifier.inBackground)));
 var kTextSlotId = (0, import_app11.getSlotId)(callDef4, Param.text);
 var kImmediatelySlotId2 = (0, import_app11.getSlotId)(callDef4, Modifier.immediately);
 var kInBackgroundSlotId2 = (0, import_app11.getSlotId)(callDef4, Modifier.inBackground);
 function hasArg2(args, slotId) {
-  const value = args.get(slotId);
+  const value = args.at(slotId);
   return value !== void 0 && !(0, import_app11.isNilValue)(value);
 }
 function whenResultText(ctx) {
@@ -32805,7 +33517,7 @@ function whenResultText(ctx) {
   return (0, import_app11.extractStringValue)(whenResult);
 }
 function execDisplayScroll(ctx, args, handle) {
-  const text = hasArg2(args, kTextSlotId) ? (0, import_app11.extractStringValue)(args.get(kTextSlotId)) ?? DEFAULT_TEXT : whenResultText(ctx) ?? DEFAULT_TEXT;
+  const text = hasArg2(args, kTextSlotId) ? (0, import_app11.extractStringValue)(args.at(kTextSlotId)) ?? DEFAULT_TEXT : whenResultText(ctx) ?? DEFAULT_TEXT;
   const microbit = getMicroBitContextDevice(ctx);
   if (!microbit) {
     handle.resolve(import_app11.VOID_VALUE);
@@ -32829,26 +33541,31 @@ var display_scroll_default = {
   callDef: callDef4,
   fn: { exec: execDisplayScroll },
   isAsync: true,
-  metadata: { label: "display text" }
+  metadata: {
+    label: "display text"
+  }
 };
 
-// ../../packages/wodal/dist/targets/microbit-v2/mindcraft/actions/display-set-pixel.js
+// ../../packages/wodal/dist/targets/microbit-v2/wendoo/actions/display-set-pixel.js
 var import_app12 = __toESM(require_app(), 1);
 var DEFAULT_X = 0;
 var DEFAULT_Y = 0;
-var DEFAULT_BRIGHTNESS = 255;
-var callDef5 = (0, import_app12.mkCallDef)((0, import_app12.bag)((0, import_app12.optional)(Param.x), (0, import_app12.optional)(Param.y), (0, import_app12.optional)(Param.brightness)));
-var kXSlotId = (0, import_app12.getSlotId)(callDef5, Param.x);
-var kYSlotId = (0, import_app12.getSlotId)(callDef5, Param.y);
-var kBrightnessSlotId = (0, import_app12.getSlotId)(callDef5, Param.brightness);
+var DEFAULT_BRIGHTNESS = MAX_BRIGHTNESS;
+var X = { ...Param.x, default: (0, import_app12.mkNumberValue)(DEFAULT_X) };
+var Y = { ...Param.y, default: (0, import_app12.mkNumberValue)(DEFAULT_Y) };
+var Brightness = { ...Param.brightness, default: (0, import_app12.mkNumberValue)(DEFAULT_BRIGHTNESS) };
+var callDef5 = (0, import_app12.mkCallDef)((0, import_app12.bag)((0, import_app12.optional)(X), (0, import_app12.optional)(Y), (0, import_app12.optional)(Brightness)));
+var kXSlotId = (0, import_app12.getSlotId)(callDef5, X);
+var kYSlotId = (0, import_app12.getSlotId)(callDef5, Y);
+var kBrightnessSlotId = (0, import_app12.getSlotId)(callDef5, Brightness);
 function execDisplaySetPixel(ctx, args) {
   const microbit = getMicroBitContextDevice(ctx);
   if (!microbit) {
     return import_app12.VOID_VALUE;
   }
-  const x = (0, import_app12.extractNumberValue)(args.get(kXSlotId)) ?? DEFAULT_X;
-  const y = (0, import_app12.extractNumberValue)(args.get(kYSlotId)) ?? DEFAULT_Y;
-  const brightness = (0, import_app12.extractNumberValue)(args.get(kBrightnessSlotId)) ?? DEFAULT_BRIGHTNESS;
+  const x = (0, import_app12.extractNumberValue)(args.at(kXSlotId)) ?? DEFAULT_X;
+  const y = (0, import_app12.extractNumberValue)(args.at(kYSlotId)) ?? DEFAULT_Y;
+  const brightness = (0, import_app12.extractNumberValue)(args.at(kBrightnessSlotId)) ?? DEFAULT_BRIGHTNESS;
   microbit.display.setPixelValue(pixelCoordToPort(x), pixelCoordToPort(y), brightnessToPort(brightness));
   return import_app12.VOID_VALUE;
 }
@@ -32860,7 +33577,7 @@ var display_set_pixel_default = {
   metadata: { label: "set pixel" }
 };
 
-// ../../packages/wodal/dist/targets/microbit-v2/mindcraft/actions/gesture-sensor.js
+// ../../packages/wodal/dist/targets/microbit-v2/wendoo/actions/gesture-sensor.js
 var import_app13 = __toESM(require_app(), 1);
 var callDef6 = (0, import_app13.mkCallDef)((0, import_app13.bag)((0, import_app13.optional)((0, import_app13.choice)(Modifier.shake, Modifier.tiltUp, Modifier.tiltDown, Modifier.tiltLeft, Modifier.tiltRight, Modifier.faceUp, Modifier.faceDown, Modifier.freefall))));
 var kShakeSlotId = (0, import_app13.getSlotId)(callDef6, Modifier.shake);
@@ -32872,7 +33589,7 @@ var kFaceUpSlotId = (0, import_app13.getSlotId)(callDef6, Modifier.faceUp);
 var kFaceDownSlotId = (0, import_app13.getSlotId)(callDef6, Modifier.faceDown);
 var kFreefallSlotId = (0, import_app13.getSlotId)(callDef6, Modifier.freefall);
 function hasArg3(args, slotId) {
-  const value = args.get(slotId);
+  const value = args.at(slotId);
   return value !== void 0 && !(0, import_app13.isNilValue)(value);
 }
 function selectGestureCode(args) {
@@ -32910,7 +33627,7 @@ var gestureSensor = {
   metadata: { label: "gesture", language: { frame: "event", bare: "shake" } }
 };
 
-// ../../packages/wodal/dist/targets/microbit-v2/mindcraft/actions/light-level-sensor.js
+// ../../packages/wodal/dist/targets/microbit-v2/wendoo/actions/light-level-sensor.js
 var import_app14 = __toESM(require_app(), 1);
 var callDef7 = (0, import_app14.mkCallDef)({ type: "bag", items: [] });
 function exec2(ctx, _args) {
@@ -32926,20 +33643,21 @@ var lightLevelSensor = {
   metadata: { label: "light level" }
 };
 
-// ../../packages/wodal/dist/targets/microbit-v2/mindcraft/actions/play-sound.js
+// ../../packages/wodal/dist/targets/microbit-v2/wendoo/actions/play-sound.js
 var import_app15 = __toESM(require_app(), 1);
-var callDef8 = (0, import_app15.mkCallDef)((0, import_app15.bag)((0, import_app15.optional)(Param.soundEmoji), (0, import_app15.optional)(Modifier.immediately), (0, import_app15.optional)(Modifier.inBackground)));
-var kSoundSlotId = (0, import_app15.getSlotId)(callDef8, Param.soundEmoji);
+var Sound = { ...Param.soundEmoji, default: builtInSoundStructValue(findBuiltInSound(DEFAULT_BUILT_IN_SOUND_NAME)) };
+var callDef8 = (0, import_app15.mkCallDef)((0, import_app15.bag)((0, import_app15.optional)(Sound), (0, import_app15.optional)(Modifier.immediately), (0, import_app15.optional)(Modifier.inBackground)));
+var kSoundSlotId = (0, import_app15.getSlotId)(callDef8, Sound);
 var kImmediatelySlotId3 = (0, import_app15.getSlotId)(callDef8, Modifier.immediately);
 var kInBackgroundSlotId3 = (0, import_app15.getSlotId)(callDef8, Modifier.inBackground);
 function soundEmojiName(value) {
   if (value === void 0 || !(0, import_app15.isStructValue)(value) || value.v === void 0) {
     return void 0;
   }
-  return (0, import_app15.extractStringValue)(value.v.get(SoundEmojiField.Name));
+  return (0, import_app15.extractStringValue)(value.v.at(SoundEmojiField.Name));
 }
 function execPlaySound(ctx, args, handle) {
-  const name = soundEmojiName(args.get(kSoundSlotId)) ?? DEFAULT_BUILT_IN_SOUND_NAME;
+  const name = soundEmojiName(args.at(kSoundSlotId)) ?? DEFAULT_BUILT_IN_SOUND_NAME;
   const microbit = getMicroBitContextDevice(ctx);
   if (!microbit) {
     handle.resolve(import_app15.VOID_VALUE);
@@ -32962,49 +33680,133 @@ var play_sound_default = {
   callDef: callDef8,
   fn: { exec: execPlaySound },
   isAsync: true,
-  metadata: { label: "play sound" }
+  metadata: {
+    label: "play sound"
+  }
 };
 
-// ../../packages/wodal/dist/targets/microbit-v2/mindcraft/actions/radio-receive.js
-var import_core = __toESM(require_node(), 1);
+// ../../packages/wodal/dist/targets/microbit-v2/wendoo/actions/play-tone.js
 var import_app16 = __toESM(require_app(), 1);
+var DEFAULT_FREQUENCY_HZ = 880;
+var DEFAULT_DURATION_SECONDS = 0.5;
+var DEFAULT_VOLUME = 1;
+var DEFAULT_WAVEFORM = "triangle";
+var AnonFrequency = (0, import_app16.param)(import_app16.CoreParameterId.AnonymousNumber, {
+  anonymous: true,
+  name: "pitch",
+  unit: "Hz",
+  default: (0, import_app16.mkNumberValue)(DEFAULT_FREQUENCY_HZ),
+  range: { min: MIN_TONE_FREQUENCY_HZ, max: MAX_TONE_FREQUENCY_HZ, onExceed: "clamp" }
+});
+var Duration2 = {
+  ...Param.duration,
+  default: (0, import_app16.mkNumberValue)(DEFAULT_DURATION_SECONDS),
+  range: { min: 0, onExceed: "drop" }
+};
+var Volume = {
+  ...Param.volume,
+  default: (0, import_app16.mkNumberValue)(DEFAULT_VOLUME),
+  range: { min: MIN_TONE_VOLUME, max: MAX_TONE_VOLUME, onExceed: "clamp" }
+};
+var callDef9 = (0, import_app16.mkCallDef)((0, import_app16.bag)((0, import_app16.optional)(AnonFrequency), (0, import_app16.optional)(Duration2), (0, import_app16.optional)(Volume), (0, import_app16.optional)((0, import_app16.choice)(Modifier.square, Modifier.sawtooth, Modifier.sine, Modifier.triangle)), (0, import_app16.optional)(Modifier.immediately), (0, import_app16.optional)(Modifier.inBackground)));
+var kFrequencySlotId = (0, import_app16.getSlotId)(callDef9, AnonFrequency);
+var kDurationSlotId2 = (0, import_app16.getSlotId)(callDef9, Duration2);
+var kVolumeSlotId = (0, import_app16.getSlotId)(callDef9, Volume);
+var kSquareSlotId = (0, import_app16.getSlotId)(callDef9, Modifier.square);
+var kSawtoothSlotId = (0, import_app16.getSlotId)(callDef9, Modifier.sawtooth);
+var kSineSlotId = (0, import_app16.getSlotId)(callDef9, Modifier.sine);
+var kTriangleSlotId = (0, import_app16.getSlotId)(callDef9, Modifier.triangle);
+var kImmediatelySlotId4 = (0, import_app16.getSlotId)(callDef9, Modifier.immediately);
+var kInBackgroundSlotId4 = (0, import_app16.getSlotId)(callDef9, Modifier.inBackground);
+function finiteArg(args, slotId, fallback) {
+  const value = (0, import_app16.extractNumberValue)(args.at(slotId));
+  return value === void 0 || !Number.isFinite(value) ? fallback : value;
+}
+function selectedWaveform(args) {
+  if (hasModifier(args, kSawtoothSlotId)) {
+    return "sawtooth";
+  }
+  if (hasModifier(args, kSineSlotId)) {
+    return "sine";
+  }
+  if (hasModifier(args, kTriangleSlotId)) {
+    return "triangle";
+  }
+  if (hasModifier(args, kSquareSlotId)) {
+    return "square";
+  }
+  return DEFAULT_WAVEFORM;
+}
+function execPlayTone(ctx, args, handle) {
+  const microbit = getMicroBitContextDevice(ctx);
+  if (!microbit) {
+    handle.resolve(import_app16.VOID_VALUE);
+    return;
+  }
+  if (hasModifier(args, kImmediatelySlotId4)) {
+    microbit.speaker.preempt();
+  }
+  const durationSeconds = finiteArg(args, kDurationSlotId2, DEFAULT_DURATION_SECONDS);
+  const command = mkSpeakerToneCommand(selectedWaveform(args), finiteArg(args, kFrequencySlotId, DEFAULT_FREQUENCY_HZ), Math.round(Math.fround(durationSeconds * 1e3)), finiteArg(args, kVolumeSlotId, DEFAULT_VOLUME));
+  const inBackground = hasModifier(args, kInBackgroundSlotId4);
+  microbit.speaker.playTone(command, ctx.time, (end) => {
+    handle.resolve(import_app16.VOID_VALUE);
+    reportDeviceOperationEnding(ctx, { handleId: handle.id, end, inBackground });
+  });
+  if (inBackground) {
+    handle.resolve(import_app16.VOID_VALUE);
+  }
+}
+var play_tone_default = {
+  ...MicroBitV2HostActions.PlayTone,
+  callDef: callDef9,
+  fn: { exec: execPlayTone },
+  isAsync: true,
+  metadata: {
+    label: "beep"
+  }
+};
+
+// ../../packages/wodal/dist/targets/microbit-v2/wendoo/actions/radio-receive.js
+var import_core2 = __toESM(require_node(), 1);
+var import_app17 = __toESM(require_app(), 1);
 var import_runtime6 = __toESM(require_runtime(), 1);
-var emptyCallDef = (0, import_app16.mkCallDef)({ type: "bag", items: [] });
+var emptyCallDef = (0, import_app17.mkCallDef)({ type: "bag", items: [] });
 var VALUE_OUTPUT_NAME = "value";
 var RSSI_OUTPUT_NAME = "rssi";
 function receiveOutputs(valueType) {
   return [
     { name: VALUE_OUTPUT_NAME, type: valueType, label: "received value" },
-    { name: RSSI_OUTPUT_NAME, type: import_app16.CoreTypeIds.Number, label: "signal strength" }
+    { name: RSSI_OUTPUT_NAME, type: import_app17.CoreTypeIds.Number, label: "signal strength" }
   ];
 }
 function makeReceiveSensor(ids, label, outputType, matches, renderValue2, capabilities, outputs) {
   function exec4(ctx, _args) {
     const microbit = getMicroBitContextDevice(ctx);
     if (!microbit) {
-      return import_app16.NIL_VALUE;
+      return import_app17.NIL_VALUE;
     }
     const radio = microbit.radio;
-    const previous = (0, import_app16.getCallSiteState)(ctx);
+    const previous = (0, import_app17.getCallSiteState)(ctx);
     if (previous === void 0) {
-      (0, import_app16.setCallSiteState)(ctx, { cursor: radio.headSequence() });
-      return import_app16.NIL_VALUE;
+      (0, import_app17.setCallSiteState)(ctx, { cursor: radio.headSequence() });
+      return import_app17.NIL_VALUE;
     }
     const packet = radio.nextAfter(previous.cursor, matches);
     if (packet === void 0) {
-      return import_app16.NIL_VALUE;
+      return import_app17.NIL_VALUE;
     }
     previous.cursor = packet.seq;
-    (0, import_app16.setCallSiteState)(ctx, previous);
+    (0, import_app17.setCallSiteState)(ctx, previous);
     const value = renderValue2(packet);
-    (0, import_app16.setSensorOutput)(ctx, outputType, VALUE_OUTPUT_NAME, value);
-    (0, import_app16.setSensorOutput)(ctx, import_app16.CoreTypeIds.Number, RSSI_OUTPUT_NAME, (0, import_app16.mkNumberValue)(packet.rssi));
+    (0, import_app17.setSensorOutput)(ctx, outputType, VALUE_OUTPUT_NAME, value);
+    (0, import_app17.setSensorOutput)(ctx, import_app17.CoreTypeIds.Number, RSSI_OUTPUT_NAME, (0, import_app17.mkNumberValue)(packet.rssi));
     return value;
   }
   return {
     ...ids,
     callDef: emptyCallDef,
-    fn: { onPageEntered: import_app16.clearCallSiteState, exec: exec4 },
+    fn: { onPageEntered: import_app17.clearCallSiteState, exec: exec4 },
     isAsync: false,
     outputType,
     outputs,
@@ -33013,13 +33815,13 @@ function makeReceiveSensor(ids, label, outputType, matches, renderValue2, capabi
   };
 }
 function numberValue(packet) {
-  return (0, import_app16.mkNumberValue)(packet.value);
+  return (0, import_app17.mkNumberValue)(packet.value);
 }
 function stringValue(packet) {
-  return (0, import_app16.mkStringValue)(packet.text);
+  return (0, import_app17.mkStringValue)(packet.text);
 }
 function bufferValue(packet) {
-  return (0, import_runtime6.mkBufferValue)(import_core.stream.byteArrayFromUint8Array(packet.bytes));
+  return (0, import_runtime6.mkBufferValue)(import_core2.stream.byteArrayFromUint8Array(packet.bytes));
 }
 function matchesNumber(type) {
   return type === RadioPacketType.Number || type === RadioPacketType.Double;
@@ -33030,15 +33832,15 @@ function matchesString(type) {
 function matchesBuffer(type) {
   return type === RadioPacketType.Buffer;
 }
-var numberCapabilities = new import_app16.BitSet().set(import_app16.CoreCapabilityBits.PresenceGated);
-var stringCapabilities = new import_app16.BitSet().set(import_app16.CoreCapabilityBits.PresenceGated);
-var bufferCapabilities = new import_app16.BitSet().set(import_app16.CoreCapabilityBits.PresenceGated);
-var numberOutputs = receiveOutputs(import_app16.CoreTypeIds.Number);
-var stringOutputs = receiveOutputs(import_app16.CoreTypeIds.String);
-var bufferOutputs = receiveOutputs(import_app16.CoreTypeIds.Buffer);
-var radioReceiveNumberSensor = makeReceiveSensor(MicroBitV2HostActions.RadioReceiveNumber, "radio receive number", import_app16.CoreTypeIds.Number, matchesNumber, numberValue, numberCapabilities, numberOutputs);
-var radioReceiveStringSensor = makeReceiveSensor(MicroBitV2HostActions.RadioReceiveString, "radio receive string", import_app16.CoreTypeIds.String, matchesString, stringValue, stringCapabilities, stringOutputs);
-var radioReceiveBufferSensor = makeReceiveSensor(MicroBitV2HostActions.RadioReceiveBuffer, "radio receive buffer", import_app16.CoreTypeIds.Buffer, matchesBuffer, bufferValue, bufferCapabilities, bufferOutputs);
+var numberCapabilities = new import_app17.BitSet().set(import_app17.CoreCapabilityBits.PresenceGated);
+var stringCapabilities = new import_app17.BitSet().set(import_app17.CoreCapabilityBits.PresenceGated);
+var bufferCapabilities = new import_app17.BitSet().set(import_app17.CoreCapabilityBits.PresenceGated);
+var numberOutputs = receiveOutputs(import_app17.CoreTypeIds.Number);
+var stringOutputs = receiveOutputs(import_app17.CoreTypeIds.String);
+var bufferOutputs = receiveOutputs(import_app17.CoreTypeIds.Buffer);
+var radioReceiveNumberSensor = makeReceiveSensor(MicroBitV2HostActions.RadioReceiveNumber, "radio receive number", import_app17.CoreTypeIds.Number, matchesNumber, numberValue, numberCapabilities, numberOutputs);
+var radioReceiveStringSensor = makeReceiveSensor(MicroBitV2HostActions.RadioReceiveString, "radio receive string", import_app17.CoreTypeIds.String, matchesString, stringValue, stringCapabilities, stringOutputs);
+var radioReceiveBufferSensor = makeReceiveSensor(MicroBitV2HostActions.RadioReceiveBuffer, "radio receive buffer", import_app17.CoreTypeIds.Buffer, matchesBuffer, bufferValue, bufferCapabilities, bufferOutputs);
 function dedupeOutputTiles(tiles) {
   const byId = /* @__PURE__ */ new Map();
   for (const tile of tiles) {
@@ -33049,30 +33851,31 @@ function dedupeOutputTiles(tiles) {
   return [...byId.values()];
 }
 var radioReceiveOutputTiles = dedupeOutputTiles([
-  ...(0, import_app16.buildDescriptorOutputTiles)(numberOutputs),
-  ...(0, import_app16.buildDescriptorOutputTiles)(stringOutputs),
-  ...(0, import_app16.buildDescriptorOutputTiles)(bufferOutputs)
+  ...(0, import_app17.buildDescriptorOutputTiles)(numberOutputs),
+  ...(0, import_app17.buildDescriptorOutputTiles)(stringOutputs),
+  ...(0, import_app17.buildDescriptorOutputTiles)(bufferOutputs)
 ]);
 
-// ../../packages/wodal/dist/targets/microbit-v2/mindcraft/actions/radio-send.js
-var import_app17 = __toESM(require_app(), 1);
+// ../../packages/wodal/dist/targets/microbit-v2/wendoo/actions/radio-send.js
+var import_app18 = __toESM(require_app(), 1);
 var import_runtime7 = __toESM(require_runtime(), 1);
 var EMPTY_BYTES = new Uint8Array(0);
-var AnonNumber = (0, import_app17.param)(import_app17.CoreParameterId.AnonymousNumber, { anonymous: true });
-var AnonString = (0, import_app17.param)(import_app17.CoreParameterId.AnonymousString, { anonymous: true });
-var AnonBoolean = (0, import_app17.param)(import_app17.CoreParameterId.AnonymousBoolean, { anonymous: true });
-var AnonBuffer = (0, import_app17.param)(WodalMicroBitV2ParameterId.Buffer, { anonymous: true });
-var callDef9 = (0, import_app17.mkCallDef)((0, import_app17.bag)((0, import_app17.optional)((0, import_app17.choice)(AnonNumber, AnonString, AnonBoolean, AnonBuffer))));
-var kNumberSlotId = (0, import_app17.getSlotId)(callDef9, AnonNumber);
-var kStringSlotId = (0, import_app17.getSlotId)(callDef9, AnonString);
-var kBooleanSlotId = (0, import_app17.getSlotId)(callDef9, AnonBoolean);
-var kBufferSlotId = (0, import_app17.getSlotId)(callDef9, AnonBuffer);
+var message = { anonymous: true, derived: true };
+var AnonNumber = (0, import_app18.param)(import_app18.CoreParameterId.AnonymousNumber, { ...message, name: "message-number" });
+var AnonString = (0, import_app18.param)(import_app18.CoreParameterId.AnonymousString, { ...message, name: "message-text" });
+var AnonBoolean = (0, import_app18.param)(import_app18.CoreParameterId.AnonymousBoolean, { ...message, name: "message-yes-no" });
+var AnonBuffer = (0, import_app18.param)(WodalMicroBitV2ParameterId.Buffer, { ...message, name: "message-bytes" });
+var callDef10 = (0, import_app18.mkCallDef)((0, import_app18.bag)((0, import_app18.optional)((0, import_app18.choice)(AnonNumber, AnonString, AnonBoolean, AnonBuffer))));
+var kNumberSlotId = (0, import_app18.getSlotId)(callDef10, AnonNumber);
+var kStringSlotId = (0, import_app18.getSlotId)(callDef10, AnonString);
+var kBooleanSlotId = (0, import_app18.getSlotId)(callDef10, AnonBoolean);
+var kBufferSlotId = (0, import_app18.getSlotId)(callDef10, AnonBuffer);
 function presentArg(args, slotId) {
-  const value = args.get(slotId);
-  return value !== void 0 && !(0, import_app17.isNilValue)(value) ? value : void 0;
+  const value = args.at(slotId);
+  return value !== void 0 && !(0, import_app18.isNilValue)(value) ? value : void 0;
 }
 function valueToSend(ctx, args) {
-  return presentArg(args, kNumberSlotId) ?? presentArg(args, kStringSlotId) ?? presentArg(args, kBooleanSlotId) ?? presentArg(args, kBufferSlotId) ?? (0, import_app17.getWhenResult)(ctx);
+  return presentArg(args, kNumberSlotId) ?? presentArg(args, kStringSlotId) ?? presentArg(args, kBooleanSlotId) ?? presentArg(args, kBufferSlotId) ?? (0, import_app18.getWhenResult)(ctx);
 }
 function bufferBytes(value) {
   const length = (0, import_runtime7.bufferLength)(value);
@@ -33083,7 +33886,7 @@ function bufferBytes(value) {
   return bytes;
 }
 function recordFor(value, group) {
-  if ((0, import_app17.isNumberValue)(value)) {
+  if ((0, import_app18.isNumberValue)(value)) {
     const n = value.v;
     return {
       type: radioNumberIsInteger(n) ? RadioPacketType.Number : RadioPacketType.Double,
@@ -33094,10 +33897,10 @@ function recordFor(value, group) {
       bytes: EMPTY_BYTES
     };
   }
-  if ((0, import_app17.isStringValue)(value)) {
+  if ((0, import_app18.isStringValue)(value)) {
     return { type: RadioPacketType.String, group, value: 0, name: "", text: value.v, bytes: EMPTY_BYTES };
   }
-  if ((0, import_app17.isBooleanValue)(value)) {
+  if ((0, import_app18.isBooleanValue)(value)) {
     return { type: RadioPacketType.Number, group, value: value.v ? 1 : 0, name: "", text: "", bytes: EMPTY_BYTES };
   }
   if ((0, import_runtime7.isBufferValue)(value)) {
@@ -33108,94 +33911,102 @@ function recordFor(value, group) {
 function execRadioSend(ctx, args) {
   const microbit = getMicroBitContextDevice(ctx);
   if (!microbit) {
-    return import_app17.VOID_VALUE;
+    return import_app18.VOID_VALUE;
   }
   const record2 = recordFor(valueToSend(ctx, args), microbit.radio.group);
   if (record2 !== void 0) {
     microbit.radio.send(record2);
   }
-  return import_app17.VOID_VALUE;
+  return import_app18.VOID_VALUE;
 }
 var radio_send_default = {
   ...MicroBitV2HostActions.RadioSend,
-  callDef: callDef9,
+  callDef: callDef10,
   fn: { exec: execRadioSend },
   isAsync: false,
   metadata: { label: "radio send" }
 };
 
-// ../../packages/wodal/dist/targets/microbit-v2/mindcraft/actions/set-radio-group.js
-var import_app18 = __toESM(require_app(), 1);
-var AnonNumber2 = (0, import_app18.param)(import_app18.CoreParameterId.AnonymousNumber, { anonymous: true });
-var callDef10 = (0, import_app18.mkCallDef)((0, import_app18.bag)((0, import_app18.optional)(AnonNumber2)));
-var kGroupSlotId = (0, import_app18.getSlotId)(callDef10, AnonNumber2);
+// ../../packages/wodal/dist/targets/microbit-v2/wendoo/actions/set-radio-group.js
+var import_app19 = __toESM(require_app(), 1);
+var RADIO_MAX_GROUP = 255;
+var AnonNumber2 = (0, import_app19.param)(import_app19.CoreParameterId.AnonymousNumber, {
+  anonymous: true,
+  name: "group",
+  default: (0, import_app19.mkNumberValue)(RADIO_DEFAULT_GROUP),
+  range: { min: 0, max: RADIO_MAX_GROUP, onExceed: "wrap" }
+});
+var callDef11 = (0, import_app19.mkCallDef)((0, import_app19.bag)((0, import_app19.optional)(AnonNumber2)));
+var kGroupSlotId = (0, import_app19.getSlotId)(callDef11, AnonNumber2);
 function execSetRadioGroup(ctx, args) {
   const microbit = getMicroBitContextDevice(ctx);
   if (!microbit) {
-    return import_app18.VOID_VALUE;
+    return import_app19.VOID_VALUE;
   }
-  microbit.radio.setGroup((0, import_app18.extractNumberValue)(args.get(kGroupSlotId)) ?? RADIO_DEFAULT_GROUP);
-  return import_app18.VOID_VALUE;
+  microbit.radio.setGroup((0, import_app19.extractNumberValue)(args.at(kGroupSlotId)) ?? RADIO_DEFAULT_GROUP);
+  return import_app19.VOID_VALUE;
 }
 var set_radio_group_default = {
   ...MicroBitV2HostActions.SetRadioGroup,
-  callDef: callDef10,
+  callDef: callDef11,
   fn: { exec: execSetRadioGroup },
   isAsync: false,
   metadata: { label: "set radio group" }
 };
 
-// ../../packages/wodal/dist/targets/microbit-v2/mindcraft/actions/temperature-sensor.js
-var import_app19 = __toESM(require_app(), 1);
-var callDef11 = (0, import_app19.mkCallDef)({ type: "bag", items: [] });
+// ../../packages/wodal/dist/targets/microbit-v2/wendoo/actions/temperature-sensor.js
+var import_app20 = __toESM(require_app(), 1);
+var callDef12 = (0, import_app20.mkCallDef)({ type: "bag", items: [] });
 function exec3(ctx, _args) {
-  return (0, import_app19.mkNumberValue)(getMicroBitContextDevice(ctx)?.thermometer.getTemperature() ?? 0);
+  return (0, import_app20.mkNumberValue)(getMicroBitContextDevice(ctx)?.thermometer.getTemperature() ?? 0);
 }
 var temperatureSensor = {
   ...MicroBitV2HostActions.Temperature,
-  callDef: callDef11,
+  callDef: callDef12,
   fn: { exec: exec3 },
   isAsync: false,
-  outputType: import_app19.CoreTypeIds.Number,
+  outputType: import_app20.CoreTypeIds.Number,
   inline: true,
   metadata: { label: "temperature" }
 };
 
-// ../../packages/wodal/dist/targets/microbit-v2/mindcraft/module.js
-var WODAL_MICROBIT_V2_MODULE_ID = "mindcraft.microbit-v2";
+// ../../packages/wodal/dist/targets/microbit-v2/wendoo/module.js
+var WODAL_MICROBIT_V2_MODULE_ID = "wendoo.microbit-v2";
 var WODAL_MICROBIT_V2_TYPE_IDS = {
   /** Native-backed aggregate for the simulated device. */
-  MicroBit: (0, import_app20.mkTypeId)(import_app20.NativeType.Struct, "MicroBit"),
+  MicroBit: (0, import_app21.mkTypeId)(import_app21.NativeType.Struct, "MicroBit"),
   /** Native-backed display facade for the simulated device. */
-  MicroBitDisplay: (0, import_app20.mkTypeId)(import_app20.NativeType.Struct, "MicroBitDisplay"),
+  MicroBitDisplay: (0, import_app21.mkTypeId)(import_app21.NativeType.Struct, "MicroBitDisplay"),
   /** Native-backed button facade for the simulated device. */
-  Button: (0, import_app20.mkTypeId)(import_app20.NativeType.Struct, "Button"),
+  Button: (0, import_app21.mkTypeId)(import_app21.NativeType.Struct, "Button"),
   /** Native-backed touch button facade for the simulated device. */
-  TouchButton: (0, import_app20.mkTypeId)(import_app20.NativeType.Struct, "TouchButton"),
+  TouchButton: (0, import_app21.mkTypeId)(import_app21.NativeType.Struct, "TouchButton"),
   /** Native-backed accelerometer facade for the simulated device. */
-  Accelerometer: (0, import_app20.mkTypeId)(import_app20.NativeType.Struct, "Accelerometer"),
+  Accelerometer: (0, import_app21.mkTypeId)(import_app21.NativeType.Struct, "Accelerometer"),
   /** Native-backed I2C bus facade for the simulated device. */
-  I2C: (0, import_app20.mkTypeId)(import_app20.NativeType.Struct, "I2C"),
+  I2C: (0, import_app21.mkTypeId)(import_app21.NativeType.Struct, "I2C"),
   /** Native-backed GPIO pin facade for the simulated device. */
-  GPIO: (0, import_app20.mkTypeId)(import_app20.NativeType.Struct, "GPIO"),
+  GPIO: (0, import_app21.mkTypeId)(import_app21.NativeType.Struct, "GPIO"),
   /** Native-backed sonar facade for the simulated device's background sensor driver. */
-  Sonar: (0, import_app20.mkTypeId)(import_app20.NativeType.Struct, "Sonar"),
+  Sonar: (0, import_app21.mkTypeId)(import_app21.NativeType.Struct, "Sonar"),
   /** Native-backed radio facade for the simulated device. */
-  Radio: (0, import_app20.mkTypeId)(import_app20.NativeType.Struct, "Radio"),
+  Radio: (0, import_app21.mkTypeId)(import_app21.NativeType.Struct, "Radio"),
   /** Native-backed speaker audio facade for the simulated device. */
-  MicroBitAudio: (0, import_app20.mkTypeId)(import_app20.NativeType.Struct, "MicroBitAudio"),
+  MicroBitAudio: (0, import_app21.mkTypeId)(import_app21.NativeType.Struct, "MicroBitAudio"),
   /** Native-backed thermometer facade for the simulated device. */
-  Thermometer: (0, import_app20.mkTypeId)(import_app20.NativeType.Struct, "Thermometer"),
+  Thermometer: (0, import_app21.mkTypeId)(import_app21.NativeType.Struct, "Thermometer"),
   /** Options struct for `MicroBitAudio.playSound`: the two optional lease flags. */
-  PlaySoundOptions: (0, import_app20.mkTypeId)(import_app20.NativeType.Struct, "PlaySoundOptions"),
+  PlaySoundOptions: (0, import_app21.mkTypeId)(import_app21.NativeType.Struct, "PlaySoundOptions"),
+  /** Options struct for `MicroBitAudio.playTone`: the optional tone shape and the two lease flags. */
+  PlayToneOptions: (0, import_app21.mkTypeId)(import_app21.NativeType.Struct, "PlayToneOptions"),
   /** Options struct for `MicroBitDisplay.drawImage`: the optional hold duration and two lease flags. */
-  DrawImageOptions: (0, import_app20.mkTypeId)(import_app20.NativeType.Struct, "DrawImageOptions"),
+  DrawImageOptions: (0, import_app21.mkTypeId)(import_app21.NativeType.Struct, "DrawImageOptions"),
   /** Options struct for `MicroBitDisplay.scrollText`: the two optional lease flags. */
-  ScrollTextOptions: (0, import_app20.mkTypeId)(import_app20.NativeType.Struct, "ScrollTextOptions"),
+  ScrollTextOptions: (0, import_app21.mkTypeId)(import_app21.NativeType.Struct, "ScrollTextOptions"),
   /** Value struct describing one received radio packet (drain-all element). */
-  RadioPacket: (0, import_app20.mkTypeId)(import_app20.NativeType.Struct, "RadioPacket"),
+  RadioPacket: (0, import_app21.mkTypeId)(import_app21.NativeType.Struct, "RadioPacket"),
   /** List of {@link RadioPacket}, the drain-all receive result type. */
-  RadioPacketList: (0, import_app20.mkTypeId)(import_app20.NativeType.List, "RadioPacketList")
+  RadioPacketList: (0, import_app21.mkTypeId)(import_app21.NativeType.List, "RadioPacketList")
 };
 var RadioPacketField;
 (function(RadioPacketField2) {
@@ -33234,13 +34045,21 @@ var DrawImageOptionsField;
   DrawImageOptionsField2[DrawImageOptionsField2["Immediately"] = 1] = "Immediately";
   DrawImageOptionsField2[DrawImageOptionsField2["InBackground"] = 2] = "InBackground";
 })(DrawImageOptionsField || (DrawImageOptionsField = {}));
+var PlayToneOptionsField;
+(function(PlayToneOptionsField2) {
+  PlayToneOptionsField2[PlayToneOptionsField2["Duration"] = 0] = "Duration";
+  PlayToneOptionsField2[PlayToneOptionsField2["Volume"] = 1] = "Volume";
+  PlayToneOptionsField2[PlayToneOptionsField2["Waveform"] = 2] = "Waveform";
+  PlayToneOptionsField2[PlayToneOptionsField2["Immediately"] = 3] = "Immediately";
+  PlayToneOptionsField2[PlayToneOptionsField2["InBackground"] = 4] = "InBackground";
+})(PlayToneOptionsField || (PlayToneOptionsField = {}));
 var CONTEXT_MICROBIT_FIELD_ID = 6;
 function optionField(options, fieldIndex) {
-  return (0, import_app20.isStructValue)(options) && options.v !== void 0 ? options.v.get(fieldIndex) ?? import_app20.NIL_VALUE : import_app20.NIL_VALUE;
+  return (0, import_app21.isStructValue)(options) && options.v !== void 0 ? options.v.at(fieldIndex) ?? import_app21.NIL_VALUE : import_app21.NIL_VALUE;
 }
 function optionFlag(options, fieldIndex) {
   const field = optionField(options, fieldIndex);
-  return (0, import_app20.isBooleanValue)(field) && field.v;
+  return (0, import_app21.isBooleanValue)(field) && field.v;
 }
 function createMicroBitV2Module() {
   return {
@@ -33264,212 +34083,212 @@ function registerMicroBitTypes(api) {
   const { types } = api.brainServices.runtime;
   types.addStructType("MicroBitDisplay", {
     atomId: MicroBitV2TypeAtomId.MicroBitDisplay,
-    fields: import_app20.List.empty(),
+    fields: import_app21.List.empty(),
     fieldGetter: () => void 0,
-    methods: import_app20.List.from([
+    methods: import_app21.List.from([
       {
         name: "setPixelValue",
-        params: import_app20.List.from([
-          { name: "x", typeId: import_app20.CoreTypeIds.Number },
-          { name: "y", typeId: import_app20.CoreTypeIds.Number },
-          { name: "brightness", typeId: import_app20.CoreTypeIds.Number }
+        params: import_app21.List.from([
+          { name: "x", typeId: import_app21.CoreTypeIds.Number },
+          { name: "y", typeId: import_app21.CoreTypeIds.Number },
+          { name: "brightness", typeId: import_app21.CoreTypeIds.Number }
         ]),
-        returnTypeId: import_app20.CoreTypeIds.Void
+        returnTypeId: import_app21.CoreTypeIds.Void
       },
       {
         name: "getPixelValue",
-        params: import_app20.List.from([
-          { name: "x", typeId: import_app20.CoreTypeIds.Number },
-          { name: "y", typeId: import_app20.CoreTypeIds.Number }
+        params: import_app21.List.from([
+          { name: "x", typeId: import_app21.CoreTypeIds.Number },
+          { name: "y", typeId: import_app21.CoreTypeIds.Number }
         ]),
-        returnTypeId: import_app20.CoreTypeIds.Number
+        returnTypeId: import_app21.CoreTypeIds.Number
       },
       {
         name: "clear",
-        params: import_app20.List.empty(),
-        returnTypeId: import_app20.CoreTypeIds.Void
+        params: import_app21.List.empty(),
+        returnTypeId: import_app21.CoreTypeIds.Void
       },
       {
         name: "drawImage",
-        params: import_app20.List.from([
+        params: import_app21.List.from([
           { name: "image", typeId: WODAL_SHARED_TYPE_IDS.Image },
           { name: "options", typeId: WODAL_MICROBIT_V2_TYPE_IDS.DrawImageOptions, optional: true }
         ]),
-        returnTypeId: import_app20.CoreTypeIds.Void,
+        returnTypeId: import_app21.CoreTypeIds.Void,
         isAsync: true
       },
       {
         name: "scrollText",
-        params: import_app20.List.from([
-          { name: "text", typeId: import_app20.CoreTypeIds.String },
+        params: import_app21.List.from([
+          { name: "text", typeId: import_app21.CoreTypeIds.String },
           { name: "options", typeId: WODAL_MICROBIT_V2_TYPE_IDS.ScrollTextOptions, optional: true }
         ]),
-        returnTypeId: import_app20.CoreTypeIds.Void,
+        returnTypeId: import_app21.CoreTypeIds.Void,
         isAsync: true
       },
       {
         name: "getLightLevel",
-        params: import_app20.List.empty(),
-        returnTypeId: import_app20.CoreTypeIds.Number
+        params: import_app21.List.empty(),
+        returnTypeId: import_app21.CoreTypeIds.Number
       }
     ])
   });
   types.addStructType("Button", {
     atomId: MicroBitV2TypeAtomId.Button,
-    fields: import_app20.List.empty(),
+    fields: import_app21.List.empty(),
     fieldGetter: () => void 0,
-    methods: import_app20.List.from([
+    methods: import_app21.List.from([
       {
         name: "isPressed",
-        params: import_app20.List.empty(),
-        returnTypeId: import_app20.CoreTypeIds.Number
+        params: import_app21.List.empty(),
+        returnTypeId: import_app21.CoreTypeIds.Number
       }
     ])
   });
   types.addStructType("TouchButton", {
     atomId: MicroBitV2TypeAtomId.TouchButton,
-    fields: import_app20.List.empty(),
+    fields: import_app21.List.empty(),
     fieldGetter: () => void 0,
-    methods: import_app20.List.from([
+    methods: import_app21.List.from([
       {
         name: "isPressed",
-        params: import_app20.List.empty(),
-        returnTypeId: import_app20.CoreTypeIds.Number
+        params: import_app21.List.empty(),
+        returnTypeId: import_app21.CoreTypeIds.Number
       },
       {
         name: "getThreshold",
-        params: import_app20.List.empty(),
-        returnTypeId: import_app20.CoreTypeIds.Number
+        params: import_app21.List.empty(),
+        returnTypeId: import_app21.CoreTypeIds.Number
       },
       {
         name: "setThreshold",
-        params: import_app20.List.from([{ name: "threshold", typeId: import_app20.CoreTypeIds.Number }]),
-        returnTypeId: import_app20.CoreTypeIds.Void
+        params: import_app21.List.from([{ name: "threshold", typeId: import_app21.CoreTypeIds.Number }]),
+        returnTypeId: import_app21.CoreTypeIds.Void
       },
       {
         name: "getValue",
-        params: import_app20.List.empty(),
-        returnTypeId: import_app20.CoreTypeIds.Number
+        params: import_app21.List.empty(),
+        returnTypeId: import_app21.CoreTypeIds.Number
       },
       {
         name: "setValue",
-        params: import_app20.List.from([{ name: "value", typeId: import_app20.CoreTypeIds.Number }]),
-        returnTypeId: import_app20.CoreTypeIds.Void
+        params: import_app21.List.from([{ name: "value", typeId: import_app21.CoreTypeIds.Number }]),
+        returnTypeId: import_app21.CoreTypeIds.Void
       }
     ])
   });
   types.addStructType("Accelerometer", {
     atomId: MicroBitV2TypeAtomId.Accelerometer,
-    fields: import_app20.List.empty(),
+    fields: import_app21.List.empty(),
     fieldGetter: () => void 0,
-    methods: import_app20.List.from([
-      { name: "getX", params: import_app20.List.empty(), returnTypeId: import_app20.CoreTypeIds.Number },
-      { name: "getY", params: import_app20.List.empty(), returnTypeId: import_app20.CoreTypeIds.Number },
-      { name: "getZ", params: import_app20.List.empty(), returnTypeId: import_app20.CoreTypeIds.Number },
-      { name: "getPitchRadians", params: import_app20.List.empty(), returnTypeId: import_app20.CoreTypeIds.Number },
-      { name: "getRollRadians", params: import_app20.List.empty(), returnTypeId: import_app20.CoreTypeIds.Number },
-      { name: "getPitch", params: import_app20.List.empty(), returnTypeId: import_app20.CoreTypeIds.Number },
-      { name: "getRoll", params: import_app20.List.empty(), returnTypeId: import_app20.CoreTypeIds.Number },
-      { name: "getGesture", params: import_app20.List.empty(), returnTypeId: import_app20.CoreTypeIds.Number }
+    methods: import_app21.List.from([
+      { name: "getX", params: import_app21.List.empty(), returnTypeId: import_app21.CoreTypeIds.Number },
+      { name: "getY", params: import_app21.List.empty(), returnTypeId: import_app21.CoreTypeIds.Number },
+      { name: "getZ", params: import_app21.List.empty(), returnTypeId: import_app21.CoreTypeIds.Number },
+      { name: "getPitchRadians", params: import_app21.List.empty(), returnTypeId: import_app21.CoreTypeIds.Number },
+      { name: "getRollRadians", params: import_app21.List.empty(), returnTypeId: import_app21.CoreTypeIds.Number },
+      { name: "getPitch", params: import_app21.List.empty(), returnTypeId: import_app21.CoreTypeIds.Number },
+      { name: "getRoll", params: import_app21.List.empty(), returnTypeId: import_app21.CoreTypeIds.Number },
+      { name: "getGesture", params: import_app21.List.empty(), returnTypeId: import_app21.CoreTypeIds.Number }
     ])
   });
   types.addStructType("Thermometer", {
     atomId: MicroBitV2TypeAtomId.MicroBitThermometer,
-    fields: import_app20.List.empty(),
+    fields: import_app21.List.empty(),
     fieldGetter: () => void 0,
-    methods: import_app20.List.from([{ name: "getTemperature", params: import_app20.List.empty(), returnTypeId: import_app20.CoreTypeIds.Number }])
+    methods: import_app21.List.from([{ name: "getTemperature", params: import_app21.List.empty(), returnTypeId: import_app21.CoreTypeIds.Number }])
   });
   types.addStructType("I2C", {
     atomId: MicroBitV2TypeAtomId.I2C,
-    fields: import_app20.List.empty(),
+    fields: import_app21.List.empty(),
     fieldGetter: () => void 0,
-    methods: import_app20.List.from([
+    methods: import_app21.List.from([
       {
         name: "writeBuffer",
-        params: import_app20.List.from([
-          { name: "address", typeId: import_app20.CoreTypeIds.Number },
-          { name: "data", typeId: import_app20.CoreTypeIds.Buffer }
+        params: import_app21.List.from([
+          { name: "address", typeId: import_app21.CoreTypeIds.Number },
+          { name: "data", typeId: import_app21.CoreTypeIds.Buffer }
         ]),
-        returnTypeId: import_app20.CoreTypeIds.Number
+        returnTypeId: import_app21.CoreTypeIds.Number
       },
       {
         name: "readBuffer",
-        params: import_app20.List.from([
-          { name: "address", typeId: import_app20.CoreTypeIds.Number },
-          { name: "length", typeId: import_app20.CoreTypeIds.Number }
+        params: import_app21.List.from([
+          { name: "address", typeId: import_app21.CoreTypeIds.Number },
+          { name: "length", typeId: import_app21.CoreTypeIds.Number }
         ]),
-        returnTypeId: import_app20.CoreTypeIds.Buffer
+        returnTypeId: import_app21.CoreTypeIds.Buffer
       }
     ])
   });
   types.addStructType("GPIO", {
     atomId: MicroBitV2TypeAtomId.GPIO,
-    fields: import_app20.List.empty(),
+    fields: import_app21.List.empty(),
     fieldGetter: () => void 0,
-    methods: import_app20.List.from([
+    methods: import_app21.List.from([
       {
         name: "digitalRead",
-        params: import_app20.List.from([{ name: "pin", typeId: import_app20.CoreTypeIds.Number }]),
-        returnTypeId: import_app20.CoreTypeIds.Number
+        params: import_app21.List.from([{ name: "pin", typeId: import_app21.CoreTypeIds.Number }]),
+        returnTypeId: import_app21.CoreTypeIds.Number
       },
       {
         name: "digitalWrite",
-        params: import_app20.List.from([
-          { name: "pin", typeId: import_app20.CoreTypeIds.Number },
-          { name: "value", typeId: import_app20.CoreTypeIds.Number }
+        params: import_app21.List.from([
+          { name: "pin", typeId: import_app21.CoreTypeIds.Number },
+          { name: "value", typeId: import_app21.CoreTypeIds.Number }
         ]),
-        returnTypeId: import_app20.CoreTypeIds.Number
+        returnTypeId: import_app21.CoreTypeIds.Number
       },
       {
         name: "setPull",
-        params: import_app20.List.from([
-          { name: "pin", typeId: import_app20.CoreTypeIds.Number },
-          { name: "mode", typeId: import_app20.CoreTypeIds.Number }
+        params: import_app21.List.from([
+          { name: "pin", typeId: import_app21.CoreTypeIds.Number },
+          { name: "mode", typeId: import_app21.CoreTypeIds.Number }
         ]),
-        returnTypeId: import_app20.CoreTypeIds.Number
+        returnTypeId: import_app21.CoreTypeIds.Number
       },
       {
         name: "servoWrite",
-        params: import_app20.List.from([
-          { name: "pin", typeId: import_app20.CoreTypeIds.Number },
-          { name: "angle", typeId: import_app20.CoreTypeIds.Number }
+        params: import_app21.List.from([
+          { name: "pin", typeId: import_app21.CoreTypeIds.Number },
+          { name: "angle", typeId: import_app21.CoreTypeIds.Number }
         ]),
-        returnTypeId: import_app20.CoreTypeIds.Number
+        returnTypeId: import_app21.CoreTypeIds.Number
       },
       {
         name: "analogRead",
-        params: import_app20.List.from([{ name: "pin", typeId: import_app20.CoreTypeIds.Number }]),
-        returnTypeId: import_app20.CoreTypeIds.Number
+        params: import_app21.List.from([{ name: "pin", typeId: import_app21.CoreTypeIds.Number }]),
+        returnTypeId: import_app21.CoreTypeIds.Number
       }
     ])
   });
   types.addStructType("Sonar", {
     atomId: MicroBitV2TypeAtomId.Sonar,
-    fields: import_app20.List.empty(),
+    fields: import_app21.List.empty(),
     fieldGetter: () => void 0,
-    methods: import_app20.List.from([
+    methods: import_app21.List.from([
       {
         name: "distance",
-        params: import_app20.List.from([
-          { name: "trig", typeId: import_app20.CoreTypeIds.Number },
-          { name: "echo", typeId: import_app20.CoreTypeIds.Number }
+        params: import_app21.List.from([
+          { name: "trig", typeId: import_app21.CoreTypeIds.Number },
+          { name: "echo", typeId: import_app21.CoreTypeIds.Number }
         ]),
-        returnTypeId: import_app20.CoreTypeIds.Number
+        returnTypeId: import_app21.CoreTypeIds.Number
       }
     ])
   });
   types.addStructType("RadioPacket", {
     atomId: MicroBitV2TypeAtomId.RadioPacket,
-    fields: import_app20.List.from([
-      { name: "seq", typeId: import_app20.CoreTypeIds.Number, fieldIndex: RadioPacketField.Seq },
-      { name: "type", typeId: import_app20.CoreTypeIds.Number, fieldIndex: RadioPacketField.Type },
-      { name: "value", typeId: import_app20.CoreTypeIds.Number, fieldIndex: RadioPacketField.Value },
-      { name: "name", typeId: import_app20.CoreTypeIds.String, fieldIndex: RadioPacketField.Name },
-      { name: "text", typeId: import_app20.CoreTypeIds.String, fieldIndex: RadioPacketField.Text },
-      { name: "buffer", typeId: import_app20.CoreTypeIds.Buffer, fieldIndex: RadioPacketField.Buffer },
-      { name: "rssi", typeId: import_app20.CoreTypeIds.Number, fieldIndex: RadioPacketField.Rssi },
-      { name: "serial", typeId: import_app20.CoreTypeIds.Number, fieldIndex: RadioPacketField.Serial },
-      { name: "time", typeId: import_app20.CoreTypeIds.Number, fieldIndex: RadioPacketField.Time }
+    fields: import_app21.List.from([
+      { name: "seq", typeId: import_app21.CoreTypeIds.Number, fieldIndex: RadioPacketField.Seq },
+      { name: "type", typeId: import_app21.CoreTypeIds.Number, fieldIndex: RadioPacketField.Type },
+      { name: "value", typeId: import_app21.CoreTypeIds.Number, fieldIndex: RadioPacketField.Value },
+      { name: "name", typeId: import_app21.CoreTypeIds.String, fieldIndex: RadioPacketField.Name },
+      { name: "text", typeId: import_app21.CoreTypeIds.String, fieldIndex: RadioPacketField.Text },
+      { name: "buffer", typeId: import_app21.CoreTypeIds.Buffer, fieldIndex: RadioPacketField.Buffer },
+      { name: "rssi", typeId: import_app21.CoreTypeIds.Number, fieldIndex: RadioPacketField.Rssi },
+      { name: "serial", typeId: import_app21.CoreTypeIds.Number, fieldIndex: RadioPacketField.Serial },
+      { name: "time", typeId: import_app21.CoreTypeIds.Number, fieldIndex: RadioPacketField.Time }
     ])
   });
   types.addListType("RadioPacketList", {
@@ -33478,28 +34297,48 @@ function registerMicroBitTypes(api) {
   });
   types.addStructType("SoundEmoji", {
     atomId: MicroBitV2TypeAtomId.SoundEmoji,
-    fields: import_app20.List.from([{ name: "name", typeId: import_app20.CoreTypeIds.String, fieldIndex: SoundEmojiField.Name }])
+    fields: import_app21.List.from([{ name: "name", typeId: import_app21.CoreTypeIds.String, fieldIndex: SoundEmojiField.Name }])
   });
   types.addStructType("PlaySoundOptions", {
     atomId: MicroBitV2TypeAtomId.PlaySoundOptions,
-    fields: import_app20.List.from([
-      { name: "immediately", typeId: import_app20.CoreTypeIds.Boolean, fieldIndex: LeaseOptionsField.Immediately, optional: true },
-      { name: "inBackground", typeId: import_app20.CoreTypeIds.Boolean, fieldIndex: LeaseOptionsField.InBackground, optional: true }
+    fields: import_app21.List.from([
+      { name: "immediately", typeId: import_app21.CoreTypeIds.Boolean, fieldIndex: LeaseOptionsField.Immediately, optional: true },
+      { name: "inBackground", typeId: import_app21.CoreTypeIds.Boolean, fieldIndex: LeaseOptionsField.InBackground, optional: true }
+    ])
+  });
+  types.addStructType("PlayToneOptions", {
+    atomId: MicroBitV2TypeAtomId.PlayToneOptions,
+    fields: import_app21.List.from([
+      { name: "duration", typeId: import_app21.CoreTypeIds.Number, fieldIndex: PlayToneOptionsField.Duration, optional: true },
+      { name: "volume", typeId: import_app21.CoreTypeIds.Number, fieldIndex: PlayToneOptionsField.Volume, optional: true },
+      { name: "waveform", typeId: import_app21.CoreTypeIds.String, fieldIndex: PlayToneOptionsField.Waveform, optional: true },
+      {
+        name: "immediately",
+        typeId: import_app21.CoreTypeIds.Boolean,
+        fieldIndex: PlayToneOptionsField.Immediately,
+        optional: true
+      },
+      {
+        name: "inBackground",
+        typeId: import_app21.CoreTypeIds.Boolean,
+        fieldIndex: PlayToneOptionsField.InBackground,
+        optional: true
+      }
     ])
   });
   types.addStructType("DrawImageOptions", {
     atomId: MicroBitV2TypeAtomId.DrawImageOptions,
-    fields: import_app20.List.from([
-      { name: "duration", typeId: import_app20.CoreTypeIds.Number, fieldIndex: DrawImageOptionsField.Duration, optional: true },
+    fields: import_app21.List.from([
+      { name: "duration", typeId: import_app21.CoreTypeIds.Number, fieldIndex: DrawImageOptionsField.Duration, optional: true },
       {
         name: "immediately",
-        typeId: import_app20.CoreTypeIds.Boolean,
+        typeId: import_app21.CoreTypeIds.Boolean,
         fieldIndex: DrawImageOptionsField.Immediately,
         optional: true
       },
       {
         name: "inBackground",
-        typeId: import_app20.CoreTypeIds.Boolean,
+        typeId: import_app21.CoreTypeIds.Boolean,
         fieldIndex: DrawImageOptionsField.InBackground,
         optional: true
       }
@@ -33507,90 +34346,99 @@ function registerMicroBitTypes(api) {
   });
   types.addStructType("ScrollTextOptions", {
     atomId: MicroBitV2TypeAtomId.ScrollTextOptions,
-    fields: import_app20.List.from([
-      { name: "immediately", typeId: import_app20.CoreTypeIds.Boolean, fieldIndex: LeaseOptionsField.Immediately, optional: true },
-      { name: "inBackground", typeId: import_app20.CoreTypeIds.Boolean, fieldIndex: LeaseOptionsField.InBackground, optional: true }
+    fields: import_app21.List.from([
+      { name: "immediately", typeId: import_app21.CoreTypeIds.Boolean, fieldIndex: LeaseOptionsField.Immediately, optional: true },
+      { name: "inBackground", typeId: import_app21.CoreTypeIds.Boolean, fieldIndex: LeaseOptionsField.InBackground, optional: true }
     ])
   });
   types.addStructType("Radio", {
     atomId: MicroBitV2TypeAtomId.Radio,
-    fields: import_app20.List.empty(),
+    fields: import_app21.List.empty(),
     fieldGetter: () => void 0,
-    methods: import_app20.List.from([
+    methods: import_app21.List.from([
       {
         name: "sendNumber",
-        params: import_app20.List.from([{ name: "value", typeId: import_app20.CoreTypeIds.Number }]),
-        returnTypeId: import_app20.CoreTypeIds.Void
+        params: import_app21.List.from([{ name: "value", typeId: import_app21.CoreTypeIds.Number }]),
+        returnTypeId: import_app21.CoreTypeIds.Void
       },
       {
         name: "sendString",
-        params: import_app20.List.from([{ name: "text", typeId: import_app20.CoreTypeIds.String }]),
-        returnTypeId: import_app20.CoreTypeIds.Void
+        params: import_app21.List.from([{ name: "text", typeId: import_app21.CoreTypeIds.String }]),
+        returnTypeId: import_app21.CoreTypeIds.Void
       },
       {
         name: "sendValue",
-        params: import_app20.List.from([
-          { name: "name", typeId: import_app20.CoreTypeIds.String },
-          { name: "value", typeId: import_app20.CoreTypeIds.Number }
+        params: import_app21.List.from([
+          { name: "name", typeId: import_app21.CoreTypeIds.String },
+          { name: "value", typeId: import_app21.CoreTypeIds.Number }
         ]),
-        returnTypeId: import_app20.CoreTypeIds.Void
+        returnTypeId: import_app21.CoreTypeIds.Void
       },
       {
         name: "sendBuffer",
-        params: import_app20.List.from([{ name: "buffer", typeId: import_app20.CoreTypeIds.Buffer }]),
-        returnTypeId: import_app20.CoreTypeIds.Void
+        params: import_app21.List.from([{ name: "buffer", typeId: import_app21.CoreTypeIds.Buffer }]),
+        returnTypeId: import_app21.CoreTypeIds.Void
       },
       {
         name: "sendRawBuffer",
-        params: import_app20.List.from([{ name: "buffer", typeId: import_app20.CoreTypeIds.Buffer }]),
-        returnTypeId: import_app20.CoreTypeIds.Void
+        params: import_app21.List.from([{ name: "buffer", typeId: import_app21.CoreTypeIds.Buffer }]),
+        returnTypeId: import_app21.CoreTypeIds.Void
       },
       {
         name: "setGroup",
-        params: import_app20.List.from([{ name: "group", typeId: import_app20.CoreTypeIds.Number }]),
-        returnTypeId: import_app20.CoreTypeIds.Void
+        params: import_app21.List.from([{ name: "group", typeId: import_app21.CoreTypeIds.Number }]),
+        returnTypeId: import_app21.CoreTypeIds.Void
       },
       {
         name: "setTransmitPower",
-        params: import_app20.List.from([{ name: "power", typeId: import_app20.CoreTypeIds.Number }]),
-        returnTypeId: import_app20.CoreTypeIds.Void
+        params: import_app21.List.from([{ name: "power", typeId: import_app21.CoreTypeIds.Number }]),
+        returnTypeId: import_app21.CoreTypeIds.Void
       },
       {
         name: "setFrequencyBand",
-        params: import_app20.List.from([{ name: "band", typeId: import_app20.CoreTypeIds.Number }]),
-        returnTypeId: import_app20.CoreTypeIds.Void
+        params: import_app21.List.from([{ name: "band", typeId: import_app21.CoreTypeIds.Number }]),
+        returnTypeId: import_app21.CoreTypeIds.Void
       },
       {
         name: "receive",
-        params: import_app20.List.from([{ name: "since", typeId: import_app20.CoreTypeIds.Number }]),
+        params: import_app21.List.from([{ name: "since", typeId: import_app21.CoreTypeIds.Number }]),
         returnTypeId: WODAL_MICROBIT_V2_TYPE_IDS.RadioPacketList
       },
       {
         name: "currentSeq",
-        params: import_app20.List.empty(),
-        returnTypeId: import_app20.CoreTypeIds.Number
+        params: import_app21.List.empty(),
+        returnTypeId: import_app21.CoreTypeIds.Number
       }
     ])
   });
   types.addStructType("MicroBitAudio", {
     atomId: MicroBitV2TypeAtomId.MicroBitAudio,
-    fields: import_app20.List.empty(),
+    fields: import_app21.List.empty(),
     fieldGetter: () => void 0,
-    methods: import_app20.List.from([
+    methods: import_app21.List.from([
       {
         name: "playSound",
-        params: import_app20.List.from([
-          { name: "sound", typeId: import_app20.CoreTypeIds.String },
+        params: import_app21.List.from([
+          { name: "sound", typeId: import_app21.CoreTypeIds.String },
           { name: "options", typeId: WODAL_MICROBIT_V2_TYPE_IDS.PlaySoundOptions, optional: true }
         ]),
-        returnTypeId: import_app20.CoreTypeIds.Void,
+        returnTypeId: import_app21.CoreTypeIds.Void,
+        isAsync: true
+      },
+      {
+        name: "playTone",
+        params: import_app21.List.from([
+          { name: "frequency", typeId: import_app21.CoreTypeIds.Number, optional: true },
+          { name: "options", typeId: WODAL_MICROBIT_V2_TYPE_IDS.PlayToneOptions, optional: true }
+        ]),
+        returnTypeId: import_app21.CoreTypeIds.Void,
         isAsync: true
       }
     ])
   });
   types.addStructType("MicroBit", {
     atomId: MicroBitV2TypeAtomId.MicroBit,
-    fields: import_app20.List.from([
+    fields: import_app21.List.from([
       { name: "display", typeId: WODAL_MICROBIT_V2_TYPE_IDS.MicroBitDisplay, fieldIndex: MicroBitField.Display },
       { name: "buttonA", typeId: WODAL_MICROBIT_V2_TYPE_IDS.Button, fieldIndex: MicroBitField.ButtonA },
       { name: "buttonB", typeId: WODAL_MICROBIT_V2_TYPE_IDS.Button, fieldIndex: MicroBitField.ButtonB },
@@ -33614,48 +34462,48 @@ function registerMicroBitTypes(api) {
     fieldGetter: (source, fieldId) => {
       const microbit = getNativeMicroBit(source);
       if (!microbit) {
-        return import_app20.NIL_VALUE;
+        return import_app21.NIL_VALUE;
       }
       switch (fieldId) {
         case MicroBitField.Display:
-          return (0, import_app20.mkNativeStructValue)(WODAL_MICROBIT_V2_TYPE_IDS.MicroBitDisplay, microbit.display);
+          return (0, import_app21.mkNativeStructValue)(WODAL_MICROBIT_V2_TYPE_IDS.MicroBitDisplay, microbit.display);
         case MicroBitField.ButtonA:
-          return (0, import_app20.mkNativeStructValue)(WODAL_MICROBIT_V2_TYPE_IDS.Button, microbit.buttonA);
+          return (0, import_app21.mkNativeStructValue)(WODAL_MICROBIT_V2_TYPE_IDS.Button, microbit.buttonA);
         case MicroBitField.ButtonB:
-          return (0, import_app20.mkNativeStructValue)(WODAL_MICROBIT_V2_TYPE_IDS.Button, microbit.buttonB);
+          return (0, import_app21.mkNativeStructValue)(WODAL_MICROBIT_V2_TYPE_IDS.Button, microbit.buttonB);
         case MicroBitField.Logo:
-          return (0, import_app20.mkNativeStructValue)(WODAL_MICROBIT_V2_TYPE_IDS.TouchButton, microbit.logo);
+          return (0, import_app21.mkNativeStructValue)(WODAL_MICROBIT_V2_TYPE_IDS.TouchButton, microbit.logo);
         case MicroBitField.Accelerometer:
-          return (0, import_app20.mkNativeStructValue)(WODAL_MICROBIT_V2_TYPE_IDS.Accelerometer, microbit.accelerometer);
+          return (0, import_app21.mkNativeStructValue)(WODAL_MICROBIT_V2_TYPE_IDS.Accelerometer, microbit.accelerometer);
         case MicroBitField.I2C:
-          return (0, import_app20.mkNativeStructValue)(WODAL_MICROBIT_V2_TYPE_IDS.I2C, microbit.i2c);
+          return (0, import_app21.mkNativeStructValue)(WODAL_MICROBIT_V2_TYPE_IDS.I2C, microbit.i2c);
         case MicroBitField.GPIO:
-          return (0, import_app20.mkNativeStructValue)(WODAL_MICROBIT_V2_TYPE_IDS.GPIO, microbit.gpio);
+          return (0, import_app21.mkNativeStructValue)(WODAL_MICROBIT_V2_TYPE_IDS.GPIO, microbit.gpio);
         case MicroBitField.Sonar:
-          return (0, import_app20.mkNativeStructValue)(WODAL_MICROBIT_V2_TYPE_IDS.Sonar, microbit.sensorDriver);
+          return (0, import_app21.mkNativeStructValue)(WODAL_MICROBIT_V2_TYPE_IDS.Sonar, microbit.sensorDriver);
         case MicroBitField.Radio:
-          return (0, import_app20.mkNativeStructValue)(WODAL_MICROBIT_V2_TYPE_IDS.Radio, microbit.radio);
+          return (0, import_app21.mkNativeStructValue)(WODAL_MICROBIT_V2_TYPE_IDS.Radio, microbit.radio);
         case MicroBitField.Audio:
-          return (0, import_app20.mkNativeStructValue)(WODAL_MICROBIT_V2_TYPE_IDS.MicroBitAudio, microbit.speaker);
+          return (0, import_app21.mkNativeStructValue)(WODAL_MICROBIT_V2_TYPE_IDS.MicroBitAudio, microbit.speaker);
         case MicroBitField.Thermometer:
-          return (0, import_app20.mkNativeStructValue)(WODAL_MICROBIT_V2_TYPE_IDS.Thermometer, microbit.thermometer);
+          return (0, import_app21.mkNativeStructValue)(WODAL_MICROBIT_V2_TYPE_IDS.Thermometer, microbit.thermometer);
         default:
           return void 0;
       }
     }
   });
-  types.addStructFields(import_app20.ContextTypeIds.Context, import_app20.List.from([
+  types.addStructFields(import_app21.ContextTypeIds.Context, import_app21.List.from([
     { name: "microbit", typeId: WODAL_MICROBIT_V2_TYPE_IDS.MicroBit, fieldIndex: CONTEXT_MICROBIT_FIELD_ID }
   ]), (_source, fieldId, ctx) => {
     if (fieldId !== CONTEXT_MICROBIT_FIELD_ID) {
       return void 0;
     }
     const microbit = getMicroBitContextDevice(ctx);
-    return microbit ? (0, import_app20.mkNativeStructValue)(WODAL_MICROBIT_V2_TYPE_IDS.MicroBit, microbit) : import_app20.NIL_VALUE;
+    return microbit ? (0, import_app21.mkNativeStructValue)(WODAL_MICROBIT_V2_TYPE_IDS.MicroBit, microbit) : import_app21.NIL_VALUE;
   });
 }
 function registerMicroBitDisplayFunctions(api) {
-  const emptyCallDef2 = (0, import_app20.mkCallDef)({ type: "bag", items: [] });
+  const emptyCallDef2 = (0, import_app21.mkCallDef)({ type: "bag", items: [] });
   api.registerFunction({
     id: MicroBitV2HostFuncId.DisplaySetPixelValue,
     name: "MicroBitDisplay.setPixelValue",
@@ -33663,7 +34511,7 @@ function registerMicroBitDisplayFunctions(api) {
     fn: {
       exec: (_ctx, args) => {
         getDisplayReceiver(args)?.setPixelValue(pixelCoordToPort(numberArg(args, 1)), pixelCoordToPort(numberArg(args, 2)), brightnessToPort(numberArg(args, 3)));
-        return import_app20.VOID_VALUE;
+        return import_app21.VOID_VALUE;
       }
     },
     callDef: emptyCallDef2
@@ -33675,7 +34523,7 @@ function registerMicroBitDisplayFunctions(api) {
     fn: {
       exec: (_ctx, args) => {
         const brightness = getDisplayReceiver(args)?.getPixelValue(numberArg(args, 1), numberArg(args, 2)) ?? 0;
-        return (0, import_app20.mkNumberValue)(brightness);
+        return (0, import_app21.mkNumberValue)(brightness);
       }
     },
     callDef: emptyCallDef2
@@ -33687,7 +34535,7 @@ function registerMicroBitDisplayFunctions(api) {
     fn: {
       exec: (_ctx, args) => {
         getDisplayReceiver(args)?.clear();
-        return import_app20.VOID_VALUE;
+        return import_app21.VOID_VALUE;
       }
     },
     callDef: emptyCallDef2
@@ -33700,20 +34548,20 @@ function registerMicroBitDisplayFunctions(api) {
       exec: (ctx, args, handle) => {
         const display = getDisplayReceiver(args);
         if (!display) {
-          handle.resolve(import_app20.VOID_VALUE);
+          handle.resolve(import_app21.VOID_VALUE);
           return;
         }
-        const options = args.get(2);
+        const options = args.at(2);
         if (optionFlag(options, DrawImageOptionsField.Immediately)) {
           display.preempt();
         }
-        const imageArg = args.get(1);
+        const imageArg = args.at(1);
         const clipped = (imageArg !== void 0 ? clipImage(imageArg) : void 0) ?? DEFAULT_IMAGE;
-        const durationSeconds = (0, import_app20.extractNumberValue)(optionField(options, DrawImageOptionsField.Duration));
+        const durationSeconds = (0, import_app21.extractNumberValue)(optionField(options, DrawImageOptionsField.Duration));
         const durationMs = durationSeconds === void 0 ? DEFAULT_DURATION_MS : toNonNegativeInteger(Math.fround(durationSeconds * 1e3));
-        display.drawImage([clipped], durationMs, ctx.time, () => handle.resolve(import_app20.VOID_VALUE));
+        display.drawImage([clipped], durationMs, ctx.time, () => handle.resolve(import_app21.VOID_VALUE));
         if (optionFlag(options, DrawImageOptionsField.InBackground)) {
-          handle.resolve(import_app20.VOID_VALUE);
+          handle.resolve(import_app21.VOID_VALUE);
         }
       }
     },
@@ -33724,7 +34572,7 @@ function registerMicroBitDisplayFunctions(api) {
     name: "MicroBitDisplay.getLightLevel",
     isAsync: false,
     fn: {
-      exec: (_ctx, args) => (0, import_app20.mkNumberValue)(getDisplayReceiver(args)?.getLightLevel() ?? 0)
+      exec: (_ctx, args) => (0, import_app21.mkNumberValue)(getDisplayReceiver(args)?.getLightLevel() ?? 0)
     },
     callDef: emptyCallDef2
   });
@@ -33736,18 +34584,18 @@ function registerMicroBitDisplayFunctions(api) {
       exec: (ctx, args, handle) => {
         const display = getDisplayReceiver(args);
         if (!display) {
-          handle.resolve(import_app20.VOID_VALUE);
+          handle.resolve(import_app21.VOID_VALUE);
           return;
         }
-        const options = args.get(2);
+        const options = args.at(2);
         if (optionFlag(options, LeaseOptionsField.Immediately)) {
           display.preempt();
         }
-        const text = (0, import_app20.extractStringValue)(args.get(1)) ?? "";
+        const text = (0, import_app21.extractStringValue)(args.at(1)) ?? "";
         const durationMs = scrollDurationMs(text.length, SCROLL_DEFAULT_DELAY_MS);
-        display.scrollText(text, durationMs, ctx.time, () => handle.resolve(import_app20.VOID_VALUE));
+        display.scrollText(text, durationMs, ctx.time, () => handle.resolve(import_app21.VOID_VALUE));
         if (optionFlag(options, LeaseOptionsField.InBackground)) {
-          handle.resolve(import_app20.VOID_VALUE);
+          handle.resolve(import_app21.VOID_VALUE);
         }
       }
     },
@@ -33755,7 +34603,7 @@ function registerMicroBitDisplayFunctions(api) {
   });
 }
 function registerButtonFunctions(api) {
-  const emptyCallDef2 = (0, import_app20.mkCallDef)({ type: "bag", items: [] });
+  const emptyCallDef2 = (0, import_app21.mkCallDef)({ type: "bag", items: [] });
   const isPressedRegistrations = [
     { typeName: "Button", id: MicroBitV2HostFuncId.ButtonIsPressed },
     { typeName: "TouchButton", id: MicroBitV2HostFuncId.TouchButtonIsPressed }
@@ -33766,7 +34614,7 @@ function registerButtonFunctions(api) {
       name: `${typeName}.isPressed`,
       isAsync: false,
       fn: {
-        exec: (_ctx, args) => (0, import_app20.mkNumberValue)(getButtonReceiver(args)?.isPressed() ?? 0)
+        exec: (_ctx, args) => (0, import_app21.mkNumberValue)(getButtonReceiver(args)?.isPressed() ?? 0)
       },
       callDef: emptyCallDef2
     });
@@ -33776,7 +34624,7 @@ function registerButtonFunctions(api) {
     name: "TouchButton.getThreshold",
     isAsync: false,
     fn: {
-      exec: (_ctx, args) => (0, import_app20.mkNumberValue)(getTouchButtonReceiver(args)?.getThreshold() ?? 0)
+      exec: (_ctx, args) => (0, import_app21.mkNumberValue)(getTouchButtonReceiver(args)?.getThreshold() ?? 0)
     },
     callDef: emptyCallDef2
   });
@@ -33787,7 +34635,7 @@ function registerButtonFunctions(api) {
     fn: {
       exec: (_ctx, args) => {
         getTouchButtonReceiver(args)?.setThreshold(numberArg(args, 1));
-        return import_app20.VOID_VALUE;
+        return import_app21.VOID_VALUE;
       }
     },
     callDef: emptyCallDef2
@@ -33797,7 +34645,7 @@ function registerButtonFunctions(api) {
     name: "TouchButton.getValue",
     isAsync: false,
     fn: {
-      exec: (_ctx, args) => (0, import_app20.mkNumberValue)(getTouchButtonReceiver(args)?.getValue() ?? 0)
+      exec: (_ctx, args) => (0, import_app21.mkNumberValue)(getTouchButtonReceiver(args)?.getValue() ?? 0)
     },
     callDef: emptyCallDef2
   });
@@ -33808,14 +34656,14 @@ function registerButtonFunctions(api) {
     fn: {
       exec: (ctx, args) => {
         getTouchButtonReceiver(args)?.setValue(numberArg(args, 1), ctx.time);
-        return import_app20.VOID_VALUE;
+        return import_app21.VOID_VALUE;
       }
     },
     callDef: emptyCallDef2
   });
 }
 function registerAccelerometerFunctions(api) {
-  const emptyCallDef2 = (0, import_app20.mkCallDef)({ type: "bag", items: [] });
+  const emptyCallDef2 = (0, import_app21.mkCallDef)({ type: "bag", items: [] });
   const reads = [
     { name: "getX", id: MicroBitV2HostFuncId.AccelerometerGetX, read: (a) => a.getX() },
     { name: "getY", id: MicroBitV2HostFuncId.AccelerometerGetY, read: (a) => a.getY() },
@@ -33838,7 +34686,7 @@ function registerAccelerometerFunctions(api) {
       fn: {
         exec: (_ctx, args) => {
           const receiver = getAccelerometerReceiver(args);
-          return (0, import_app20.mkNumberValue)(receiver ? read(receiver) : 0);
+          return (0, import_app21.mkNumberValue)(receiver ? read(receiver) : 0);
         }
       },
       callDef: emptyCallDef2
@@ -33846,19 +34694,19 @@ function registerAccelerometerFunctions(api) {
   }
 }
 function registerThermometerFunctions(api) {
-  const emptyCallDef2 = (0, import_app20.mkCallDef)({ type: "bag", items: [] });
+  const emptyCallDef2 = (0, import_app21.mkCallDef)({ type: "bag", items: [] });
   api.registerFunction({
     id: MicroBitV2HostFuncId.ThermometerGetTemperature,
     name: "Thermometer.getTemperature",
     isAsync: false,
     fn: {
-      exec: (_ctx, args) => (0, import_app20.mkNumberValue)(getThermometerReceiver(args)?.getTemperature() ?? 0)
+      exec: (_ctx, args) => (0, import_app21.mkNumberValue)(getThermometerReceiver(args)?.getTemperature() ?? 0)
     },
     callDef: emptyCallDef2
   });
 }
 function registerI2CFunctions(api) {
-  const emptyCallDef2 = (0, import_app20.mkCallDef)({ type: "bag", items: [] });
+  const emptyCallDef2 = (0, import_app21.mkCallDef)({ type: "bag", items: [] });
   api.registerFunction({
     id: MicroBitV2HostFuncId.I2CWriteBuffer,
     name: "I2C.writeBuffer",
@@ -33867,8 +34715,8 @@ function registerI2CFunctions(api) {
       exec: (_ctx, args) => {
         const bus = getI2CReceiver(args);
         const address = toNonNegativeInteger(numberArg(args, 1));
-        const bytes = bufferArgBytes(args.get(2));
-        return (0, import_app20.mkNumberValue)(bus ? bus.write(address, bytes) : 0);
+        const bytes = bufferArgBytes(args.at(2));
+        return (0, import_app21.mkNumberValue)(bus ? bus.write(address, bytes) : 0);
       }
     },
     callDef: emptyCallDef2
@@ -33883,14 +34731,14 @@ function registerI2CFunctions(api) {
         const address = toNonNegativeInteger(numberArg(args, 1));
         const length = toNonNegativeInteger(numberArg(args, 2));
         const bytes = bus ? bus.read(address, length) : new Uint8Array(0);
-        return (0, import_runtime8.mkBufferValue)(import_core2.stream.byteArrayFromUint8Array(bytes));
+        return (0, import_runtime8.mkBufferValue)(import_core3.stream.byteArrayFromUint8Array(bytes));
       }
     },
     callDef: emptyCallDef2
   });
 }
 function registerGPIOFunctions(api) {
-  const emptyCallDef2 = (0, import_app20.mkCallDef)({ type: "bag", items: [] });
+  const emptyCallDef2 = (0, import_app21.mkCallDef)({ type: "bag", items: [] });
   api.registerFunction({
     id: MicroBitV2HostFuncId.GpioDigitalRead,
     name: "GPIO.digitalRead",
@@ -33899,7 +34747,7 @@ function registerGPIOFunctions(api) {
       exec: (_ctx, args) => {
         const gpio = getGPIOReceiver(args);
         const pin = toNonNegativeInteger(numberArg(args, 1));
-        return (0, import_app20.mkNumberValue)(gpio ? gpio.digitalRead(pin) : 0);
+        return (0, import_app21.mkNumberValue)(gpio ? gpio.digitalRead(pin) : 0);
       }
     },
     callDef: emptyCallDef2
@@ -33913,7 +34761,7 @@ function registerGPIOFunctions(api) {
         const gpio = getGPIOReceiver(args);
         const pin = toNonNegativeInteger(numberArg(args, 1));
         const value = toNonNegativeInteger(numberArg(args, 2));
-        return (0, import_app20.mkNumberValue)(gpio ? gpio.digitalWrite(pin, value) : 0);
+        return (0, import_app21.mkNumberValue)(gpio ? gpio.digitalWrite(pin, value) : 0);
       }
     },
     callDef: emptyCallDef2
@@ -33927,7 +34775,7 @@ function registerGPIOFunctions(api) {
         const gpio = getGPIOReceiver(args);
         const pin = toNonNegativeInteger(numberArg(args, 1));
         const mode = toNonNegativeInteger(numberArg(args, 2));
-        return (0, import_app20.mkNumberValue)(gpio ? gpio.setPull(pin, mode) : 0);
+        return (0, import_app21.mkNumberValue)(gpio ? gpio.setPull(pin, mode) : 0);
       }
     },
     callDef: emptyCallDef2
@@ -33941,7 +34789,7 @@ function registerGPIOFunctions(api) {
         const gpio = getGPIOReceiver(args);
         const pin = toNonNegativeInteger(numberArg(args, 1));
         const angle = toNonNegativeInteger(numberArg(args, 2));
-        return (0, import_app20.mkNumberValue)(gpio ? gpio.setServo(pin, angle) : 0);
+        return (0, import_app21.mkNumberValue)(gpio ? gpio.setServo(pin, angle) : 0);
       }
     },
     callDef: emptyCallDef2
@@ -33954,14 +34802,14 @@ function registerGPIOFunctions(api) {
       exec: (_ctx, args) => {
         const gpio = getGPIOReceiver(args);
         const pin = toNonNegativeInteger(numberArg(args, 1));
-        return (0, import_app20.mkNumberValue)(gpio ? gpio.analogRead(pin) : 0);
+        return (0, import_app21.mkNumberValue)(gpio ? gpio.analogRead(pin) : 0);
       }
     },
     callDef: emptyCallDef2
   });
 }
 function registerSonarFunctions(api) {
-  const emptyCallDef2 = (0, import_app20.mkCallDef)({ type: "bag", items: [] });
+  const emptyCallDef2 = (0, import_app21.mkCallDef)({ type: "bag", items: [] });
   api.registerFunction({
     id: MicroBitV2HostFuncId.SonarDistance,
     name: "Sonar.distance",
@@ -33971,7 +34819,7 @@ function registerSonarFunctions(api) {
         const driver2 = getSonarReceiver(args);
         const trig = toNonNegativeInteger(numberArg(args, 1));
         const echo = toNonNegativeInteger(numberArg(args, 2));
-        return (0, import_app20.mkNumberValue)(driver2 ? driver2.sonarDistance(trig, echo) : 0);
+        return (0, import_app21.mkNumberValue)(driver2 ? driver2.sonarDistance(trig, echo) : 0);
       }
     },
     callDef: emptyCallDef2
@@ -33979,13 +34827,13 @@ function registerSonarFunctions(api) {
 }
 var EMPTY_BYTES2 = new Uint8Array(0);
 function registerRadioFunctions(api) {
-  const emptyCallDef2 = (0, import_app20.mkCallDef)({ type: "bag", items: [] });
+  const emptyCallDef2 = (0, import_app21.mkCallDef)({ type: "bag", items: [] });
   const sendRecord = (args, record2) => {
     const radio = getRadioReceiver(args);
     if (radio) {
       radio.send(record2);
     }
-    return import_app20.VOID_VALUE;
+    return import_app21.VOID_VALUE;
   };
   api.registerFunction({
     id: MicroBitV2HostFuncId.RadioSendNumber,
@@ -34019,7 +34867,7 @@ function registerRadioFunctions(api) {
           group: radio ? radio.group : 0,
           value: 0,
           name: "",
-          text: (0, import_app20.extractStringValue)(args.get(1)) ?? "",
+          text: (0, import_app21.extractStringValue)(args.at(1)) ?? "",
           bytes: EMPTY_BYTES2
         });
       }
@@ -34038,7 +34886,7 @@ function registerRadioFunctions(api) {
           type: radioNumberIsInteger(value) ? RadioPacketType.Value : RadioPacketType.DoubleValue,
           group: radio ? radio.group : 0,
           value,
-          name: (0, import_app20.extractStringValue)(args.get(1)) ?? "",
+          name: (0, import_app21.extractStringValue)(args.at(1)) ?? "",
           text: "",
           bytes: EMPTY_BYTES2
         });
@@ -34059,7 +34907,7 @@ function registerRadioFunctions(api) {
           value: 0,
           name: "",
           text: "",
-          bytes: bufferArgBytes(args.get(1))
+          bytes: bufferArgBytes(args.at(1))
         });
       }
     },
@@ -34078,7 +34926,7 @@ function registerRadioFunctions(api) {
           value: 0,
           name: "",
           text: "",
-          bytes: bufferArgBytes(args.get(1))
+          bytes: bufferArgBytes(args.at(1))
         });
       }
     },
@@ -34108,7 +34956,7 @@ function registerRadioFunctions(api) {
           if (radio) {
             apply(radio, numberArg(args, 1));
           }
-          return import_app20.VOID_VALUE;
+          return import_app21.VOID_VALUE;
         }
       },
       callDef: emptyCallDef2
@@ -34122,10 +34970,10 @@ function registerRadioFunctions(api) {
       exec: (_ctx, args) => {
         const radio = getRadioReceiver(args);
         if (!radio) {
-          return (0, import_app20.mkListValue)(WODAL_MICROBIT_V2_TYPE_IDS.RadioPacketList, import_app20.List.empty());
+          return (0, import_app21.mkListValue)(WODAL_MICROBIT_V2_TYPE_IDS.RadioPacketList, import_app21.List.empty());
         }
         const since = toNonNegativeInteger(numberArg(args, 1));
-        return (0, import_app20.mkListValue)(WODAL_MICROBIT_V2_TYPE_IDS.RadioPacketList, import_app20.List.from(radio.drainAfter(since).map(radioPacketStructValue)));
+        return (0, import_app21.mkListValue)(WODAL_MICROBIT_V2_TYPE_IDS.RadioPacketList, import_app21.List.from(radio.drainAfter(since).map(radioPacketStructValue)));
       }
     },
     callDef: emptyCallDef2
@@ -34137,14 +34985,14 @@ function registerRadioFunctions(api) {
     fn: {
       exec: (_ctx, args) => {
         const radio = getRadioReceiver(args);
-        return (0, import_app20.mkNumberValue)(radio ? radio.headSequence() : 0);
+        return (0, import_app21.mkNumberValue)(radio ? radio.headSequence() : 0);
       }
     },
     callDef: emptyCallDef2
   });
 }
 function registerAudioFunctions(api) {
-  const emptyCallDef2 = (0, import_app20.mkCallDef)({ type: "bag", items: [] });
+  const emptyCallDef2 = (0, import_app21.mkCallDef)({ type: "bag", items: [] });
   api.registerFunction({
     id: MicroBitV2HostFuncId.AudioPlaySound,
     name: "MicroBitAudio.playSound",
@@ -34153,57 +35001,95 @@ function registerAudioFunctions(api) {
       exec: (ctx, args, handle) => {
         const speaker = getAudioReceiver(args);
         if (!speaker) {
-          handle.resolve(import_app20.VOID_VALUE);
+          handle.resolve(import_app21.VOID_VALUE);
           return;
         }
-        const name = (0, import_app20.extractStringValue)(args.get(1)) ?? "";
-        const options = args.get(2);
+        const name = (0, import_app21.extractStringValue)(args.at(1)) ?? "";
+        const options = args.at(2);
         if (optionFlag(options, LeaseOptionsField.Immediately)) {
           speaker.preempt();
         }
-        speaker.playSoundEmoji(name, ctx.time, () => handle.resolve(import_app20.VOID_VALUE));
+        speaker.playSoundEmoji(name, ctx.time, () => handle.resolve(import_app21.VOID_VALUE));
         if (optionFlag(options, LeaseOptionsField.InBackground)) {
-          handle.resolve(import_app20.VOID_VALUE);
+          handle.resolve(import_app21.VOID_VALUE);
+        }
+      }
+    },
+    callDef: emptyCallDef2
+  });
+  api.registerFunction({
+    id: MicroBitV2HostFuncId.AudioPlayTone,
+    name: "MicroBitAudio.playTone",
+    isAsync: true,
+    fn: {
+      exec: (ctx, args, handle) => {
+        const speaker = getAudioReceiver(args);
+        if (!speaker) {
+          handle.resolve(import_app21.VOID_VALUE);
+          return;
+        }
+        const options = args.at(2);
+        if (optionFlag(options, PlayToneOptionsField.Immediately)) {
+          speaker.preempt();
+        }
+        const waveform = requestedWaveform(optionField(options, PlayToneOptionsField.Waveform));
+        if (waveform === void 0) {
+          handle.resolve(import_app21.VOID_VALUE);
+          return;
+        }
+        const durationSeconds = finiteNumber(optionField(options, PlayToneOptionsField.Duration), DEFAULT_DURATION_SECONDS);
+        const command = mkSpeakerToneCommand(waveform, finiteNumber(args.at(1), DEFAULT_FREQUENCY_HZ), Math.round(Math.fround(durationSeconds * 1e3)), finiteNumber(optionField(options, PlayToneOptionsField.Volume), DEFAULT_VOLUME));
+        speaker.playTone(command, ctx.time, () => handle.resolve(import_app21.VOID_VALUE));
+        if (optionFlag(options, PlayToneOptionsField.InBackground)) {
+          handle.resolve(import_app21.VOID_VALUE);
         }
       }
     },
     callDef: emptyCallDef2
   });
 }
+function requestedWaveform(field) {
+  return (0, import_app21.isNilValue)(field) ? DEFAULT_WAVEFORM : findToneWaveform((0, import_app21.extractStringValue)(field) ?? "");
+}
+function finiteNumber(value, fallback) {
+  const number4 = (0, import_app21.extractNumberValue)(value);
+  return number4 === void 0 || !Number.isFinite(number4) ? fallback : number4;
+}
 function radioPacketStructValue(packet) {
-  return (0, import_app20.mkClosedStructValue)(WODAL_MICROBIT_V2_TYPE_IDS.RadioPacket, import_app20.List.from([
-    (0, import_app20.mkNumberValue)(packet.seq),
-    (0, import_app20.mkNumberValue)(packet.type),
-    (0, import_app20.mkNumberValue)(packet.value),
-    (0, import_app20.mkStringValue)(packet.name),
-    (0, import_app20.mkStringValue)(packet.text),
-    (0, import_runtime8.mkBufferValue)(import_core2.stream.byteArrayFromUint8Array(packet.bytes)),
-    (0, import_app20.mkNumberValue)(packet.rssi),
-    (0, import_app20.mkNumberValue)(packet.serial),
-    (0, import_app20.mkNumberValue)(packet.time)
+  return (0, import_app21.mkClosedStructValue)(WODAL_MICROBIT_V2_TYPE_IDS.RadioPacket, import_app21.List.from([
+    (0, import_app21.mkNumberValue)(packet.seq),
+    (0, import_app21.mkNumberValue)(packet.type),
+    (0, import_app21.mkNumberValue)(packet.value),
+    (0, import_app21.mkStringValue)(packet.name),
+    (0, import_app21.mkStringValue)(packet.text),
+    (0, import_runtime8.mkBufferValue)(import_core3.stream.byteArrayFromUint8Array(packet.bytes)),
+    (0, import_app21.mkNumberValue)(packet.rssi),
+    (0, import_app21.mkNumberValue)(packet.serial),
+    (0, import_app21.mkNumberValue)(packet.time)
   ]));
 }
 function registerBrainTiles(api) {
-  api.registerHostSensor((0, import_app20.createHostSensor)(buttonASensor));
-  api.registerHostSensor((0, import_app20.createHostSensor)(buttonBSensor));
-  api.registerHostSensor((0, import_app20.createHostSensor)(buttonABSensor));
-  api.registerHostSensor((0, import_app20.createHostSensor)(buttonLogoSensor));
-  api.registerHostSensor((0, import_app20.createHostSensor)(gestureSensor));
-  api.registerHostSensor((0, import_app20.createHostSensor)(lightLevelSensor));
-  api.registerHostSensor((0, import_app20.createHostSensor)(temperatureSensor));
-  api.registerHostSensor((0, import_app20.createHostSensor)(radioReceiveNumberSensor));
-  api.registerHostSensor((0, import_app20.createHostSensor)(radioReceiveStringSensor));
-  api.registerHostSensor((0, import_app20.createHostSensor)(radioReceiveBufferSensor));
+  api.registerHostSensor((0, import_app21.createHostSensor)(buttonASensor));
+  api.registerHostSensor((0, import_app21.createHostSensor)(buttonBSensor));
+  api.registerHostSensor((0, import_app21.createHostSensor)(buttonABSensor));
+  api.registerHostSensor((0, import_app21.createHostSensor)(buttonLogoSensor));
+  api.registerHostSensor((0, import_app21.createHostSensor)(gestureSensor));
+  api.registerHostSensor((0, import_app21.createHostSensor)(lightLevelSensor));
+  api.registerHostSensor((0, import_app21.createHostSensor)(temperatureSensor));
+  api.registerHostSensor((0, import_app21.createHostSensor)(radioReceiveNumberSensor));
+  api.registerHostSensor((0, import_app21.createHostSensor)(radioReceiveStringSensor));
+  api.registerHostSensor((0, import_app21.createHostSensor)(radioReceiveBufferSensor));
   for (const outputTile of radioReceiveOutputTiles) {
     api.registerTile(outputTile);
   }
-  api.registerHostActuator((0, import_app20.createHostActuator)(radio_send_default));
-  api.registerHostActuator((0, import_app20.createHostActuator)(set_radio_group_default));
-  api.registerHostActuator((0, import_app20.createHostActuator)(display_set_pixel_default));
-  api.registerHostActuator((0, import_app20.createHostActuator)(display_scroll_default));
-  api.registerHostActuator((0, import_app20.createHostActuator)(display_draw_default));
-  api.registerHostActuator((0, import_app20.createHostActuator)(display_clear_default));
-  api.registerHostActuator((0, import_app20.createHostActuator)(play_sound_default));
+  api.registerHostActuator((0, import_app21.createHostActuator)(radio_send_default));
+  api.registerHostActuator((0, import_app21.createHostActuator)(set_radio_group_default));
+  api.registerHostActuator((0, import_app21.createHostActuator)(display_set_pixel_default));
+  api.registerHostActuator((0, import_app21.createHostActuator)(display_scroll_default));
+  api.registerHostActuator((0, import_app21.createHostActuator)(display_draw_default));
+  api.registerHostActuator((0, import_app21.createHostActuator)(display_clear_default));
+  api.registerHostActuator((0, import_app21.createHostActuator)(play_sound_default));
+  api.registerHostActuator((0, import_app21.createHostActuator)(play_tone_default));
   api.registerModifiers(MICROBIT_V2_MODIFIERS);
   api.registerParameters(MICROBIT_V2_PARAMETERS);
   registerBuiltInImageTiles(api);
@@ -34211,79 +35097,79 @@ function registerBrainTiles(api) {
 }
 function registerBuiltInImageTiles(api) {
   for (const def of BUILT_IN_IMAGES) {
-    api.registerTile(new import_app20.BrainTileLiteralDef(WODAL_SHARED_TYPE_IDS.Image, builtInImageStructValue(def), { valueLabel: def.name, persist: false, metadata: { label: def.label, language: { form: def.label } } }, api.brainServices));
+    api.registerTile(new import_app21.BrainTileLiteralDef(WODAL_SHARED_TYPE_IDS.Image, builtInImageStructValue(def), { valueLabel: def.name, persist: false, metadata: { label: def.label, language: { form: def.label } } }, api.brainServices));
   }
 }
 function registerBuiltInSoundTiles(api) {
   for (const def of BUILT_IN_SOUNDS) {
-    api.registerTile(new import_app20.BrainTileLiteralDef(SOUND_EMOJI_TYPE_ID, builtInSoundStructValue(def), { valueLabel: def.name, persist: false, metadata: { label: def.label, language: { form: def.label } } }, api.brainServices));
+    api.registerTile(new import_app21.BrainTileLiteralDef(SOUND_EMOJI_TYPE_ID, builtInSoundStructValue(def), { valueLabel: def.name, persist: false, metadata: { label: def.label, language: { form: def.label } } }, api.brainServices));
   }
 }
 function getDisplayReceiver(args) {
-  const receiver = args.get(0);
+  const receiver = args.at(0);
   if (!isStructNative(receiver, WODAL_MICROBIT_V2_TYPE_IDS.MicroBitDisplay)) {
     return void 0;
   }
   return receiver.native instanceof MicroBitDisplay ? receiver.native : void 0;
 }
 function getButtonReceiver(args) {
-  const receiver = args.get(0);
+  const receiver = args.at(0);
   if (!isStructNative(receiver, WODAL_MICROBIT_V2_TYPE_IDS.Button) && !isStructNative(receiver, WODAL_MICROBIT_V2_TYPE_IDS.TouchButton)) {
     return void 0;
   }
   return receiver.native instanceof Button ? receiver.native : void 0;
 }
 function getTouchButtonReceiver(args) {
-  const receiver = args.get(0);
+  const receiver = args.at(0);
   if (!isStructNative(receiver, WODAL_MICROBIT_V2_TYPE_IDS.TouchButton)) {
     return void 0;
   }
   return receiver.native instanceof TouchButton ? receiver.native : void 0;
 }
 function getAccelerometerReceiver(args) {
-  const receiver = args.get(0);
+  const receiver = args.at(0);
   if (!isStructNative(receiver, WODAL_MICROBIT_V2_TYPE_IDS.Accelerometer)) {
     return void 0;
   }
   return receiver.native instanceof Accelerometer ? receiver.native : void 0;
 }
 function getThermometerReceiver(args) {
-  const receiver = args.get(0);
+  const receiver = args.at(0);
   if (!isStructNative(receiver, WODAL_MICROBIT_V2_TYPE_IDS.Thermometer)) {
     return void 0;
   }
   return receiver.native instanceof Thermometer ? receiver.native : void 0;
 }
 function getI2CReceiver(args) {
-  const receiver = args.get(0);
+  const receiver = args.at(0);
   if (!isStructNative(receiver, WODAL_MICROBIT_V2_TYPE_IDS.I2C)) {
     return void 0;
   }
   return receiver.native instanceof I2CBus ? receiver.native : void 0;
 }
 function getGPIOReceiver(args) {
-  const receiver = args.get(0);
+  const receiver = args.at(0);
   if (!isStructNative(receiver, WODAL_MICROBIT_V2_TYPE_IDS.GPIO)) {
     return void 0;
   }
   return receiver.native instanceof Gpio ? receiver.native : void 0;
 }
 function getSonarReceiver(args) {
-  const receiver = args.get(0);
+  const receiver = args.at(0);
   if (!isStructNative(receiver, WODAL_MICROBIT_V2_TYPE_IDS.Sonar)) {
     return void 0;
   }
   return receiver.native instanceof SensorDriver ? receiver.native : void 0;
 }
 function getAudioReceiver(args) {
-  const receiver = args.get(0);
+  const receiver = args.at(0);
   if (!isStructNative(receiver, WODAL_MICROBIT_V2_TYPE_IDS.MicroBitAudio)) {
     return void 0;
   }
   return receiver.native instanceof MicroBitSpeaker ? receiver.native : void 0;
 }
 function getRadioReceiver(args) {
-  const receiver = args.get(0);
+  const receiver = args.at(0);
   if (!isStructNative(receiver, WODAL_MICROBIT_V2_TYPE_IDS.Radio)) {
     return void 0;
   }
@@ -34304,16 +35190,16 @@ function getNativeMicroBit(value) {
   return value.native instanceof MicroBit ? value.native : void 0;
 }
 function isStructNative(value, typeId) {
-  return value !== void 0 && value.t === import_app20.NativeType.Struct && value.typeId === typeId;
+  return value !== void 0 && value.t === import_app21.NativeType.Struct && value.typeId === typeId;
 }
 function numberArg(args, index) {
-  return (0, import_app20.extractNumberValue)(args.get(index)) ?? 0;
+  return (0, import_app21.extractNumberValue)(args.at(index)) ?? 0;
 }
 
-// ../../external/mindcraft-lang/packages/service-api/dist/program-image.js
+// ../../external/wendoo-lang/packages/service-api/dist/program-image.js
 var import_runtime9 = __toESM(require_runtime(), 1);
 
-// ../../packages/wodal/dist/mindcraft/device-profile-id.js
+// ../../packages/wodal/dist/wendoo/device-profile-id.js
 var WodalDeviceProfileId = {
   MICROBIT_V2: "microbit-v2"
 };
@@ -34322,17 +35208,17 @@ var WodalDeviceProfileNumericId = Object.freeze({
   [WodalDeviceProfileId.MICROBIT_V2]: 1
 });
 
-// ../../packages/wodal/dist/targets/microbit-v2/mindcraft/program-image.js
+// ../../packages/wodal/dist/targets/microbit-v2/wendoo/program-image.js
 function createMicroBitV2ProgramImage(program) {
   return {
-    format: import_runtime9.MINDCRAFT_PROGRAM_IMAGE_FORMAT,
-    version: import_runtime9.MINDCRAFT_PROGRAM_IMAGE_VERSION,
+    format: import_runtime9.WENDOO_PROGRAM_IMAGE_FORMAT,
+    version: import_runtime9.WENDOO_PROGRAM_IMAGE_VERSION,
     profileId: WodalDeviceProfileId.MICROBIT_V2,
     program
   };
 }
 
-// ../../packages/wodal/dist/mindcraft/device-profile.js
+// ../../packages/wodal/dist/wendoo/device-profile.js
 var WODAL_DEVICE_PROFILES = Object.freeze({
   [WodalDeviceProfileId.MICROBIT_V2]: Object.freeze({
     profileId: WodalDeviceProfileId.MICROBIT_V2,
@@ -34348,7 +35234,7 @@ var WODAL_DEVICE_PROFILES = Object.freeze({
     maxFrameDepth: 64,
     maxHandlers: 16,
     maxHandles: 8,
-    createMindcraftModule: createMicroBitV2Module,
+    createWendooModule: createMicroBitV2Module,
     createProgramImage: createMicroBitV2ProgramImage
   })
 });
@@ -34356,14 +35242,18 @@ function getWodalDeviceProfile(profileId) {
   return WODAL_DEVICE_PROFILES[profileId];
 }
 
-// ../../packages/wodal/dist/mindcraft/shared-module.js
-var import_app21 = __toESM(require_app(), 1);
-var WODAL_SHARED_MODULE_ID = "mindcraft.wodal-shared";
+// ../../packages/wodal/dist/wendoo/shared-module.js
+var import_app22 = __toESM(require_app(), 1);
+var import_model2 = __toESM(require_model2(), 1);
+var import_tiles = __toESM(require_tiles2(), 1);
+var WODAL_SHARED_MODULE_ID = "wendoo.wodal-shared";
+var WODAL_IMAGE_LITERAL_FACTORY_ID = "image";
 function createWodalSharedModule() {
   return {
     id: WODAL_SHARED_MODULE_ID,
     install(api) {
       registerSharedTypes(api);
+      registerImageLiteralFactory(api);
     }
   };
 }
@@ -34371,15 +35261,25 @@ function registerSharedTypes(api) {
   const { types } = api.brainServices.runtime;
   types.addStructType("Image", {
     atomId: WodalSharedTypeAtomId.Image,
-    fields: import_app21.List.from([
-      { name: "width", typeId: import_app21.CoreTypeIds.Number, fieldIndex: ImageField.Width },
-      { name: "height", typeId: import_app21.CoreTypeIds.Number, fieldIndex: ImageField.Height },
-      { name: "pixels", typeId: import_app21.CoreTypeIds.Buffer, fieldIndex: ImageField.Pixels }
+    fields: import_app22.List.from([
+      { name: "width", typeId: import_app22.CoreTypeIds.Number, fieldIndex: ImageField.Width },
+      { name: "height", typeId: import_app22.CoreTypeIds.Number, fieldIndex: ImageField.Height },
+      { name: "pixels", typeId: import_app22.CoreTypeIds.Buffer, fieldIndex: ImageField.Pixels }
     ])
   });
 }
+function registerImageLiteralFactory(api) {
+  const services = api.brainServices;
+  api.registerTile(new import_tiles.BrainTileFactoryDef((0, import_app22.mkLiteralFactoryTileId)(WODAL_IMAGE_LITERAL_FACTORY_ID), WODAL_IMAGE_LITERAL_FACTORY_ID, (factoryTileDef, opts) => {
+    const value = opts.value;
+    if (value === void 0) {
+      throw new Error("Image literal factory tile definition requires a 'value' option");
+    }
+    return new import_app22.BrainTileLiteralDef(factoryTileDef.producedDataType, value, { uniqueId: (0, import_model2.mintDocumentId)(services.app.rng) }, services);
+  }, WODAL_SHARED_TYPE_IDS.Image, { metadata: { label: "create an image" } }));
+}
 
-// ../../packages/wodal/dist/targets/microbit-v2/mindcraft/_generated/tile-doc-content.js
+// ../../packages/wodal/dist/targets/microbit-v2/wendoo/_generated/tile-doc-content.js
 var MICROBIT_V2_TILE_DOC_CONTENT = {
   "actuator-display-clear": `\`\`\`brain noframe do
 { "tile": "\${tileId}" }
@@ -34408,11 +35308,16 @@ Scrolls text across the display.
 Scrolls the text from right to left and ends with a blank display; a single
 character is shown still for a moment instead of scrolling. With no
 \`tile:tile.parameter->microbit-v2.text\` argument it shows the value the WHEN
-side produced, or "hello". The rule waits until the animation finishes, and a
+side produced, or "hello". The rule waits until the animation finishes: until
+then a rule under it does not get its turn, and this rule cannot fire again. A
 request made while the display is busy is dropped; add
 \`tile:tile.modifier->microbit-v2.immediately\` to take over the display at once,
 or \`tile:tile.modifier->microbit-v2.in-background\` to let the rule continue
 without waiting.
+
+\`\`\`assistant
+The rule holds until the text has finished showing: until then a rule under it does not get its turn, and this rule cannot fire again. A show asked for while the display is busy is dropped; add "in background" to let the rule carry on, or "immediately" to cut off what the display is showing.
+\`\`\`
 `,
   "actuator-draw-image": `\`\`\`brain noframe do
 { "tile": "\${tileId}" }
@@ -34428,10 +35333,15 @@ Draws each given \`tile:tile.parameter->microbit-v2.image\` in order, holding
 each for \`tile:tile.parameter->microbit-v2.duration\` seconds (default 1
 second); the last image stays on the display. With no image it draws
 \`tile:tile.literal->struct:<Image>->happy\`. The rule waits for the hold to
-finish, and a draw made while the display is busy is dropped; add
+finish: until then a rule under it does not get its turn, and this rule cannot
+fire again. A draw made while the display is busy is dropped; add
 \`tile:tile.modifier->microbit-v2.immediately\` to take over the display at once,
 or \`tile:tile.modifier->microbit-v2.in-background\` to let the rule continue
 without waiting. A duration of 0 paints the image and continues at once.
+
+\`\`\`assistant
+The rule holds until the image has finished showing: until then a rule under it does not get its turn, and this rule cannot fire again. A draw asked for while the display is busy is dropped; add "in background" to let the rule carry on, or "immediately" to cut off what the display is showing.
+\`\`\`
 `,
   "actuator-play-sound": `\`\`\`brain noframe do
 { "tile": "\${tileId}" }
@@ -34446,10 +35356,204 @@ Plays a built-in sound on the speaker.
 Plays the given \`tile:tile.parameter->microbit-v2.sound-emoji\`, a built-in
 sound such as \`tile:tile.literal->struct:<SoundEmoji>->twinkle\`. With no sound
 it plays \`tile:tile.literal->struct:<SoundEmoji>->hello\`. The rule waits until
-the sound finishes, and a play made while the speaker is busy is dropped; add
+the sound finishes: until then a rule under it does not get its turn, and this
+rule cannot fire again. A play made while the speaker is busy is dropped; add
 \`tile:tile.modifier->microbit-v2.immediately\` to take over the speaker at
 once, or \`tile:tile.modifier->microbit-v2.in-background\` to let the rule
 continue without waiting.
+
+\`\`\`assistant
+The rule holds until the sound has finished: until then a rule under it does not get its turn, and this rule cannot fire again. A sound asked for while another is playing is dropped; add "in background" to let the rule carry on, or "immediately" to cut off the sound that is playing.
+\`\`\`
+`,
+  "actuator-play-tone": `\`\`\`brain noframe do
+{ "tile": "\${tileId}" }
+\`\`\`
+
+# Beep
+
+Plays a plain tone on the speaker.
+
+---
+
+Holds one steady pitch for a set time -- the classic feedback beep. The bare
+number is the pitch in Hz, 880 when left off; a pitch of 0 is a rest, silent
+for the whole time while still holding the speaker, so beeps and gaps can be
+built from the one tile. \`tile:tile.parameter->microbit-v2.duration\` sets how
+long the tone lasts in seconds (0.5 when left off, fractions allowed) and
+\`tile:tile.parameter->microbit-v2.volume\` sets how loud it is, from 0 to 1 (1
+when left off). Add one wave shape -- \`tile:tile.modifier->microbit-v2.square\`,
+\`tile:tile.modifier->microbit-v2.sawtooth\`,
+\`tile:tile.modifier->microbit-v2.sine\`, or
+\`tile:tile.modifier->microbit-v2.triangle\` -- to change the character of the
+tone; with none of them it is a triangle wave. The rule waits until the tone
+ends: until then a rule under it does not get its turn, and this rule cannot
+fire again. A beep made while the speaker is busy is dropped; add
+\`tile:tile.modifier->microbit-v2.immediately\` to take over the speaker at once,
+or \`tile:tile.modifier->microbit-v2.in-background\` to let the rule continue
+without waiting.
+
+## Example
+
+A short, quiet beep as feedback for a button press. It uses
+\`tile:tile.modifier->microbit-v2.in-background\` so the rule can fire again on
+the next press without waiting for the tone.
+
+\`\`\`brain
+{
+  "ruleJsons": [
+    {
+      "version": 1,
+      "when": [
+        "tile.sensor->microbit-v2.button-a",
+        "tile.modifier->microbit-v2.pressed"
+      ],
+      "do": [
+        "\${tileId}",
+        "tile.literal->number:<number>->440",
+        "tile.parameter->microbit-v2.duration",
+        "tile.literal->number:<number>->0.1",
+        "tile.parameter->microbit-v2.volume",
+        "tile.literal->number:<number>->0.3",
+        "tile.modifier->microbit-v2.in-background"
+      ],
+      "children": [],
+      "comment": "A quiet 440 Hz blip, without holding up the rule."
+    }
+  ],
+  "catalog": [
+    {
+      "version": 2,
+      "kind": "literal",
+      "tileId": "tile.literal->number:<number>->440",
+      "valueType": "number:<number>",
+      "value": 440,
+      "valueLabel": "440",
+      "displayFormat": "default"
+    },
+    {
+      "version": 2,
+      "kind": "literal",
+      "tileId": "tile.literal->number:<number>->0.1",
+      "valueType": "number:<number>",
+      "value": 0.1,
+      "valueLabel": "0.1",
+      "displayFormat": "default"
+    },
+    {
+      "version": 2,
+      "kind": "literal",
+      "tileId": "tile.literal->number:<number>->0.3",
+      "valueType": "number:<number>",
+      "value": 0.3,
+      "valueLabel": "0.3",
+      "displayFormat": "default"
+    }
+  ]
+}
+\`\`\`
+
+## Example: a beep, a rest, a higher beep
+
+Each rule waits for its own tone, so nesting them plays them one after another.
+The middle tone is a rest: a pitch of 0 sounds nothing but still takes its
+0.15 seconds, which is the gap between the two beeps.
+
+\`\`\`brain
+{
+  "ruleJsons": [
+    {
+      "version": 1,
+      "when": [
+        "tile.sensor->microbit-v2.button-b",
+        "tile.modifier->microbit-v2.pressed"
+      ],
+      "do": [
+        "\${tileId}",
+        "tile.literal->number:<number>->660",
+        "tile.parameter->microbit-v2.duration",
+        "tile.literal->number:<number>->0.15"
+      ],
+      "children": [
+        {
+          "version": 1,
+          "when": [],
+          "do": [
+            "\${tileId}",
+            "tile.literal->number:<number>->0",
+            "tile.parameter->microbit-v2.duration",
+            "tile.literal->number:<number>->0.15"
+          ],
+          "children": [
+            {
+              "version": 1,
+              "when": [],
+              "do": [
+                "\${tileId}",
+                "tile.literal->number:<number>->990",
+                "tile.parameter->microbit-v2.duration",
+                "tile.literal->number:<number>->0.15"
+              ],
+              "children": [],
+              "comment": "Then a higher beep."
+            }
+          ],
+          "comment": "A rest: silent, but it still takes 0.15 seconds."
+        }
+      ],
+      "comment": "First beep."
+    }
+  ],
+  "catalog": [
+    {
+      "version": 2,
+      "kind": "literal",
+      "tileId": "tile.literal->number:<number>->660",
+      "valueType": "number:<number>",
+      "value": 660,
+      "valueLabel": "660",
+      "displayFormat": "default"
+    },
+    {
+      "version": 2,
+      "kind": "literal",
+      "tileId": "tile.literal->number:<number>->990",
+      "valueType": "number:<number>",
+      "value": 990,
+      "valueLabel": "990",
+      "displayFormat": "default"
+    },
+    {
+      "version": 2,
+      "kind": "literal",
+      "tileId": "tile.literal->number:<number>->0",
+      "valueType": "number:<number>",
+      "value": 0,
+      "valueLabel": "0",
+      "displayFormat": "default"
+    },
+    {
+      "version": 2,
+      "kind": "literal",
+      "tileId": "tile.literal->number:<number>->0.15",
+      "valueType": "number:<number>",
+      "value": 0.15,
+      "valueLabel": "0.15",
+      "displayFormat": "default"
+    }
+  ]
+}
+\`\`\`
+
+## See Also
+
+\`tile:tile.actuator->microbit-v2.play-sound\`
+\`tile:tile.parameter->microbit-v2.duration\`
+\`tile:tile.parameter->microbit-v2.volume\`
+
+\`\`\`assistant
+A pitch of 0 plays silence for the duration, a rest. One wave-shape word (square / sawtooth / sine / triangle) picks the sound, triangle when none is given. The rule holds until the tone ends: until then a rule under it does not get its turn, and this rule cannot fire again. A tone asked for while a sound is playing is dropped; add "in background" to let the rule carry on, or "immediately" to cut off the sound that is playing.
+\`\`\`
 `,
   "actuator-radio-send": `\`\`\`brain noframe do
 { "tile": "\${tileId}" }
@@ -34496,6 +35600,35 @@ Chooses which radio group this micro:bit talks on.
 Sets the radio group to a number from 0 to 255; with no argument it sets the
 default group 0. Micro:bits only hear each other when their groups match, so
 set the same group on both ends, usually when the page is entered.
+`,
+  "lit-factory-image": `\`\`\`brain noframe do
+{ "tile": "\${tileId}" }
+\`\`\`
+
+# Create an image
+
+Draws a new 5x5 image of your own.
+
+---
+
+Opens a 5x5 grid to draw on: pick a brightness, then tap a pixel to light it at
+that brightness, and tap it again to turn it off. Saving makes an image tile
+that works anywhere a built-in image such as
+\`tile:tile.literal->struct:<Image>->heart\` does -- give it to
+\`tile:tile.parameter->microbit-v2.image\` on
+\`tile:tile.actuator->microbit-v2.draw-image\`. Every drawing makes a tile of its
+own, so two drawings that came out the same stay two tiles. Naming the image
+gives it a word to read by, in the editor and in what the assistant sees.
+
+Editing an image changes it everywhere it is placed. The tile stays the same
+tile, so every rule holding it draws the new pixels, and undo puts the old ones
+back everywhere at once. To change one placement on its own, duplicate the image
+first: a duplicate is a separate image tile, drawn from the same pixels, that you
+can edit without touching the one you copied.
+
+\`\`\`assistant
+You cannot create an image: the grid editor is the only way one is drawn, and the person using the editor draws it. Use the images that already exist, by tile id -- read_catalog and read_project list them, the built-in ones and the ones the user drew. A drawn image may carry a name, which is the word it is listed under. Editing an image keeps its tile id and updates every placement of it at once; duplicating one makes a separate image tile with an id of its own.
+\`\`\`
 `,
   "literal-image-arrow-east": `\`\`\`brain noframe do
 { "tile": "\${tileId}" }
@@ -34787,7 +35920,8 @@ press.
 
 # Immediately
 
-Takes over the display or speaker at once.
+Takes over the display or speaker at once, cutting off whatever was showing or
+playing.
 
 ---
 
@@ -34803,7 +35937,9 @@ display or speaker is busy is dropped.
 
 # In background
 
-Runs the show or sound without making the rule wait.
+Runs the show or sound just as usual, but the rule does not wait for it: the
+rule carries on at once and can fire again, while the display or speaker stays
+busy until this one finishes.
 
 ---
 
@@ -34854,6 +35990,22 @@ Reacts the moment a button comes back up.
 Attach to a button tile such as \`tile:tile.sensor->microbit-v2.button-a\`: the
 rule fires on the think the button is let go.
 `,
+  "modifier-sawtooth": `\`\`\`brain noframe do
+{ "tile": "\${tileId}" }
+\`\`\`
+
+# Sawtooth
+
+Gives a beep a bright, brassy sawtooth wave.
+
+---
+
+Attach to \`tile:tile.actuator->microbit-v2.play-tone\`: the tone is sounded as a
+sawtooth wave, which climbs and then drops straight back and gives a bright,
+buzzy edge -- softer than
+\`tile:tile.modifier->microbit-v2.square\` but far from smooth. Use at most one
+wave shape per beep; with none the beep is a triangle wave.
+`,
   "modifier-shake": `\`\`\`brain noframe when
 { "tile": "\${tileId}" }
 \`\`\`
@@ -34866,6 +36018,36 @@ Detects the micro:bit being shaken.
 
 Attach to \`tile:tile.sensor->microbit-v2.gesture\` to detect shaking. This is
 also what a bare gesture tile detects.
+`,
+  "modifier-sine": `\`\`\`brain noframe do
+{ "tile": "\${tileId}" }
+\`\`\`
+
+# Sine
+
+Gives a beep a smooth, mellow sine wave.
+
+---
+
+Attach to \`tile:tile.actuator->microbit-v2.play-tone\`: the tone is sounded as a
+sine wave, the plainest shape there is, so the beep comes out soft and round
+rather than buzzy. Use at most one wave shape per beep; with none the beep is a
+triangle wave.
+`,
+  "modifier-square": `\`\`\`brain noframe do
+{ "tile": "\${tileId}" }
+\`\`\`
+
+# Square
+
+Gives a beep a hard, buzzy square wave.
+
+---
+
+Attach to \`tile:tile.actuator->microbit-v2.play-tone\`: the tone is sounded as a
+square wave, which jumps straight between loud and quiet and gives the sharp,
+retro-game buzz. Use at most one wave shape per beep; with none the beep is a
+triangle wave.
 `,
   "modifier-tilt-down": `\`\`\`brain noframe when
 { "tile": "\${tileId}" }
@@ -34922,6 +36104,23 @@ Detects the micro:bit tilted up.
 Attach to \`tile:tile.sensor->microbit-v2.gesture\`: the rule fires while the
 board is tilted up. It stays true for as long as the board is held in that
 position.
+`,
+  "modifier-triangle": `\`\`\`brain noframe do
+{ "tile": "\${tileId}" }
+\`\`\`
+
+# Triangle
+
+Gives a beep a soft, hollow triangle wave.
+
+---
+
+Attach to \`tile:tile.actuator->microbit-v2.play-tone\`: the tone is sounded as a
+triangle wave, which rises and falls in straight lines and sits between
+\`tile:tile.modifier->microbit-v2.sine\` and
+\`tile:tile.modifier->microbit-v2.square\` -- soft, with a hollow, flute-like
+edge. This is what a beep uses when no wave shape is attached, so add it only
+to say so plainly. Use at most one wave shape per beep.
 `,
   "output-buffer-value": `\`\`\`brain noframe do
 { "tile": "\${tileId}" }
@@ -35096,6 +36295,22 @@ The text to show on the display.
 Gives \`tile:tile.actuator->microbit-v2.display-scroll\` the text to scroll.
 When left off, the actuator shows the value the WHEN side produced, or
 "hello".
+`,
+  "parameter-volume": `\`\`\`brain noframe do
+{ "tile": "\${tileId}" }
+\`\`\`
+
+# Volume
+
+How loud a tone is, from 0 to 1.
+
+---
+
+Gives \`tile:tile.actuator->microbit-v2.play-tone\` its loudness as a fraction of
+full: 1 is as loud as the tone gets, 0.5 is half, and 0 is silent. When left
+off, the tone plays at 1. A silent tone still holds the speaker for its whole
+\`tile:tile.parameter->microbit-v2.duration\`. The device's own volume setting
+still applies on top of this.
 `,
   "parameter-x": `\`\`\`brain noframe do
 { "tile": "\${tileId}" }
@@ -35307,7 +36522,7 @@ warm.
 `
 };
 
-// ../../packages/wodal/dist/targets/microbit-v2/mindcraft/tile-docs.js
+// ../../packages/wodal/dist/targets/microbit-v2/wendoo/tile-docs.js
 var MICROBIT_V2_TILE_DOCS = [
   { tileId: "tile.sensor->microbit-v2.button-a", contentKey: "sensor-button-a" },
   { tileId: "tile.sensor->microbit-v2.button-b", contentKey: "sensor-button-b" },
@@ -35330,6 +36545,7 @@ var MICROBIT_V2_TILE_DOCS = [
   { tileId: "tile.actuator->microbit-v2.display-clear", contentKey: "actuator-display-clear" },
   { tileId: "tile.actuator->microbit-v2.draw-image", contentKey: "actuator-draw-image" },
   { tileId: "tile.actuator->microbit-v2.play-sound", contentKey: "actuator-play-sound" },
+  { tileId: "tile.actuator->microbit-v2.play-tone", contentKey: "actuator-play-tone" },
   { tileId: "tile.modifier->microbit-v2.pressed", contentKey: "modifier-pressed" },
   { tileId: "tile.modifier->microbit-v2.released", contentKey: "modifier-released" },
   { tileId: "tile.modifier->microbit-v2.click", contentKey: "modifier-click" },
@@ -35346,6 +36562,10 @@ var MICROBIT_V2_TILE_DOCS = [
   { tileId: "tile.modifier->microbit-v2.freefall", contentKey: "modifier-freefall" },
   { tileId: "tile.modifier->microbit-v2.immediately", contentKey: "modifier-immediately" },
   { tileId: "tile.modifier->microbit-v2.in-background", contentKey: "modifier-in-background" },
+  { tileId: "tile.modifier->microbit-v2.square", contentKey: "modifier-square" },
+  { tileId: "tile.modifier->microbit-v2.sawtooth", contentKey: "modifier-sawtooth" },
+  { tileId: "tile.modifier->microbit-v2.sine", contentKey: "modifier-sine" },
+  { tileId: "tile.modifier->microbit-v2.triangle", contentKey: "modifier-triangle" },
   { tileId: "tile.parameter->microbit-v2.x", contentKey: "parameter-x" },
   { tileId: "tile.parameter->microbit-v2.y", contentKey: "parameter-y" },
   { tileId: "tile.parameter->microbit-v2.brightness", contentKey: "parameter-brightness" },
@@ -35353,6 +36573,8 @@ var MICROBIT_V2_TILE_DOCS = [
   { tileId: "tile.parameter->microbit-v2.image", contentKey: "parameter-image" },
   { tileId: "tile.parameter->microbit-v2.duration", contentKey: "parameter-duration" },
   { tileId: "tile.parameter->microbit-v2.sound-emoji", contentKey: "parameter-sound" },
+  { tileId: "tile.parameter->microbit-v2.volume", contentKey: "parameter-volume" },
+  { tileId: "tile.lit.factory->image", contentKey: "lit-factory-image" },
   { tileId: "tile.literal->struct:<Image>->heart", contentKey: "literal-image-heart" },
   { tileId: "tile.literal->struct:<Image>->happy", contentKey: "literal-image-happy" },
   { tileId: "tile.literal->struct:<Image>->sad", contentKey: "literal-image-sad" },
@@ -35383,7 +36605,7 @@ function microBitV2TileDocs() {
   return docs;
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/dist/simulate/summarizer.js
+// ../../external/wendoo-lang/packages/assistant-bridge/dist/simulate/summarizer.js
 var thinkFieldText = {
   fired: (think) => think.fired.join(","),
   when: (think) => think.when.join(","),
@@ -35394,7 +36616,19 @@ var thinkFieldText = {
 };
 var thinkFields = Object.values(thinkFieldText);
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/dist/tools/rejection-policy.js
+// ../../external/wendoo-lang/packages/assistant-bridge/dist/tools/offer-libraries.js
+var LibraryOfferUnknownCode = {
+  /** A non-empty shelf holds nothing at that coordinate; another of its coordinates may fit. */
+  NotShelved: "not_shelved",
+  /** The shelf offers nothing at all -- absent or bare -- so no coordinate can be offered. */
+  NoShelf: "no_shelf"
+};
+var unknownMessages = {
+  [LibraryOfferUnknownCode.NotShelved]: (coordinate) => `The shelf holds no library at "${coordinate}"; read_libraries lists what it does hold.`,
+  [LibraryOfferUnknownCode.NoShelf]: () => "This session's shelf offers no library at all, so there is nothing to offer."
+};
+
+// ../../external/wendoo-lang/packages/assistant-bridge/dist/tools/rejection-policy.js
 var import_compiler = __toESM(require_compiler(), 1);
 var acceptedDiagCodes = [import_compiler.TypeDiagCode.DataTypeConverted];
 function codesOf(enumObject) {
@@ -35419,7 +36653,7 @@ var proposalPolicy = [
   verdict: proposalVerdict(code)
 }));
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/classic/external.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/classic/external.js
 var external_exports = {};
 __export(external_exports, {
   $brand: () => $brand,
@@ -35600,7 +36834,7 @@ __export(external_exports, {
   nullish: () => nullish2,
   number: () => number2,
   object: () => object,
-  optional: () => optional9,
+  optional: () => optional10,
   overwrite: () => _overwrite,
   parse: () => parse2,
   parseAsync: () => parseAsync2,
@@ -35662,7 +36896,7 @@ __export(external_exports, {
   xor: () => xor
 });
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/core/index.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/core/index.js
 var core_exports2 = {};
 __export(core_exports2, {
   $ZodAny: () => $ZodAny,
@@ -35941,7 +37175,7 @@ __export(core_exports2, {
   version: () => version
 });
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/core/core.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/core/core.js
 var _a;
 var NEVER = /* @__PURE__ */ Object.freeze({
   status: "aborted"
@@ -36018,7 +37252,7 @@ function config(newConfig) {
   return globalConfig;
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/core/util.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/core/util.js
 var util_exports = {};
 __export(util_exports, {
   BIGINT_FORMAT_RANGES: () => BIGINT_FORMAT_RANGES,
@@ -36605,14 +37839,14 @@ function prefixIssues(path, issues) {
     return iss;
   });
 }
-function unwrapMessage(message) {
-  return typeof message === "string" ? message : message?.message;
+function unwrapMessage(message2) {
+  return typeof message2 === "string" ? message2 : message2?.message;
 }
 function finalizeIssue(iss, ctx, config2) {
-  const message = iss.message ? iss.message : unwrapMessage(iss.inst?._zod.def?.error?.(iss)) ?? unwrapMessage(ctx?.error?.(iss)) ?? unwrapMessage(config2.customError?.(iss)) ?? unwrapMessage(config2.localeError?.(iss)) ?? "Invalid input";
+  const message2 = iss.message ? iss.message : unwrapMessage(iss.inst?._zod.def?.error?.(iss)) ?? unwrapMessage(ctx?.error?.(iss)) ?? unwrapMessage(config2.customError?.(iss)) ?? unwrapMessage(config2.localeError?.(iss)) ?? "Invalid input";
   const { inst: _inst, continue: _continue, input: _input, ...rest } = iss;
   rest.path ?? (rest.path = []);
-  rest.message = message;
+  rest.message = message2;
   if (ctx?.reportInput) {
     rest.input = _input;
   }
@@ -36714,7 +37948,7 @@ var Class = class {
   }
 };
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/core/errors.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/core/errors.js
 var initializer = (inst, def) => {
   inst.name = "$ZodError";
   Object.defineProperty(inst, "_zod", {
@@ -36853,7 +38087,7 @@ function prettifyError(error51) {
   return lines.join("\n");
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/core/parse.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/core/parse.js
 var _parse = (_Err) => (schema, value, _ctx, _params) => {
   const ctx = _ctx ? { ..._ctx, async: false } : { async: false };
   const result = schema._zod.run({ value, issues: [] }, ctx);
@@ -36941,7 +38175,7 @@ var _safeDecodeAsync = (_Err) => async (schema, value, _ctx) => {
 };
 var safeDecodeAsync = /* @__PURE__ */ _safeDecodeAsync($ZodRealError);
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/core/regexes.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/core/regexes.js
 var regexes_exports = {};
 __export(regexes_exports, {
   base64: () => base64,
@@ -37100,7 +38334,7 @@ var sha512_hex = /^[0-9a-fA-F]{128}$/;
 var sha512_base64 = /* @__PURE__ */ fixedBase64(86, "==");
 var sha512_base64url = /* @__PURE__ */ fixedBase64url(86);
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/core/checks.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/core/checks.js
 var $ZodCheck = /* @__PURE__ */ $constructor("$ZodCheck", (inst, def) => {
   var _a3;
   inst._zod ?? (inst._zod = {});
@@ -37116,13 +38350,13 @@ var $ZodCheckLessThan = /* @__PURE__ */ $constructor("$ZodCheckLessThan", (inst,
   $ZodCheck.init(inst, def);
   const origin = numericOriginMap[typeof def.value];
   inst._zod.onattach.push((inst2) => {
-    const bag10 = inst2._zod.bag;
-    const curr = (def.inclusive ? bag10.maximum : bag10.exclusiveMaximum) ?? Number.POSITIVE_INFINITY;
+    const bag11 = inst2._zod.bag;
+    const curr = (def.inclusive ? bag11.maximum : bag11.exclusiveMaximum) ?? Number.POSITIVE_INFINITY;
     if (def.value < curr) {
       if (def.inclusive)
-        bag10.maximum = def.value;
+        bag11.maximum = def.value;
       else
-        bag10.exclusiveMaximum = def.value;
+        bag11.exclusiveMaximum = def.value;
     }
   });
   inst._zod.check = (payload) => {
@@ -37144,13 +38378,13 @@ var $ZodCheckGreaterThan = /* @__PURE__ */ $constructor("$ZodCheckGreaterThan", 
   $ZodCheck.init(inst, def);
   const origin = numericOriginMap[typeof def.value];
   inst._zod.onattach.push((inst2) => {
-    const bag10 = inst2._zod.bag;
-    const curr = (def.inclusive ? bag10.minimum : bag10.exclusiveMinimum) ?? Number.NEGATIVE_INFINITY;
+    const bag11 = inst2._zod.bag;
+    const curr = (def.inclusive ? bag11.minimum : bag11.exclusiveMinimum) ?? Number.NEGATIVE_INFINITY;
     if (def.value > curr) {
       if (def.inclusive)
-        bag10.minimum = def.value;
+        bag11.minimum = def.value;
       else
-        bag10.exclusiveMinimum = def.value;
+        bag11.exclusiveMinimum = def.value;
     }
   });
   inst._zod.check = (payload) => {
@@ -37197,12 +38431,12 @@ var $ZodCheckNumberFormat = /* @__PURE__ */ $constructor("$ZodCheckNumberFormat"
   const origin = isInt ? "int" : "number";
   const [minimum, maximum] = NUMBER_FORMAT_RANGES[def.format];
   inst._zod.onattach.push((inst2) => {
-    const bag10 = inst2._zod.bag;
-    bag10.format = def.format;
-    bag10.minimum = minimum;
-    bag10.maximum = maximum;
+    const bag11 = inst2._zod.bag;
+    bag11.format = def.format;
+    bag11.minimum = minimum;
+    bag11.maximum = maximum;
     if (isInt)
-      bag10.pattern = integer;
+      bag11.pattern = integer;
   });
   inst._zod.check = (payload) => {
     const input = payload.value;
@@ -37273,10 +38507,10 @@ var $ZodCheckBigIntFormat = /* @__PURE__ */ $constructor("$ZodCheckBigIntFormat"
   $ZodCheck.init(inst, def);
   const [minimum, maximum] = BIGINT_FORMAT_RANGES[def.format];
   inst._zod.onattach.push((inst2) => {
-    const bag10 = inst2._zod.bag;
-    bag10.format = def.format;
-    bag10.minimum = minimum;
-    bag10.maximum = maximum;
+    const bag11 = inst2._zod.bag;
+    bag11.format = def.format;
+    bag11.minimum = minimum;
+    bag11.maximum = maximum;
   });
   inst._zod.check = (payload) => {
     const input = payload.value;
@@ -37368,10 +38602,10 @@ var $ZodCheckSizeEquals = /* @__PURE__ */ $constructor("$ZodCheckSizeEquals", (i
     return !nullish(val) && val.size !== void 0;
   });
   inst._zod.onattach.push((inst2) => {
-    const bag10 = inst2._zod.bag;
-    bag10.minimum = def.size;
-    bag10.maximum = def.size;
-    bag10.size = def.size;
+    const bag11 = inst2._zod.bag;
+    bag11.minimum = def.size;
+    bag11.maximum = def.size;
+    bag11.size = def.size;
   });
   inst._zod.check = (payload) => {
     const input = payload.value;
@@ -37456,10 +38690,10 @@ var $ZodCheckLengthEquals = /* @__PURE__ */ $constructor("$ZodCheckLengthEquals"
     return !nullish(val) && val.length !== void 0;
   });
   inst._zod.onattach.push((inst2) => {
-    const bag10 = inst2._zod.bag;
-    bag10.minimum = def.length;
-    bag10.maximum = def.length;
-    bag10.length = def.length;
+    const bag11 = inst2._zod.bag;
+    bag11.minimum = def.length;
+    bag11.maximum = def.length;
+    bag11.length = def.length;
   });
   inst._zod.check = (payload) => {
     const input = payload.value;
@@ -37483,11 +38717,11 @@ var $ZodCheckStringFormat = /* @__PURE__ */ $constructor("$ZodCheckStringFormat"
   var _a3, _b;
   $ZodCheck.init(inst, def);
   inst._zod.onattach.push((inst2) => {
-    const bag10 = inst2._zod.bag;
-    bag10.format = def.format;
+    const bag11 = inst2._zod.bag;
+    bag11.format = def.format;
     if (def.pattern) {
-      bag10.patterns ?? (bag10.patterns = /* @__PURE__ */ new Set());
-      bag10.patterns.add(def.pattern);
+      bag11.patterns ?? (bag11.patterns = /* @__PURE__ */ new Set());
+      bag11.patterns.add(def.pattern);
     }
   });
   if (def.pattern)
@@ -37540,9 +38774,9 @@ var $ZodCheckIncludes = /* @__PURE__ */ $constructor("$ZodCheckIncludes", (inst,
   const pattern = new RegExp(typeof def.position === "number" ? `^.{${def.position}}${escapedRegex}` : escapedRegex);
   def.pattern = pattern;
   inst._zod.onattach.push((inst2) => {
-    const bag10 = inst2._zod.bag;
-    bag10.patterns ?? (bag10.patterns = /* @__PURE__ */ new Set());
-    bag10.patterns.add(pattern);
+    const bag11 = inst2._zod.bag;
+    bag11.patterns ?? (bag11.patterns = /* @__PURE__ */ new Set());
+    bag11.patterns.add(pattern);
   });
   inst._zod.check = (payload) => {
     if (payload.value.includes(def.includes, def.position))
@@ -37563,9 +38797,9 @@ var $ZodCheckStartsWith = /* @__PURE__ */ $constructor("$ZodCheckStartsWith", (i
   const pattern = new RegExp(`^${escapeRegex(def.prefix)}.*`);
   def.pattern ?? (def.pattern = pattern);
   inst._zod.onattach.push((inst2) => {
-    const bag10 = inst2._zod.bag;
-    bag10.patterns ?? (bag10.patterns = /* @__PURE__ */ new Set());
-    bag10.patterns.add(pattern);
+    const bag11 = inst2._zod.bag;
+    bag11.patterns ?? (bag11.patterns = /* @__PURE__ */ new Set());
+    bag11.patterns.add(pattern);
   });
   inst._zod.check = (payload) => {
     if (payload.value.startsWith(def.prefix))
@@ -37586,9 +38820,9 @@ var $ZodCheckEndsWith = /* @__PURE__ */ $constructor("$ZodCheckEndsWith", (inst,
   const pattern = new RegExp(`.*${escapeRegex(def.suffix)}$`);
   def.pattern ?? (def.pattern = pattern);
   inst._zod.onattach.push((inst2) => {
-    const bag10 = inst2._zod.bag;
-    bag10.patterns ?? (bag10.patterns = /* @__PURE__ */ new Set());
-    bag10.patterns.add(pattern);
+    const bag11 = inst2._zod.bag;
+    bag11.patterns ?? (bag11.patterns = /* @__PURE__ */ new Set());
+    bag11.patterns.add(pattern);
   });
   inst._zod.check = (payload) => {
     if (payload.value.endsWith(def.suffix))
@@ -37648,7 +38882,7 @@ var $ZodCheckOverwrite = /* @__PURE__ */ $constructor("$ZodCheckOverwrite", (ins
   };
 });
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/core/doc.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/core/doc.js
 var Doc = class {
   constructor(args = []) {
     this.content = [];
@@ -37684,14 +38918,14 @@ var Doc = class {
   }
 };
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/core/versions.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/core/versions.js
 var version = {
   major: 4,
   minor: 4,
   patch: 3
 };
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/core/schemas.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/core/schemas.js
 var $ZodType = /* @__PURE__ */ $constructor("$ZodType", (inst, def) => {
   var _a3;
   inst ?? (inst = {});
@@ -39784,7 +41018,7 @@ function handleRefineResult(result, payload, input, inst) {
   }
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/locales/index.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/locales/index.js
 var locales_exports = {};
 __export(locales_exports, {
   ar: () => ar_default,
@@ -39841,7 +41075,7 @@ __export(locales_exports, {
   zhTW: () => zh_TW_default
 });
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/locales/ar.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/locales/ar.js
 var error = () => {
   const Sizable = {
     string: { unit: "\u062D\u0631\u0641", verb: "\u0623\u0646 \u064A\u062D\u0648\u064A" },
@@ -39948,7 +41182,7 @@ function ar_default() {
   };
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/locales/az.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/locales/az.js
 var error2 = () => {
   const Sizable = {
     string: { unit: "simvol", verb: "olmal\u0131d\u0131r" },
@@ -40054,7 +41288,7 @@ function az_default() {
   };
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/locales/be.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/locales/be.js
 function getBelarusianPlural(count, one, few, many) {
   const absCount = Math.abs(count);
   const lastDigit = absCount % 10;
@@ -40211,7 +41445,7 @@ function be_default() {
   };
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/locales/bg.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/locales/bg.js
 var error4 = () => {
   const Sizable = {
     string: { unit: "\u0441\u0438\u043C\u0432\u043E\u043B\u0430", verb: "\u0434\u0430 \u0441\u044A\u0434\u044A\u0440\u0436\u0430" },
@@ -40332,7 +41566,7 @@ function bg_default() {
   };
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/locales/ca.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/locales/ca.js
 var error5 = () => {
   const Sizable = {
     string: { unit: "car\xE0cters", verb: "contenir" },
@@ -40441,7 +41675,7 @@ function ca_default() {
   };
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/locales/cs.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/locales/cs.js
 var error6 = () => {
   const Sizable = {
     string: { unit: "znak\u016F", verb: "m\xEDt" },
@@ -40553,7 +41787,7 @@ function cs_default() {
   };
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/locales/da.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/locales/da.js
 var error7 = () => {
   const Sizable = {
     string: { unit: "tegn", verb: "havde" },
@@ -40669,7 +41903,7 @@ function da_default() {
   };
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/locales/de.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/locales/de.js
 var error8 = () => {
   const Sizable = {
     string: { unit: "Zeichen", verb: "zu haben" },
@@ -40778,7 +42012,7 @@ function de_default() {
   };
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/locales/el.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/locales/el.js
 var error9 = () => {
   const Sizable = {
     string: { unit: "\u03C7\u03B1\u03C1\u03B1\u03BA\u03C4\u03AE\u03C1\u03B5\u03C2", verb: "\u03BD\u03B1 \u03AD\u03C7\u03B5\u03B9" },
@@ -40888,7 +42122,7 @@ function el_default() {
   };
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/locales/en.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/locales/en.js
 var error10 = () => {
   const Sizable = {
     string: { unit: "characters", verb: "to have" },
@@ -41001,7 +42235,7 @@ function en_default() {
   };
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/locales/eo.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/locales/eo.js
 var error11 = () => {
   const Sizable = {
     string: { unit: "karaktrojn", verb: "havi" },
@@ -41111,7 +42345,7 @@ function eo_default() {
   };
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/locales/es.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/locales/es.js
 var error12 = () => {
   const Sizable = {
     string: { unit: "caracteres", verb: "tener" },
@@ -41244,7 +42478,7 @@ function es_default() {
   };
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/locales/fa.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/locales/fa.js
 var error13 = () => {
   const Sizable = {
     string: { unit: "\u06A9\u0627\u0631\u0627\u06A9\u062A\u0631", verb: "\u062F\u0627\u0634\u062A\u0647 \u0628\u0627\u0634\u062F" },
@@ -41359,7 +42593,7 @@ function fa_default() {
   };
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/locales/fi.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/locales/fi.js
 var error14 = () => {
   const Sizable = {
     string: { unit: "merkki\xE4", subject: "merkkijonon" },
@@ -41472,7 +42706,7 @@ function fi_default() {
   };
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/locales/fr.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/locales/fr.js
 var error15 = () => {
   const Sizable = {
     string: { unit: "caract\xE8res", verb: "avoir" },
@@ -41598,7 +42832,7 @@ function fr_default() {
   };
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/locales/fr-CA.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/locales/fr-CA.js
 var error16 = () => {
   const Sizable = {
     string: { unit: "caract\xE8res", verb: "avoir" },
@@ -41706,7 +42940,7 @@ function fr_CA_default() {
   };
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/locales/he.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/locales/he.js
 var error17 = () => {
   const TypeNames = {
     string: { label: "\u05DE\u05D7\u05E8\u05D5\u05D6\u05EA", gender: "f" },
@@ -41901,7 +43135,7 @@ function he_default() {
   };
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/locales/hr.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/locales/hr.js
 var error18 = () => {
   const Sizable = {
     string: { unit: "znakova", verb: "imati" },
@@ -42024,7 +43258,7 @@ function hr_default() {
   };
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/locales/hu.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/locales/hu.js
 var error19 = () => {
   const Sizable = {
     string: { unit: "karakter", verb: "legyen" },
@@ -42133,7 +43367,7 @@ function hu_default() {
   };
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/locales/hy.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/locales/hy.js
 function getArmenianPlural(count, one, many) {
   return Math.abs(count) === 1 ? one : many;
 }
@@ -42281,7 +43515,7 @@ function hy_default() {
   };
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/locales/id.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/locales/id.js
 var error21 = () => {
   const Sizable = {
     string: { unit: "karakter", verb: "memiliki" },
@@ -42388,7 +43622,7 @@ function id_default() {
   };
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/locales/is.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/locales/is.js
 var error22 = () => {
   const Sizable = {
     string: { unit: "stafi", verb: "a\xF0 hafa" },
@@ -42498,7 +43732,7 @@ function is_default() {
   };
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/locales/it.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/locales/it.js
 var error23 = () => {
   const Sizable = {
     string: { unit: "caratteri", verb: "avere" },
@@ -42607,7 +43841,7 @@ function it_default() {
   };
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/locales/ja.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/locales/ja.js
 var error24 = () => {
   const Sizable = {
     string: { unit: "\u6587\u5B57", verb: "\u3067\u3042\u308B" },
@@ -42715,7 +43949,7 @@ function ja_default() {
   };
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/locales/ka.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/locales/ka.js
 var error25 = () => {
   const Sizable = {
     string: { unit: "\u10E1\u10D8\u10DB\u10D1\u10DD\u10DA\u10DD", verb: "\u10E3\u10DC\u10D3\u10D0 \u10E8\u10D4\u10D8\u10EA\u10D0\u10D5\u10D3\u10D4\u10E1" },
@@ -42828,7 +44062,7 @@ function ka_default() {
   };
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/locales/km.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/locales/km.js
 var error26 = () => {
   const Sizable = {
     string: { unit: "\u178F\u17BD\u17A2\u1780\u17D2\u179F\u179A", verb: "\u1782\u17BD\u179A\u1798\u17B6\u1793" },
@@ -42939,12 +44173,12 @@ function km_default() {
   };
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/locales/kh.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/locales/kh.js
 function kh_default() {
   return km_default();
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/locales/ko.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/locales/ko.js
 var error27 = () => {
   const Sizable = {
     string: { unit: "\uBB38\uC790", verb: "to have" },
@@ -43056,7 +44290,7 @@ function ko_default() {
   };
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/locales/lt.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/locales/lt.js
 var capitalizeFirstCharacter = (text) => {
   return text.charAt(0).toUpperCase() + text.slice(1);
 };
@@ -43260,7 +44494,7 @@ function lt_default() {
   };
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/locales/mk.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/locales/mk.js
 var error29 = () => {
   const Sizable = {
     string: { unit: "\u0437\u043D\u0430\u0446\u0438", verb: "\u0434\u0430 \u0438\u043C\u0430\u0430\u0442" },
@@ -43370,7 +44604,7 @@ function mk_default() {
   };
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/locales/ms.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/locales/ms.js
 var error30 = () => {
   const Sizable = {
     string: { unit: "aksara", verb: "mempunyai" },
@@ -43478,7 +44712,7 @@ function ms_default() {
   };
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/locales/nl.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/locales/nl.js
 var error31 = () => {
   const Sizable = {
     string: { unit: "tekens", verb: "heeft" },
@@ -43589,7 +44823,7 @@ function nl_default() {
   };
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/locales/no.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/locales/no.js
 var error32 = () => {
   const Sizable = {
     string: { unit: "tegn", verb: "\xE5 ha" },
@@ -43698,7 +44932,7 @@ function no_default() {
   };
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/locales/ota.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/locales/ota.js
 var error33 = () => {
   const Sizable = {
     string: { unit: "harf", verb: "olmal\u0131d\u0131r" },
@@ -43808,7 +45042,7 @@ function ota_default() {
   };
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/locales/ps.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/locales/ps.js
 var error34 = () => {
   const Sizable = {
     string: { unit: "\u062A\u0648\u06A9\u064A", verb: "\u0648\u0644\u0631\u064A" },
@@ -43923,7 +45157,7 @@ function ps_default() {
   };
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/locales/pl.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/locales/pl.js
 var error35 = () => {
   const Sizable = {
     string: { unit: "znak\xF3w", verb: "mie\u0107" },
@@ -44033,7 +45267,7 @@ function pl_default() {
   };
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/locales/pt.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/locales/pt.js
 var error36 = () => {
   const Sizable = {
     string: { unit: "caracteres", verb: "ter" },
@@ -44142,7 +45376,7 @@ function pt_default() {
   };
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/locales/ro.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/locales/ro.js
 var error37 = () => {
   const Sizable = {
     string: { unit: "caractere", verb: "s\u0103 aib\u0103" },
@@ -44262,7 +45496,7 @@ function ro_default() {
   };
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/locales/ru.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/locales/ru.js
 function getRussianPlural(count, one, few, many) {
   const absCount = Math.abs(count);
   const lastDigit = absCount % 10;
@@ -44419,7 +45653,7 @@ function ru_default() {
   };
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/locales/sl.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/locales/sl.js
 var error39 = () => {
   const Sizable = {
     string: { unit: "znakov", verb: "imeti" },
@@ -44529,7 +45763,7 @@ function sl_default() {
   };
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/locales/sv.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/locales/sv.js
 var error40 = () => {
   const Sizable = {
     string: { unit: "tecken", verb: "att ha" },
@@ -44640,7 +45874,7 @@ function sv_default() {
   };
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/locales/ta.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/locales/ta.js
 var error41 = () => {
   const Sizable = {
     string: { unit: "\u0B8E\u0BB4\u0BC1\u0BA4\u0BCD\u0BA4\u0BC1\u0B95\u0BCD\u0B95\u0BB3\u0BCD", verb: "\u0B95\u0BCA\u0BA3\u0BCD\u0B9F\u0BBF\u0BB0\u0BC1\u0B95\u0BCD\u0B95 \u0BB5\u0BC7\u0BA3\u0BCD\u0B9F\u0BC1\u0BAE\u0BCD" },
@@ -44751,7 +45985,7 @@ function ta_default() {
   };
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/locales/th.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/locales/th.js
 var error42 = () => {
   const Sizable = {
     string: { unit: "\u0E15\u0E31\u0E27\u0E2D\u0E31\u0E01\u0E29\u0E23", verb: "\u0E04\u0E27\u0E23\u0E21\u0E35" },
@@ -44862,7 +46096,7 @@ function th_default() {
   };
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/locales/tr.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/locales/tr.js
 var error43 = () => {
   const Sizable = {
     string: { unit: "karakter", verb: "olmal\u0131" },
@@ -44968,7 +46202,7 @@ function tr_default() {
   };
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/locales/uk.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/locales/uk.js
 var error44 = () => {
   const Sizable = {
     string: { unit: "\u0441\u0438\u043C\u0432\u043E\u043B\u0456\u0432", verb: "\u043C\u0430\u0442\u0438\u043C\u0435" },
@@ -45077,12 +46311,12 @@ function uk_default() {
   };
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/locales/ua.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/locales/ua.js
 function ua_default() {
   return uk_default();
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/locales/ur.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/locales/ur.js
 var error45 = () => {
   const Sizable = {
     string: { unit: "\u062D\u0631\u0648\u0641", verb: "\u06C1\u0648\u0646\u0627" },
@@ -45193,7 +46427,7 @@ function ur_default() {
   };
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/locales/uz.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/locales/uz.js
 var error46 = () => {
   const Sizable = {
     string: { unit: "belgi", verb: "bo\u2018lishi kerak" },
@@ -45304,7 +46538,7 @@ function uz_default() {
   };
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/locales/vi.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/locales/vi.js
 var error47 = () => {
   const Sizable = {
     string: { unit: "k\xFD t\u1EF1", verb: "c\xF3" },
@@ -45413,7 +46647,7 @@ function vi_default() {
   };
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/locales/zh-CN.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/locales/zh-CN.js
 var error48 = () => {
   const Sizable = {
     string: { unit: "\u5B57\u7B26", verb: "\u5305\u542B" },
@@ -45523,7 +46757,7 @@ function zh_CN_default() {
   };
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/locales/zh-TW.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/locales/zh-TW.js
 var error49 = () => {
   const Sizable = {
     string: { unit: "\u5B57\u5143", verb: "\u64C1\u6709" },
@@ -45631,7 +46865,7 @@ function zh_TW_default() {
   };
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/locales/yo.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/locales/yo.js
 var error50 = () => {
   const Sizable = {
     string: { unit: "\xE0mi", verb: "n\xED" },
@@ -45739,7 +46973,7 @@ function yo_default() {
   };
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/core/registries.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/core/registries.js
 var _a2;
 var $output = /* @__PURE__ */ Symbol("ZodOutput");
 var $input = /* @__PURE__ */ Symbol("ZodInput");
@@ -45789,7 +47023,7 @@ function registry() {
 (_a2 = globalThis).__zod_globalRegistry ?? (_a2.__zod_globalRegistry = registry());
 var globalRegistry = globalThis.__zod_globalRegistry;
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/core/api.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/core/api.js
 // @__NO_SIDE_EFFECTS__
 function _string(Class2, params) {
   return new Class2({
@@ -46828,7 +48062,7 @@ function _stringFormat(Class2, format, fnOrRegex, _params = {}) {
   return inst;
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/core/to-json-schema.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/core/to-json-schema.js
 function initializeContext(params) {
   let target = params?.target ?? "draft-2020-12";
   if (target === "draft-4")
@@ -47187,7 +48421,7 @@ var createStandardJSONSchemaMethod = (schema, io, processors = {}) => (params) =
   return finalize(ctx, schema);
 };
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/core/json-schema-processors.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/core/json-schema-processors.js
 var formatMap = {
   guid: "uuid",
   url: "uri",
@@ -47731,7 +48965,7 @@ function toJSONSchema(input, params) {
   return finalize(ctx, input);
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/core/json-schema-generator.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/core/json-schema-generator.js
 var JSONSchemaGenerator = class {
   /** @deprecated Access via ctx instead */
   get metadataRegistry() {
@@ -47806,10 +49040,10 @@ var JSONSchemaGenerator = class {
   }
 };
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/core/json-schema.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/core/json-schema.js
 var json_schema_exports = {};
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/classic/schemas.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/classic/schemas.js
 var schemas_exports2 = {};
 __export(schemas_exports2, {
   ZodAny: () => ZodAny,
@@ -47944,7 +49178,7 @@ __export(schemas_exports2, {
   nullish: () => nullish2,
   number: () => number2,
   object: () => object,
-  optional: () => optional9,
+  optional: () => optional10,
   partialRecord: () => partialRecord,
   pipe: () => pipe,
   prefault: () => prefault,
@@ -47980,7 +49214,7 @@ __export(schemas_exports2, {
   xor: () => xor
 });
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/classic/checks.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/classic/checks.js
 var checks_exports2 = {};
 __export(checks_exports2, {
   endsWith: () => _endsWith,
@@ -48014,7 +49248,7 @@ __export(checks_exports2, {
   uppercase: () => _uppercase
 });
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/classic/iso.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/classic/iso.js
 var iso_exports = {};
 __export(iso_exports, {
   ZodISODate: () => ZodISODate,
@@ -48055,7 +49289,7 @@ function duration2(params) {
   return _isoDuration(ZodISODuration, params);
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/classic/errors.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/classic/errors.js
 var initializer2 = (inst, issues) => {
   $ZodError.init(inst, issues);
   inst.name = "ZodError";
@@ -48095,7 +49329,7 @@ var ZodRealError = /* @__PURE__ */ $constructor("ZodError", initializer2, {
   Parent: Error
 });
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/classic/parse.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/classic/parse.js
 var parse2 = /* @__PURE__ */ _parse(ZodRealError);
 var parseAsync2 = /* @__PURE__ */ _parseAsync(ZodRealError);
 var safeParse2 = /* @__PURE__ */ _safeParse(ZodRealError);
@@ -48109,7 +49343,7 @@ var safeDecode2 = /* @__PURE__ */ _safeDecode(ZodRealError);
 var safeEncodeAsync2 = /* @__PURE__ */ _safeEncodeAsync(ZodRealError);
 var safeDecodeAsync2 = /* @__PURE__ */ _safeDecodeAsync(ZodRealError);
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/classic/schemas.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/classic/schemas.js
 var _installedGroups = /* @__PURE__ */ new WeakMap();
 function _installLazyMethods(inst, group, methods) {
   const proto = Object.getPrototypeOf(inst);
@@ -48205,7 +49439,7 @@ var ZodType = /* @__PURE__ */ $constructor("ZodType", (inst, def) => {
       return this.check(_overwrite(fn));
     },
     optional() {
-      return optional9(this);
+      return optional10(this);
     },
     exactOptional() {
       return exactOptional(this);
@@ -48214,7 +49448,7 @@ var ZodType = /* @__PURE__ */ $constructor("ZodType", (inst, def) => {
       return nullable(this);
     },
     nullish() {
-      return optional9(nullable(this));
+      return optional10(nullable(this));
     },
     nonoptional(params) {
       return nonoptional(this, params);
@@ -48280,10 +49514,10 @@ var _ZodString = /* @__PURE__ */ $constructor("_ZodString", (inst, def) => {
   $ZodString.init(inst, def);
   ZodType.init(inst, def);
   inst._zod.processJSONSchema = (ctx, json2, params) => stringProcessor(inst, ctx, json2, params);
-  const bag10 = inst._zod.bag;
-  inst.format = bag10.format ?? null;
-  inst.minLength = bag10.minimum ?? null;
-  inst.maxLength = bag10.maximum ?? null;
+  const bag11 = inst._zod.bag;
+  inst.format = bag11.format ?? null;
+  inst.minLength = bag11.minimum ?? null;
+  inst.maxLength = bag11.maximum ?? null;
   _installLazyMethods(inst, "_ZodString", {
     regex(...args) {
       return this.check(_regex(...args));
@@ -48598,12 +49832,12 @@ var ZodNumber = /* @__PURE__ */ $constructor("ZodNumber", (inst, def) => {
       return this;
     }
   });
-  const bag10 = inst._zod.bag;
-  inst.minValue = Math.max(bag10.minimum ?? Number.NEGATIVE_INFINITY, bag10.exclusiveMinimum ?? Number.NEGATIVE_INFINITY) ?? null;
-  inst.maxValue = Math.min(bag10.maximum ?? Number.POSITIVE_INFINITY, bag10.exclusiveMaximum ?? Number.POSITIVE_INFINITY) ?? null;
-  inst.isInt = (bag10.format ?? "").includes("int") || Number.isSafeInteger(bag10.multipleOf ?? 0.5);
+  const bag11 = inst._zod.bag;
+  inst.minValue = Math.max(bag11.minimum ?? Number.NEGATIVE_INFINITY, bag11.exclusiveMinimum ?? Number.NEGATIVE_INFINITY) ?? null;
+  inst.maxValue = Math.min(bag11.maximum ?? Number.POSITIVE_INFINITY, bag11.exclusiveMaximum ?? Number.POSITIVE_INFINITY) ?? null;
+  inst.isInt = (bag11.format ?? "").includes("int") || Number.isSafeInteger(bag11.multipleOf ?? 0.5);
   inst.isFinite = true;
-  inst.format = bag10.format ?? null;
+  inst.format = bag11.format ?? null;
 });
 function number2(params) {
   return _number(ZodNumber, params);
@@ -48652,10 +49886,10 @@ var ZodBigInt = /* @__PURE__ */ $constructor("ZodBigInt", (inst, def) => {
   inst.nonpositive = (params) => inst.check(_lte(BigInt(0), params));
   inst.nonnegative = (params) => inst.check(_gte(BigInt(0), params));
   inst.multipleOf = (value, params) => inst.check(_multipleOf(value, params));
-  const bag10 = inst._zod.bag;
-  inst.minValue = bag10.minimum ?? null;
-  inst.maxValue = bag10.maximum ?? null;
-  inst.format = bag10.format ?? null;
+  const bag11 = inst._zod.bag;
+  inst.minValue = bag11.minimum ?? null;
+  inst.maxValue = bag11.maximum ?? null;
+  inst.format = bag11.format ?? null;
 });
 function bigint2(params) {
   return _bigint(ZodBigInt, params);
@@ -49121,7 +50355,7 @@ var ZodOptional = /* @__PURE__ */ $constructor("ZodOptional", (inst, def) => {
   inst._zod.processJSONSchema = (ctx, json2, params) => optionalProcessor(inst, ctx, json2, params);
   inst.unwrap = () => inst._zod.def.innerType;
 });
-function optional9(innerType) {
+function optional10(innerType) {
   return new ZodOptional({
     type: "optional",
     innerType
@@ -49152,7 +50386,7 @@ function nullable(innerType) {
   });
 }
 function nullish2(innerType) {
-  return optional9(nullable(innerType));
+  return optional10(nullable(innerType));
 }
 var ZodDefault = /* @__PURE__ */ $constructor("ZodDefault", (inst, def) => {
   $ZodDefault.init(inst, def);
@@ -49399,7 +50633,7 @@ function preprocess(fn, schema) {
   });
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/classic/compat.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/classic/compat.js
 var ZodIssueCode = {
   invalid_type: "invalid_type",
   too_big: "too_big",
@@ -49425,7 +50659,7 @@ var ZodFirstPartyTypeKind;
 /* @__PURE__ */ (function(ZodFirstPartyTypeKind2) {
 })(ZodFirstPartyTypeKind || (ZodFirstPartyTypeKind = {}));
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/classic/from-json-schema.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/classic/from-json-schema.js
 var z = {
   ...schemas_exports2,
   ...checks_exports2,
@@ -49905,7 +51139,7 @@ function fromJSONSchema(schema, params) {
   return convertSchema(normalized, ctx);
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/classic/coerce.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/classic/coerce.js
 var coerce_exports = {};
 __export(coerce_exports, {
   bigint: () => bigint3,
@@ -49930,16 +51164,26 @@ function date4(params) {
   return _coercedDate(ZodDate, params);
 }
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/node_modules/zod/v4/classic/external.js
+// ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/classic/external.js
 config(en_default());
 
-// ../../external/mindcraft-lang/packages/assistant-bridge/dist/tools/tool-schemas.js
+// ../../external/wendoo-lang/packages/assistant-bridge/dist/tools/tool-schemas.js
 var ruleSideSchema = external_exports.enum(["when", "do"]);
+var ruleTriggerSchema = external_exports.enum(["when", "otherwise", "then"]).describe('What arms the rule. "when" evaluates every think it is scheduled and is the default. "otherwise" fires on the thinks no earlier rule of its flat otherwise-run fired, making the run an if/else-if/else ladder. "then" runs once the rule above it completes -- its DO finished and every rule that firing spawned finished with it -- and a run of them sequences. The first rule at a level takes "when" alone; the other two need a rule above them at the same level.');
 var ruleIdSchema = external_exports.string().describe(`Rule id, exactly as read_project reports it. It stays the rule's id as other rules come and go. Inside a batch, "#N" instead names the rule the batch's own command at index N creates.`);
 var pageIdSchema = external_exports.string().describe("Page id, exactly as read_project reports it. It stays the page's id as other pages come and go.");
+var maxBatchCommands = 24;
+var maxPlacedTiles = 12;
 var readProjectInputSchema = external_exports.object({});
 var readCatalogInputSchema = external_exports.object({
   filter: external_exports.string().optional().describe("Case-insensitive substring matched against tile id, label, kind, and description.")
+});
+var maxOfferedLibraries = 3;
+var offerLibrariesInputSchema = external_exports.object({
+  coordinates: external_exports.array(external_exports.string().min(1)).min(1).max(maxOfferedLibraries).describe(`The <owner>/<repo> coordinates of the libraries to present, exactly as read_libraries reports them, in the order their cards should stand. A call presents at most ${maxOfferedLibraries}.`)
+});
+var readLibrariesInputSchema = external_exports.object({
+  filter: external_exports.string().optional().describe("Case-insensitive substring matched against library coordinate, name, and description.")
 });
 var suggestTilesInputSchema = external_exports.discriminatedUnion("mode", [
   external_exports.object({
@@ -49967,11 +51211,18 @@ var tileRunEntrySchema = external_exports.union([
 var editCommandBranches = [
   external_exports.object({
     op: external_exports.literal("addRule"),
-    pageIndex: external_exports.number().int().min(0).describe("Zero-based page index from read_project.")
+    pageIndex: external_exports.number().int().min(0).describe("Zero-based page index from read_project."),
+    trigger: ruleTriggerSchema.optional()
   }),
   external_exports.object({
     op: external_exports.literal("addChildRule"),
-    parentRuleId: ruleIdSchema.describe("Rule id of the rule the new rule goes under, from read_project. The new rule is added after any children that rule already has, and runs each time that rule finishes its DO.")
+    parentRuleId: ruleIdSchema.describe("Rule id of the rule the new rule goes under, from read_project. The new rule is added after any children that rule already has, and runs each time that rule finishes its DO."),
+    trigger: ruleTriggerSchema.optional()
+  }),
+  external_exports.object({
+    op: external_exports.literal("setRuleTrigger"),
+    ruleId: ruleIdSchema.describe("Rule id of the rule whose trigger mode changes, from read_project."),
+    trigger: ruleTriggerSchema
   }),
   external_exports.object({
     op: external_exports.literal("placeTile"),
@@ -49984,7 +51235,7 @@ var editCommandBranches = [
     op: external_exports.literal("placeTiles"),
     ruleId: ruleIdSchema,
     side: ruleSideSchema,
-    tileIds: external_exports.array(tileRunEntrySchema).min(1).describe("Tiles to place in order, starting at the insertion index; validated as one end state. A factory tile is given as an object carrying its mint input."),
+    tileIds: external_exports.array(tileRunEntrySchema).min(1).max(maxPlacedTiles).describe(`Tiles to place in order, starting at the insertion index; validated as one end state. A factory tile is given as an object carrying its mint input. A run carries at most ${maxPlacedTiles} tiles.`),
     position: external_exports.number().int().min(0).optional().describe("Insertion index of the first tile; defaults to the end of the side.")
   }),
   external_exports.object({
@@ -50018,7 +51269,7 @@ var proposeEditInputSchema = external_exports.discriminatedUnion("op", [
   ...editCommandBranches,
   external_exports.object({
     op: external_exports.literal("batch"),
-    commands: external_exports.array(editCommandSchema).min(2).describe(`Commands to apply in order, judged as one end state; every one lands or none does. A command may name a rule an earlier command created, as "#N" for that command's index.`)
+    commands: external_exports.array(editCommandSchema).min(2).max(maxBatchCommands).describe(`Commands to apply in order, judged as one end state; every one lands or none does. A command may name a rule an earlier command created, as "#N" for that command's index. A batch carries at most ${maxBatchCommands} commands, which is one stage of a build; a build larger than that is made a stage at a time.`)
   })
 ]);
 var compileInputSchema = external_exports.object({});
@@ -50037,16 +51288,20 @@ var simulateInputSchema = external_exports.object({
 });
 var toolInputSchemas = {
   compile: compileInputSchema,
+  offer_libraries: offerLibrariesInputSchema,
   propose_edit: proposeEditInputSchema,
   read_catalog: readCatalogInputSchema,
+  read_libraries: readLibrariesInputSchema,
   read_project: readProjectInputSchema,
   simulate: simulateInputSchema,
   suggest_tiles: suggestTilesInputSchema
 };
 var toolDescriptions = {
   compile: "Build the whole brain and return its diagnostics. Call after a group of edits that should hold together, before claiming the brain is ready.",
-  propose_edit: `Apply one editor command to the document. The editor validates it: an accepted edit is in the document and undoable, and a rejected edit leaves the document untouched and returns the diagnostic code that rejected it. Read the code, adjust, and propose again. This is the only way to change the brain. Any tile that leaves an expression unfinished -- an operator, an opening paren, a NOT, a parameter awaiting its value -- is rejected on its own, because the editor validates the state the edit leaves behind. Place it with the tiles that finish it in one placeTiles call: the whole run lands together or not at all. A factory tile carries no value of its own and cannot be placed by id alone: name it as an object giving its tileId plus what to mint -- a value, optionally with a displayFormat, for a literal factory, or a name for a variable factory. Every place a tile is named takes that object, so a minted value can be placed by placeTile, swapped in by replaceTile, or carried in a placeTiles run. The minted tile joins the document's catalog, and a rejected edit takes the minting back with the placement. Pages are how a brain holds more than one mode: addPage appends a page, gives it the name you pass, and reports the pageId it minted; the page arrives holding one empty rule you can fill straight away. Inside a batch that rule is what "#N" names for the addPage command at index N, and "#N.page" names the new page's own tile -- the tile you place after switch-page to send yourself there, since its id does not exist until the page does. Name every page you make something the person would recognise. A page appended this way sits one past the last page read_project reported, which is the pageIndex addRule takes for it. deleteRule removes a rule and everything nested under it; deletePage removes a page and every rule on it. Both are refused when something would be left dangling: a page another rule still switches to comes back as page_still_referenced naming those rules, so retarget or remove them first -- a batch may do both at once, since only the end state is judged -- and the only page left in the brain comes back as last_page, because a brain always has somewhere to be; empty its rules instead. Removing a page shifts every page after it down one, so put deletes last in a batch that also names pages by pageIndex. Author one command per call, narrating each as it lands; that is the default. Reach for the batch op only when a plan must land or fail as one thing, such as a refactor or a structure of several rules whose half-applied form would be worse than none: the commands apply in order, only the state they leave is judged, and one undo takes the whole plan back. States in the middle of a batch may be broken. A command that cannot apply at all stops the batch and reports its index.`,
-  read_catalog: "List the tiles available in this world with their descriptions, argument grammar, and where they may be placed. Call before planning which tiles a goal needs.",
+  offer_libraries: "Present the install cards the person adds these libraries from. Offering is a deliberate act: call this for a library you have judged to carry what the wish needs, never to describe what the shelf holds. Naming a library in your own words describes it; this is what offers it. Each coordinate comes back listed, which stands its card at the end of your message, or unknown, which stands nothing and carries the code saying why -- read that code and correct the coordinate rather than repeating it. Coordinates and descriptions both come from read_libraries.",
+  propose_edit: `Apply one editor command to the document. The editor validates it: an accepted edit is in the document and undoable, and a rejected edit leaves the document untouched and returns the diagnostic code that rejected it. Read the code, adjust, and propose again. This is the only way to change the brain. Any tile that leaves an expression unfinished -- an operator, an opening paren, a NOT, a parameter awaiting its value -- is rejected on its own, because the editor validates the state the edit leaves behind. Place it with the tiles that finish it in one placeTiles call: the whole run lands together or not at all. A factory tile carries no value of its own and cannot be placed by id alone: name it as an object giving its tileId plus what to mint -- a value, optionally with a displayFormat, for a literal factory, or a name for a variable factory. Every place a tile is named takes that object, so a minted value can be placed by placeTile, swapped in by replaceTile, or carried in a placeTiles run. The minted tile joins the document's catalog, and a rejected edit takes the minting back with the placement. Every rule carries a trigger mode, which is how rules branch and sequence: addRule and addChildRule take an optional trigger and default to when, and setRuleTrigger changes the mode of a rule already standing. A mode the rule's position does not admit -- otherwise or then in the first rule at its level -- comes back refused under the diagnostic code that says so, as any other rejected edit does. Pages are how a brain holds more than one mode: addPage appends a page, gives it the name you pass, and reports the pageId it minted; the page arrives holding one empty rule you can fill straight away. Inside a batch that rule is what "#N" names for the addPage command at index N, and "#N.page" names the new page's own tile -- the tile you place after switch-page to send yourself there, since its id does not exist until the page does. Name every page you make something the person would recognise. A page appended this way sits one past the last page read_project reported, which is the pageIndex addRule takes for it. deleteRule removes a rule and everything nested under it; deletePage removes a page and every rule on it. Both are refused when something would be left dangling: a page another rule still switches to comes back as page_still_referenced naming those rules, so retarget or remove them first -- a batch may do both at once, since only the end state is judged -- and the only page left in the brain comes back as last_page, because a brain always has somewhere to be; empty its rules instead. Removing a page shifts every page after it down one, so put deletes last in a batch that also names pages by pageIndex. Author one command per call, narrating each as it lands; that is the default. Reach for the batch op when one stage of the work must land or fail as one thing, such as a refactor or a structure of several rules whose half-applied form would be worse than none: the commands apply in order, only the state they leave is judged, and one undo takes the whole plan back. A batch carries at most ${maxBatchCommands} commands, which is the size of one stage; a build larger than that is made a stage at a time, each stage its own batch, rehearsed before the next. States in the middle of a batch may be broken. A command that cannot apply at all stops the batch and reports its index.`,
+  read_catalog: 'List the tiles available in this world with their descriptions, argument grammar, and where they may be placed. Call before planning which tiles a goal needs. Tiles come back in groups: the "environment" group is the vocabulary this world installs, and the "document" group is what this brain minted for itself -- its page tiles, its variables, and the literals it minted. Either group is left out when it holds nothing matching.',
+  read_libraries: "List the libraries this world approves for the project: the shelf of extra capabilities the person can add to it, each with its name, the approved version, a description of what it adds, and whether it is installed. An installed library's tiles are already in read_catalog's answer; an uninstalled one's are not, and nothing more of it can be read until the person adds it, which offer_libraries is how you put to them. Call this when the catalog holds no tile for what is being asked, before saying the thing cannot be built, and describe a library only from what its own description says.",
   read_project: "Read the current brain: its pages, rules, and the tiles on each rule side. Call at the start of a request and again whenever the document may have changed under you.",
   simulate: "Run the compiled brain in a bounded rehearsal and return a summary of what happened: which rules fired, what their WHEN evaluated to, which actions dispatched, and how the state of the thing you are programming changed as it ran. Call before claiming the brain does something. A call the summary reports as pending had not finished when the run ended, so run again with more thinks before concluding anything about the brain from what did not appear.",
   suggest_tiles: "Ask the editor which tiles are legal at one position. Insert mode answers what may go in at a spot; call before placing a tile you are not certain of, and ask again after each placement to see what may follow. Every tile it offers can be placed there, but one that leaves the expression unfinished only lands in a placeTiles run that finishes it. Replace mode answers what may stand in for a tile already there; that is the move for a tile that is wrong rather than missing, so ask in replace mode first and then swap it with a propose_edit replaceTile."
@@ -50292,7 +51547,7 @@ var GestureInjector = class {
   }
 };
 
-// ../../packages/wodal/dist/mindcraft/build-kernel.js
+// ../../packages/wodal/dist/wendoo/build-kernel.js
 var WodalBuildDiagnosticCode = {
   /** The brain failed to compile or link. */
   BRAIN_LINK_FAILED: "WODAL_BUILD_BRAIN_LINK_FAILED",
@@ -50316,8 +51571,8 @@ function buildWodalProgramImage(input) {
     };
   }
   if (!built.program) {
-    const message = built.diagnostics.toArray().filter((diagnostic) => diagnostic.severity === "error").map((diagnostic) => diagnostic.message).join("; ");
-    return { ok: false, errors: [{ code: WodalBuildDiagnosticCode.BRAIN_LINK_FAILED, message }] };
+    const message2 = built.diagnostics.toArray().filter((diagnostic) => diagnostic.severity === "error").map((diagnostic) => diagnostic.message).join("; ");
+    return { ok: false, errors: [{ code: WodalBuildDiagnosticCode.BRAIN_LINK_FAILED, message: message2 }] };
   }
   try {
     const image = input.deviceProfile.createProgramImage(built.program);
@@ -50336,17 +51591,17 @@ function buildWodalProgramImage(input) {
   }
 }
 
-// ../../packages/wodal/dist/targets/microbit-v2/mindcraft/runtime.js
+// ../../packages/wodal/dist/targets/microbit-v2/wendoo/runtime.js
 var import_runtime10 = __toESM(require_runtime(), 1);
 
-// ../../packages/wodal/dist/mindcraft/program-load.js
+// ../../packages/wodal/dist/wendoo/program-load.js
 var WodalProgramLoadValidationCode = {
   INVALID_SERIALIZED_PROGRAM: "WODAL_PROGRAM_LOAD_INVALID_SERIALIZED_PROGRAM",
   UNSUPPORTED_DEVICE_PROFILE: "WODAL_PROGRAM_LOAD_UNSUPPORTED_DEVICE_PROFILE",
   UNRESOLVED_HOST_ACTION: "WODAL_PROGRAM_LOAD_UNRESOLVED_HOST_ACTION"
 };
 
-// ../../packages/wodal/dist/targets/microbit-v2/mindcraft/runtime.js
+// ../../packages/wodal/dist/targets/microbit-v2/wendoo/runtime.js
 var WodalMicroBitRuntime = class {
   /** Simulated device visible to WODAL host calls. */
   microbit;
@@ -50532,7 +51787,7 @@ var PERCEPTS = {
     apply: (stage, value) => stage.device.setTemperature(Number(value))
   },
   gesture: {
-    description: 'How the device is being moved, named exactly: "shake", "freefall", "tilt up", "tilt down", "tilt left", "tilt right", "face up", "face down", or "none" to set it back down. A shake or a freefall plays once and takes a few thinks to be felt; a tilt or a face holds until another entry changes it.',
+    description: 'How the device is being moved, named exactly: "shake", "freefall", "tilt up", "tilt down", "tilt left", "tilt right", "face up", "face down", or "none" to set it back down. A shake or a freefall plays once; a tilt or a face holds until another entry changes it. Either way it takes several thinks of being held before it is felt.',
     apply: (stage, value) => stage.gestures.select(GESTURE_NAMES[String(value)] ?? AccelerometerGesture.None)
   },
   "radio-message-number": {
@@ -50558,8 +51813,13 @@ var PERCEPT_KINDS = Object.entries(PERCEPTS).map(([name, percept]) => ({ name, d
 var DISPLAY_CHANNEL = "display";
 var SPEAKER_CHANNEL = "speaker";
 var BRIGHTNESS_STEPS = 10;
-var MAX_BRIGHTNESS = 255;
+var MAX_BRIGHTNESS2 = 255;
 var SPEAKER_IDLE = "idle";
+var SPEAKER_PLAY_MARK = "#";
+function speakerSound(reported) {
+  const mark = reported.indexOf(SPEAKER_PLAY_MARK);
+  return mark === -1 ? reported : reported.slice(0, mark);
+}
 var STATE_CHANNELS = [
   {
     name: DISPLAY_CHANNEL,
@@ -50567,13 +51827,14 @@ var STATE_CHANNELS = [
   },
   {
     name: SPEAKER_CHANNEL,
-    description: `The sound playing right now, as its name followed by \`#\` and a number that counts up each time a sound starts, or \`${SPEAKER_IDLE}\` while nothing is playing.`
+    description: `The sound playing right now, as its name followed by \`#\` and a number that counts up each time a sound starts, or \`${SPEAKER_IDLE}\` while nothing is playing.`,
+    identityValue: speakerSound
   }
 ];
 function renderDisplay(pixels) {
   let text = "";
   for (const pixel of pixels) {
-    const step = Math.floor(pixel * BRIGHTNESS_STEPS / (MAX_BRIGHTNESS + 1));
+    const step = Math.floor(pixel * BRIGHTNESS_STEPS / (MAX_BRIGHTNESS2 + 1));
     text += String(step);
   }
   return text;
@@ -50677,7 +51938,7 @@ var MANIFEST = {
   ]
 };
 var driver = {
-  modules: () => [createWodalSharedModule(), PROFILE.createMindcraftModule()],
+  modules: () => [createWodalSharedModule(), PROFILE.createWendooModule()],
   subjects: () => [DEVICE_SUBJECT],
   inputKinds: () => PERCEPT_KINDS,
   stateChannels: () => STATE_CHANNELS,
@@ -50694,7 +51955,9 @@ function createTargetAdapter(targetIdentity) {
 }
 
 // adapter-entry.js
-var createTargetAdapter2 = () => createTargetAdapter("mindcraft-lang/trg-microbit-v2");
+var createTargetAdapter2 = () => createTargetAdapter("wendoo-lang/trg-microbit-v2");
+var buildStamp = { "coreVersion": "0.2.19", "coreDistHash": "01f611925a6b8aff95d3b6e419dfb6d42b32c3b3316326fb9ed7054625c04a6c", "builtAt": "2026-09-07T18:05:00.909Z" };
 export {
+  buildStamp,
   createTargetAdapter2 as createTargetAdapter
 };
