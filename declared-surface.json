@@ -1,0 +1,70 @@
+{
+  "formatVersion": 1,
+  "targetIdentity": "wendoo-lang/trg-microbit-v2",
+  "buildStamp": {
+    "coreVersion": "0.2.20",
+    "coreDistHash": "3c7a82608561bf5ae5934efd08a855d7a56f2d84a75e5b79c1f04b76549e0def",
+    "builtAt": "2026-09-14T15:20:27.536Z"
+  },
+  "manifest": {
+    "target": "a pocket computer with a 5x5 LED screen, two buttons, and a handful of senses",
+    "thing": "their device",
+    "provides": [
+      "The device can feel its two front buttons and its touch logo, and can tell how bright the room is and how warm it is.",
+      "The device can feel how it is being moved: shaken, tilted, turned face up or face down, or dropped.",
+      "The device can light pixels on its screen, show pictures and scrolling text, and play sounds.",
+      "The device can send and receive radio messages to and from other devices on the same group."
+    ]
+  },
+  "subjects": [
+    "device"
+  ],
+  "inputKinds": [
+    {
+      "name": "button-a",
+      "description": "Whether the A button is held down: true presses it, false releases it."
+    },
+    {
+      "name": "button-b",
+      "description": "Whether the B button is held down: true presses it, false releases it."
+    },
+    {
+      "name": "gesture",
+      "description": "How the device is being moved, named exactly: \"shake\", \"freefall\", \"tilt up\", \"tilt down\", \"tilt left\", \"tilt right\", \"face up\", \"face down\", or \"none\" to set it back down. A shake or a freefall plays once; a tilt or a face holds until another entry changes it. Either way it takes several thinks of being held before it is felt."
+    },
+    {
+      "name": "light-level",
+      "description": "How bright the room is, from 0 (dark) to 255 (bright); a level outside that range is clamped."
+    },
+    {
+      "name": "logo-touch",
+      "description": "Whether the touch logo is being touched: true holds the touch, false lets go."
+    },
+    {
+      "name": "radio-message-number",
+      "description": "A number arriving over the radio, delivered once, on this think alone."
+    },
+    {
+      "name": "radio-message-string",
+      "description": "A word arriving over the radio, delivered once, on this think alone; long text is cut short."
+    },
+    {
+      "name": "radio-signal-strength",
+      "description": "How strong the radio messages after it come in, as -dBm: near 40 is close by and near 90 is far away. It holds until another entry changes it, and starts at 42."
+    },
+    {
+      "name": "temperature",
+      "description": "How warm the device is, in whole degrees Celsius; it holds until another entry changes it."
+    }
+  ],
+  "stateChannels": [
+    {
+      "name": "display",
+      "description": "What the 5x5 screen shows, as 25 brightness digits read left to right and top to bottom, one row after the next: 0 is off and 9 is full brightness, so `0000000900000000000000000` is one lit pixel in the middle."
+    },
+    {
+      "name": "speaker",
+      "description": "The sound playing right now, as its name followed by `#` and a number that counts up each time a sound starts, or `idle` while nothing is playing."
+    }
+  ]
+}

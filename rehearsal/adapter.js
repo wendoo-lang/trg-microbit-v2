@@ -1733,13 +1733,13 @@ var require_value = __commonJS({
     exports.mkListValue = mkListValue2;
     exports.mkFunctionValue = mkFunctionValue;
     exports.mkBufferValue = mkBufferValue4;
-    exports.bufferLength = bufferLength4;
-    exports.bufferByteAt = bufferByteAt4;
+    exports.bufferLength = bufferLength5;
+    exports.bufferByteAt = bufferByteAt5;
     exports.buffersEqual = buffersEqual;
     exports.bufferToHex = bufferToHex2;
     exports.mkBufferValueFromHex = mkBufferValueFromHex;
     exports.extractBooleanValue = extractBooleanValue;
-    exports.extractNumberValue = extractNumberValue7;
+    exports.extractNumberValue = extractNumberValue8;
     exports.extractStringValue = extractStringValue4;
     exports.extractListValue = extractListValue;
     exports.extractBufferValue = extractBufferValue;
@@ -1753,9 +1753,9 @@ var require_value = __commonJS({
     exports.isEnumValue = isEnumValue;
     exports.isListValue = isListValue2;
     exports.isMapValue = isMapValue;
-    exports.isStructValue = isStructValue4;
+    exports.isStructValue = isStructValue5;
     exports.isFunctionValue = isFunctionValue;
-    exports.isBufferValue = isBufferValue4;
+    exports.isBufferValue = isBufferValue5;
     exports.isErrValue = isErrValue;
     exports.forEachValueTypeId = forEachValueTypeId;
     var dict_1 = require_dict();
@@ -1893,10 +1893,10 @@ var require_value = __commonJS({
     function mkBufferValue4(bytes) {
       return { t: type_defs_1.NativeType.Buffer, v: bytes };
     }
-    function bufferLength4(buffer) {
+    function bufferLength5(buffer) {
       return buffer.v.length();
     }
-    function bufferByteAt4(buffer, index) {
+    function bufferByteAt5(buffer, index) {
       if (index < 0 || index >= buffer.v.length()) {
         return void 0;
       }
@@ -1944,7 +1944,7 @@ var require_value = __commonJS({
       }
       return void 0;
     }
-    function extractNumberValue7(v) {
+    function extractNumberValue8(v) {
       if (v && v.t === type_defs_1.NativeType.Number) {
         return v.v;
       }
@@ -1998,13 +1998,13 @@ var require_value = __commonJS({
     function isMapValue(v) {
       return v?.t === type_defs_1.NativeType.Map;
     }
-    function isStructValue4(v) {
+    function isStructValue5(v) {
       return v?.t === type_defs_1.NativeType.Struct;
     }
     function isFunctionValue(v) {
       return v?.t === type_defs_1.NativeType.Function;
     }
-    function isBufferValue4(v) {
+    function isBufferValue5(v) {
       return v?.t === type_defs_1.NativeType.Buffer;
     }
     function isErrValue(v) {
@@ -8113,11 +8113,11 @@ var require_brain_runtime = __commonJS({
       }
       /**
        * Request a page change by zero-based page index. If `pageIndex` equals the
-       * current page, triggers a restart instead.
+       * current page, triggers a restart instead. An index outside the brain's
+       * pages is a no-op: the current page stays active and no request is pending.
        */
       requestPageChange(pageIndex) {
         if (pageIndex < 0 || pageIndex >= this.pageMetadata.size()) {
-          this.desiredPageIndex = -1;
           return;
         }
         if (pageIndex === this.currentPageIndex) {
@@ -8127,7 +8127,10 @@ var require_brain_runtime = __commonJS({
         this.desiredPageIndex = pageIndex;
         this.cancelActiveFibers();
       }
-      /** Request a page change by stable page identifier (UUID). */
+      /**
+       * Request a page change by stable page identifier (UUID), falling back to a
+       * page-name lookup. A no-op when no page carries the identifier or the name.
+       */
       requestPageChangeByPageId(pageId) {
         const idx = this.pageIdToIndex.get(pageId);
         if (idx !== void 0) {
@@ -8136,14 +8139,12 @@ var require_brain_runtime = __commonJS({
         }
         this.requestPageChangeByName(pageId);
       }
-      /** Request a page change by page name. */
+      /** Request a page change by page name. A no-op when no page carries the name. */
       requestPageChangeByName(name) {
         const idx = this.pageNameToIndex.get(name);
         if (idx !== void 0) {
           this.requestPageChange(idx);
-          return;
         }
-        this.requestPageChange(-1);
       }
       /** Request that the current page restart at the next tick. */
       requestPageRestart() {
@@ -12902,6 +12903,7 @@ var require_tiles = __commonJS({
     exports.fixedFormat = fixedFormat;
     exports.timeSecondsFormat = timeSecondsFormat;
     exports.timeMsFormat = timeMsFormat;
+    exports.isDisplayFormat = isDisplayFormat;
     exports.parseDisplayFormat = parseDisplayFormat;
     exports.isActionTileDef = isActionTileDef;
     exports.isInlineTileDef = isInlineTileDef;
@@ -12988,6 +12990,30 @@ var require_tiles = __commonJS({
     }
     function timeMsFormat(decimals) {
       return `time_ms:${decimals}`;
+    }
+    var kBareDisplayFormats = ["default", "percent", "thousands", "time_seconds", "time_ms"];
+    var kCountedDisplayFormatPrefixes = ["percent:", "fixed:", "time_seconds:", "time_ms:"];
+    var ZERO_CHAR_CODE = 48;
+    var NINE_CHAR_CODE = 57;
+    function isDigitRun(text) {
+      const len = string_1.StringUtils.length(text);
+      if (len === 0)
+        return false;
+      for (let i = 0; i < len; i++) {
+        const code = string_1.StringUtils.charCodeAt(text, i);
+        if (code < ZERO_CHAR_CODE || code > NINE_CHAR_CODE)
+          return false;
+      }
+      return true;
+    }
+    function isDisplayFormat(fmt) {
+      if (kBareDisplayFormats.includes(fmt))
+        return true;
+      for (const prefix of kCountedDisplayFormatPrefixes) {
+        if (string_1.StringUtils.startsWith(fmt, prefix))
+          return isDigitRun(string_1.StringUtils.substring(fmt, string_1.StringUtils.length(prefix)));
+      }
+      return false;
     }
     function parseDisplayFormat(fmt) {
       if (string_1.StringUtils.startsWith(fmt, "percent:")) {
@@ -13101,7 +13127,6 @@ var require_tiles = __commonJS({
     })(CoreVariableFactoryId || (exports.CoreVariableFactoryId = CoreVariableFactoryId = {}));
     var CoreLiteralFactoryId;
     (function(CoreLiteralFactoryId2) {
-      CoreLiteralFactoryId2["Boolean"] = "boolean";
       CoreLiteralFactoryId2["Number"] = "number";
       CoreLiteralFactoryId2["String"] = "string";
     })(CoreLiteralFactoryId || (exports.CoreLiteralFactoryId = CoreLiteralFactoryId = {}));
@@ -13117,7 +13142,6 @@ var require_tiles = __commonJS({
       return string_1.StringUtils.startsWith(tileId, "tile.var.factory->");
     }
     exports.CoreLiteralFactoryTileIds = [
-      mkLiteralFactoryTileId2(CoreLiteralFactoryId.Boolean),
       mkLiteralFactoryTileId2(CoreLiteralFactoryId.Number),
       mkLiteralFactoryTileId2(CoreLiteralFactoryId.String)
     ];
@@ -33203,12 +33227,35 @@ var import_runtime5 = __toESM(require_runtime(), 1);
 var import_core = __toESM(require_node(), 1);
 var import_app8 = __toESM(require_app(), 1);
 var import_runtime4 = __toESM(require_runtime(), 1);
+var kGridSize = 5;
+var kGridPixelCount = kGridSize * kGridSize;
+var kLevelStep = 17;
+var kGridDigitsPattern = new RegExp(`^[0-9a-f]{${kGridPixelCount}}$`);
 function mkImageStructValue(width, height, pixels) {
   const slots = [];
   slots[ImageField.Width] = (0, import_app8.mkNumberValue)(width);
   slots[ImageField.Height] = (0, import_app8.mkNumberValue)(height);
   slots[ImageField.Pixels] = (0, import_runtime4.mkBufferValue)(import_core.stream.byteArrayFromUint8Array(new Uint8Array(pixels)));
   return (0, import_app8.mkClosedStructValue)(WODAL_SHARED_TYPE_IDS.Image, import_app8.List.from(slots));
+}
+function isImageStructValue(value) {
+  const candidate = value;
+  if (!(0, import_runtime4.isStructValue)(candidate) || candidate.typeId !== WODAL_SHARED_TYPE_IDS.Image || candidate.v === void 0) {
+    return false;
+  }
+  return (0, import_app8.extractNumberValue)(candidate.v.at(ImageField.Width)) !== void 0 && (0, import_app8.extractNumberValue)(candidate.v.at(ImageField.Height)) !== void 0 && (0, import_runtime4.isBufferValue)(candidate.v.at(ImageField.Pixels));
+}
+function imageLevelBrightness(level) {
+  return level * kLevelStep;
+}
+function isImageGridDigits(text) {
+  return kGridDigitsPattern.test(text);
+}
+function imageValueFromDigits(digits) {
+  if (!isImageGridDigits(digits))
+    return void 0;
+  const bytes = [...digits].map((digit) => imageLevelBrightness(Number.parseInt(digit, 16)));
+  return mkImageStructValue(kGridSize, kGridSize, bytes);
 }
 
 // ../../packages/wodal/dist/targets/microbit-v2/wendoo/built-in-images.js
@@ -35268,13 +35315,17 @@ function registerSharedTypes(api) {
     ])
   });
 }
+function mintedImageValue(value) {
+  if (typeof value === "string")
+    return imageValueFromDigits(value);
+  return isImageStructValue(value) ? value : void 0;
+}
 function registerImageLiteralFactory(api) {
   const services = api.brainServices;
   api.registerTile(new import_tiles.BrainTileFactoryDef((0, import_app22.mkLiteralFactoryTileId)(WODAL_IMAGE_LITERAL_FACTORY_ID), WODAL_IMAGE_LITERAL_FACTORY_ID, (factoryTileDef, opts) => {
-    const value = opts.value;
-    if (value === void 0) {
-      throw new Error("Image literal factory tile definition requires a 'value' option");
-    }
+    const value = mintedImageValue(opts.value);
+    if (value === void 0)
+      return void 0;
     return new import_app22.BrainTileLiteralDef(factoryTileDef.producedDataType, value, { uniqueId: (0, import_model2.mintDocumentId)(services.app.rng) }, services);
   }, WODAL_SHARED_TYPE_IDS.Image, { metadata: { label: "create an image" } }));
 }
@@ -35340,7 +35391,7 @@ or \`tile:tile.modifier->microbit-v2.in-background\` to let the rule continue
 without waiting. A duration of 0 paints the image and continues at once.
 
 \`\`\`assistant
-The rule holds until the image has finished showing: until then a rule under it does not get its turn, and this rule cannot fire again. A draw asked for while the display is busy is dropped; add "in background" to let the rule carry on, or "immediately" to cut off what the display is showing.
+Several images in one draw play in order, each held for the duration, and the last stays on the display -- one draw is a whole animation. The rule holds until the sequence has finished showing: until then a rule under it does not get its turn, and this rule cannot fire again; when the hold ends the rule may fire again, so one rule drawing the full sequence is how an animation loops. Do not split an animation's frames across rules: a draw asked for while the display is busy is dropped, so racing rules lose frames. Add "in background" to let the rule carry on, or "immediately" to cut off what the display is showing. There is no blank built-in image; for a blank or dim frame, mint one with the create-an-image factory (all-zero digits make a dark screen) or use an image the user has drawn.
 \`\`\`
 `,
   "actuator-play-sound": `\`\`\`brain noframe do
@@ -35627,7 +35678,7 @@ first: a duplicate is a separate image tile, drawn from the same pixels, that yo
 can edit without touching the one you copied.
 
 \`\`\`assistant
-You cannot create an image: the grid editor is the only way one is drawn, and the person using the editor draws it. Use the images that already exist, by tile id -- read_catalog and read_project list them, the built-in ones and the ones the user drew. A drawn image may carry a name, which is the word it is listed under. Editing an image keeps its tile id and updates every placement of it at once; duplicating one makes a separate image tile with an id of its own.
+You can create an image: mint this factory through propose_edit, giving value and name together. The value is 25 hex digits, one per pixel of the 5x5 grid, rows left to right from the top row down -- 0 is dark, f is brightest, and a digit between is a dimmer pixel. The name is required; it is the word the image is listed under, and a mint without one is refused. The minted image joins the document group of read_catalog and works anywhere a built-in image does. Before minting, check read_catalog and read_project for an image that already fits -- built-in, drawn by the user, or minted earlier -- and reuse it by tile id. You cannot change an image's pixels after minting; to get a different picture, mint a new image under a new name. The person can edit any image in the grid editor; such an edit keeps the tile id and updates every placement at once.
 \`\`\`
 `,
   "literal-image-arrow-east": `\`\`\`brain noframe do
@@ -36615,43 +36666,6 @@ var thinkFieldText = {
   page: (think) => think.page ?? ""
 };
 var thinkFields = Object.values(thinkFieldText);
-
-// ../../external/wendoo-lang/packages/assistant-bridge/dist/tools/offer-libraries.js
-var LibraryOfferUnknownCode = {
-  /** A non-empty shelf holds nothing at that coordinate; another of its coordinates may fit. */
-  NotShelved: "not_shelved",
-  /** The shelf offers nothing at all -- absent or bare -- so no coordinate can be offered. */
-  NoShelf: "no_shelf"
-};
-var unknownMessages = {
-  [LibraryOfferUnknownCode.NotShelved]: (coordinate) => `The shelf holds no library at "${coordinate}"; read_libraries lists what it does hold.`,
-  [LibraryOfferUnknownCode.NoShelf]: () => "This session's shelf offers no library at all, so there is nothing to offer."
-};
-
-// ../../external/wendoo-lang/packages/assistant-bridge/dist/tools/rejection-policy.js
-var import_compiler = __toESM(require_compiler(), 1);
-var acceptedDiagCodes = [import_compiler.TypeDiagCode.DataTypeConverted];
-function codesOf(enumObject) {
-  const codes = [];
-  for (const value of Object.values(enumObject)) {
-    if (typeof value === "number")
-      codes.push(value);
-  }
-  return codes;
-}
-function proposalVerdict(code) {
-  return acceptedDiagCodes.includes(code) ? "accept" : "reject";
-}
-var proposalPolicy = [
-  ...codesOf(import_compiler.ParseDiagCode),
-  ...codesOf(import_compiler.TypeDiagCode),
-  ...codesOf(import_compiler.CompilationDiagCode),
-  ...codesOf(import_compiler.LinkDiagCode)
-].map((code) => ({
-  code,
-  coreSeverity: (0, import_compiler.diagnosticSeverity)(code),
-  verdict: proposalVerdict(code)
-}));
 
 // ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/classic/external.js
 var external_exports = {};
@@ -51167,6 +51181,79 @@ function date4(params) {
 // ../../external/wendoo-lang/packages/assistant-bridge/node_modules/zod/v4/classic/external.js
 config(en_default());
 
+// ../../external/wendoo-lang/packages/assistant-bridge/dist/target/declared-surface.js
+var targetManifestSchema = external_exports.object({
+  target: external_exports.string(),
+  thing: external_exports.string(),
+  provides: external_exports.array(external_exports.string())
+});
+var scenarioInputKindSchema = external_exports.object({
+  name: external_exports.string(),
+  description: external_exports.string()
+});
+var subjectStateChannelSchema = external_exports.object({
+  name: external_exports.string(),
+  description: external_exports.string()
+});
+var buildStampSchema = external_exports.object({
+  coreVersion: external_exports.string(),
+  coreDistHash: external_exports.string(),
+  builtAt: external_exports.string()
+});
+var declaredSurfaceSchema = external_exports.object({
+  /** {@link DECLARED_SURFACE_FORMAT_VERSION} the document was written at. */
+  formatVersion: external_exports.number().int().positive(),
+  /** Wendoo identity of the target the surface describes, as its `wendoo.json` declares it. */
+  targetIdentity: external_exports.string().min(1),
+  /** The build stamp the adapter artifact this surface was baked from publishes. */
+  buildStamp: buildStampSchema,
+  /** Facts about the target world, as the adapter's own `manifest()` states them. */
+  manifest: targetManifestSchema,
+  /** Population roles a scenario may name as its subject. */
+  subjects: external_exports.array(external_exports.string()),
+  /** Scenario input kinds the target reads; empty when it scripts no percepts. */
+  inputKinds: external_exports.array(scenarioInputKindSchema),
+  /** State channels of the subject the target reports per think; empty when it reports none. */
+  stateChannels: external_exports.array(subjectStateChannelSchema)
+});
+
+// ../../external/wendoo-lang/packages/assistant-bridge/dist/tools/offer-libraries.js
+var LibraryOfferUnknownCode = {
+  /** A non-empty shelf holds nothing at that coordinate; another of its coordinates may fit. */
+  NotShelved: "not_shelved",
+  /** The shelf offers nothing at all -- absent or bare -- so no coordinate can be offered. */
+  NoShelf: "no_shelf"
+};
+var unknownMessages = {
+  [LibraryOfferUnknownCode.NotShelved]: (coordinate) => `The shelf holds no library at "${coordinate}"; read_libraries lists what it does hold.`,
+  [LibraryOfferUnknownCode.NoShelf]: () => "This session's shelf offers no library at all, so there is nothing to offer."
+};
+
+// ../../external/wendoo-lang/packages/assistant-bridge/dist/tools/rejection-policy.js
+var import_compiler = __toESM(require_compiler(), 1);
+var acceptedDiagCodes = [import_compiler.TypeDiagCode.DataTypeConverted];
+function codesOf(enumObject) {
+  const codes = [];
+  for (const value of Object.values(enumObject)) {
+    if (typeof value === "number")
+      codes.push(value);
+  }
+  return codes;
+}
+function proposalVerdict(code) {
+  return acceptedDiagCodes.includes(code) ? "accept" : "reject";
+}
+var proposalPolicy = [
+  ...codesOf(import_compiler.ParseDiagCode),
+  ...codesOf(import_compiler.TypeDiagCode),
+  ...codesOf(import_compiler.CompilationDiagCode),
+  ...codesOf(import_compiler.LinkDiagCode)
+].map((code) => ({
+  code,
+  coreSeverity: (0, import_compiler.diagnosticSeverity)(code),
+  verdict: proposalVerdict(code)
+}));
+
 // ../../external/wendoo-lang/packages/assistant-bridge/dist/tools/tool-schemas.js
 var ruleSideSchema = external_exports.enum(["when", "do"]);
 var ruleTriggerSchema = external_exports.enum(["when", "otherwise", "then"]).describe('What arms the rule. "when" evaluates every think it is scheduled and is the default. "otherwise" fires on the thinks no earlier rule of its flat otherwise-run fired, making the run an if/else-if/else ladder. "then" runs once the rule above it completes -- its DO finished and every rule that firing spawned finished with it -- and a run of them sequences. The first rule at a level takes "when" alone; the other two need a rule above them at the same level.');
@@ -51204,8 +51291,8 @@ var tileRunEntrySchema = external_exports.union([
   external_exports.object({
     tileId: external_exports.string().describe("Factory tile id from read_catalog or suggest_tiles."),
     value: external_exports.union([external_exports.string(), external_exports.number(), external_exports.boolean()]).optional().describe("Literal factory: the value the minted tile carries."),
-    displayFormat: external_exports.string().optional().describe('Literal factory: how the value reads, for example "percent" or "time_seconds".'),
-    name: external_exports.string().optional().describe("Variable factory: the name the minted variable carries.")
+    displayFormat: external_exports.string().optional().describe('Literal factory: how a numeric value reads. One of "default", "percent", "percent:N", "fixed:N", "thousands", "time_seconds", "time_seconds:N", "time_ms", "time_ms:N", where N is the number of decimal places. Anything else is refused.'),
+    name: external_exports.string().optional().describe("The word the minted tile reads by: the variable's name for a variable factory, and for a literal factory the name the value goes by, which a factory minting values with an identity of their own requires.")
   })
 ]);
 var editCommandBranches = [
@@ -51299,7 +51386,7 @@ var toolInputSchemas = {
 var toolDescriptions = {
   compile: "Build the whole brain and return its diagnostics. Call after a group of edits that should hold together, before claiming the brain is ready.",
   offer_libraries: "Present the install cards the person adds these libraries from. Offering is a deliberate act: call this for a library you have judged to carry what the wish needs, never to describe what the shelf holds. Naming a library in your own words describes it; this is what offers it. Each coordinate comes back listed, which stands its card at the end of your message, or unknown, which stands nothing and carries the code saying why -- read that code and correct the coordinate rather than repeating it. Coordinates and descriptions both come from read_libraries.",
-  propose_edit: `Apply one editor command to the document. The editor validates it: an accepted edit is in the document and undoable, and a rejected edit leaves the document untouched and returns the diagnostic code that rejected it. Read the code, adjust, and propose again. This is the only way to change the brain. Any tile that leaves an expression unfinished -- an operator, an opening paren, a NOT, a parameter awaiting its value -- is rejected on its own, because the editor validates the state the edit leaves behind. Place it with the tiles that finish it in one placeTiles call: the whole run lands together or not at all. A factory tile carries no value of its own and cannot be placed by id alone: name it as an object giving its tileId plus what to mint -- a value, optionally with a displayFormat, for a literal factory, or a name for a variable factory. Every place a tile is named takes that object, so a minted value can be placed by placeTile, swapped in by replaceTile, or carried in a placeTiles run. The minted tile joins the document's catalog, and a rejected edit takes the minting back with the placement. Every rule carries a trigger mode, which is how rules branch and sequence: addRule and addChildRule take an optional trigger and default to when, and setRuleTrigger changes the mode of a rule already standing. A mode the rule's position does not admit -- otherwise or then in the first rule at its level -- comes back refused under the diagnostic code that says so, as any other rejected edit does. Pages are how a brain holds more than one mode: addPage appends a page, gives it the name you pass, and reports the pageId it minted; the page arrives holding one empty rule you can fill straight away. Inside a batch that rule is what "#N" names for the addPage command at index N, and "#N.page" names the new page's own tile -- the tile you place after switch-page to send yourself there, since its id does not exist until the page does. Name every page you make something the person would recognise. A page appended this way sits one past the last page read_project reported, which is the pageIndex addRule takes for it. deleteRule removes a rule and everything nested under it; deletePage removes a page and every rule on it. Both are refused when something would be left dangling: a page another rule still switches to comes back as page_still_referenced naming those rules, so retarget or remove them first -- a batch may do both at once, since only the end state is judged -- and the only page left in the brain comes back as last_page, because a brain always has somewhere to be; empty its rules instead. Removing a page shifts every page after it down one, so put deletes last in a batch that also names pages by pageIndex. Author one command per call, narrating each as it lands; that is the default. Reach for the batch op when one stage of the work must land or fail as one thing, such as a refactor or a structure of several rules whose half-applied form would be worse than none: the commands apply in order, only the state they leave is judged, and one undo takes the whole plan back. A batch carries at most ${maxBatchCommands} commands, which is the size of one stage; a build larger than that is made a stage at a time, each stage its own batch, rehearsed before the next. States in the middle of a batch may be broken. A command that cannot apply at all stops the batch and reports its index.`,
+  propose_edit: `Apply one editor command to the document. The editor validates it: an accepted edit is in the document and undoable, and a rejected edit leaves the document untouched and returns the diagnostic code that rejected it. Read the code, adjust, and propose again. This is the only way to change the brain. Any tile that leaves an expression unfinished -- an operator, an opening paren, a NOT, a parameter awaiting its value -- is rejected on its own, because the editor validates the state the edit leaves behind. Place it with the tiles that finish it in one placeTiles call: the whole run lands together or not at all. A factory tile carries no value of its own and cannot be placed by id alone: name it as an object giving its tileId plus what to mint -- a value, optionally with a displayFormat and a name, for a literal factory, or a name for a variable factory. A literal factory that mints values with an identity of their own refuses a mint carrying no name, since the tile would read by that raw identity. Every place a tile is named takes that object, so a minted value can be placed by placeTile, swapped in by replaceTile, or carried in a placeTiles run. The minted tile joins the document's catalog, and a rejected edit takes the minting back with the placement. Every rule carries a trigger mode, which is how rules branch and sequence: addRule and addChildRule take an optional trigger and default to when, and setRuleTrigger changes the mode of a rule already standing. A mode the rule's position does not admit -- otherwise or then in the first rule at its level -- comes back refused under the diagnostic code that says so, as any other rejected edit does. Pages are how a brain holds more than one mode: addPage appends a page, gives it the name you pass, and reports the pageId it minted; the page arrives holding one empty rule you can fill straight away. Inside a batch that rule is what "#N" names for the addPage command at index N, and "#N.page" names the new page's own tile -- the tile you place after switch-page to send yourself there, since its id does not exist until the page does. Name every page you make something the person would recognise. A page appended this way sits one past the last page read_project reported, which is the pageIndex addRule takes for it. deleteRule removes a rule and everything nested under it; deletePage removes a page and every rule on it. Both are refused when something would be left dangling: a page another rule still switches to comes back as page_still_referenced naming those rules, so retarget or remove them first -- a batch may do both at once, since only the end state is judged -- and the only page left in the brain comes back as last_page, because a brain always has somewhere to be; empty its rules instead. Removing a page shifts every page after it down one, so put deletes last in a batch that also names pages by pageIndex. Author one command per call, narrating each as it lands; that is the default. Reach for the batch op when one stage of the work must land or fail as one thing, such as a refactor or a structure of several rules whose half-applied form would be worse than none: the commands apply in order, only the state they leave is judged, and one undo takes the whole plan back. A batch carries at most ${maxBatchCommands} commands, which is the size of one stage; a build larger than that is made a stage at a time, each stage its own batch, rehearsed before the next. States in the middle of a batch may be broken. A command that cannot apply at all stops the batch and reports its index.`,
   read_catalog: 'List the tiles available in this world with their descriptions, argument grammar, and where they may be placed. Call before planning which tiles a goal needs. Tiles come back in groups: the "environment" group is the vocabulary this world installs, and the "document" group is what this brain minted for itself -- its page tiles, its variables, and the literals it minted. Either group is left out when it holds nothing matching.',
   read_libraries: "List the libraries this world approves for the project: the shelf of extra capabilities the person can add to it, each with its name, the approved version, a description of what it adds, and whether it is installed. An installed library's tiles are already in read_catalog's answer; an uninstalled one's are not, and nothing more of it can be read until the person adds it, which offer_libraries is how you put to them. Call this when the catalog holds no tile for what is being asked, before saying the thing cannot be built, and describe a library only from what its own description says.",
   read_project: "Read the current brain: its pages, rules, and the tiles on each rule side. Call at the start of a request and again whenever the document may have changed under you.",
@@ -51956,7 +52043,7 @@ function createTargetAdapter(targetIdentity) {
 
 // adapter-entry.js
 var createTargetAdapter2 = () => createTargetAdapter("wendoo-lang/trg-microbit-v2");
-var buildStamp = { "coreVersion": "0.2.19", "coreDistHash": "01f611925a6b8aff95d3b6e419dfb6d42b32c3b3316326fb9ed7054625c04a6c", "builtAt": "2026-09-07T18:05:00.909Z" };
+var buildStamp = { "coreVersion": "0.2.20", "coreDistHash": "3c7a82608561bf5ae5934efd08a855d7a56f2d84a75e5b79c1f04b76549e0def", "builtAt": "2026-09-14T15:20:27.536Z" };
 export {
   buildStamp,
   createTargetAdapter2 as createTargetAdapter
