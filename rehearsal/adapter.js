@@ -29160,6 +29160,21 @@ var require_app = __commonJS({
   }
 });
 
+// ../../external/wendoo-lang/packages/core/dist/node/build-identity.js
+var require_build_identity = __commonJS({
+  "../../external/wendoo-lang/packages/core/dist/node/build-identity.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.DEV_CLIENT_BUILD = exports.UNKNOWN_CORE_DIST_HASH = exports.DEV_TARGET_PACKAGE_VERSION = void 0;
+    exports.DEV_TARGET_PACKAGE_VERSION = "dev";
+    exports.UNKNOWN_CORE_DIST_HASH = "unknown";
+    exports.DEV_CLIENT_BUILD = {
+      targetPackageVersion: exports.DEV_TARGET_PACKAGE_VERSION,
+      coreDistHash: exports.UNKNOWN_CORE_DIST_HASH
+    };
+  }
+});
+
 // ../../external/wendoo-lang/packages/core/dist/node/platform/vector3.js
 var require_vector3 = __commonJS({
   "../../external/wendoo-lang/packages/core/dist/node/platform/vector3.js"(exports) {
@@ -29405,8 +29420,18 @@ var require_node = __commonJS({
       };
     })();
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.withWendooEnvironmentServices = exports.createWendooEnvironment = exports.createHostSensor = exports.createHostActuator = exports.coreModule = exports.opSuccess = exports.opFailure = exports.MTreeNode = exports.MTreeBuilder = exports.MTree = exports.EventEmitter = exports.BitSet = exports.util = exports.systems = exports.runtime = exports.fromFourCC = exports.fourCC = exports.primitives = exports.Vector3 = exports.Vector2 = exports.UniqueSet = exports.TypeUtils = exports.task = exports.StringUtils = exports.stream = exports.MathOps = exports.logger = exports.LogLevel = exports.createLogger = exports.List = exports.Error = exports.Dict = exports.assertUnreachable = exports.brain = void 0;
+    exports.withWendooEnvironmentServices = exports.createWendooEnvironment = exports.createHostSensor = exports.createHostActuator = exports.coreModule = exports.opSuccess = exports.opFailure = exports.MTreeNode = exports.MTreeBuilder = exports.MTree = exports.EventEmitter = exports.BitSet = exports.util = exports.systems = exports.runtime = exports.fromFourCC = exports.fourCC = exports.primitives = exports.Vector3 = exports.Vector2 = exports.UniqueSet = exports.TypeUtils = exports.task = exports.StringUtils = exports.stream = exports.MathOps = exports.logger = exports.LogLevel = exports.createLogger = exports.List = exports.Error = exports.Dict = exports.assertUnreachable = exports.UNKNOWN_CORE_DIST_HASH = exports.DEV_TARGET_PACKAGE_VERSION = exports.DEV_CLIENT_BUILD = exports.brain = void 0;
     exports.brain = __importStar(require_brain2());
+    var build_identity_1 = require_build_identity();
+    Object.defineProperty(exports, "DEV_CLIENT_BUILD", { enumerable: true, get: function() {
+      return build_identity_1.DEV_CLIENT_BUILD;
+    } });
+    Object.defineProperty(exports, "DEV_TARGET_PACKAGE_VERSION", { enumerable: true, get: function() {
+      return build_identity_1.DEV_TARGET_PACKAGE_VERSION;
+    } });
+    Object.defineProperty(exports, "UNKNOWN_CORE_DIST_HASH", { enumerable: true, get: function() {
+      return build_identity_1.UNKNOWN_CORE_DIST_HASH;
+    } });
     var assert_1 = require_assert();
     Object.defineProperty(exports, "assertUnreachable", { enumerable: true, get: function() {
       return assert_1.assertUnreachable;
@@ -36655,6 +36680,25 @@ function microBitV2TileDocs() {
   }
   return docs;
 }
+
+// ../../external/wendoo-lang/packages/assistant-bridge/dist/catalog/digest.js
+var CATALOG_TILE_FIELDS = [
+  "tileId",
+  "label",
+  "kind",
+  "description",
+  "assistant",
+  "outputType",
+  "args",
+  "placement",
+  "requires",
+  "provides",
+  "outputs",
+  "consumesWhenResult",
+  "hidden",
+  "deprecated"
+];
+var declaredFields = new Set(CATALOG_TILE_FIELDS);
 
 // ../../external/wendoo-lang/packages/assistant-bridge/dist/simulate/summarizer.js
 var thinkFieldText = {
@@ -51197,8 +51241,7 @@ var subjectStateChannelSchema = external_exports.object({
 });
 var buildStampSchema = external_exports.object({
   coreVersion: external_exports.string(),
-  coreDistHash: external_exports.string(),
-  builtAt: external_exports.string()
+  coreDistHash: external_exports.string()
 });
 var declaredSurfaceSchema = external_exports.object({
   /** {@link DECLARED_SURFACE_FORMAT_VERSION} the document was written at. */
@@ -51216,6 +51259,7 @@ var declaredSurfaceSchema = external_exports.object({
   /** State channels of the subject the target reports per think; empty when it reports none. */
   stateChannels: external_exports.array(subjectStateChannelSchema)
 });
+var formatVersionEnvelopeSchema = external_exports.object({ formatVersion: external_exports.number().int().positive() });
 
 // ../../external/wendoo-lang/packages/assistant-bridge/dist/tools/offer-libraries.js
 var LibraryOfferUnknownCode = {
@@ -52043,7 +52087,7 @@ function createTargetAdapter(targetIdentity) {
 
 // adapter-entry.js
 var createTargetAdapter2 = () => createTargetAdapter("wendoo-lang/trg-microbit-v2");
-var buildStamp = { "coreVersion": "0.2.20", "coreDistHash": "3c7a82608561bf5ae5934efd08a855d7a56f2d84a75e5b79c1f04b76549e0def", "builtAt": "2026-09-14T15:20:27.536Z" };
+var buildStamp = { "coreVersion": "0.2.20", "coreDistHash": "2b93683f61098642557178edd2dfcfe9855f66b4d0b398320eb4afcf657c3ec5" };
 export {
   buildStamp,
   createTargetAdapter2 as createTargetAdapter

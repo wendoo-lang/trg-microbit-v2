@@ -3,8 +3,7 @@
   "targetIdentity": "wendoo-lang/trg-microbit-v2",
   "buildStamp": {
     "coreVersion": "0.2.20",
-    "coreDistHash": "3c7a82608561bf5ae5934efd08a855d7a56f2d84a75e5b79c1f04b76549e0def",
-    "builtAt": "2026-09-14T15:20:27.536Z"
+    "coreDistHash": "2b93683f61098642557178edd2dfcfe9855f66b4d0b398320eb4afcf657c3ec5"
   },
   "manifest": {
     "target": "a pocket computer with a 5x5 LED screen, two buttons, and a handful of senses",

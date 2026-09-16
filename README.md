@@ -1,9 +1,9 @@
-# micro:bit v2
+# Wendoo micro:bit v2
 
 Program the BBC micro:bit (v2) with Wendoo.
 
 Create a new project for this target:
 
 ```
-gh:wendoo-lang/trg-microbit-v2@0.9.12
+gh:wendoo-lang/trg-microbit-v2@0.9.13
 ```
